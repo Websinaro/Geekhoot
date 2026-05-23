@@ -1,8 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import * as productService from "../services/product.service";
-import fs from "fs";
-import path from "path";
-import { uploadToCloudinary } from "../services/cloudinary.service";
+import { uploadBufferToCloudinary } from "../services/cloudinary.service";
 
 const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
   "Custom T-Shirts": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=600",
@@ -19,21 +17,7 @@ const DEFAULT_FALLBACK_IMAGE = "https://images.unsplash.com/photo-1523275335684-
 
 const processProductInstance = (product: any) => {
   if (!product) return product;
-  if (product.images && Array.isArray(product.images)) {
-    product.images = product.images.map((img: string) => {
-      if (img.startsWith("/uploads/")) {
-        const filename = img.replace("/uploads/", "");
-        const filePath = path.join(process.cwd(), "uploads", filename);
-        if (!fs.existsSync(filePath)) {
-          return CATEGORY_FALLBACK_IMAGES[product.category] || DEFAULT_FALLBACK_IMAGE;
-        }
-      }
-      return img;
-    });
-    if (product.images.length === 0) {
-      product.images = [CATEGORY_FALLBACK_IMAGES[product.category] || DEFAULT_FALLBACK_IMAGE];
-    }
-  } else {
+  if (!product.images || !Array.isArray(product.images) || product.images.length === 0) {
     product.images = [CATEGORY_FALLBACK_IMAGES[product.category] || DEFAULT_FALLBACK_IMAGE];
   }
   return product;
@@ -100,16 +84,7 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
     if (data.rating) data.rating = parseFloat(data.rating);
 
     if (req.file) {
-      const filePath = req.file.path;
-      const cloudinaryUrl = await uploadToCloudinary(filePath);
-      if (cloudinaryUrl) {
-        data.images = [cloudinaryUrl];
-        fs.unlink(filePath, (err) => {
-          if (err) console.error("Error deleting temp file:", err);
-        });
-      } else {
-        data.images = [`/uploads/${req.file.filename}`];
-      }
+      data.images = [await uploadBufferToCloudinary(req.file.buffer, req.file.mimetype)];
     } else if (data.imageUrl) {
       data.images = [data.imageUrl];
     } else {
@@ -139,16 +114,7 @@ export const updateProduct = async (req: Request, res: Response, next: NextFunct
     if (data.rating) data.rating = parseFloat(data.rating);
 
     if (req.file) {
-      const filePath = req.file.path;
-      const cloudinaryUrl = await uploadToCloudinary(filePath);
-      if (cloudinaryUrl) {
-        data.images = [cloudinaryUrl];
-        fs.unlink(filePath, (err) => {
-          if (err) console.error("Error deleting temp file:", err);
-        });
-      } else {
-        data.images = [`/uploads/${req.file.filename}`];
-      }
+      data.images = [await uploadBufferToCloudinary(req.file.buffer, req.file.mimetype)];
     } else if (data.imageUrl) {
       data.images = [data.imageUrl];
     }

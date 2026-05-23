@@ -1,20 +1,9 @@
 import multer from 'multer';
-import path from 'path';
-import fs from 'fs';
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadsDir = path.join(process.cwd(), 'uploads');
-    if (!fs.existsSync(uploadsDir)) {
-      fs.mkdirSync(uploadsDir, { recursive: true });
-    }
-    cb(null, uploadsDir);
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-  }
-});
+// Use memory storage — files live only in RAM as a Buffer.
+// They are never written to disk, so there is no local file to lose on restart.
+// The buffer is passed directly to Cloudinary via a stream in cloudinary.service.ts.
+const storage = multer.memoryStorage();
 
 const fileFilter = (req: any, file: any, cb: any) => {
   if (file.mimetype.startsWith('image/')) {
@@ -25,7 +14,7 @@ const fileFilter = (req: any, file: any, cb: any) => {
 };
 
 export const upload = multer({
-  storage: storage,
-  fileFilter: fileFilter,
-  limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
+  storage,
+  fileFilter,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB
 });
