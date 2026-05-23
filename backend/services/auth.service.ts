@@ -35,8 +35,12 @@ export const verifyRefreshToken = async (token: string) => {
       where: { id: decoded.id }
     });
 
-    if (!user || !user.refreshToken) {
-      throw new AppError('Invalid refresh token or user not found', 401);
+    if (!user) {
+      throw new AppError('User not found', 401);
+    }
+
+    if (!user.refreshToken) {
+      throw new AppError('Session expired. Please log in again.', 401);
     }
 
     const hashedToken = crypto.createHash('sha256').update(token).digest('hex');
@@ -45,7 +49,8 @@ export const verifyRefreshToken = async (token: string) => {
     }
 
     return user;
-  } catch (error) {
+  } catch (error: any) {
+    if (error instanceof AppError) throw error;
     throw new AppError('Invalid or expired refresh token', 401);
   }
 };
@@ -92,7 +97,7 @@ export const signupUser = async (data: any) => {
       ...data,
       password: hashedPassword,
       locationUrl,
-      role: (email === 'admin@geekhoot.com' || data.name === 'geekhoot') ? 'ADMIN' : 'USER',
+      role: (email === (process.env.ADMIN_EMAIL || 'admin@geekhoot.com') || data.name === 'geekhoot') ? 'ADMIN' : 'USER',
       isVerified: true,
       verificationCode: null,
     },

@@ -95,8 +95,8 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       return new Promise((resolve, reject) => {
-        axios
-          .post('/api/auth/refresh', {}, { withCredentials: true })
+        api
+          .post('/auth/refresh', {}, { withCredentials: true })
           .then(({ data }) => {
             const newToken = data.token;
             useAuthStore.getState().setToken(newToken);

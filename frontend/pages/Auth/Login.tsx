@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { KeyRound, Mail, Lock, ArrowRight, Sparkles, ShieldCheck, ArrowLeft } from 'lucide-react';
+import { KeyRound, Mail, Lock, ArrowRight } from 'lucide-react';
 import { useAuthStore } from '@/src/store/authStore';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -55,7 +55,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-80px)] flex items-center justify-center p-6 bg-gray-50/50 relative font-sans">
+    <div className="min-h-[calc(100vh-80px)] overflow-y-auto flex items-center justify-center p-6 bg-gray-50/50 relative font-sans">
       {/* Dynamic Background Accents */}
       <div className="absolute inset-0 z-0 opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:30px_30px]" />
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#ff5200]/5 rounded-full blur-3xl pointer-events-none" />
@@ -146,12 +146,6 @@ export default function Login() {
               >
                 Create an account
               </button>
-            </div>
-            
-            <div className="bg-orange-50/50 p-2.5 rounded-lg border border-orange-100/50 text-center">
-              <p className="text-[11px] text-[#ff5200] font-medium flex items-center justify-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" /> Demo credentials: <span className="font-bold underline">geekhoot</span> / <span className="font-bold underline">asdfghjkl</span>
-              </p>
             </div>
           </CardFooter>
         </Card>

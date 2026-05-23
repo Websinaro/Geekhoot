@@ -95,18 +95,21 @@ const PRODUCTS_DATA = [
 ];
 
 async function main() {
-  // 1. Create Admin
-  const adminPassword = await bcrypt.hash('asdfghjkl', 12);
+  // 1. Create Admin — credentials are read from environment variables
+  const adminEmail = process.env.ADMIN_EMAIL || 'admin@geekhoot.com';
+  const adminPassword = process.env.ADMIN_PASSWORD || 'changeme_in_env';
+  const hashedPassword = await bcrypt.hash(adminPassword, 12);
   const admin = await prisma.user.upsert({
-    where: { email: 'admin@geekhoot.com' },
+    where: { email: adminEmail },
     update: {
-      isVerified: true
+      isVerified: true,
+      password: hashedPassword,
     },
     create: {
-      email: 'admin@geekhoot.com',
+      email: adminEmail,
       name: 'geekhoot',
       phone: '910000000000',
-      password: adminPassword,
+      password: hashedPassword,
       role: 'ADMIN',
       address: 'Admin Headquarters',
       district: 'Ernakulam',
