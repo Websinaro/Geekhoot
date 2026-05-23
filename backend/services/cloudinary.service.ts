@@ -1,5 +1,4 @@
 import { v2 as cloudinary } from 'cloudinary';
-import { Readable } from 'stream';
 
 let isConfigured = false;
 
@@ -25,9 +24,9 @@ function configureCloudinary(): boolean {
 }
 
 /**
- * Uploads a file Buffer directly to Cloudinary via a stream.
- * No temp file is written to disk — the image is permanent and survives restarts.
- * Throws if Cloudinary is not configured so the caller can return a proper error.
+ * Uploads a file Buffer to Cloudinary using a base64 data URI.
+ * This uses a signed upload (api_key + api_secret) — no upload preset needed.
+ * Images are stored permanently on Cloudinary and survive server restarts.
  */
 export async function uploadBufferToCloudinary(
   buffer: Buffer,
@@ -35,44 +34,28 @@ export async function uploadBufferToCloudinary(
 ): Promise<string> {
   if (!configureCloudinary()) {
     throw new Error(
-      'Cloudinary is not configured. Set CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET in your environment.'
+      'Cloudinary is not configured. Set CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET in your .env.'
     );
   }
 
-  return new Promise((resolve, reject) => {
-    const uploadStream = cloudinary.uploader.upload_stream(
-      { folder: 'geekhoot', resource_type: 'auto' },
-      (error, result) => {
-        if (error || !result) {
-          console.error('❌ Cloudinary upload failed:', error);
-          return reject(error || new Error('Cloudinary upload returned no result'));
-        }
-        console.log('✨ Uploaded to Cloudinary:', result.secure_url);
-        resolve(result.secure_url);
-      }
-    );
+  // Convert buffer to base64 data URI — works with cloudinary.uploader.upload() directly
+  const base64 = buffer.toString('base64');
+  const dataUri = `data:${mimetype};base64,${base64}`;
 
-    const readable = new Readable();
-    readable.push(buffer);
-    readable.push(null);
-    readable.pipe(uploadStream);
-  });
-}
-
-// Keep the old file-path based function for any legacy callers (unused after this fix)
-export async function uploadToCloudinary(filePath: string): Promise<string | null> {
   try {
-    if (!configureCloudinary()) {
-      console.warn('⚠️ Cloudinary credentials missing.');
-      return null;
-    }
-    const result = await cloudinary.uploader.upload(filePath, {
+    const result = await cloudinary.uploader.upload(dataUri, {
       folder: 'geekhoot',
-      resource_type: 'auto',
+      resource_type: 'image',
     });
+    console.log('✨ Uploaded to Cloudinary:', result.secure_url);
     return result.secure_url;
-  } catch (err) {
-    console.error('❌ Cloudinary upload failed:', err);
-    return null;
+  } catch (err: any) {
+    console.error('❌ Cloudinary upload failed:', {
+      message: err?.message,
+      http_code: err?.http_code,
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+      api_key_prefix: process.env.CLOUDINARY_API_KEY?.slice(0, 6) + '...',
+    });
+    throw new Error(`Cloudinary upload failed (${err?.http_code || 'unknown'}): ${err?.message}`);
   }
 }
