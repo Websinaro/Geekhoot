@@ -35,9 +35,9 @@ export default function Footer() {
             <h3 className="text-black font-black uppercase text-xs tracking-[0.4em] border-l-2 border-[#ff5200] pl-4">Inventory Sectors</h3>
             <ul className="space-y-4 text-[10px] font-black uppercase tracking-widest">
               <li><Link to="/products" className="hover:text-[#ff5200] transition-colors text-gray-400">All Operations</Link></li>
-              <li><Link to="/products?category=Electronics" className="hover:text-[#ff5200] transition-colors text-gray-400">Digital Cores</Link></li>
-              <li><Link to="/products?category=Accessories" className="hover:text-[#ff5200] transition-colors text-gray-400">Linkage Modules</Link></li>
-              <li><Link to="/products?category=Wearables" className="hover:text-[#ff5200] transition-colors text-gray-400">Bio-Link Systems</Link></li>
+              <li><Link to="/products?category=Electronics" className="hover:text-[#ff5200] transition-colors text-gray-400">Tech Gadgets</Link></li>
+              <li><Link to="/products?category=Accessories" className="hover:text-[#ff5200] transition-colors text-gray-400">Accessories</Link></li>
+              <li><Link to="/products?category=Wearables" className="hover:text-[#ff5200] transition-colors text-gray-400">Wearable</Link></li>
             </ul>
           </div>
 
