@@ -45,9 +45,10 @@ export default function Footer() {
           <div className="space-y-8">
             <h3 className="text-black font-black uppercase text-xs tracking-[0.4em] border-l-2 border-[#ff5200] pl-4">Node Operations</h3>
             <ul className="space-y-4 text-[10px] font-black uppercase tracking-widest">
-              <li><Link to="/profile" className="hover:text-[#ff5200] transition-colors text-gray-400">Identity Manifest</Link></li>
-              <li><Link to="/orders" className="hover:text-[#ff5200] transition-colors text-gray-400">Logistics Track</Link></li>
-              <li><Link to="/faq" className="hover:text-[#ff5200] transition-colors text-gray-400">Sync Protocol FAQ</Link></li>
+              <li><Link to="/profile" className="hover:text-[#ff5200] transition-colors text-gray-400">Profile</Link></li>
+              <li><Link to="/orders" className="hover:text-[#ff5200] transition-colors text-gray-400">Track Your Ordera
+              s</Link></li>
+              <li><Link to="/faq" className="hover:text-[#ff5200] transition-colors text-gray-400">FAQ</Link></li>
               <li><Link to="/terms" className="hover:text-[#ff5200] transition-colors text-gray-400">Engagement Terms</Link></li>
             </ul>
           </div>
@@ -58,7 +59,7 @@ export default function Footer() {
             <ul className="space-y-6 text-[10px] font-black uppercase tracking-widest">
               <li className="flex items-start gap-4">
                 <MapPin className="w-5 h-5 text-[#ff5200] shrink-0" />
-                <span className="leading-relaxed text-gray-400">Sector 7, Tech Park, <br />Bypass Region, Kochi, IN</span>
+                <span className="leading-relaxed text-gray-400">Geekhoot Shop <br />Kallara , Attingal , Thiruvananthapuram , Kerala , India</span>
               </li>
               <li className="flex items-center gap-4">
                 <Phone className="w-5 h-5 text-[#ff5200] shrink-0" />
@@ -66,7 +67,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-4">
                 <Mail className="w-5 h-5 text-[#ff5200] shrink-0" />
-                <span className="lowercase text-gray-400">vAULT@GEEKHOOT.IO</span>
+                <span className="lowercase text-gray-400">mygeekhoot@gmail.com</span>
               </li>
             </ul>
           </div>
@@ -74,12 +75,12 @@ export default function Footer() {
 
         <div className="mt-24 pt-12 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-8">
           <p className="text-[9px] font-black uppercase tracking-[0.5em] text-gray-300">
-            © {new Date().getFullYear()} Geekhoot Architecture. Node Locked.
+            © {new Date().getFullYear()} Geekhoot Architecture.Powered by WEBSINARO.
           </p>
           <div className="flex items-center gap-6">
              <div className="h-0.5 w-12 bg-gray-100"></div>
              <p className="text-[9px] font-black uppercase tracking-[0.5em] text-[#ff5200] italic">
-               Powered by WEBSINARO
+               Powered by WEBSINARO WB
              </p>
           </div>
         </div>
