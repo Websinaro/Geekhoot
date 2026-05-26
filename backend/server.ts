@@ -19,9 +19,7 @@ import orderRoutes from "./routes/order.routes";
 import adminRoutes from "./routes/admin.routes";
 import notificationRoutes from "./routes/notification.routes";
 import wishlistRoutes from "./routes/wishlist.routes";
-import sitemapRoute from "./routes/sitemap";
-
-
+import sitemapRoutes from "./routes/sitemap.routes";
 
 const isProd = config.nodeEnv === "production";
 
@@ -36,7 +34,6 @@ async function startServer() {
   app.use(csrfProtection);
   app.use(xssProtection);
   app.use(morgan(isProd ? "combined" : "dev"));
-  app.use("/", sitemapRoute);
 
   // Rate Limiting
   const limiter = rateLimit({
@@ -64,6 +61,9 @@ async function startServer() {
   app.use("/api/admin", adminRoutes);
   app.use("/api/notifications", notificationRoutes);
   app.use("/api/wishlist", wishlistRoutes);
+
+  // SEO: sitemap + robots (must be before SPA catch-all)
+  app.use("/", sitemapRoutes);
 
   // Vite middleware or Production static files
   if (!isProd) {

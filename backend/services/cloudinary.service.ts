@@ -19,7 +19,7 @@ export async function uploadBufferToCloudinary(
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
       {
-        upload_preset:   'Geekhoot',
+        upload_preset:   '7cea9e92-9867-4199-bd87-1ced10240e41',
         asset_folder:    'Geekhoot/products',
         transformation: [{ quality: 'auto', fetch_format: 'auto' }],
       },

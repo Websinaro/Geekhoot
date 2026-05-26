@@ -1,15 +1,15 @@
 User-agent: *
 Allow: /
+Allow: /products
+Allow: /product/
 
-# Block sensitive/private routes
 Disallow: /admin/
+Disallow: /cart
+Disallow: /orders
+Disallow: /profile
+Disallow: /wishlist
 Disallow: /api/
-Disallow: /dashboard/
-Disallow: /checkout/
-Disallow: /profile/
-Disallow: /settings/
-Disallow: /cart/
-Disallow: /wishlist/
+Disallow: /login
+Disallow: /signup
 
-# Sitemap location
 Sitemap: https://shopongeekhoot.onrender.com/sitemap.xml
