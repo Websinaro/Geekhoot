@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { SitemapStream, streamToPromise } from "sitemap";
 import { ProductCategory } from "@prisma/client";
-import prisma from "../lib/prisma";
+import prisma from "../prisma/db";
 
 const router = Router();
 
