@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Filter, ChevronLeft, ChevronRight, Search, SearchX, Star, X } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
@@ -43,14 +43,20 @@ export default function ProductList() {
     setLoadedProducts([]);
   }, [category, search, sort, minPrice, maxPrice, minRating]);
 
-  // Debounced search logic
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setSearch(searchTerm);
+  // Stable debounced setter — useRef so the timer survives re-renders without
+  // recreating the function, avoiding the stale-closure bug in the old setTimeout approach
+  const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const debouncedSetSearch = useCallback((value: string) => {
+    if (debounceTimer.current) clearTimeout(debounceTimer.current);
+    debounceTimer.current = setTimeout(() => {
+      setSearch(value);
+      setPage(1);
     }, 400);
+  }, []);
 
-    return () => clearTimeout(handler);
-  }, [searchTerm]);
+  useEffect(() => () => {
+    if (debounceTimer.current) clearTimeout(debounceTimer.current);
+  }, []);
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['products', page, category, search, sort, minPrice, maxPrice, minRating],
@@ -96,6 +102,8 @@ export default function ProductList() {
     enabled: searchTerm.length >= 2,
   });
 
+  // Memoize the deduplicated product list — prevents re-running the Set logic on every render
+  const visibleProducts = useMemo(() => loadedProducts, [loadedProducts]);
   const total = data?.total || 0;
   const totalPages = data?.pages || 1;
 
@@ -335,6 +343,7 @@ export default function ProductList() {
                     value={searchTerm}
                     onChange={(e) => {
                       setSearchTerm(e.target.value);
+                      debouncedSetSearch(e.target.value);
                       setShowSuggestions(true);
                     }}
                     onFocus={() => setShowSuggestions(true)}
@@ -495,8 +504,8 @@ export default function ProductList() {
             ) : loadedProducts.length > 0 ? (
               <>
                 <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-                  {loadedProducts.map((product: Product) => (
-                    <ProductCard key={product.id} product={product} />
+                  {visibleProducts.map((product: Product, i: number) => (
+                    <ProductCard key={product.id} product={product} priority={i < 4} />
                   ))}
                 </div>
 

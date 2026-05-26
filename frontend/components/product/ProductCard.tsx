@@ -12,9 +12,10 @@ import LazyProductImage from './LazyProductImage';
 
 interface ProductCardProps {
   product: Product;
+  priority?: boolean; // true for above-fold cards (first 2 on mobile, first 4 on desktop)
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, priority = false }: ProductCardProps) {
   const { addItem } = useCartStore();
   const { toggleWishlist, isInWishlist } = useWishlistStore();
   const isWish = isInWishlist(product.id);
@@ -30,8 +31,11 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
+      style={{ willChange: 'transform, opacity' }}
       viewport={{ once: true }}
       className="bg-white group rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 flex flex-col h-full relative"
     >
@@ -53,14 +57,17 @@ export default function ProductCard({ product }: ProductCardProps) {
                }
              }}
              className="absolute top-3 right-3 z-20 p-2 rounded-full bg-white/90 dark:bg-zinc-900/90 text-gray-400 hover:text-red-500 dark:hover:text-red-500 shadow-sm hover:scale-110 active:scale-95 transition-all cursor-pointer border-none"
-             title={isWish ? "Remove from wishlist" : "Add to wishlist"}
+             aria-label={isWish ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
            >
-             <Heart className={cn("w-4 h-4 transition-colors", isWish ? "fill-red-500 text-red-500" : "text-gray-400")} />
+             <Heart className={cn("w-4 h-4 transition-colors", isWish ? "fill-red-500 text-red-500" : "text-gray-400")} aria-hidden="true" />
            </button>
 
           <LazyProductImage
             src={(Array.isArray(product.images) && product.images.length > 0) ? product.images[0] : ''}
             alt={product.name}
+            priority={priority}
+            width={400}
+            height={400}
             className="transition-transform duration-500 group-hover:scale-105"
             containerClassName="w-full h-full"
           />

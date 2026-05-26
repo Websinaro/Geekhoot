@@ -77,7 +77,8 @@ export default function Orders() {
                 key={order.id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05 }}
+                transition={{ delay: i * 0.05, duration: 0.25, ease: 'easeOut' }}
+                style={{ willChange: 'transform, opacity' }}
               >
                 <Card 
                   onClick={() => setSelectedOrder(order)}

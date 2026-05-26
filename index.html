@@ -31,6 +31,20 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Geekhoot" />
     <link rel="apple-touch-icon" href="/pwa-192x192.png" />
+    <!-- Critical resource hints -->
+    <!-- Preconnect to image CDNs so DNS+TLS is ready before images are requested -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+
+    <!-- Preload LCP hero image (desktop only — mobile hero is CSS gradient, no image) -->
+    <link
+      rel="preload"
+      as="image"
+      href="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop&fm=webp"
+      fetchpriority="high"
+      media="(min-width: 1024px)"
+    />
+
     <!-- Microsoft Clarity -->
     <script type="text/javascript">
       (function(c,l,a,r,i,t,y){
@@ -45,3 +59,4 @@
     <script type="module" src="/frontend/main.tsx"></script>
   </body>
 </html>
+

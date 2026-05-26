@@ -65,6 +65,8 @@ export default function Wishlist() {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
+            style={{ willChange: 'transform, opacity' }}
             className="bg-white rounded-lg border border-gray-100 shadow-sm p-12 text-center max-w-xl mx-auto mt-8 flex flex-col items-center"
           >
             <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-4">
@@ -86,9 +88,10 @@ export default function Wishlist() {
             {items.map((product) => (
               <motion.div
                 key={product.id}
-                layout
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                style={{ willChange: 'transform, opacity' }}
                 className="bg-white group rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 flex flex-col h-full relative"
               >
                 {/* Remove button on hover top corner */}

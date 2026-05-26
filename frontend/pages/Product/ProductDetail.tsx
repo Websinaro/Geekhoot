@@ -340,13 +340,15 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                   <button
                     key={i}
                     onClick={() => setActiveImage(i)}
+                    aria-label={`View image ${i + 1} of ${product.images.length}`}
+                    aria-pressed={activeImage === i}
                     className={`w-16 h-16 shrink-0 rounded border-2 transition-all p-1 flex items-center justify-center ${activeImage === i ? 'border-[#ff5200]' : 'border-gray-100'}`}
                   >
-                    <LazyProductImage 
-                      src={img} 
-                      alt="" 
+                    <LazyProductImage
+                      src={img}
+                      alt=""
                       className="max-w-full max-h-full object-contain"
-                      containerClassName="w-full h-full" 
+                      containerClassName="w-full h-full"
                     />
                   </button>
                 ))}
@@ -448,22 +450,25 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
 
                 <div className="flex items-center gap-6 border-y border-gray-50 py-4">
                    <div className="flex items-center gap-2">
-                     <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Quantity</span>
-                     <div className="flex items-center border border-gray-200 rounded">
-                        <button 
-                          onClick={() => setQuantity(Math.max(1, quantity - 1))} 
+                     {/* upgraded text-gray-400 → text-gray-600 for WCAG AA */}
+                     <span className="text-xs font-bold text-gray-600 uppercase tracking-widest">Quantity</span>
+                     <div className="flex items-center border border-gray-200 rounded" role="group" aria-label="Quantity selector">
+                        <button
+                          onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                          aria-label="Decrease quantity"
                           className="p-2 border-r hover:bg-gray-50 disabled:opacity-30"
                           disabled={product.stock === 0 || quantity <= 1}
                         >
-                          <Minus className="w-4 h-4" />
+                          <Minus className="w-4 h-4" aria-hidden="true" />
                         </button>
-                        <span className="w-12 text-center text-sm font-bold">{product.stock === 0 ? 0 : quantity}</span>
-                        <button 
-                          onClick={() => setQuantity(quantity + 1)} 
+                        <span className="w-12 text-center text-sm font-bold" aria-live="polite" aria-label={`Quantity: ${product.stock === 0 ? 0 : quantity}`}>{product.stock === 0 ? 0 : quantity}</span>
+                        <button
+                          onClick={() => setQuantity(quantity + 1)}
+                          aria-label="Increase quantity"
                           className="p-2 border-l hover:bg-gray-50 disabled:opacity-30"
                           disabled={product.stock === 0 || quantity >= product.stock}
                         >
-                          <Plus className="w-4 h-4" />
+                          <Plus className="w-4 h-4" aria-hidden="true" />
                         </button>
                      </div>
                    </div>
@@ -499,14 +504,26 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
 
                 <AnimatePresence>
                     {showReviewForm && (
-                        <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden mb-8 border-b pb-8">
+                        <motion.div
+                          initial={{ opacity: 0, scaleY: 0.92, transformOrigin: 'top' }}
+                          animate={{ opacity: 1, scaleY: 1 }}
+                          exit={{ opacity: 0, scaleY: 0.92 }}
+                          transition={{ duration: 0.2, ease: 'easeOut' }}
+                          style={{ willChange: 'transform, opacity' }}
+                          className="overflow-hidden mb-8 border-b pb-8">
                             <form onSubmit={handleReviewSubmit} className="space-y-4">
                                 <div className="flex items-center gap-4">
                                     <span className="text-sm font-bold">Rate:</span>
-                                    <div className="flex gap-1">
+                                    <div className="flex gap-1" role="group" aria-label="Star rating">
                                         {[1,2,3,4,5].map(i => (
-                                            <button key={i} type="button" onClick={() => setReviewData({ ...reviewData, rating: i })}>
-                                                <Star className={`w-6 h-6 ${reviewData.rating >= i ? 'fill-yellow-400 text-yellow-400' : 'text-gray-200'}`} />
+                                            <button
+                                              key={i}
+                                              type="button"
+                                              onClick={() => setReviewData({ ...reviewData, rating: i })}
+                                              aria-label={`Rate ${i} star${i !== 1 ? 's' : ''}`}
+                                              aria-pressed={reviewData.rating === i}
+                                            >
+                                                <Star className={`w-6 h-6 ${reviewData.rating >= i ? 'fill-yellow-400 text-yellow-400' : 'text-gray-200'}`} aria-hidden="true" />
                                             </button>
                                         ))}
                                     </div>

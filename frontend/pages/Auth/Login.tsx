@@ -64,7 +64,8 @@ export default function Login() {
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        style={{ willChange: 'transform, opacity' }}
         className="w-full max-w-md z-10"
       >
         <Card className="rounded-2xl border border-gray-100 shadow-xl bg-white p-6 sm:p-8 relative overflow-hidden">

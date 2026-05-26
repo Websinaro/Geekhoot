@@ -97,7 +97,8 @@ export default function Signup() {
       <motion.div
         initial={{ opacity: 0, scale: 0.99 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        style={{ willChange: 'transform, opacity' }}
         className="w-full max-w-4xl z-10"
       >
         <Card className="rounded-2xl border border-gray-100 shadow-xl bg-white p-6 sm:p-10 relative overflow-hidden">
@@ -192,9 +193,12 @@ export default function Signup() {
                           <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
+                            aria-label={showPassword ? 'Hide password' : 'Show password'}
                             className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#ff5200] transition-colors h-8 w-8 flex items-center justify-center p-0 rounded-full"
                           >
-                            {showPassword ? <EyeOff className="w-4.5 h-4.5" /> : <Eye className="w-4.5 h-4.5" />}
+                            {showPassword
+                              ? <EyeOff className="w-4.5 h-4.5" aria-hidden="true" />
+                              : <Eye    className="w-4.5 h-4.5" aria-hidden="true" />}
                           </button>
                         </div>
                         {form.formState.errors.password && (

@@ -92,6 +92,7 @@ export default function Profile() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
+        style={{ willChange: 'transform, opacity' }}
       >
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Main Profile Info */}

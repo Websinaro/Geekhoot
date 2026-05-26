@@ -1,5 +1,4 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Truck, ShieldCheck, Zap, Star, Quote } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -31,7 +30,9 @@ export default function Home() {
     },
   });
 
-  const featuredProducts = data || [];
+  // Memoize so the array reference is stable — prevents ProductCard re-renders
+  // when unrelated state (e.g. navigate hover) updates the Home component
+  const featuredProducts = useMemo(() => data || [], [data]);
 
   return (
     <div className="flex flex-col bg-background text-foreground min-h-screen transition-colors duration-200">
@@ -62,17 +63,27 @@ export default function Home() {
             <div className="max-w-xl">
               <h1 className="text-3xl md:text-5xl font-bold mb-4">Quality Custom Prints for Your Lifestyle</h1>
               <p className="text-lg md:text-xl mb-8 opacity-90">Personalized gifts, apparel, and gadgets delivered with precision.</p>
-              <Button 
-                size="lg" 
-                className="bg-[#fb641b] hover:bg-[#ff5200] text-white font-bold h-12 px-8 rounded-sm shadow-lg border-none" 
+              <Button
+                size="lg"
+                className="bg-[#fb641b] hover:bg-[#ff5200] text-white font-bold h-12 px-8 rounded-sm shadow-lg border-none"
                 onClick={() => navigate('/products')}
               >
                 Shop Now
               </Button>
             </div>
           </div>
-          <div className="absolute right-0 top-0 h-full w-1/2 hidden lg:block">
-            <div className="h-full w-full bg-[url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center"></div>
+          {/* LCP hero image — real <img> so the browser preloader can discover it */}
+          <div className="absolute right-0 top-0 h-full w-1/2 hidden lg:block" aria-hidden="true">
+            <img
+              src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop&fm=webp"
+              alt=""
+              width={1000}
+              height={450}
+              fetchPriority="high"
+              loading="eager"
+              decoding="sync"
+              className="h-full w-full object-cover object-center"
+            />
           </div>
         </section>
 
@@ -95,15 +106,17 @@ export default function Home() {
                 <div key={i} className="aspect-[3/4] bg-gray-50 dark:bg-zinc-800 rounded animate-pulse"></div>
               ))
             ) : (
-              featuredProducts.map((product: Product) => (
-                <ProductCard key={product.id} product={product} />
+              featuredProducts.map((product: Product, i: number) => (
+                <ProductCard key={product.id} product={product} priority={i < 4} />
               ))
             )}
           </div>
         </section>
 
-        {/* Brand Promises */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        {/* Below-fold sections deferred — don't block initial paint */}
+        <React.Suspense fallback={null}>
+          {/* Brand Promises */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
            <div className="flex items-center gap-4 p-6 bg-blue-50/50 dark:bg-blue-950/20 rounded-lg border border-blue-100/65 dark:border-blue-900/30 transition-colors">
              <Truck className="w-8 h-8 text-blue-600" />
              <div>
@@ -132,7 +145,7 @@ export default function Home() {
            <div className="absolute inset-0 bg-gradient-to-br from-[#ff5200]/20 to-blue-500/20 opacity-50"></div>
            <div className="relative z-10 max-w-2xl mx-auto">
              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 uppercase tracking-tight italic">Unleash Your Creativity</h2>
-             <p className="text-gray-400 mb-10 text-lg">Join thousands of customers who trust Geekhoot for their custom printing needs. High quality, zero compromises.</p>
+             <p className="text-gray-400 mb-10 text-lg text-gray-600 dark:text-gray-400">Join thousands of customers who trust Geekhoot for their custom printing needs. High quality, zero compromises.</p>
              <Button 
                 onClick={() => navigate('/products')} 
                 className="bg-white text-gray-900 hover:bg-gray-100 font-bold px-10 h-14 rounded-sm text-lg"
@@ -141,6 +154,7 @@ export default function Home() {
              </Button>
            </div>
         </section>
+        </React.Suspense>
       </div>
     </div>
   );

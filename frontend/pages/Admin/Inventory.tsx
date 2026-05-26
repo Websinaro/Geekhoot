@@ -258,7 +258,8 @@ export default function AdminInventory() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.15 }}
+            transition={{ duration: 0.15, ease: 'easeOut' }}
+            style={{ willChange: 'transform, opacity' }}
             className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden"
           >
             <div className="overflow-x-auto">
@@ -424,7 +425,8 @@ export default function AdminInventory() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.15 }}
+            transition={{ duration: 0.15, ease: 'easeOut' }}
+            style={{ willChange: 'transform, opacity' }}
             className="space-y-4"
           >
             <div className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden pb-4">

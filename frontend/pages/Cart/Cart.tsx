@@ -226,8 +226,10 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
     return (
       <div className="min-h-[80vh] flex flex-col items-center justify-center p-8 bg-white text-black">
         <motion.div 
-          initial={{ scale: 0.8, opacity: 0 }}
+          initial={{ scale: 0.92, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.35, ease: 'easeOut' }}
+          style={{ willChange: 'transform, opacity' }}
           className="w-40 h-40 bg-gray-50 rounded-[3rem] flex items-center justify-center mb-10 border border-gray-100 relative overflow-hidden group"
         >
           <div className="absolute inset-0 bg-[#ff5200]/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -268,10 +270,11 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
                   {cart.map((item) => (
                     <motion.div
                       key={item.id}
-                      layout
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 8 }}
+                      transition={{ duration: 0.2, ease: 'easeOut' }}
+                      style={{ willChange: 'transform, opacity' }}
                       className="p-6 hover:bg-gray-50 transition-colors"
                     >
                       <div className="flex flex-col md:flex-row gap-6">

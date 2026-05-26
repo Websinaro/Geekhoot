@@ -71,8 +71,47 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
-    app.get("*", (req, res) => res.sendFile(path.join(distPath, "index.html")));
+
+    // 1. Hashed assets (JS, CSS, images emitted by Vite with content-hash filenames)
+    //    Safe to cache for 1 year — the hash changes whenever the content changes.
+    app.use(
+      "/assets",
+      express.static(path.join(distPath, "assets"), {
+        maxAge: "1y",
+        immutable: true,
+        etag: false,       // hash in filename makes etag redundant
+        lastModified: false,
+      })
+    );
+
+    // 2. PWA manifest, icons, service worker
+    //    Short cache — these can change with app updates but are small files.
+    app.use(
+      express.static(distPath, {
+        maxAge: "1d",
+        setHeaders(res, filePath) {
+          // index.html must never be cached — it's the SPA entry point and
+          // must always reflect the latest hashed asset filenames.
+          if (filePath.endsWith("index.html")) {
+            res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            res.setHeader("Pragma", "no-cache");
+            res.setHeader("Expires", "0");
+            return;
+          }
+          // Service worker must not be cached or updates won't reach users.
+          if (filePath.endsWith("sw.js") || filePath.endsWith("workbox-")) {
+            res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            return;
+          }
+        },
+      })
+    );
+
+    // 3. SPA fallback — always serve index.html with no-cache headers
+    app.get("*", (req, res) => {
+      res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+      res.sendFile(path.join(distPath, "index.html"));
+    });
   }
 
   // Error Handler (Must be last)
