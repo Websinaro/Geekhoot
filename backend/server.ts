@@ -21,7 +21,7 @@ import notificationRoutes from "./routes/notification.routes";
 import wishlistRoutes from "./routes/wishlist.routes";
 import sitemapRoute from "./routes/sitemap";
 
-app.use("/", sitemapRoute);
+
 
 const isProd = config.nodeEnv === "production";
 
@@ -36,6 +36,7 @@ async function startServer() {
   app.use(csrfProtection);
   app.use(xssProtection);
   app.use(morgan(isProd ? "combined" : "dev"));
+  app.use("/", sitemapRoute);
 
   // Rate Limiting
   const limiter = rateLimit({
