@@ -19,6 +19,9 @@ import orderRoutes from "./routes/order.routes";
 import adminRoutes from "./routes/admin.routes";
 import notificationRoutes from "./routes/notification.routes";
 import wishlistRoutes from "./routes/wishlist.routes";
+import sitemapRoute from "./routes/sitemap";
+
+app.use("/", sitemapRoute);
 
 const isProd = config.nodeEnv === "production";
 
