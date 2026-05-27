@@ -48,7 +48,7 @@ export default function Footer() {
               </a>
 
               <a
-                href="https://facebook.com/"
+                href="https://facebook.com/geekhoot.in/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center hover:bg-[#ff5200] transition-all border border-gray-100 shadow-sm group"
