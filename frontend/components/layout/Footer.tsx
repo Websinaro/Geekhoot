@@ -15,7 +15,7 @@ export default function Footer() {
             <Link to="/" className="flex flex-col leading-none group text-black">
                <span className="text-3xl font-black italic tracking-tighter uppercase group-hover:text-[#ff5200] transition-colors">Geekhoot</span>
                <span className="text-[9px] italic font-black text-gray-300 flex items-center gap-1 mt-1 uppercase tracking-widest">
-                 System Version 2.0.4
+                 System Version 1.0.1
                </span>
             </Link>
             <p className="text-sm font-medium leading-relaxed max-w-xs text-gray-400 uppercase tracking-tight">
@@ -36,8 +36,8 @@ export default function Footer() {
             <ul className="space-y-4 text-[10px] font-black uppercase tracking-widest">
               <li><Link to="/products" className="hover:text-[#ff5200] transition-colors text-gray-400">All Operations</Link></li>
               <li><Link to="/products?category=Electronics" className="hover:text-[#ff5200] transition-colors text-gray-400">Digital Cores</Link></li>
-              <li><Link to="/products?category=Accessories" className="hover:text-[#ff5200] transition-colors text-gray-400">Linkage Modules</Link></li>
-              <li><Link to="/products?category=Wearables" className="hover:text-[#ff5200] transition-colors text-gray-400">Bio-Link Systems</Link></li>
+              <li><Link to="/products?category=Accessories" className="hover:text-[#ff5200] transition-colors text-gray-400">Accessories</Link></li>
+              <li><Link to="/products?category=Wearables" className="hover:text-[#ff5200] transition-colors text-gray-400">Wearable Gadgets</Link></li>
             </ul>
           </div>
 
@@ -45,28 +45,28 @@ export default function Footer() {
           <div className="space-y-8">
             <h3 className="text-black font-black uppercase text-xs tracking-[0.4em] border-l-2 border-[#ff5200] pl-4">Node Operations</h3>
             <ul className="space-y-4 text-[10px] font-black uppercase tracking-widest">
-              <li><Link to="/profile" className="hover:text-[#ff5200] transition-colors text-gray-400">Identity Manifest</Link></li>
-              <li><Link to="/orders" className="hover:text-[#ff5200] transition-colors text-gray-400">Logistics Track</Link></li>
-              <li><Link to="/faq" className="hover:text-[#ff5200] transition-colors text-gray-400">Sync Protocol FAQ</Link></li>
-              <li><Link to="/terms" className="hover:text-[#ff5200] transition-colors text-gray-400">Engagement Terms</Link></li>
+              <li><Link to="/profile" className="hover:text-[#ff5200] transition-colors text-gray-400">Profile</Link></li>
+              <li><Link to="/orders" className="hover:text-[#ff5200] transition-colors text-gray-400">Order Track</Link></li>
+              <li><Link to="/faq" className="hover:text-[#ff5200] transition-colors text-gray-400"> FAQ</Link></li>
+              <li><Link to="/terms" className="hover:text-[#ff5200] transition-colors text-gray-400">Terms And Services</Link></li>
             </ul>
           </div>
 
           {/* Contact */}
           <div className="space-y-8">
-            <h3 className="text-black font-black uppercase text-xs tracking-[0.4em] border-l-2 border-[#ff5200] pl-4">Signal Terminal</h3>
+            <h3 className="text-black font-black uppercase text-xs tracking-[0.4em] border-l-2 border-[#ff5200] pl-4">Contact Terminal</h3>
             <ul className="space-y-6 text-[10px] font-black uppercase tracking-widest">
               <li className="flex items-start gap-4">
                 <MapPin className="w-5 h-5 text-[#ff5200] shrink-0" />
-                <span className="leading-relaxed text-gray-400">Sector 7, Tech Park, <br />Bypass Region, Kochi, IN</span>
+                <span className="leading-relaxed text-gray-400"> Kausthubham Pattara Kurumpayam po <br /> 695608 <br /> Kallara Thiruvananthapuram Kerala IN</span>
               </li>
               <li className="flex items-center gap-4">
                 <Phone className="w-5 h-5 text-[#ff5200] shrink-0" />
-                <span className="text-gray-400">+91 81388 72364</span>
+                <span className="text-gray-400">+9162387 77570</span>
               </li>
               <li className="flex items-center gap-4">
                 <Mail className="w-5 h-5 text-[#ff5200] shrink-0" />
-                <span className="lowercase text-gray-400">vAULT@GEEKHOOT.IO</span>
+                <span className="lowercase text-gray-400">mygeekhoot@gmail.com</span>
               </li>
             </ul>
           </div>
@@ -74,12 +74,12 @@ export default function Footer() {
 
         <div className="mt-24 pt-12 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-8">
           <p className="text-[9px] font-black uppercase tracking-[0.5em] text-gray-300">
-            © {new Date().getFullYear()} Geekhoot Architecture. Node Locked.
+            © {new Date().getFullYear()} Geekhoot Architecture.Websinaro Terminal Protected.
           </p>
           <div className="flex items-center gap-6">
              <div className="h-0.5 w-12 bg-gray-100"></div>
              <p className="text-[9px] font-black uppercase tracking-[0.5em] text-[#ff5200] italic">
-               Powered by WEBSINARO
+               Powered by WEBSINARO WB
              </p>
           </div>
         </div>
