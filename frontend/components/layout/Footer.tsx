@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import { Facebook, Youtube, Instagram, Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -22,11 +22,33 @@ export default function Footer() {
               Elite inventory manifest for premium gadgets and handcrafted masterpieces. Execute your style protocol.
             </p>
             <div className="flex gap-4 pt-4">
-              {[Instagram, Twitter, Facebook].map((Icon, i) => (
-                <div key={i} className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center hover:bg-[#ff5200] hover:text-white transition-all cursor-pointer border border-gray-100 shadow-sm">
-                  <Icon className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
-                </div>
-              ))}
+  <a
+    href="https://instagram.com/geekhoot.in/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center hover:bg-[#ff5200] transition-all border border-gray-100 shadow-sm group"
+  >
+    <Instagram className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+  </a>
+
+  <a
+    href="https://www.instagram.com/geekhoot.in?utm_source=qr&igsh=bTVxaTk4bXJlbjIy"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center hover:bg-[#ff5200] transition-all border border-gray-100 shadow-sm group"
+  >
+    <Facebook className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+  </a>
+
+  <a
+    href="https://www.youtube.com/channel/UCs1tFdPhqfPN5-6sXpOAQrA"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center hover:bg-[#ff5200] transition-all border border-gray-100 shadow-sm group"
+  >
+    <Youtube className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+  </a>
+</div>
             </div>
           </div>
 
