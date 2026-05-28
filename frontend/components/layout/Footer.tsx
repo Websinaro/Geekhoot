@@ -1,220 +1,156 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Facebook,
-  Youtube,
-  Instagram,
-  Mail,
-  Phone,
-  MapPin,
-} from 'lucide-react';
+import { Facebook, Youtube, Instagram, Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-white text-gray-400 border-t border-gray-100 relative overflow-hidden">
-      {/* Background Accent */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-[#ff5200]/5 blur-[120px] pointer-events-none"></div>
+    <footer className="bg-white dark:bg-zinc-950 border-t border-gray-100 dark:border-zinc-900 relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-[#ff5200]/5 blur-[120px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 py-20 lg:py-32 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-24">
+      <div className="max-w-7xl mx-auto px-6 py-14 lg:py-20 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16">
 
           {/* Brand */}
-          <div className="space-y-8">
-            <Link to="/" className="flex flex-col leading-none group text-black">
-              <span className="text-3xl font-black italic tracking-tighter uppercase group-hover:text-[#ff5200] transition-colors">
-                Geekhoot
-              </span>
-
-              <span className="text-[9px] italic font-black text-gray-300 flex items-center gap-1 mt-1 uppercase tracking-widest">
-                System Version 1.0.1
-              </span>
+          <div className="space-y-5 sm:col-span-2 lg:col-span-1">
+            <Link to="/" className="inline-block">
+              <img
+                src="/logo.png"
+                alt="GeekHoot"
+                className="h-10 w-auto object-contain dark:invert"
+                draggable={false}
+              />
             </Link>
-
-            <p className="text-sm font-medium leading-relaxed max-w-xs text-gray-400 uppercase tracking-tight">
-              Elite inventory manifest for premium gadgets and handcrafted masterpieces.
-              Execute your style protocol.
+            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed max-w-xs">
+              Your one-stop shop for premium custom merchandise, personalised gifts, and unique accessories — delivered with care.
             </p>
-
-            {/* Social Links */}
-            <div className="flex gap-4 pt-4">
-
+            <div className="flex gap-3 pt-1">
               <a
                 href="https://instagram.com/geekhoot.in"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center hover:bg-[#ff5200] transition-all border border-gray-100 shadow-sm group"
+                aria-label="Instagram"
+                className="w-10 h-10 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center text-gray-500 hover:bg-[#ff5200] hover:text-white hover:border-[#ff5200] transition-all duration-150 active:opacity-75 group"
               >
-                <Instagram className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+                <Instagram className="w-4 h-4 group-hover:text-white transition-colors" aria-hidden="true" />
               </a>
-
               <a
                 href="https://facebook.com/geekhoot.in/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center hover:bg-[#ff5200] transition-all border border-gray-100 shadow-sm group"
+                aria-label="Facebook"
+                className="w-10 h-10 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center text-gray-500 hover:bg-[#ff5200] hover:text-white hover:border-[#ff5200] transition-all duration-150 active:opacity-75 group"
               >
-                <Facebook className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+                <Facebook className="w-4 h-4 group-hover:text-white transition-colors" aria-hidden="true" />
               </a>
-
               <a
                 href="https://www.youtube.com/channel/UCs1tFdPhqfPN5-6sXpOAQrA"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center hover:bg-[#ff5200] transition-all border border-gray-100 shadow-sm group"
+                aria-label="YouTube"
+                className="w-10 h-10 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center text-gray-500 hover:bg-[#ff5200] hover:text-white hover:border-[#ff5200] transition-all duration-150 active:opacity-75 group"
               >
-                <Youtube className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+                <Youtube className="w-4 h-4 group-hover:text-white transition-colors" aria-hidden="true" />
               </a>
-
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="space-y-8">
-            <h3 className="text-black font-black uppercase text-xs tracking-[0.4em] border-l-2 border-[#ff5200] pl-4">
-              Inventory Sectors
+          {/* Shop */}
+          <div className="space-y-5">
+            <h3 className="text-sm font-bold text-gray-900 dark:text-white tracking-wide border-l-2 border-[#ff5200] pl-3">
+              Shop
             </h3>
-
-            <ul className="space-y-4 text-[10px] font-black uppercase tracking-widest">
-              <li>
-                <Link
-                  to="/products"
-                  className="hover:text-[#ff5200] transition-colors text-gray-400"
-                >
-                  All Operations
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  to="/products?category=Electronics"
-                  className="hover:text-[#ff5200] transition-colors text-gray-400"
-                >
-                  Digital Cores
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  to="/products?category=Accessories"
-                  className="hover:text-[#ff5200] transition-colors text-gray-400"
-                >
-                  Accessories
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  to="/products?category=Wearables"
-                  className="hover:text-[#ff5200] transition-colors text-gray-400"
-                >
-                  Wearable Gadgets
-                </Link>
-              </li>
+            <ul className="space-y-3">
+              {[
+                { to: '/products',                           label: 'All Products'    },
+                { to: '/products?category=Electronics',     label: 'Electronics'     },
+                { to: '/products?category=Accessories',     label: 'Accessories'     },
+                { to: '/products?category=Wearables',       label: 'Wearable Gadgets'},
+                { to: '/products?category=Custom Printing', label: 'Custom Printing' },
+              ].map(({ to, label }) => (
+                <li key={label}>
+                  <Link
+                    to={to}
+                    className="text-sm text-gray-500 dark:text-gray-400 hover:text-[#ff5200] dark:hover:text-[#ff5200] transition-colors"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Support */}
-          <div className="space-y-8">
-            <h3 className="text-black font-black uppercase text-xs tracking-[0.4em] border-l-2 border-[#ff5200] pl-4">
-              Node Operations
+          <div className="space-y-5">
+            <h3 className="text-sm font-bold text-gray-900 dark:text-white tracking-wide border-l-2 border-[#ff5200] pl-3">
+              Support
             </h3>
-
-            <ul className="space-y-4 text-[10px] font-black uppercase tracking-widest">
-              <li>
-                <Link
-                  to="/profile"
-                  className="hover:text-[#ff5200] transition-colors text-gray-400"
-                >
-                  Profile
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  to="/orders"
-                  className="hover:text-[#ff5200] transition-colors text-gray-400"
-                >
-                  Order Track
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  to="/faq"
-                  className="hover:text-[#ff5200] transition-colors text-gray-400"
-                >
-                  FAQ
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  to="/terms"
-                  className="hover:text-[#ff5200] transition-colors text-gray-400"
-                >
-                  Terms And Services
-                </Link>
-              </li>
+            <ul className="space-y-3">
+              {[
+                { to: '/profile',  label: 'My Profile'        },
+                { to: '/orders',   label: 'Track My Order'    },
+                { to: '/cart',     label: 'My Cart'           },
+                { to: '/wishlist', label: 'My Wishlist'       },
+                { to: '/faq',      label: 'FAQ'               },
+                { to: '/terms',    label: 'Terms & Services'  },
+              ].map(({ to, label }) => (
+                <li key={label}>
+                  <Link
+                    to={to}
+                    className="text-sm text-gray-500 dark:text-gray-400 hover:text-[#ff5200] dark:hover:text-[#ff5200] transition-colors"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Contact */}
-          <div className="space-y-8">
-            <h3 className="text-black font-black uppercase text-xs tracking-[0.4em] border-l-2 border-[#ff5200] pl-4">
-              Contact Terminal
+          <div className="space-y-5">
+            <h3 className="text-sm font-bold text-gray-900 dark:text-white tracking-wide border-l-2 border-[#ff5200] pl-3">
+              Contact Us
             </h3>
-
-            <ul className="space-y-6 text-[10px] font-black uppercase tracking-widest">
-
-              <li className="flex items-start gap-4">
-                <MapPin className="w-5 h-5 text-[#ff5200] shrink-0" />
-
-                <span className="leading-relaxed text-gray-400">
-                  Kausthubham Pattara Kurumpayam PO
-                  <br />
-                  695608
-                  <br />
-                  Kallara Thiruvananthapuram Kerala IN
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3">
+                <MapPin className="w-4 h-4 text-[#ff5200] shrink-0 mt-0.5" aria-hidden="true" />
+                <span className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                  Kausthubham Pattara, Kurumpayam PO,<br />
+                  Kallara, Thiruvananthapuram,<br />
+                  Kerala — 695608
                 </span>
               </li>
-
-              <li className="flex items-center gap-4">
-                <Phone className="w-5 h-5 text-[#ff5200] shrink-0" />
-
-                <span className="text-gray-400">
+              <li className="flex items-center gap-3">
+                <Phone className="w-4 h-4 text-[#ff5200] shrink-0" aria-hidden="true" />
+                <a
+                  href="tel:+916238777570"
+                  className="text-sm text-gray-500 dark:text-gray-400 hover:text-[#ff5200] transition-colors"
+                >
                   +91 62387 77570
-                </span>
+                </a>
               </li>
-
-              <li className="flex items-center gap-4">
-                <Mail className="w-5 h-5 text-[#ff5200] shrink-0" />
-
-                <span className="lowercase text-gray-400">
+              <li className="flex items-center gap-3">
+                <Mail className="w-4 h-4 text-[#ff5200] shrink-0" aria-hidden="true" />
+                <a
+                  href="mailto:mygeekhoot@gmail.com"
+                  className="text-sm text-gray-500 dark:text-gray-400 hover:text-[#ff5200] transition-colors"
+                >
                   mygeekhoot@gmail.com
-                </span>
+                </a>
               </li>
-
             </ul>
           </div>
 
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-24 pt-12 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-8">
-
-          <p className="text-[9px] font-black uppercase tracking-[0.5em] text-gray-300">
-            © {new Date().getFullYear()} Geekhoot Architecture.
-            Websinaro Terminal Protected.
+        {/* Bottom bar */}
+        <div className="mt-12 pt-8 border-t border-gray-100 dark:border-zinc-900 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-gray-400 dark:text-gray-500">
+            © {new Date().getFullYear()} Geekhoot. All rights reserved.
           </p>
-
-          <div className="flex items-center gap-6">
-            <div className="h-0.5 w-12 bg-gray-100"></div>
-
-            <p className="text-[9px] font-black uppercase tracking-[0.5em] text-[#ff5200] italic">
-              Powered by WEBSINARO WB
-            </p>
-          </div>
-
+          <p className="text-xs text-gray-400 dark:text-gray-500">
+            Powered by{' '}
+            <span className="text-[#ff5200] font-semibold">Websinaro</span>
+          </p>
         </div>
       </div>
     </footer>

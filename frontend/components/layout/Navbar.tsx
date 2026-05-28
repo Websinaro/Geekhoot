@@ -86,10 +86,13 @@ export default function Navbar() {
 
           {/* Logo */}
           <div className="flex items-center shrink-0">
-            <Link to="/" aria-label="Geekhoot — go to homepage" className="flex flex-col leading-none group">
-              <span className="text-2xl sm:text-3xl font-bold tracking-tight text-black dark:text-white group-hover:text-[#ff5200] transition-colors">Geekhoot</span>
-              {/* upgraded text-gray-400 → text-gray-500 for WCAG AA contrast on white */}
-              <span className="text-[10px] font-semibold text-gray-500 mt-0.5 uppercase tracking-wider">Premium Printing Store</span>
+            <Link to="/" aria-label="Geekhoot — go to homepage" className="flex items-center gap-2.5 group">
+              <img
+                src="/logo.png"
+                alt="GeekHoot"
+                className="h-9 w-auto object-contain dark:invert transition-opacity group-hover:opacity-80"
+                draggable={false}
+              />
             </Link>
           </div>
 
@@ -318,8 +321,12 @@ export default function Navbar() {
               <SheetContent side="right" className="w-[80%] p-0 border-none bg-white dark:bg-zinc-950 text-black dark:text-white">
                 <div className="p-6 space-y-8 h-full flex flex-col">
                   <div className="flex flex-col">
-                    <span className="text-2xl font-bold text-black dark:text-white">Geekhoot</span>
-                    <span className="text-xs text-gray-500">Premium Printing Store</span>
+                    <img
+                      src="/logo.png"
+                      alt="GeekHoot"
+                      className="h-10 w-auto object-contain dark:invert"
+                      draggable={false}
+                    />
                   </div>
 
                   <nav aria-label="Mobile navigation" className="flex flex-col gap-1">

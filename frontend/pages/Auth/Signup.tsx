@@ -107,9 +107,12 @@ export default function Signup() {
           
           <CardHeader className="text-center sm:text-left pb-8 pt-0 px-0 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-gray-50 mb-8">
             <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-              <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center text-[#ff5200] border border-orange-100/50">
-                <UserPlus className="w-6 h-6" />
-              </div>
+              <img
+                src="/logo.png"
+                alt="GeekHoot"
+                className="h-12 w-auto object-contain"
+                draggable={false}
+              />
               <div>
                 <CardTitle className="text-2xl font-bold text-gray-900 tracking-tight">Create Your Account</CardTitle>
                 <CardDescription className="text-sm text-gray-500">

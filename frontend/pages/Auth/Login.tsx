@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { KeyRound, Mail, Lock, ArrowRight } from 'lucide-react';
+import { Mail, Lock, ArrowRight } from 'lucide-react';
 import { useAuthStore } from '@/src/store/authStore';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -73,14 +73,19 @@ export default function Login() {
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#ff5200] to-orange-400" />
           
           <CardHeader className="space-y-1.5 text-center pb-6">
-            <div className="mx-auto w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center text-[#ff5200] mb-4 border border-orange-100/50">
-              <KeyRound className="w-6 h-6" />
+            <div className="flex justify-center mb-4">
+              <img
+                src="/logo.png"
+                alt="GeekHoot"
+                className="h-16 w-auto object-contain"
+                draggable={false}
+              />
             </div>
             <CardTitle className="text-2xl font-bold text-gray-900 tracking-tight">
-              Welcome to <span className="text-[#ff5200]">Geekhoot</span>
+              Welcome back
             </CardTitle>
             <CardDescription className="text-sm text-gray-500">
-              Enter your credentials to access your account
+              Sign in to your Geekhoot account
             </CardDescription>
           </CardHeader>
           

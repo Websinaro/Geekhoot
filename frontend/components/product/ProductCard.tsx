@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Star, ShoppingCart, ArrowRight, Heart } from 'lucide-react';
+import { Star, ShoppingCart, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
@@ -12,7 +12,7 @@ import LazyProductImage from './LazyProductImage';
 
 interface ProductCardProps {
   product: Product;
-  priority?: boolean; // true for above-fold cards (first 2 on mobile, first 4 on desktop)
+  priority?: boolean;
 }
 
 export default function ProductCard({ product, priority = false }: ProductCardProps) {
@@ -20,14 +20,23 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
   const { toggleWishlist, isInWishlist } = useWishlistStore();
   const isWish = isInWishlist(product.id);
 
-  const handleAddToCart = (e?: React.MouseEvent) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     addItem(product);
     toast.success(`${product.name} added to cart`);
   };
+
+  const handleWishlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleWishlist(product);
+    toast.success(isWish ? `${product.name} removed from wishlist` : `${product.name} added to wishlist`);
+  };
+
+  const discountPct = product.originalPrice && product.originalPrice > product.price
+    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+    : 0;
 
   return (
     <motion.div
@@ -36,90 +45,110 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
       viewport={{ once: true, margin: '0px 0px -40px 0px' }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
       style={{ willChange: 'transform, opacity' }}
-      viewport={{ once: true }}
-      className="bg-white group rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 flex flex-col h-full relative"
+      className="group relative bg-white dark:bg-zinc-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 dark:border-zinc-800 flex flex-col h-full"
     >
-      <Link to={`/product/${product.id}`} className="block flex-1">
-        <div className="relative aspect-square overflow-hidden bg-gray-50 flex items-center justify-center">
-           <div className="absolute top-3 left-3 z-20">
-              <Badge className="bg-[#ff5200] text-white text-[10px] font-bold px-2 py-0.5 rounded-sm border-none shadow-sm">Hot Deal</Badge>
-           </div>
-           
-           <button
-             onClick={(e) => {
-               e.preventDefault();
-               e.stopPropagation();
-               toggleWishlist(product);
-               if (isWish) {
-                 toast.success(`${product.name} removed from wishlist`);
-               } else {
-                 toast.success(`${product.name} added to wishlist`);
-               }
-             }}
-             className="absolute top-3 right-3 z-20 p-2 rounded-full bg-white/90 dark:bg-zinc-900/90 text-gray-400 hover:text-red-500 dark:hover:text-red-500 shadow-sm hover:scale-110 active:scale-95 transition-all cursor-pointer border-none"
-             aria-label={isWish ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
-           >
-             <Heart className={cn("w-4 h-4 transition-colors", isWish ? "fill-red-500 text-red-500" : "text-gray-400")} aria-hidden="true" />
-           </button>
+      {/* Image area */}
+      <Link to={`/product/${product.id}`} className="block relative aspect-square overflow-hidden bg-gray-50 dark:bg-zinc-800">
 
-          <LazyProductImage
-            src={(Array.isArray(product.images) && product.images.length > 0) ? product.images[0] : ''}
-            alt={product.name}
-            priority={priority}
-            width={400}
-            height={400}
-            className="transition-transform duration-500 group-hover:scale-105"
-            containerClassName="w-full h-full"
-          />
-          
-          {product.stock === 0 && (
-            <div className="absolute inset-0 bg-white/70 backdrop-blur-sm flex items-center justify-center z-10">
-              <span className="bg-gray-800 text-white text-[10px] font-bold uppercase tracking-wider px-4 py-2 rounded">Out of Stock</span>
-            </div>
+        {/* Badges */}
+        <div className="absolute top-2.5 left-2.5 z-20 flex flex-col gap-1">
+          {discountPct > 0 && (
+            <Badge className="bg-[#ff5200] text-white text-[10px] font-bold px-2 py-0.5 rounded-sm border-none shadow-sm">
+              {discountPct}% off
+            </Badge>
           )}
         </div>
 
-        <div className="p-4 flex flex-col flex-1">
-          <p className="text-xs text-gray-400 font-medium mb-1">{product.category}</p>
-          <h3 className="font-semibold text-base text-gray-900 group-hover:text-[#ff5200] transition-colors line-clamp-2 mb-2">{product.name}</h3>
-          
-          <div className="flex items-center gap-2 mb-3">
-            <div className="flex bg-green-600 text-white px-1.5 py-0.5 rounded text-[10px] font-bold items-center gap-1">
-              {Number(product.rating || 0).toFixed(1)} <Star className="w-2.5 h-2.5 fill-white" />
-            </div>
-            <span className="text-xs text-gray-400 font-medium">({product._count?.reviews || 0})</span>
-          </div>
+        {/* Wishlist button */}
+        <button
+          onClick={handleWishlist}
+          aria-label={isWish ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
+          className={cn(
+            "absolute top-2.5 right-2.5 z-20 w-8 h-8 rounded-full flex items-center justify-center",
+            "shadow-sm border border-gray-100 dark:border-zinc-700",
+            "transition-all duration-150 active:scale-90 active:opacity-75",
+            isWish
+              ? "bg-red-50 dark:bg-red-950/40 text-red-500"
+              : "bg-white/90 dark:bg-zinc-900/90 text-gray-400 hover:text-red-500"
+          )}
+        >
+          <Heart className={cn("w-4 h-4 transition-colors", isWish && "fill-red-500")} aria-hidden="true" />
+        </button>
 
-          <div className="mt-auto">
-            <div className="flex flex-col gap-1.5">
-              <div className="flex items-baseline gap-1.5 flex-wrap">
-                <span className="text-lg font-extrabold text-gray-900">₹{product.price.toLocaleString()}</span>
-                {product.originalPrice && product.originalPrice > product.price && (
-                  <span className="text-xs text-gray-400 line-through">₹{product.originalPrice.toLocaleString()}</span>
-                )}
-              </div>
-              {product.originalPrice && product.originalPrice > product.price && (
-                <div className="flex">
-                  <span className="text-[10px] bg-green-50/80 text-green-700 px-2 py-0.5 rounded font-bold border border-green-200/35">
-                    {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% off
-                  </span>
-                </div>
-              )}
-            </div>
+        <LazyProductImage
+          src={Array.isArray(product.images) && product.images.length > 0 ? product.images[0] : ''}
+          alt={product.name}
+          priority={priority}
+          width={400}
+          height={400}
+          className="transition-transform duration-500 group-hover:scale-105"
+          containerClassName="w-full h-full"
+        />
+
+        {/* Out of stock overlay */}
+        {product.stock === 0 && (
+          <div className="absolute inset-0 bg-white/75 dark:bg-zinc-900/75 backdrop-blur-[2px] flex items-center justify-center z-10">
+            <span className="bg-gray-800 dark:bg-zinc-700 text-white text-[10px] font-bold uppercase tracking-wider px-4 py-2 rounded-md">
+              Out of Stock
+            </span>
           </div>
+        )}
+      </Link>
+
+      {/* Product info */}
+      <Link to={`/product/${product.id}`} className="flex flex-col flex-1 p-3 sm:p-4">
+        {/* Category */}
+        <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 font-medium mb-1 uppercase tracking-wide truncate">
+          {product.category}
+        </p>
+
+        {/* Name */}
+        <h3 className="font-semibold text-sm sm:text-base text-gray-900 dark:text-white group-hover:text-[#ff5200] transition-colors line-clamp-2 mb-2 leading-snug">
+          {product.name}
+        </h3>
+
+        {/* Rating */}
+        <div className="flex items-center gap-1.5 mb-3">
+          <div className="flex items-center gap-0.5 bg-green-600 text-white px-1.5 py-0.5 rounded text-[10px] font-bold">
+            <span>{Number(product.rating || 0).toFixed(1)}</span>
+            <Star className="w-2.5 h-2.5 fill-white" aria-hidden="true" />
+          </div>
+          <span className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">
+            ({product._count?.reviews || 0})
+          </span>
+        </div>
+
+        {/* Price */}
+        <div className="mt-auto flex items-baseline gap-2 flex-wrap">
+          <span className="text-base sm:text-lg font-extrabold text-gray-900 dark:text-white">
+            ₹{product.price.toLocaleString()}
+          </span>
+          {product.originalPrice && product.originalPrice > product.price && (
+            <span className="text-xs text-gray-400 line-through">
+              ₹{product.originalPrice.toLocaleString()}
+            </span>
+          )}
         </div>
       </Link>
-      
-      <div className="p-4 pt-0">
-        <button 
-          onClick={(e) => {
-            e.preventDefault();
-            handleAddToCart(e);
-          }}
+
+      {/* Add to cart button */}
+      <div className="px-3 pb-3 sm:px-4 sm:pb-4">
+        <button
+          onClick={handleAddToCart}
           disabled={product.stock === 0}
-          className="w-full h-10 bg-black text-white hover:bg-[#ff5200] rounded-lg font-bold text-xs transition-all flex items-center justify-center gap-2 active:scale-95 disabled:bg-gray-100 disabled:text-gray-400 border-none shadow-sm"
+          aria-label={`Add ${product.name} to cart`}
+          className={cn(
+            "w-full h-10 rounded-lg font-bold text-xs sm:text-sm",
+            "flex items-center justify-center gap-2",
+            "transition-all duration-150 active:scale-[0.97] active:opacity-80",
+            "border-none shadow-sm",
+            product.stock === 0
+              ? "bg-gray-100 dark:bg-zinc-800 text-gray-400 dark:text-zinc-500 cursor-not-allowed"
+              : "bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-[#ff5200] dark:hover:bg-[#ff5200] dark:hover:text-white"
+          )}
         >
-          <ShoppingCart className="w-4 h-4" /> Add To Cart
+          <ShoppingCart className="w-4 h-4" aria-hidden="true" />
+          {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
         </button>
       </div>
     </motion.div>

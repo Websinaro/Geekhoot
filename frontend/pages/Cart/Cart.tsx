@@ -119,7 +119,7 @@ export default function Cart() {
     setIsLocationDialogOpen(false);
     setIsOrdering(true);
     
-    const adminNumber = (import.meta as any).env.VITE_WHATSAPP_ADMIN_NUMBER || "918138872364";
+    const adminNumber = (import.meta as any).env.VITE_WHATSAPP_ADMIN_NUMBER;
 
     if (useCurrent) {
       if (navigator.geolocation) {

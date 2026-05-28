@@ -149,7 +149,7 @@ function ProductDetailContent({ id }: { id: string }) {
     setIsOrdering(true);
     
     const uniqueId = Math.random().toString(36).substring(2, 10).toUpperCase();
-    const adminNumber = (import.meta as any).env.VITE_WHATSAPP_ADMIN_NUMBER || "918138872364";
+    const adminNumber = (import.meta as any).env.VITE_WHATSAPP_ADMIN_NUMBER;
 
     if (useCurrent) {
       if (navigator.geolocation) {

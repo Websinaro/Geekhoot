@@ -61,7 +61,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/10"></div>
           <div className="relative h-full flex items-center px-8 md:px-16 text-white z-10">
             <div className="max-w-xl">
-              <h1 className="text-3xl md:text-5xl font-bold mb-4">Quality Custom Prints for Your Lifestyle</h1>
+              <h1 className="text-3xl md:text-5xl font-bold mb-4 text-white">Quality Custom Prints for Your Lifestyle</h1>
               <p className="text-lg md:text-xl mb-8 opacity-90">Personalized gifts, apparel, and gadgets delivered with precision.</p>
               <Button
                 size="lg"
