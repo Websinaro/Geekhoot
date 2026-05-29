@@ -54,17 +54,17 @@ function AppRoutes() {
 
   React.useEffect(() => {
     const getPageTitle = (path: string) => {
-      if (path === '/')                 return 'Geekhoot';
-      if (path.startsWith('/login'))    return 'Geekhoot | Login';
-      if (path.startsWith('/signup'))   return 'Geekhoot | Sign Up';
-      if (path.startsWith('/products')) return 'Geekhoot | Products';
-      if (path.startsWith('/product/')) return 'Geekhoot | Product Details';
-      if (path.startsWith('/cart'))     return 'Geekhoot | Cart';
-      if (path.startsWith('/wishlist')) return 'Geekhoot | Wishlist';
-      if (path.startsWith('/profile'))  return 'Geekhoot | Profile';
-      if (path.startsWith('/orders'))   return 'Geekhoot | Orders';
-      if (path.startsWith('/admin'))    return 'Geekhoot | Admin';
-      return 'Geekhoot';
+      if (path === '/')                 return 'Geekhoot — Premium Custom Merch';
+      if (path.startsWith('/login'))    return 'Login — Geekhoot';
+      if (path.startsWith('/signup'))   return 'Create Account — Geekhoot';
+      if (path.startsWith('/products')) return 'Shop All Products — Geekhoot';
+      if (path.startsWith('/product/')) return 'Product Details — Geekhoot';
+      if (path.startsWith('/cart'))     return 'My Cart — Geekhoot';
+      if (path.startsWith('/wishlist')) return 'My Wishlist — Geekhoot';
+      if (path.startsWith('/profile'))  return 'My Profile — Geekhoot';
+      if (path.startsWith('/orders'))   return 'My Orders — Geekhoot';
+      if (path.startsWith('/admin'))    return 'Admin Panel — Geekhoot';
+      return 'Geekhoot — Premium Custom Merch';
     };
     document.title = getPageTitle(location.pathname);
   }, [location]);
