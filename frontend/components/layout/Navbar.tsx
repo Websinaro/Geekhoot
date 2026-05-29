@@ -84,15 +84,18 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center gap-6">
 
-          {/* Logo */}
+          {/* Logo + Title */}
           <div className="flex items-center shrink-0">
-            <Link to="/" aria-label="Geekhoot — go to homepage" className="flex items-center gap-2.5 group">
+            <Link to="/" aria-label="Geekhoot — go to homepage" className="flex items-center gap-2 group">
               <img
                 src="/logo.png"
-                alt="GeekHoot"
-                className="h-9 w-auto object-contain dark:invert transition-opacity group-hover:opacity-80"
+                alt=""
+                className="h-8 w-8 object-contain dark:invert transition-opacity group-hover:opacity-80"
                 draggable={false}
               />
+              <span className="text-xl font-black tracking-tight text-gray-900 dark:text-white group-hover:text-[#ff5200] transition-colors">
+                GeekHoot
+              </span>
             </Link>
           </div>
 
@@ -320,13 +323,16 @@ export default function Navbar() {
               </SheetTrigger>
               <SheetContent side="right" className="w-[80%] p-0 border-none bg-white dark:bg-zinc-950 text-black dark:text-white">
                 <div className="p-6 space-y-8 h-full flex flex-col">
-                  <div className="flex flex-col">
+                  <div className="flex items-center gap-2">
                     <img
                       src="/logo.png"
-                      alt="GeekHoot"
-                      className="h-10 w-auto object-contain dark:invert"
+                      alt=""
+                      className="h-8 w-8 object-contain dark:invert"
                       draggable={false}
                     />
+                    <span className="text-xl font-black tracking-tight text-gray-900 dark:text-white">
+                      GeekHoot
+                    </span>
                   </div>
 
                   <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
