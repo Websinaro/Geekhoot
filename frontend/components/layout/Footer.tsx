@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="absolute top-0 right-0 w-1/2 h-full bg-[#ff5200]/5 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 py-14 lg:py-20 relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
 
           {/* Brand */}
           <div className="space-y-5 sm:col-span-2 lg:col-span-1">
@@ -86,12 +86,36 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               {[
-                { to: '/profile',  label: 'My Profile'        },
-                { to: '/orders',   label: 'Track My Order'    },
-                { to: '/cart',     label: 'My Cart'           },
-                { to: '/wishlist', label: 'My Wishlist'       },
-                { to: '/faq',      label: 'FAQ'               },
-                { to: '/terms',    label: 'Terms & Services'  },
+                { to: '/profile',         label: 'My Profile'          },
+                { to: '/orders',          label: 'Track My Order'      },
+                { to: '/cart',            label: 'My Cart'             },
+                { to: '/wishlist',        label: 'My Wishlist'         },
+                { to: '/contact',         label: 'Contact Us'          },
+                { to: '/faq',             label: 'FAQ'                 },
+              ].map(({ to, label }) => (
+                <li key={label}>
+                  <Link
+                    to={to}
+                    className="text-sm text-gray-500 dark:text-gray-400 hover:text-[#ff5200] dark:hover:text-[#ff5200] transition-colors"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div className="space-y-5">
+            <h3 className="text-sm font-bold text-gray-900 dark:text-white tracking-wide border-l-2 border-[#ff5200] pl-3">
+              Legal
+            </h3>
+            <ul className="space-y-3">
+              {[
+                { to: '/privacy-policy',  label: 'Privacy Policy'      },
+                { to: '/terms',           label: 'Terms of Service'    },
+                { to: '/shipping-policy', label: 'Shipping Policy'     },
+                { to: '/refund-policy',   label: 'Return & Refund'     },
               ].map(({ to, label }) => (
                 <li key={label}>
                   <Link
@@ -142,11 +166,22 @@ export default function Footer() {
 
         </div>
 
-        {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-gray-100 dark:border-zinc-900 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-xs text-gray-400 dark:text-gray-500">
             © {new Date().getFullYear()} Geekhoot. All rights reserved.
           </p>
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
+            {[
+              { to: '/privacy-policy',  label: 'Privacy Policy' },
+              { to: '/terms',           label: 'Terms'          },
+              { to: '/refund-policy',   label: 'Refunds'        },
+              { to: '/contact',         label: 'Contact'        },
+            ].map(({ to, label }) => (
+              <Link key={to} to={to} className="text-xs text-gray-400 hover:text-[#ff5200] transition-colors">
+                {label}
+              </Link>
+            ))}
+          </div>
           <p className="text-xs text-gray-400 dark:text-gray-500">
             Powered by{' '}
             <span className="text-[#ff5200] font-semibold">Websinaro</span>

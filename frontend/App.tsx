@@ -20,6 +20,11 @@ const Cart          = React.lazy(() => import('./pages/Cart/Cart'));
 const Wishlist      = React.lazy(() => import('./pages/User/Wishlist'));
 const Profile       = React.lazy(() => import('./pages/User/Profile'));
 const Orders        = React.lazy(() => import('./pages/User/Orders'));
+const PrivacyPolicy = React.lazy(() => import('./pages/Info/PrivacyPolicy'));
+const TermsOfService = React.lazy(() => import('./pages/Info/TermsOfService'));
+const ShippingPolicy = React.lazy(() => import('./pages/Info/ShippingPolicy'));
+const RefundPolicy  = React.lazy(() => import('./pages/Info/RefundPolicy'));
+const ContactUs     = React.lazy(() => import('./pages/Info/ContactUs'));
 
 // ── Admin pages (separate lazy group — never bundled into user sessions) ──────
 const AdminDashboard = React.lazy(() => import('./pages/Admin/Dashboard'));
@@ -63,6 +68,11 @@ function AppRoutes() {
       if (path.startsWith('/wishlist')) return 'My Wishlist — Geekhoot';
       if (path.startsWith('/profile'))  return 'My Profile — Geekhoot';
       if (path.startsWith('/orders'))   return 'My Orders — Geekhoot';
+      if (path.startsWith('/privacy-policy'))  return 'Privacy Policy — Geekhoot';
+      if (path.startsWith('/terms'))           return 'Terms of Service — Geekhoot';
+      if (path.startsWith('/shipping-policy')) return 'Shipping Policy — Geekhoot';
+      if (path.startsWith('/refund-policy'))   return 'Refund Policy — Geekhoot';
+      if (path.startsWith('/contact'))         return 'Contact Us — Geekhoot';
       if (path.startsWith('/admin'))    return 'Admin Panel — Geekhoot';
       return 'Geekhoot — Premium Custom Merch';
     };
@@ -87,6 +97,11 @@ function AppRoutes() {
                 <Route path="/wishlist"    element={<Wishlist />} />
                 <Route path="/profile"     element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                 <Route path="/orders"      element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+                <Route path="/privacy-policy"   element={<PrivacyPolicy />} />
+                <Route path="/terms"            element={<TermsOfService />} />
+                <Route path="/shipping-policy"  element={<ShippingPolicy />} />
+                <Route path="/refund-policy"    element={<RefundPolicy />} />
+                <Route path="/contact"          element={<ContactUs />} />
               </Routes>
             </React.Suspense>
           } />
