@@ -187,7 +187,7 @@ export default function ProductList() {
         {/* Categories Section */}
         <div className="space-y-1">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Category</p>
-          {['all', 'T-Shirts', 'Name Slips', 'Bottles', 'Cups', 'Photo Frames', 'Keychain', 'Stationery', 'Tech Gadgets'].map((cat) => (
+          {['all', 'T-Shirts', 'Name Slips', 'Bottles', 'Mugs', 'Photo Frames', 'Keychain', 'Stationery', 'Mobile Case'].map((cat) => (
             <button 
               key={cat}
               onClick={() => { setCategory(cat); setPage(1); }}

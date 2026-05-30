@@ -9,14 +9,14 @@ import { cn } from '@/lib/utils';
 import { Product } from '@/src/types';
 
 const FEATURED_CATEGORIES = [
-  { name: 'Custom T-Shirts', icon: '👕' },
-  { name: 'Name Slips', icon: '🏷️' },
-  { name: 'Printed Bottles', icon: '🍼' },
-  { name: 'Custom Cups', icon: '☕' },
-  { name: 'Photo Frames', icon: '🖼️' },
-  { name: 'Keychain', icon: '🔑' },
-  { name: 'Stationery', icon: '✏️' },
-  { name: 'Tech Gadgets', icon: '⌚' },
+  { label: 'Custom T-Shirts', filter: 'T-Shirts',    icon: '👕' },
+  { label: 'Name Slips',      filter: 'Name Slips',  icon: '🏷️' },
+  { label: 'Printed Bottles', filter: 'Bottles',     icon: '🍼' },
+  { label: 'Mugs',            filter: 'Cups',        icon: '☕' },
+  { label: 'Photo Frames',    filter: 'Photo Frames',icon: '🖼️' },
+  { label: 'Keychain',        filter: 'Keychain',    icon: '🔑' },
+  { label: 'Stationery',      filter: 'Stationery',  icon: '✏️' },
+  { label: 'Mobile Cases',    filter: 'Mobile Case', icon: '📱' },
 ];
 
 export default function Home() {
@@ -42,13 +42,13 @@ export default function Home() {
           {FEATURED_CATEGORIES.map((cat, i) => (
             <div
               key={i}
-              onClick={() => navigate(`/products?category=${cat.name}`)}
+              onClick={() => navigate(`/products?category=${encodeURIComponent(cat.filter)}`)}
               className="flex flex-col items-center gap-2 cursor-pointer group"
             >
               <div className="w-16 h-16 rounded-full bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center text-3xl transition-transform group-hover:scale-110">
                 {cat.icon}
               </div>
-              <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 group-hover:text-[#ff5200] dark:group-hover:text-[#ff5200]">{cat.name}</span>
+              <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 group-hover:text-[#ff5200] dark:group-hover:text-[#ff5200] text-center leading-tight">{cat.label}</span>
             </div>
           ))}
         </div>

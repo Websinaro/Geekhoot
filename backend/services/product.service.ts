@@ -9,20 +9,20 @@ const SYNONYM_MAP: Record<string, string> = {
   "slip": "Name Slips", "slips": "Name Slips", "sticker": "Name Slips", "stickers": "Name Slips",
   "name": "Name Slips", "names": "Name Slips",
   "bottle": "Bottles", "bottles": "Bottles", "flask": "Bottles", "flasks": "Bottles", "insulated": "Bottles",
-  "cup": "Cups", "cups": "Cups", "mug": "Cups", "mugs": "Cups", "coffee": "Cups", "printed": "Cups",
+  "cup": "Mugs", "cups": "Mugs", "mug": "Mugs", "mugs": "Mugs", "coffee": "Mugs", "printed": "Mugs",
   "frame": "Photo Frames", "frames": "Photo Frames", "photo": "Photo Frames", "photos": "Photo Frames",
   "keychain": "Keychain", "keychains": "Keychain", "key": "Keychain", "keys": "Keychain",
   "ring": "Keychain", "rings": "Keychain", "chain": "Keychain",
   "notebook": "Stationery", "notebooks": "Stationery", "book": "Stationery", "books": "Stationery",
   "stationery": "Stationery", "pen": "Stationery", "pens": "Stationery", "paper": "Stationery",
-  "gadget": "Tech Gadgets", "gadgets": "Tech Gadgets", "smart": "Tech Gadgets",
-  "band": "Tech Gadgets", "bands": "Tech Gadgets", "tracker": "Tech Gadgets",
-  "trackers": "Tech Gadgets", "tech": "Tech Gadgets",
+  "mobile": "Mobile Case", "case": "Mobile Case", "cases": "Mobile Case", "cover": "Mobile Case",
+  "covers": "Mobile Case", "phone": "Mobile Case", "phones": "Mobile Case",
+  "gadget": "Mobile Case", "gadgets": "Mobile Case", "tech": "Mobile Case",
 };
 
 const ALL_CATEGORIES = [
-  "T-Shirts", "Name Slips", "Bottles", "Cups",
-  "Photo Frames", "Keychain", "Stationery", "Tech Gadgets",
+  "T-Shirts", "Name Slips", "Bottles", "Mugs",
+  "Photo Frames", "Keychain", "Stationery", "Mobile Case",
 ];
 
 export const getAllProducts = async (filters: any) => {
