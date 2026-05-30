@@ -12,7 +12,7 @@ const FEATURED_CATEGORIES = [
   { label: 'Custom T-Shirts', filter: 'T-Shirts',    icon: '👕' },
   { label: 'Name Slips',      filter: 'Name Slips',  icon: '🏷️' },
   { label: 'Printed Bottles', filter: 'Bottles',     icon: '🍼' },
-  { label: 'Mugs',            filter: 'Cups',        icon: '☕' },
+  { label: 'Mugs',            filter: 'Mugs',        icon: '☕' },
   { label: 'Photo Frames',    filter: 'Photo Frames',icon: '🖼️' },
   { label: 'Keychain',        filter: 'Keychain',    icon: '🔑' },
   { label: 'Stationery',      filter: 'Stationery',  icon: '✏️' },
