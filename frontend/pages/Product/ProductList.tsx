@@ -4,6 +4,7 @@ import { Filter, ChevronLeft, ChevronRight, Search, SearchX, Star, X } from 'luc
 import { useQuery } from '@tanstack/react-query';
 import api from '@/src/services/api';
 import ProductCard from '@/src/components/product/ProductCard';
+import AdCard from '@/src/components/product/AdCard';
 import LazyProductImage from '@/src/components/product/LazyProductImage';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -505,7 +506,10 @@ export default function ProductList() {
               <>
                 <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                   {visibleProducts.map((product: Product, i: number) => (
-                    <ProductCard key={product.id} product={product} priority={i < 4} />
+                    <React.Fragment key={product.id}>
+                      <ProductCard product={product} priority={i < 4} />
+                      {(i + 1) % 8 === 0 && <AdCard />}
+                    </React.Fragment>
                   ))}
                 </div>
 

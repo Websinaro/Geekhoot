@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useQuery } from '@tanstack/react-query';
 import api from '@/src/services/api';
 import ProductCard from '@/src/components/product/ProductCard';
+import AdCard from '@/src/components/product/AdCard';
 import { cn } from '@/lib/utils';
 import { Product } from '@/src/types';
 
@@ -107,7 +108,10 @@ export default function Home() {
               ))
             ) : (
               featuredProducts.map((product: Product, i: number) => (
-                <ProductCard key={product.id} product={product} priority={i < 4} />
+                <React.Fragment key={product.id}>
+                  <ProductCard product={product} priority={i < 4} />
+                  {(i + 1) % 8 === 0 && <AdCard />}
+                </React.Fragment>
               ))
             )}
           </div>
