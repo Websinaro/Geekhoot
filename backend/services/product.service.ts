@@ -1,13 +1,42 @@
 import prisma from '../prisma/db';
 import { AppError } from '../middleware/error.middleware';
 
+// Shared synonym map — maps search keywords to partial category names.
+// The backend uses contains+insensitive so "Cups" matches "Custom Printed Cups" etc.
+const SYNONYM_MAP: Record<string, string> = {
+  "tee": "T-Shirts", "tees": "T-Shirts", "shirt": "T-Shirts", "shirts": "T-Shirts",
+  "tshirt": "T-Shirts", "tshirts": "T-Shirts", "t-shirt": "T-Shirts", "t-shirts": "T-Shirts",
+  "slip": "Name Slips", "slips": "Name Slips", "sticker": "Name Slips", "stickers": "Name Slips",
+  "name": "Name Slips", "names": "Name Slips",
+  "bottle": "Bottles", "bottles": "Bottles", "flask": "Bottles", "flasks": "Bottles", "insulated": "Bottles",
+  "cup": "Cups", "cups": "Cups", "mug": "Cups", "mugs": "Cups", "coffee": "Cups", "printed": "Cups",
+  "frame": "Photo Frames", "frames": "Photo Frames", "photo": "Photo Frames", "photos": "Photo Frames",
+  "keychain": "Keychain", "keychains": "Keychain", "key": "Keychain", "keys": "Keychain",
+  "ring": "Keychain", "rings": "Keychain", "chain": "Keychain",
+  "notebook": "Stationery", "notebooks": "Stationery", "book": "Stationery", "books": "Stationery",
+  "stationery": "Stationery", "pen": "Stationery", "pens": "Stationery", "paper": "Stationery",
+  "gadget": "Tech Gadgets", "gadgets": "Tech Gadgets", "smart": "Tech Gadgets",
+  "band": "Tech Gadgets", "bands": "Tech Gadgets", "tracker": "Tech Gadgets",
+  "trackers": "Tech Gadgets", "tech": "Tech Gadgets",
+};
+
+const ALL_CATEGORIES = [
+  "T-Shirts", "Name Slips", "Bottles", "Cups",
+  "Photo Frames", "Keychain", "Stationery", "Tech Gadgets",
+];
+
 export const getAllProducts = async (filters: any) => {
   const { category, search, sort, page = 1, limit = 10, minPrice, maxPrice, minRating } = filters;
   const skip = (page - 1) * limit;
   const take = limit;
 
   const where: any = {};
-  if (category) where.category = category;
+
+  // Use contains + insensitive so "Custom Cups" matches "Custom Printed Cups",
+  // "Printed Cups", "cups" etc. — exact match was breaking partial category names.
+  if (category) {
+    where.category = { contains: category, mode: 'insensitive' };
+  }
 
   // Implement Price Range Filters
   if (minPrice !== undefined || maxPrice !== undefined) {
@@ -22,59 +51,7 @@ export const getAllProducts = async (filters: any) => {
   }
 
   // Synonym map for Smart Search
-  const synonymMap: Record<string, string> = {
-    "tee": "Custom T-Shirts",
-    "tees": "Custom T-Shirts",
-    "shirt": "Custom T-Shirts",
-    "shirts": "Custom T-Shirts",
-    "tshirt": "Custom T-Shirts",
-    "tshirts": "Custom T-Shirts",
-    "t-shirt": "Custom T-Shirts",
-    "t-shirts": "Custom T-Shirts",
-    "slip": "Name Slips",
-    "slips": "Name Slips",
-    "sticker": "Name Slips",
-    "stickers": "Name Slips",
-    "name": "Name Slips",
-    "names": "Name Slips",
-    "bottle": "Printed Bottles",
-    "bottles": "Printed Bottles",
-    "flask": "Printed Bottles",
-    "flasks": "Printed Bottles",
-    "insulated": "Printed Bottles",
-    "cup": "Custom Cups",
-    "cups": "Custom Cups",
-    "mug": "Custom Cups",
-    "mugs": "Custom Cups",
-    "coffee": "Custom Cups",
-    "frame": "Photo Frames",
-    "frames": "Photo Frames",
-    "photo": "Photo Frames",
-    "photos": "Photo Frames",
-    "keychain": "Keychain",
-    "keychains": "Keychain",
-    "key": "Keychain",
-    "keys": "Keychain",
-    "ring": "Keychain",
-    "rings": "Keychain",
-    "chain": "Keychain",
-    "notebook": "Stationery",
-    "notebooks": "Stationery",
-    "book": "Stationery",
-    "books": "Stationery",
-    "stationery": "Stationery",
-    "pen": "Stationery",
-    "pens": "Stationery",
-    "paper": "Stationery",
-    "gadget": "Tech Gadgets",
-    "gadgets": "Tech Gadgets",
-    "smart": "Tech Gadgets",
-    "band": "Tech Gadgets",
-    "bands": "Tech Gadgets",
-    "tracker": "Tech Gadgets",
-    "trackers": "Tech Gadgets",
-    "tech": "Tech Gadgets"
-  };
+  // synonymMap is defined at module top as SYNONYM_MAP
 
   if (search) {
     const searchString = String(search).trim();
@@ -82,8 +59,8 @@ export const getAllProducts = async (filters: any) => {
     const matchedCategories = new Set<string>();
 
     words.forEach(w => {
-      if (synonymMap[w]) {
-        matchedCategories.add(synonymMap[w]);
+      if (SYNONYM_MAP[w]) {
+        matchedCategories.add(SYNONYM_MAP[w]);
       }
     });
 
@@ -137,77 +114,12 @@ export const getProductSuggestions = async (query: string) => {
   const cleanQuery = query.trim();
   const searchWords = cleanQuery.toLowerCase().split(/\s+/).filter(Boolean);
 
-  const synonymMap: Record<string, string> = {
-    "tee": "Custom T-Shirts",
-    "tees": "Custom T-Shirts",
-    "shirt": "Custom T-Shirts",
-    "shirts": "Custom T-Shirts",
-    "tshirt": "Custom T-Shirts",
-    "tshirts": "Custom T-Shirts",
-    "t-shirt": "Custom T-Shirts",
-    "t-shirts": "Custom T-Shirts",
-    "slip": "Name Slips",
-    "slips": "Name Slips",
-    "sticker": "Name Slips",
-    "stickers": "Name Slips",
-    "name": "Name Slips",
-    "names": "Name Slips",
-    "bottle": "Printed Bottles",
-    "bottles": "Printed Bottles",
-    "flask": "Printed Bottles",
-    "flasks": "Printed Bottles",
-    "insulated": "Printed Bottles",
-    "cup": "Custom Cups",
-    "cups": "Custom Cups",
-    "mug": "Custom Cups",
-    "mugs": "Custom Cups",
-    "coffee": "Custom Cups",
-    "frame": "Photo Frames",
-    "frames": "Photo Frames",
-    "photo": "Photo Frames",
-    "photos": "Photo Frames",
-    "keychain": "Keychain",
-    "keychains": "Keychain",
-    "key": "Keychain",
-    "keys": "Keychain",
-    "ring": "Keychain",
-    "rings": "Keychain",
-    "chain": "Keychain",
-    "notebook": "Stationery",
-    "notebooks": "Stationery",
-    "book": "Stationery",
-    "books": "Stationery",
-    "stationery": "Stationery",
-    "pen": "Stationery",
-    "pens": "Stationery",
-    "paper": "Stationery",
-    "gadget": "Tech Gadgets",
-    "gadgets": "Tech Gadgets",
-    "smart": "Tech Gadgets",
-    "band": "Tech Gadgets",
-    "bands": "Tech Gadgets",
-    "tracker": "Tech Gadgets",
-    "trackers": "Tech Gadgets",
-    "tech": "Tech Gadgets"
-  };
-
   const matchedCategories = new Set<string>();
   searchWords.forEach(w => {
-    if (synonymMap[w]) matchedCategories.add(synonymMap[w]);
+    if (SYNONYM_MAP[w]) matchedCategories.add(SYNONYM_MAP[w]);
   });
 
-  const allCategories = [
-    "Custom T-Shirts",
-    "Name Slips",
-    "Printed Bottles",
-    "Custom Cups",
-    "Photo Frames",
-    "Keychain",
-    "Stationery",
-    "Tech Gadgets"
-  ];
-
-  allCategories.forEach(cat => {
+  ALL_CATEGORIES.forEach(cat => {
     if (cat.toLowerCase().includes(cleanQuery.toLowerCase())) {
       matchedCategories.add(cat);
     }
