@@ -154,8 +154,11 @@ export default function AdminProducts() {
                       <SelectItem value="T-Shirts">T-Shirts</SelectItem>
                       <SelectItem value="Name Slips">Name Slips</SelectItem>
                       <SelectItem value="Bottles">Bottles</SelectItem>
-                      <SelectItem value="Cups">Cups</SelectItem>
-                      <SelectItem value="Custom Printed">Custom Printed</SelectItem>
+                      <SelectItem value="Mugs">Mugs</SelectItem>
+                      <SelectItem value="Photo Frames">Photo Frames</SelectItem>
+                      <SelectItem value="Keychain">Keychain</SelectItem>
+                      <SelectItem value="Stationery">Stationery</SelectItem>
+                      <SelectItem value="Mobile Case">Mobile Case</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
