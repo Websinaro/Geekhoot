@@ -3,7 +3,7 @@ import prisma from '../prisma/db';
 
 const router = Router();
 
-const BASE_URL = 'https://shopongeekhoot.onrender.com';
+const BASE_URL = 'https://mygeekhoot.onrender.com';
 
 // Static pages with their priorities and change frequencies
 const STATIC_PAGES = [
