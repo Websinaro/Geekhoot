@@ -21,6 +21,26 @@ import notificationRoutes from "./routes/notification.routes";
 import wishlistRoutes from "./routes/wishlist.routes";
 import sitemapRoutes from "./routes/sitemap.routes";
 
+import prisma from "./prisma/db";
+
+// Auto-migration: fix category names saved with old admin form values.
+// Safe to re-run on every startup — updateMany with 0 matches is a no-op.
+async function runCategoryMigration() {
+  const renames = [
+    { from: "Cups",           to: "Mugs" },
+    { from: "Custom Printed", to: "Mugs" },
+  ];
+  for (const { from, to } of renames) {
+    const result = await prisma.product.updateMany({
+      where: { category: { equals: from, mode: "insensitive" } },
+      data:  { category: to },
+    });
+    if (result.count > 0) {
+      console.log(`[migration] Renamed "${from}" → "${to}" for ${result.count} product(s)`);
+    }
+  }
+}
+
 const isProd = config.nodeEnv === "production";
 
 async function startServer() {
@@ -115,6 +135,9 @@ async function startServer() {
   }
 
   // Error Handler (Must be last)
+  // Run DB migrations before accepting traffic
+  await runCategoryMigration();
+
   app.use(errorHandler);
 
   app.listen(Number(config.port), "0.0.0.0", () => {

@@ -32,10 +32,10 @@ export const getAllProducts = async (filters: any) => {
 
   const where: any = {};
 
-  // Use contains + insensitive so "Custom Cups" matches "Custom Printed Cups",
-  // "Printed Cups", "cups" etc. — exact match was breaking partial category names.
+  // Use equals + insensitive for exact category match.
+  // "contains" was causing cross-category pollution (e.g. "Mugs" matching unrelated entries).
   if (category) {
-    where.category = { contains: category, mode: 'insensitive' };
+    where.category = { equals: category, mode: 'insensitive' };
   }
 
   // Implement Price Range Filters
