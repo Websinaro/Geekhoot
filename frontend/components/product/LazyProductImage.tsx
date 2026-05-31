@@ -110,7 +110,6 @@ export default function LazyProductImage({
           loading={priority ? 'eager' : 'lazy'}
           fetchPriority={priority ? 'high' : 'auto'}
           decoding={priority ? 'sync' : 'async'}
-          referrerPolicy="no-referrer"
           width={width}
           height={height}
           className={cn(
