@@ -56,7 +56,7 @@ export default function Orders() {
   if (isLoading) return <OrderListSkeleton />;
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8 bg-[#f1f3f6] min-h-screen">
+    <div className="theme-light-scope max-w-5xl mx-auto px-4 py-8 bg-[#f1f3f6] min-h-screen">
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">My Orders</h1>
@@ -157,7 +157,7 @@ export default function Orders() {
 
       {/* Order Detail Modal */}
       <Dialog open={!!selectedOrder} onOpenChange={(open) => !open && setSelectedOrder(null)}>
-        <DialogContent className="max-w-2xl rounded-lg p-0 border-none max-h-[90vh] overflow-y-auto bg-white shadow-2xl">
+        <DialogContent className="theme-light-scope max-w-2xl rounded-lg p-0 border-none max-h-[90vh] overflow-y-auto bg-white shadow-2xl">
           {selectedOrder && (
             <div className="relative">
               {/* Header */}

@@ -517,7 +517,7 @@ export default function AdminInventory() {
 
       {/* MODAL DIALOG: RESTOCK / DEDUCT FOR PRODUCTS */}
       <Dialog open={!!selectedProduct} onOpenChange={(open) => { if (!open) setSelectedProduct(null); }}>
-        <DialogContent className="max-w-md rounded-lg p-6 bg-white border-none shadow-2xl modal-inventory-adjustment">
+        <DialogContent className="theme-light-scope max-w-md rounded-lg p-6 bg-white border-none shadow-2xl modal-inventory-adjustment">
           <DialogHeader>
             <DialogTitle className="text-lg font-bold text-gray-900 tracking-tight flex items-center gap-2">
               <CornerDownRight className="w-5 h-5 text-blue-600 block" />

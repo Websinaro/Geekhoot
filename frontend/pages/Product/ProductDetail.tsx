@@ -52,7 +52,7 @@ export default function ProductDetail() {
 
   if (!id || id === 'undefined' || id === 'null') {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#f1f3f6] px-4">
+      <div className="theme-light-scope min-h-screen flex flex-col items-center justify-center bg-[#f1f3f6] px-4">
         <div className="text-center max-w-md bg-white p-8 rounded-lg shadow-sm border border-gray-150">
           <div className="w-16 h-16 bg-red-50 text-[#ff5200] rounded-full flex items-center justify-center mx-auto mb-4">
              <span className="text-2xl font-bold">!</span>
@@ -285,7 +285,7 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
 
   if (isError || !product) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#f1f3f6] px-4">
+      <div className="theme-light-scope min-h-screen flex flex-col items-center justify-center bg-[#f1f3f6] px-4">
         <div className="text-center max-w-md bg-white p-8 rounded-lg shadow-sm border border-gray-150">
           <div className="w-16 h-16 bg-red-50 text-[#ff5200] rounded-full flex items-center justify-center mx-auto mb-4">
              <span className="text-2xl font-bold">!</span>
@@ -311,7 +311,7 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
     : '';
 
   return (
-    <div className="bg-[#f1f3f6] min-h-screen pb-20">
+    <div className="theme-light-scope bg-[#f1f3f6] min-h-screen pb-20">
       <div className="max-w-[1440px] mx-auto px-4 py-4">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-xs text-gray-500 mb-4 bg-white p-3 rounded shadow-sm">
@@ -615,7 +615,7 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
 
       {/* Location Dialog remains similar but cleaner UI */}
       <Dialog open={isLocationDialogOpen} onOpenChange={setIsLocationDialogOpen}>
-        <DialogContent className="max-w-md rounded-lg p-6 bg-white border-none shadow-2xl ring-0">
+        <DialogContent className="theme-light-scope max-w-md rounded-lg p-6 bg-white border-none shadow-2xl ring-0">
           <DialogHeader className="mb-6 text-left">
             <DialogTitle className="text-xl font-bold">Select Delivery Location</DialogTitle>
             <DialogDescription className="text-gray-500 text-sm">
@@ -651,7 +651,7 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
 
       {/* Loading Overlay */}
       {isOrdering && (
-        <div className="fixed inset-0 bg-white/80 backdrop-blur-sm z-[100] flex items-center justify-center">
+        <div className="theme-light-scope fixed inset-0 bg-white/80 backdrop-blur-sm z-[100] flex items-center justify-center">
             <div className="text-center space-y-4">
                 <div className="w-48 h-2 bg-zinc-200 rounded overflow-hidden mx-auto relative">
                   <div className="absolute top-0 left-0 h-full bg-[#ff5200] rounded animate-pulse w-full" />

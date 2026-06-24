@@ -22,7 +22,7 @@ export default function Wishlist() {
   };
 
   return (
-    <div className="bg-[#f1f3f6] min-h-screen text-black">
+    <div className="theme-light-scope bg-[#f1f3f6] min-h-screen text-black">
       <div className="max-w-[1440px] mx-auto px-4 py-8 lg:py-12">
         {/* Wishlist Header Card */}
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-6">

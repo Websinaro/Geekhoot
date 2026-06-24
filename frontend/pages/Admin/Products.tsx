@@ -128,7 +128,7 @@ export default function AdminProducts() {
           <DialogTrigger render={<Button className="bg-blue-600 hover:bg-blue-700 text-white font-bold h-10 px-6 rounded shadow-sm border-none" />}>
             <Plus className="w-4 h-4 mr-2" /> Add Product
           </DialogTrigger>
-          <DialogContent className="max-w-xl rounded-lg p-6 bg-white border-none shadow-2xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="theme-light-scope max-w-xl rounded-lg p-6 bg-white border-none shadow-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader className="mb-6">
               <DialogTitle className="text-xl font-bold text-gray-900">
                 {editingProduct ? 'Edit Product' : 'Add New Product'}
@@ -150,7 +150,7 @@ export default function AdminProducts() {
                     <SelectTrigger className="rounded-md h-10 border-gray-200 bg-white">
                       <SelectValue placeholder="Select Category" />
                     </SelectTrigger>
-                    <SelectContent className="bg-white border-gray-100">
+                    <SelectContent className="theme-light-scope bg-white border-gray-100">
                       <SelectItem value="T-Shirts">T-Shirts</SelectItem>
                       <SelectItem value="Name Slips">Name Slips</SelectItem>
                       <SelectItem value="Bottles">Bottles</SelectItem>
@@ -288,7 +288,7 @@ export default function AdminProducts() {
                       <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-gray-900" />}>
                         <MoreHorizontal className="w-5 h-5" />
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="bg-white border-gray-100 text-gray-700">
+                      <DropdownMenuContent align="end" className="theme-light-scope bg-white border-gray-100 text-gray-700">
                         <DropdownMenuItem onClick={() => {
                           setEditingProduct(product);
                           setIsDialogOpen(true);

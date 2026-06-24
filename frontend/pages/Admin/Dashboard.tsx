@@ -217,7 +217,7 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="theme-light-scope flex min-h-screen bg-gray-50">
       {/* Sidebar */}
       <aside className="hidden lg:flex flex-col w-64 bg-white border-r border-gray-100 sticky top-16 h-[calc(100vh-64px)]">
         <div className="p-4 flex flex-col gap-1">

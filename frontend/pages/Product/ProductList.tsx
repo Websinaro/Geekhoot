@@ -318,7 +318,7 @@ export default function ProductList() {
   };
 
   return (
-    <div className="bg-[#f1f3f6] min-h-screen text-black">
+    <div className="theme-light-scope bg-[#f1f3f6] min-h-screen text-black">
       <div className="max-w-[1440px] mx-auto px-4 py-8 lg:py-12">
         {/* Header & Filters */}
         <div className="flex flex-col gap-6 mb-8">
@@ -458,7 +458,7 @@ export default function ProductList() {
                 <SelectTrigger className="w-[180px] h-10 rounded-md border-gray-200 bg-gray-50 text-sm focus:ring-1 focus:ring-orange-500">
                   <SelectValue placeholder="Sort By" />
                 </SelectTrigger>
-                <SelectContent className="bg-white border-gray-100">
+                <SelectContent className="theme-light-scope bg-white border-gray-100">
                   <SelectItem value="newest">Newest First</SelectItem>
                   <SelectItem value="price_asc">Price: Low to High</SelectItem>
                   <SelectItem value="price_desc">Price: High to Low</SelectItem>
@@ -470,7 +470,7 @@ export default function ProductList() {
                 <SheetTrigger className={cn(buttonVariants({ variant: "outline" }), "rounded-md h-10 px-4 border-gray-200 bg-gray-50 md:hidden text-sm")}>
                   <Filter className="w-4 h-4 mr-2" /> Filter
                 </SheetTrigger>
-                <SheetContent side="right" className="bg-white w-full sm:max-w-xs p-6 overflow-y-auto">
+                <SheetContent side="right" className="theme-light-scope bg-white w-full sm:max-w-xs p-6 overflow-y-auto">
                   <SheetHeader className="mb-4">
                     <SheetTitle className="text-xl font-bold flex items-center justify-between">Filters</SheetTitle>
                   </SheetHeader>

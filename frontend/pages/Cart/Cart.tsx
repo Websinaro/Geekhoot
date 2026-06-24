@@ -224,7 +224,7 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
 
   if (cart.length === 0) {
     return (
-      <div className="min-h-[80vh] flex flex-col items-center justify-center p-8 bg-white text-black">
+      <div className="theme-light-scope min-h-[80vh] flex flex-col items-center justify-center p-8 bg-white text-black">
         <motion.div 
           initial={{ scale: 0.92, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -250,7 +250,7 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
   }
 
   return (
-    <div className="bg-[#f1f3f6] min-h-screen text-gray-900">
+    <div className="theme-light-scope bg-[#f1f3f6] min-h-screen text-gray-900">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Cart Items */}
@@ -385,7 +385,7 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
 
       {/* Location Selection Dialog */}
       <Dialog open={isLocationDialogOpen} onOpenChange={setIsLocationDialogOpen}>
-        <DialogContent className="max-w-md rounded-lg p-6 bg-white border-none shadow-2xl">
+        <DialogContent className="theme-light-scope max-w-md rounded-lg p-6 bg-white border-none shadow-2xl">
           <DialogHeader className="mb-6">
             <DialogTitle className="text-xl font-bold text-gray-900">Delivery Location</DialogTitle>
             <DialogDescription className="text-sm text-gray-500 mt-2">
@@ -425,7 +425,7 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
 
       {/* Loading Overlay */}
       {isOrdering && (
-        <div className="fixed inset-0 bg-white/80 backdrop-blur-sm z-[100] flex items-center justify-center">
+        <div className="theme-light-scope fixed inset-0 bg-white/80 backdrop-blur-sm z-[100] flex items-center justify-center">
            <div className="text-center space-y-4">
               <div className="w-48 h-2 bg-zinc-200 rounded overflow-hidden mx-auto relative">
                 <div className="absolute top-0 left-0 h-full bg-[#fb641b] rounded animate-pulse w-full" />

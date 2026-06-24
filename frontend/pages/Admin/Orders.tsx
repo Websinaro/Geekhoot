@@ -198,7 +198,7 @@ export default function AdminOrders() {
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-md rounded-lg p-6 bg-white border-none shadow-2xl">
+        <DialogContent className="theme-light-scope max-w-md rounded-lg p-6 bg-white border-none shadow-2xl">
           <DialogHeader className="mb-6">
             <DialogTitle className="text-xl font-bold text-gray-900">Update Order Status</DialogTitle>
             <p className="text-xs text-gray-500 mt-2">Managing Order #{selectedOrder?.orderCode || selectedOrder?.id?.slice(-8).toUpperCase()}</p>
@@ -212,7 +212,7 @@ export default function AdminOrders() {
                   <SelectTrigger className="rounded-md h-10 border-gray-200 bg-white">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-white border-gray-100">
+                  <SelectContent className="theme-light-scope bg-white border-gray-100">
                     {Object.keys(STATUS_CONFIG).map(s => (
                       <SelectItem key={s} value={s}>{STATUS_CONFIG[s].label}</SelectItem>
                     ))}
@@ -227,7 +227,7 @@ export default function AdminOrders() {
                     <SelectTrigger className="rounded-md h-10 border-gray-200 bg-white text-sm">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent className="bg-white border-gray-100">
+                    <SelectContent className="theme-light-scope bg-white border-gray-100">
                       <SelectItem value="Ekart">Ekart Logistics</SelectItem>
                       <SelectItem value="Delhivery">Delhivery</SelectItem>
                       <SelectItem value="BlueDart">BlueDart</SelectItem>

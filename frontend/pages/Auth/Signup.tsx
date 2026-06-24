@@ -88,7 +88,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-80px)] overflow-y-auto py-12 flex items-center justify-center p-6 bg-gray-50/50 relative font-sans">
+    <div className="theme-light-scope min-h-[calc(100vh-80px)] overflow-y-auto py-12 flex items-center justify-center p-6 bg-gray-50/50 relative font-sans">
       {/* Background decoration */}
       <div className="absolute inset-0 z-0 opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:30px_30px]" />
       <div className="absolute top-1/6 right-1/6 w-96 h-96 bg-[#ff5200]/5 rounded-full blur-3xl pointer-events-none" />

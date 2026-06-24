@@ -96,7 +96,7 @@ export default function Profile() {
       >
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Main Profile Info */}
-          <div className="flex-1 space-y-6">
+          <div className="theme-light-scope flex-1 space-y-6">
             <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100 flex flex-col md:flex-row items-center gap-8">
               <div className="relative">
                 <Avatar className="w-32 h-32 rounded-full shadow-sm border-4 border-gray-50 bg-gray-50">
