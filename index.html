@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Prevent Android WebView "Force Dark Mode" from inverting the page colours.
+         Without this, the OS turns text white on light backgrounds, making typed
+         text invisible in inputs on many budget Android devices. -->
+    <meta name="color-scheme" content="light dark" />
     <title>Geekhoot — Premium Custom Merch</title>
 
     <!-- Favicons — multiple sizes so browsers, Google, and PWA all pick up the new logo.

@@ -60,6 +60,11 @@
 }
 
 :root {
+    /* color-scheme: light tells Android WebView / Chromium not to run
+       "Force Dark Mode" automatic inversion on this page. Without it,
+       some devices invert text to white, making typed input text invisible. */
+    color-scheme: light;
+
     /* NOTE: colors are plain hex/rgba (not oklch()) on purpose.
        oklch() is unsupported on the old Chrome WebView shipped on many
        budget Android devices (e.g. Realme C15), which silently breaks
@@ -146,20 +151,35 @@
 
   /* Belt-and-braces: guarantee typed text and the caret are always
      visible/legible on every device, independent of theme variables.
-     Some Android WebViews mishandle autofill or inherited color on
-     form controls; this rule pins the color explicitly. */
+     Some Android WebViews running "Force Dark Mode" push text to white;
+     we pin the colour to a hardcoded dark value so it cannot be inverted.
+     -webkit-text-fill-color beats both `color` and forced OS colours on
+     WebKit/Blink — MUST be a literal value, not currentColor or var(), 
+     because those also get force-inverted. */
   input,
   textarea,
   select {
-    color: var(--foreground);
-    caret-color: var(--foreground);
-    -webkit-text-fill-color: currentColor;
+    color: #111111 !important;
+    caret-color: #111111 !important;
+    -webkit-text-fill-color: #111111 !important;
+    /* Prevent Windows High-Contrast / Android forced-color from overriding */
+    forced-color-adjust: none;
+  }
+
+  /* Light-mode explicit white background for inputs so Force Dark cannot
+     show a dark bg behind the now-pinned dark text */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  textarea,
+  select {
+    background-color: #ffffff;
   }
 
   input:-webkit-autofill,
   textarea:-webkit-autofill,
   select:-webkit-autofill {
-    -webkit-text-fill-color: var(--foreground);
+    -webkit-text-fill-color: #111111 !important;
+    /* Delay the autofill yellow wash indefinitely so it never shows */
     transition: background-color 999999s ease-in-out 0s;
+    background-color: #ffffff !important;
   }
 }
