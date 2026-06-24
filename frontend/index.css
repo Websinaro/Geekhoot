@@ -149,37 +149,49 @@
     @apply font-sans;
     }
 
-  /* Belt-and-braces: guarantee typed text and the caret are always
-     visible/legible on every device, independent of theme variables.
-     Some Android WebViews running "Force Dark Mode" push text to white;
-     we pin the colour to a hardcoded dark value so it cannot be inverted.
-     -webkit-text-fill-color beats both `color` and forced OS colours on
-     WebKit/Blink — MUST be a literal value, not currentColor or var(), 
-     because those also get force-inverted. */
+  /* Input text visibility fix.
+     Root cause: old Android WebView "Force Dark Mode" inverts text to
+     white, making typed text invisible on light backgrounds.
+     We pin text+bg with literal hex (not CSS vars / currentColor, which
+     also get inverted). Light and dark mode need separate rules. */
+
+  /* LIGHT MODE — dark text on white background */
   input,
   textarea,
   select {
     color: #111111 !important;
     caret-color: #111111 !important;
     -webkit-text-fill-color: #111111 !important;
-    /* Prevent Windows High-Contrast / Android forced-color from overriding */
+    background-color: #ffffff;
     forced-color-adjust: none;
   }
 
-  /* Light-mode explicit white background for inputs so Force Dark cannot
-     show a dark bg behind the now-pinned dark text */
-  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
-  textarea,
-  select {
-    background-color: #ffffff;
+  /* DARK MODE — light text on dark background.
+     .dark is toggled by ThemeProvider on html/body. */
+  .dark input,
+  .dark textarea,
+  .dark select {
+    color: #f0f0f0 !important;
+    caret-color: #f0f0f0 !important;
+    -webkit-text-fill-color: #f0f0f0 !important;
+    background-color: rgba(255, 255, 255, 0.08);
   }
 
+  /* AUTOFILL light mode */
   input:-webkit-autofill,
   textarea:-webkit-autofill,
   select:-webkit-autofill {
     -webkit-text-fill-color: #111111 !important;
-    /* Delay the autofill yellow wash indefinitely so it never shows */
     transition: background-color 999999s ease-in-out 0s;
     background-color: #ffffff !important;
+  }
+
+  /* AUTOFILL dark mode */
+  .dark input:-webkit-autofill,
+  .dark textarea:-webkit-autofill,
+  .dark select:-webkit-autofill {
+    -webkit-text-fill-color: #f0f0f0 !important;
+    transition: background-color 999999s ease-in-out 0s;
+    background-color: #1a1a1a !important;
   }
 }
