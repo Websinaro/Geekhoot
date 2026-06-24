@@ -22,5 +22,3 @@ function Input({ className, type, style, ...props }: React.ComponentProps<"input
 }
 
 export { Input }
-
-export { Input }
