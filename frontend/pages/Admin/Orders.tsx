@@ -32,12 +32,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { toast } from 'sonner';
 
 const STATUS_CONFIG: Record<string, { color: string, icon: any, label: string }> = {
-  PENDING: { color: 'bg-yellow-50 text-yellow-600 border border-yellow-200', icon: Clock, label: 'Pending' },
-  CONFIRMED: { color: 'bg-blue-50 text-blue-600 border border-blue-200', icon: CheckCircle2, label: 'Confirmed' },
-  PACKED: { color: 'bg-purple-50 text-purple-600 border border-purple-200', icon: Box, label: 'Packed' },
-  SHIPPED: { color: 'bg-indigo-50 text-indigo-600 border border-indigo-200', icon: Ship, label: 'Shipped' },
-  DELIVERED: { color: 'bg-green-50 text-green-600 border border-green-200', icon: Truck, label: 'Delivered' },
-  CANCELLED: { color: 'bg-red-50 text-red-600 border border-red-200', icon: X, label: 'Cancelled' },
+  PENDING: { color: 'bg-yellow-50 dark:bg-yellow-950/30 text-yellow-600 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-900/50', icon: Clock, label: 'Pending' },
+  CONFIRMED: { color: 'bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-900/50', icon: CheckCircle2, label: 'Confirmed' },
+  PACKED: { color: 'bg-purple-50 dark:bg-purple-950/30 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-900/50', icon: Box, label: 'Packed' },
+  SHIPPED: { color: 'bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-900/50', icon: Ship, label: 'Shipped' },
+  DELIVERED: { color: 'bg-green-50 dark:bg-green-950/30 text-green-600 dark:text-green-400 border border-green-200 dark:border-green-900/50', icon: Truck, label: 'Delivered' },
+  CANCELLED: { color: 'bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900/50', icon: X, label: 'Cancelled' },
 };
 
 export default function AdminOrders() {
@@ -99,8 +99,8 @@ export default function AdminOrders() {
     <div className="space-y-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Manage Orders</h1>
-          <p className="text-sm text-gray-500 font-medium">Track and update customer orders</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Manage Orders</h1>
+          <p className="text-sm text-gray-500 dark:text-zinc-400 font-medium">Track and update customer orders</p>
         </div>
         
         <div className="relative w-full md:w-80">
@@ -108,17 +108,17 @@ export default function AdminOrders() {
             placeholder="Search Order ID, Name..." 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 h-10 rounded-md border-gray-200 bg-white"
+            className="pl-10 h-10 rounded-md border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800"
           />
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-zinc-500" />
         </div>
       </div>
 
-      <div className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-zinc-900 rounded-lg border border-gray-100 dark:border-zinc-800 shadow-sm overflow-hidden">
         {loading ? (
-          <div className="divide-y divide-gray-100 animate-pulse">
+          <div className="divide-y divide-gray-100 dark:divide-zinc-800 animate-pulse">
             {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="flex justify-between items-center p-6 bg-white shrink-0">
+              <div key={i} className="flex justify-between items-center p-6 bg-white dark:bg-zinc-900 shrink-0">
                 <div className="space-y-2 w-1/4">
                   <div className="h-4 bg-zinc-200 dark:bg-zinc-800 rounded w-1/2" />
                   <div className="h-3 bg-zinc-200 dark:bg-zinc-800 rounded w-1/3" />
@@ -134,41 +134,41 @@ export default function AdminOrders() {
           </div>
         ) : filteredOrders.length === 0 ? (
           <div className="py-20 text-center">
-             <Search className="w-12 h-12 text-gray-200 mx-auto mb-4" />
-             <p className="text-gray-500 font-medium text-sm">No orders found</p>
+             <Search className="w-12 h-12 text-gray-200 dark:text-zinc-700 mx-auto mb-4" />
+             <p className="text-gray-500 dark:text-zinc-400 font-medium text-sm">No orders found</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-gray-50 border-b border-gray-100">
-                  <th className="p-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Order Info</th>
-                  <th className="p-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Customer</th>
-                  <th className="p-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Product</th>
-                  <th className="p-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Amount</th>
-                  <th className="p-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
-                  <th className="p-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Action</th>
+                <tr className="bg-gray-50 dark:bg-zinc-800 border-b border-gray-100 dark:border-zinc-700">
+                  <th className="p-4 px-6 text-xs font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-wider">Order Info</th>
+                  <th className="p-4 px-6 text-xs font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-wider">Customer</th>
+                  <th className="p-4 px-6 text-xs font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-wider">Product</th>
+                  <th className="p-4 px-6 text-xs font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-wider">Amount</th>
+                  <th className="p-4 px-6 text-xs font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-wider">Status</th>
+                  <th className="p-4 px-6 text-xs font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-wider">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-50">
+              <tbody className="divide-y divide-gray-50 dark:divide-zinc-800">
                 {filteredOrders.map((order: any) => {
                   const status = STATUS_CONFIG[order.status] || STATUS_CONFIG.PENDING;
                   return (
-                    <tr key={order.id} className="hover:bg-gray-50 transition-colors">
+                    <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
                       <td className="p-4 px-6">
-                        <p className="font-bold text-blue-600 text-sm">#{order.orderCode || order.id.slice(-8).toUpperCase()}</p>
-                        <p className="text-[10px] text-gray-400 mt-0.5">{new Date(order.createdAt).toLocaleDateString()}</p>
+                        <p className="font-bold text-blue-600 dark:text-blue-400 text-sm">#{order.orderCode || order.id.slice(-8).toUpperCase()}</p>
+                        <p className="text-[10px] text-gray-400 dark:text-zinc-500 mt-0.5">{new Date(order.createdAt).toLocaleDateString()}</p>
                       </td>
                       <td className="p-4 px-6">
-                        <p className="font-bold text-gray-900 text-sm">{order.user.name}</p>
-                        <p className="text-[11px] text-gray-500 mt-0.5">{order.user.phone}</p>
+                        <p className="font-bold text-gray-900 dark:text-white text-sm">{order.user.name}</p>
+                        <p className="text-[11px] text-gray-500 dark:text-zinc-400 mt-0.5">{order.user.phone}</p>
                       </td>
                       <td className="p-4 px-6">
-                        <p className="font-medium text-gray-900 text-sm truncate max-w-[150px]">{order.product.name}</p>
-                        <p className="text-[11px] text-gray-500 mt-0.5">Qty: {order.quantity}</p>
+                        <p className="font-medium text-gray-900 dark:text-white text-sm truncate max-w-[150px]">{order.product.name}</p>
+                        <p className="text-[11px] text-gray-500 dark:text-zinc-400 mt-0.5">Qty: {order.quantity}</p>
                       </td>
                       <td className="p-4 px-6">
-                        <p className="font-bold text-gray-900 text-sm">₹{order.totalAmount.toLocaleString()}</p>
+                        <p className="font-bold text-gray-900 dark:text-white text-sm">₹{order.totalAmount.toLocaleString()}</p>
                       </td>
                       <td className="p-4 px-6">
                         <Badge className={`${status.color} font-bold text-[10px] uppercase tracking-wider rounded-sm px-2.5 py-1 leading-none border-none`}>
@@ -179,7 +179,7 @@ export default function AdminOrders() {
                         <Button 
                           variant="outline"
                           size="sm"
-                          className="font-bold text-xs h-8 px-4 rounded-sm border-gray-200 text-gray-700 hover:bg-gray-50"
+                          className="font-bold text-xs h-8 px-4 rounded-sm border-gray-200 dark:border-zinc-700 text-gray-700 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800"
                           onClick={() => {
                             setSelectedOrder(order);
                             setIsDialogOpen(true);
@@ -198,21 +198,21 @@ export default function AdminOrders() {
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="theme-light-scope max-w-md rounded-lg p-6 bg-white border-none shadow-2xl">
+        <DialogContent className="max-w-md rounded-lg p-6 bg-white dark:bg-zinc-900 border-none shadow-2xl">
           <DialogHeader className="mb-6">
-            <DialogTitle className="text-xl font-bold text-gray-900">Update Order Status</DialogTitle>
-            <p className="text-xs text-gray-500 mt-2">Managing Order #{selectedOrder?.orderCode || selectedOrder?.id?.slice(-8).toUpperCase()}</p>
+            <DialogTitle className="text-xl font-bold text-gray-900 dark:text-white">Update Order Status</DialogTitle>
+            <p className="text-xs text-gray-500 dark:text-zinc-400 mt-2">Managing Order #{selectedOrder?.orderCode || selectedOrder?.id?.slice(-8).toUpperCase()}</p>
           </DialogHeader>
           
           {selectedOrder && (
             <form key={selectedOrder?.id} onSubmit={handleUpdateStatus} className="space-y-6">
               <div className="space-y-2">
-                <Label className="text-xs font-bold text-gray-700">Status</Label>
+                <Label className="text-xs font-bold text-gray-700 dark:text-zinc-300">Status</Label>
                 <Select name="status" defaultValue={selectedOrder.status}>
-                  <SelectTrigger className="rounded-md h-10 border-gray-200 bg-white">
+                  <SelectTrigger className="rounded-md h-10 border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="theme-light-scope bg-white border-gray-100">
+                  <SelectContent className="bg-white dark:bg-zinc-900 border-gray-100 dark:border-zinc-800">
                     {Object.keys(STATUS_CONFIG).map(s => (
                       <SelectItem key={s} value={s}>{STATUS_CONFIG[s].label}</SelectItem>
                     ))}
@@ -222,12 +222,12 @@ export default function AdminOrders() {
               
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label className="text-xs font-bold text-gray-700">Carrier</Label>
+                  <Label className="text-xs font-bold text-gray-700 dark:text-zinc-300">Carrier</Label>
                   <Select name="courier" defaultValue={selectedOrder.courier || "Ekart"}>
-                    <SelectTrigger className="rounded-md h-10 border-gray-200 bg-white text-sm">
+                    <SelectTrigger className="rounded-md h-10 border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent className="theme-light-scope bg-white border-gray-100">
+                    <SelectContent className="bg-white dark:bg-zinc-900 border-gray-100 dark:border-zinc-800">
                       <SelectItem value="Ekart">Ekart Logistics</SelectItem>
                       <SelectItem value="Delhivery">Delhivery</SelectItem>
                       <SelectItem value="BlueDart">BlueDart</SelectItem>
@@ -238,17 +238,17 @@ export default function AdminOrders() {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label className="text-xs font-bold text-gray-700">Tracking ID</Label>
-                  <Input name="trackingId" defaultValue={selectedOrder.trackingId} placeholder="e.g. DEL-7789, OUT-1243" className="rounded-md h-10 border-gray-200 bg-white text-sm" />
+                  <Label className="text-xs font-bold text-gray-700 dark:text-zinc-300">Tracking ID</Label>
+                  <Input name="trackingId" defaultValue={selectedOrder.trackingId} placeholder="e.g. DEL-7789, OUT-1243" className="rounded-md h-10 border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm" />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label className="text-xs font-bold text-gray-700">Notes</Label>
-                <Input name="notes" defaultValue={selectedOrder.notes} placeholder="Optional delivery instructions or notes" className="rounded-md h-10 border-gray-200 bg-white text-sm" />
+                <Label className="text-xs font-bold text-gray-700 dark:text-zinc-300">Notes</Label>
+                <Input name="notes" defaultValue={selectedOrder.notes} placeholder="Optional delivery instructions or notes" className="rounded-md h-10 border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm" />
               </div>
 
-              <div className="p-3 bg-blue-50/50 border border-blue-100 rounded text-[11px] text-blue-800 leading-relaxed space-y-1">
+              <div className="p-3 bg-blue-50/50 dark:bg-blue-950/20 border border-blue-100 dark:border-blue-900/40 rounded text-[11px] text-blue-800 dark:text-blue-300 leading-relaxed space-y-1">
                 <p className="font-bold flex items-center gap-1">✨ Dynamic Tracking Engine Activated:</p>
                 <ul className="list-disc pl-3.5 space-y-0.5">
                   <li>Starting with <span className="font-semibold">BD / DX / FX / FMP</span> automatically autodetects Courier Partner.</li>
@@ -258,7 +258,7 @@ export default function AdminOrders() {
               </div>
               
               <div className="flex gap-3 pt-4">
-                <Button variant="outline" type="button" onClick={() => setIsDialogOpen(false)} className="flex-1 rounded-md h-10 font-bold border-gray-200">
+                <Button variant="outline" type="button" onClick={() => setIsDialogOpen(false)} className="flex-1 rounded-md h-10 font-bold border-gray-200 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800">
                   Cancel
                 </Button>
                 <Button type="submit" className="flex-1 h-10 rounded-md bg-blue-600 text-white hover:bg-blue-700 font-bold border-none">

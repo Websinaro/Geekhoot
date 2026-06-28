@@ -52,13 +52,13 @@ export default function ProductDetail() {
 
   if (!id || id === 'undefined' || id === 'null') {
     return (
-      <div className="theme-light-scope min-h-screen flex flex-col items-center justify-center bg-[#f1f3f6] px-4">
-        <div className="text-center max-w-md bg-white p-8 rounded-lg shadow-sm border border-gray-150">
-          <div className="w-16 h-16 bg-red-50 text-[#ff5200] rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#f1f3f6] dark:bg-zinc-950 px-4">
+        <div className="text-center max-w-md bg-white dark:bg-zinc-900 p-8 rounded-lg shadow-sm border border-gray-100 dark:border-zinc-800">
+          <div className="w-16 h-16 bg-red-50 dark:bg-red-950/30 text-[#ff5200] rounded-full flex items-center justify-center mx-auto mb-4">
              <span className="text-2xl font-bold">!</span>
           </div>
-          <h2 className="text-xl font-bold text-gray-950 mb-2">Product Not Found</h2>
-          <p className="text-sm text-gray-500 mb-6">
+          <h2 className="text-xl font-bold text-gray-950 dark:text-white mb-2">Product Not Found</h2>
+          <p className="text-sm text-gray-500 dark:text-zinc-400 mb-6">
             The product you are trying to view does not exist or has been removed.
           </p>
           <Button onClick={() => navigate('/products')} className="bg-[#ff5200] hover:bg-[#e04800] text-white font-bold w-full rounded-sm h-11 border-none">
@@ -285,13 +285,13 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
 
   if (isError || !product) {
     return (
-      <div className="theme-light-scope min-h-screen flex flex-col items-center justify-center bg-[#f1f3f6] px-4">
-        <div className="text-center max-w-md bg-white p-8 rounded-lg shadow-sm border border-gray-150">
-          <div className="w-16 h-16 bg-red-50 text-[#ff5200] rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#f1f3f6] dark:bg-zinc-950 px-4">
+        <div className="text-center max-w-md bg-white dark:bg-zinc-900 p-8 rounded-lg shadow-sm border border-gray-100 dark:border-zinc-800">
+          <div className="w-16 h-16 bg-red-50 dark:bg-red-950/30 text-[#ff5200] rounded-full flex items-center justify-center mx-auto mb-4">
              <span className="text-2xl font-bold">!</span>
           </div>
-          <h2 className="text-xl font-bold text-gray-950 mb-2">Product Not Found</h2>
-          <p className="text-sm text-gray-500 mb-6">
+          <h2 className="text-xl font-bold text-gray-950 dark:text-white mb-2">Product Not Found</h2>
+          <p className="text-sm text-gray-500 dark:text-zinc-400 mb-6">
             The product you are trying to view does not exist or has been removed.
           </p>
           <Button onClick={() => navigate('/products')} className="bg-[#ff5200] hover:bg-[#e04800] text-white font-bold w-full rounded-sm h-11 border-none">
@@ -311,22 +311,22 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
     : '';
 
   return (
-    <div className="theme-light-scope bg-[#f1f3f6] min-h-screen pb-20">
+    <div className="bg-[#f1f3f6] dark:bg-zinc-950 min-h-screen pb-20">
       <div className="max-w-[1440px] mx-auto px-4 py-4">
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-xs text-gray-500 mb-4 bg-white p-3 rounded shadow-sm">
-          <Link to="/" className="hover:text-blue-600">Home</Link>
+        <nav className="flex items-center gap-2 text-xs text-gray-500 dark:text-zinc-500 mb-4 bg-white dark:bg-zinc-900 p-3 rounded shadow-sm">
+          <Link to="/" className="hover:text-blue-600 dark:hover:text-blue-400">Home</Link>
           <ChevronRight className="w-3 h-3" />
-          <Link to="/products" className="hover:text-blue-600">Collection</Link>
+          <Link to="/products" className="hover:text-blue-600 dark:hover:text-blue-400">Collection</Link>
           <ChevronRight className="w-3 h-3" />
-          <span className="text-gray-900 font-medium truncate">{product.name}</span>
+          <span className="text-gray-900 dark:text-zinc-200 font-medium truncate">{product.name}</span>
         </nav>
 
         <div className="flex flex-col lg:flex-row gap-4">
           {/* Left: Image Section */}
           <div className="lg:w-[40%] space-y-4">
-            <div className="bg-white p-4 rounded shadow-sm sticky top-24">
-              <div className="aspect-square relative overflow-hidden flex items-center justify-center border border-gray-100 rounded-sm">
+            <div className="bg-white dark:bg-zinc-900 p-4 rounded shadow-sm sticky top-24">
+              <div className="aspect-square relative overflow-hidden flex items-center justify-center border border-gray-100 dark:border-zinc-800 rounded-sm">
                 <LazyProductImage 
                   src={mainImage} 
                   alt={product.name} 
@@ -342,7 +342,7 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                     onClick={() => setActiveImage(i)}
                     aria-label={`View image ${i + 1} of ${product.images.length}`}
                     aria-pressed={activeImage === i}
-                    className={`w-16 h-16 shrink-0 rounded border-2 transition-all p-1 flex items-center justify-center ${activeImage === i ? 'border-[#ff5200]' : 'border-gray-100'}`}
+                    className={`w-16 h-16 shrink-0 rounded border-2 transition-all p-1 flex items-center justify-center ${activeImage === i ? 'border-[#ff5200]' : 'border-gray-100 dark:border-zinc-800'}`}
                   >
                     <LazyProductImage
                       src={img}
@@ -357,14 +357,14 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
               <div className="grid grid-cols-2 gap-2 mt-6">
                 <Button 
                   variant="outline"
-                  className="h-14 rounded-sm border-gray-300 font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="h-14 rounded-sm border-gray-300 dark:border-zinc-700 font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   onClick={handleAddToCart}
                   disabled={product.stock === 0}
                 >
                   <ShoppingCart className="w-5 h-5 text-[#ff5200]" /> {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
                 </Button>
                 <Button 
-                  className="h-14 rounded-sm bg-[#fb641b] hover:bg-[#ff5200] text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 shadow-sm disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed border-none"
+                  className="h-14 rounded-sm bg-[#fb641b] hover:bg-[#ff5200] text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 shadow-sm disabled:bg-gray-300 dark:disabled:bg-zinc-700 disabled:text-gray-500 dark:disabled:text-zinc-400 disabled:cursor-not-allowed border-none"
                   onClick={handleWhatsAppOrder}
                   disabled={product.stock === 0}
                 >
@@ -381,8 +381,8 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                     className={cn(
                       "w-full mt-2 h-12 rounded-sm font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 transition-all border shadow-sm cursor-pointer",
                       isWish 
-                        ? "bg-red-50 text-red-600 border-red-200 hover:bg-red-100" 
-                        : "border-gray-200 hover:bg-gray-50 text-gray-700"
+                        ? "bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400 border-red-200 dark:border-red-900/50 hover:bg-red-100 dark:hover:bg-red-950/50" 
+                        : "border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800 text-gray-700 dark:text-zinc-300"
                     )}
                     onClick={() => {
                       toggleWishlist(product);
@@ -393,7 +393,7 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                       }
                     }}
                   >
-                    <Heart className={cn("w-4 h-4", isWish ? "fill-red-500 text-red-500" : "text-gray-400")} /> 
+                    <Heart className={cn("w-4 h-4", isWish ? "fill-red-500 text-red-500" : "text-gray-400 dark:text-zinc-500")} /> 
                     {isWish ? 'Wishlisted' : 'Add to Wishlist'}
                   </Button>
                 );
@@ -403,31 +403,31 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
 
           {/* Right: Product Details */}
           <div className="lg:w-[60%] flex flex-col gap-4">
-            <div className="bg-white p-6 rounded shadow-sm min-h-full">
+            <div className="bg-white dark:bg-zinc-900 p-6 rounded shadow-sm min-h-full">
               <div className="mb-6">
-                <p className="text-gray-400 text-sm font-medium mb-1">{product.category}</p>
-                <h1 className="text-2xl font-semibold text-gray-900 mb-2">{product.name}</h1>
+                <p className="text-gray-400 dark:text-zinc-500 text-sm font-medium mb-1">{product.category}</p>
+                <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">{product.name}</h1>
                 
                 <div className="flex items-center gap-4 mb-4">
                   <div className="flex items-center bg-green-600 text-white px-2 py-0.5 rounded text-sm font-bold gap-1">
                     {Number(product.rating || 0).toFixed(1)} <Star className="w-3.5 h-3.5 fill-white" />
                   </div>
-                  <span className="text-sm font-medium text-gray-400">
+                  <span className="text-sm font-medium text-gray-400 dark:text-zinc-500">
                     {product.reviews?.length || 0} Ratings & Reviews
                   </span>
                   {product.bookings > 0 && (
-                    <span className="text-sm font-bold text-green-600">
+                    <span className="text-sm font-bold text-green-600 dark:text-green-400">
                       {product.bookings} people ordered this
                     </span>
                   )}
                 </div>
 
                 <div className="flex items-baseline gap-3 mb-4">
-                  <span className="text-3xl font-bold text-gray-900">₹{product.price.toLocaleString()}</span>
+                  <span className="text-3xl font-bold text-gray-900 dark:text-white">₹{product.price.toLocaleString()}</span>
                   {product.originalPrice && product.originalPrice > product.price && (
                     <>
-                      <span className="text-lg text-gray-400 line-through">₹{product.originalPrice.toLocaleString()}</span>
-                      <span className="text-lg text-green-600 font-bold">
+                      <span className="text-lg text-gray-400 dark:text-zinc-500 line-through">₹{product.originalPrice.toLocaleString()}</span>
+                      <span className="text-lg text-green-600 dark:text-green-400 font-bold">
                         {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% off
                       </span>
                     </>
@@ -435,28 +435,28 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                 </div>
 
                 {product.stock <= 5 && product.stock > 0 && (
-                  <p className="text-red-500 text-sm font-bold mb-4 italic">Only {product.stock} left in stock - order soon!</p>
+                  <p className="text-red-500 dark:text-red-400 text-sm font-bold mb-4 italic">Only {product.stock} left in stock - order soon!</p>
                 )}
                 {product.stock === 0 && (
-                  <p className="text-red-500 text-sm font-bold mb-4">Currently Out of Stock</p>
+                  <p className="text-red-500 dark:text-red-400 text-sm font-bold mb-4">Currently Out of Stock</p>
                 )}
               </div>
 
-              <div className="border-t border-gray-100 pt-6 space-y-6">
+              <div className="border-t border-gray-100 dark:border-zinc-800 pt-6 space-y-6">
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-2">Product Description</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">{product.description}</p>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">Product Description</h3>
+                  <p className="text-gray-600 dark:text-zinc-400 text-sm leading-relaxed">{product.description}</p>
                 </div>
 
-                <div className="flex items-center gap-6 border-y border-gray-50 py-4">
+                <div className="flex items-center gap-6 border-y border-gray-50 dark:border-zinc-800 py-4">
                    <div className="flex items-center gap-2">
                      {/* upgraded text-gray-400 → text-gray-600 for WCAG AA */}
-                     <span className="text-xs font-bold text-gray-600 uppercase tracking-widest">Quantity</span>
-                     <div className="flex items-center border border-gray-200 rounded" role="group" aria-label="Quantity selector">
+                     <span className="text-xs font-bold text-gray-600 dark:text-zinc-400 uppercase tracking-widest">Quantity</span>
+                     <div className="flex items-center border border-gray-200 dark:border-zinc-700 rounded" role="group" aria-label="Quantity selector">
                         <button
                           onClick={() => setQuantity(Math.max(1, quantity - 1))}
                           aria-label="Decrease quantity"
-                          className="p-2 border-r hover:bg-gray-50 disabled:opacity-30"
+                          className="p-2 border-r dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800 disabled:opacity-30"
                           disabled={product.stock === 0 || quantity <= 1}
                         >
                           <Minus className="w-4 h-4" aria-hidden="true" />
@@ -465,7 +465,7 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                         <button
                           onClick={() => setQuantity(quantity + 1)}
                           aria-label="Increase quantity"
-                          className="p-2 border-l hover:bg-gray-50 disabled:opacity-30"
+                          className="p-2 border-l dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800 disabled:opacity-30"
                           disabled={product.stock === 0 || quantity >= product.stock}
                         >
                           <Plus className="w-4 h-4" aria-hidden="true" />
@@ -475,18 +475,18 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
-                    <Truck className="w-5 h-5 text-gray-400 mt-1" />
+                  <div className="flex items-start gap-3 p-4 bg-gray-50 dark:bg-zinc-800 rounded-lg">
+                    <Truck className="w-5 h-5 text-gray-400 dark:text-zinc-500 mt-1" />
                     <div>
-                      <p className="text-sm font-bold">Free Delivery</p>
-                      <p className="text-xs text-gray-500">Usually ships in 24-48 hours</p>
+                      <p className="text-sm font-bold dark:text-white">Free Delivery</p>
+                      <p className="text-xs text-gray-500 dark:text-zinc-400">Usually ships in 24-48 hours</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
-                    <ShieldCheck className="w-5 h-5 text-gray-400 mt-1" />
+                  <div className="flex items-start gap-3 p-4 bg-gray-50 dark:bg-zinc-800 rounded-lg">
+                    <ShieldCheck className="w-5 h-5 text-gray-400 dark:text-zinc-500 mt-1" />
                     <div>
-                      <p className="text-sm font-bold">7 Days Replacement</p>
-                      <p className="text-xs text-gray-500">Quality checking before dispatch</p>
+                      <p className="text-sm font-bold dark:text-white">7 Days Replacement</p>
+                      <p className="text-xs text-gray-500 dark:text-zinc-400">Quality checking before dispatch</p>
                     </div>
                   </div>
                 </div>
@@ -494,9 +494,9 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
             </div>
 
             {/* Reviews within Right Column or below? Standard e-commerce often puts it below */}
-            <div id="reviews" className="bg-white p-6 rounded shadow-sm">
+            <div id="reviews" className="bg-white dark:bg-zinc-900 p-6 rounded shadow-sm">
                 <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-xl font-bold text-gray-900">Ratings & Reviews</h2>
+                    <h2 className="text-xl font-bold text-gray-900 dark:text-white">Ratings & Reviews</h2>
                     {canReview && !showReviewForm && (
                         <Button variant="outline" onClick={() => setShowReviewForm(true)}>Rate Product</Button>
                     )}
@@ -510,10 +510,10 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                           exit={{ opacity: 0, scaleY: 0.92 }}
                           transition={{ duration: 0.2, ease: 'easeOut' }}
                           style={{ willChange: 'transform, opacity' }}
-                          className="overflow-hidden mb-8 border-b pb-8">
+                          className="overflow-hidden mb-8 border-b dark:border-zinc-800 pb-8">
                             <form onSubmit={handleReviewSubmit} className="space-y-4">
                                 <div className="flex items-center gap-4">
-                                    <span className="text-sm font-bold">Rate:</span>
+                                    <span className="text-sm font-bold dark:text-white">Rate:</span>
                                     <div className="flex gap-1" role="group" aria-label="Star rating">
                                         {[1,2,3,4,5].map(i => (
                                             <button
@@ -523,13 +523,13 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                                               aria-label={`Rate ${i} star${i !== 1 ? 's' : ''}`}
                                               aria-pressed={reviewData.rating === i}
                                             >
-                                                <Star className={`w-6 h-6 ${reviewData.rating >= i ? 'fill-yellow-400 text-yellow-400' : 'text-gray-200'}`} aria-hidden="true" />
+                                                <Star className={`w-6 h-6 ${reviewData.rating >= i ? 'fill-yellow-400 text-yellow-400' : 'text-gray-200 dark:text-zinc-700'}`} aria-hidden="true" />
                                             </button>
                                         ))}
                                     </div>
                                 </div>
                                 <textarea
-                                    className="w-full border rounded-md p-4 text-sm focus:ring-1 focus:ring-[#ff5200] outline-none"
+                                    className="w-full border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-gray-900 dark:text-zinc-100 rounded-md p-4 text-sm focus:ring-1 focus:ring-[#ff5200] outline-none"
                                     placeholder="Write your review here..."
                                     rows={4}
                                     value={reviewData.comment}
@@ -537,7 +537,7 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                                 />
                                 <div className="flex justify-end gap-2">
                                     <Button type="button" variant="ghost" onClick={() => setShowReviewForm(false)}>Cancel</Button>
-                                    <Button type="submit" className="bg-black text-white px-8">Submit</Button>
+                                    <Button type="submit" className="bg-black dark:bg-white text-white dark:text-black px-8">Submit</Button>
                                 </div>
                             </form>
                         </motion.div>
@@ -549,24 +549,24 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                         const userLiked = review.likedBy?.includes(user?.id);
                         const userDisliked = review.dislikedBy?.includes(user?.id);
                         return (
-                            <div key={review.id} className="border-b border-gray-100 pb-6 last:border-0">
+                            <div key={review.id} className="border-b border-gray-100 dark:border-zinc-800 pb-6 last:border-0">
                                 <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
                                     <div className="flex items-center gap-2">
                                         <div className="flex items-center bg-green-600 text-white px-1.5 py-0.5 rounded text-[10px] font-bold gap-1">
                                             {Number(review.rating || 0).toFixed(1)} <Star className="w-2.5 h-2.5 fill-white" />
                                         </div>
-                                        <span className="text-sm font-bold text-gray-905">{review.user?.name}</span>
+                                        <span className="text-sm font-bold text-gray-900 dark:text-white">{review.user?.name}</span>
                                     </div>
                                     {review.isVerifiedPurchase && (
-                                        <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-                                            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                                        <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/30 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-900/50">
+                                            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                                             Verified Purchase
                                         </span>
                                     )}
                                 </div>
-                                <p className="text-sm text-gray-720 mb-2 leading-relaxed">{review.comment}</p>
+                                <p className="text-sm text-gray-700 dark:text-zinc-300 mb-2 leading-relaxed">{review.comment}</p>
                                 <div className="flex items-center justify-between flex-wrap gap-4 mt-2">
-                                    <p className="text-[10px] text-gray-400 font-medium">Published on {new Date(review.createdAt).toLocaleDateString()}</p>
+                                    <p className="text-[10px] text-gray-400 dark:text-zinc-500 font-medium">Published on {new Date(review.createdAt).toLocaleDateString()}</p>
                                     
                                     {/* Like & Dislike interaction button row */}
                                     <div className="flex items-center gap-2">
@@ -576,8 +576,8 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                                             className={cn(
                                                 "flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full border transition-all cursor-pointer",
                                                 userLiked
-                                                    ? "bg-orange-50 text-[#ff5200] border-orange-200 font-semibold"
-                                                    : "bg-white text-gray-500 border-gray-200 hover:bg-gray-50"
+                                                    ? "bg-orange-50 dark:bg-orange-950/30 text-[#ff5200] border-orange-200 dark:border-orange-900/50 font-semibold"
+                                                    : "bg-white dark:bg-zinc-800 text-gray-500 dark:text-zinc-400 border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-700"
                                             )}
                                         >
                                             <ThumbsUp className={cn("w-3 h-3", userLiked && "fill-[#ff5200]")} />
@@ -590,8 +590,8 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                                             className={cn(
                                                 "flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full border transition-all cursor-pointer",
                                                 userDisliked
-                                                    ? "bg-zinc-100 text-zinc-800 border-zinc-300 font-semibold"
-                                                    : "bg-white text-gray-500 border-gray-200 hover:bg-gray-50"
+                                                    ? "bg-zinc-100 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-100 border-zinc-300 dark:border-zinc-600 font-semibold"
+                                                    : "bg-white dark:bg-zinc-800 text-gray-500 dark:text-zinc-400 border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-700"
                                             )}
                                         >
                                             <ThumbsDown className={cn("w-3 h-3", userDisliked && "fill-zinc-700")} />
@@ -603,8 +603,8 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                         );
                     }) : (
                         <div className="text-center py-10">
-                            <MessageSquare className="w-10 h-10 text-gray-100 mx-auto mb-4" />
-                            <p className="text-sm text-gray-400 italic">No reviews yet. Be the first to review!</p>
+                            <MessageSquare className="w-10 h-10 text-gray-100 dark:text-zinc-700 mx-auto mb-4" />
+                            <p className="text-sm text-gray-400 dark:text-zinc-500 italic">No reviews yet. Be the first to review!</p>
                         </div>
                     )}
                 </div>
@@ -615,10 +615,10 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
 
       {/* Location Dialog remains similar but cleaner UI */}
       <Dialog open={isLocationDialogOpen} onOpenChange={setIsLocationDialogOpen}>
-        <DialogContent className="theme-light-scope max-w-md rounded-lg p-6 bg-white border-none shadow-2xl ring-0">
+        <DialogContent className="max-w-md rounded-lg p-6 bg-white dark:bg-zinc-900 border-none shadow-2xl ring-0">
           <DialogHeader className="mb-6 text-left">
-            <DialogTitle className="text-xl font-bold">Select Delivery Location</DialogTitle>
-            <DialogDescription className="text-gray-500 text-sm">
+            <DialogTitle className="text-xl font-bold dark:text-white">Select Delivery Location</DialogTitle>
+            <DialogDescription className="text-gray-500 dark:text-zinc-400 text-sm">
               We need your location to process the order correctly on WhatsApp.
             </DialogDescription>
           </DialogHeader>
@@ -626,23 +626,23 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
           <div className="space-y-4">
             <button 
               onClick={() => processOrderWithLocation(true)}
-              className="w-full flex items-center gap-4 p-4 rounded-lg bg-orange-50 border border-orange-200 hover:bg-orange-100 transition-colors text-left"
+              className="w-full flex items-center gap-4 p-4 rounded-lg bg-orange-50 dark:bg-orange-950/30 border border-orange-200 dark:border-orange-900/50 hover:bg-orange-100 dark:hover:bg-orange-950/50 transition-colors text-left"
             >
               <MapPinned className="w-6 h-6 text-[#ff5200]" />
               <div>
-                <p className="font-bold text-gray-900">Current Location</p>
-                <p className="text-xs text-gray-500">Detected via GPS for precision</p>
+                <p className="font-bold text-gray-900 dark:text-white">Current Location</p>
+                <p className="text-xs text-gray-500 dark:text-zinc-400">Detected via GPS for precision</p>
               </div>
             </button>
 
             <button 
               onClick={() => processOrderWithLocation(false)}
-              className="w-full flex items-center gap-4 p-4 rounded-lg bg-gray-50 border border-gray-200 hover:bg-gray-100 transition-colors text-left"
+              className="w-full flex items-center gap-4 p-4 rounded-lg bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 hover:bg-gray-100 dark:hover:bg-zinc-700/70 transition-colors text-left"
             >
-              <MapPin className="w-6 h-6 text-gray-400" />
+              <MapPin className="w-6 h-6 text-gray-400 dark:text-zinc-500" />
               <div>
-                <p className="font-bold text-gray-900">Profile Address</p>
-                <p className="text-xs text-gray-500">Use address saved in your account</p>
+                <p className="font-bold text-gray-900 dark:text-white">Profile Address</p>
+                <p className="text-xs text-gray-500 dark:text-zinc-400">Use address saved in your account</p>
               </div>
             </button>
           </div>
@@ -651,12 +651,12 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
 
       {/* Loading Overlay */}
       {isOrdering && (
-        <div className="theme-light-scope fixed inset-0 bg-white/80 backdrop-blur-sm z-[100] flex items-center justify-center">
+        <div className="fixed inset-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm z-[100] flex items-center justify-center">
             <div className="text-center space-y-4">
-                <div className="w-48 h-2 bg-zinc-200 rounded overflow-hidden mx-auto relative">
+                <div className="w-48 h-2 bg-zinc-200 dark:bg-zinc-700 rounded overflow-hidden mx-auto relative">
                   <div className="absolute top-0 left-0 h-full bg-[#ff5200] rounded animate-pulse w-full" />
                 </div>
-                <p className="text-sm font-bold text-gray-600 animate-pulse">Processing Order...</p>
+                <p className="text-sm font-bold text-gray-600 dark:text-zinc-300 animate-pulse">Processing Order...</p>
             </div>
         </div>
       )}

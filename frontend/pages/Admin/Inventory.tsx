@@ -148,60 +148,60 @@ export default function AdminInventory() {
       {/* Header Panel */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight flex items-center gap-2">
-            <Archive className="w-7 h-7 text-blue-600" />
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight flex items-center gap-2">
+            <Archive className="w-7 h-7 text-blue-600 dark:text-blue-400" />
             Inventory & Stock Control
           </h1>
-          <p className="text-sm text-gray-500 font-medium">Auto stock reduction on sale, live history audit trials, and customized alert alerts</p>
+          <p className="text-sm text-gray-500 dark:text-zinc-400 font-medium">Auto stock reduction on sale, live history audit trials, and customized alert alerts</p>
         </div>
 
         {/* Sync Button */}
         <Button 
           variant="outline" 
           onClick={fetchInventoryData}
-          className="border-gray-200 hover:bg-gray-50 shrink-0 font-bold text-xs"
+          className="border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800 shrink-0 font-bold text-xs dark:text-zinc-300"
           id="btn-refresh-inventory"
         >
-          <FolderSync className="w-4 h-4 mr-1.5 animate-pulse text-blue-500" /> Pull Analytics
+          <FolderSync className="w-4 h-4 mr-1.5 animate-pulse text-blue-500 dark:text-blue-400" /> Pull Analytics
         </Button>
       </div>
 
       {/* Metrics Banner Cards (Healthy, Low Stock, Out of Stock) */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="rounded-lg shadow-sm border border-gray-100 bg-white" id="stat-healthy-card">
+        <Card className="rounded-lg shadow-sm border border-gray-100 dark:border-zinc-800 bg-white dark:bg-zinc-900" id="stat-healthy-card">
           <CardContent className="p-4 flex items-center justify-between">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold uppercase text-green-500 tracking-widest block">Healthy Stock</span>
-              <p className="text-3xl font-extrabold text-gray-900">{loading ? '...' : healthyCount}</p>
-              <p className="text-[11px] text-gray-400">Products above watch thresholds</p>
+              <span className="text-[10px] font-bold uppercase text-green-500 dark:text-green-400 tracking-widest block">Healthy Stock</span>
+              <p className="text-3xl font-extrabold text-gray-900 dark:text-white">{loading ? '...' : healthyCount}</p>
+              <p className="text-[11px] text-gray-400 dark:text-zinc-500">Products above watch thresholds</p>
             </div>
-            <div className="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-green-600">
+            <div className="w-12 h-12 rounded-full bg-green-50 dark:bg-green-950/30 flex items-center justify-center text-green-600 dark:text-green-400">
               <Check className="w-6 h-6" />
             </div>
           </CardContent>
         </Card>
 
-        <Card className="rounded-lg shadow-sm border border-orange-100 bg-orange-50/20" id="stat-low-card">
+        <Card className="rounded-lg shadow-sm border border-orange-100 dark:border-orange-900/40 bg-orange-50/20 dark:bg-orange-950/10" id="stat-low-card">
           <CardContent className="p-4 flex items-center justify-between">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold uppercase text-orange-600 tracking-widest block font-sans">Low stock items</span>
-              <p className="text-3xl font-extrabold text-orange-700">{loading ? '...' : lowStockCount}</p>
-              <p className="text-[11px] text-orange-500 font-medium">Reaching threshold limit levels</p>
+              <span className="text-[10px] font-bold uppercase text-orange-600 dark:text-orange-400 tracking-widest block font-sans">Low stock items</span>
+              <p className="text-3xl font-extrabold text-orange-700 dark:text-orange-400">{loading ? '...' : lowStockCount}</p>
+              <p className="text-[11px] text-orange-500 dark:text-orange-400 font-medium">Reaching threshold limit levels</p>
             </div>
-            <div className="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center text-orange-600">
+            <div className="w-12 h-12 rounded-full bg-orange-50 dark:bg-orange-950/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
               <AlertTriangle className="w-6 h-6" />
             </div>
           </CardContent>
         </Card>
 
-        <Card className="rounded-lg shadow-sm border border-red-150 bg-red-50/10" id="stat-empty-card">
+        <Card className="rounded-lg shadow-sm border border-red-100 dark:border-red-900/40 bg-red-50/10 dark:bg-red-950/10" id="stat-empty-card">
           <CardContent className="p-4 flex items-center justify-between">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold uppercase text-red-600 tracking-widest block font-mono">Out of stock status</span>
-              <p className="text-3xl font-extrabold text-red-700">{loading ? '...' : outOfStockCount}</p>
-              <p className="text-[11px] text-red-500 font-semibold">Zero units available on store shelf</p>
+              <span className="text-[10px] font-bold uppercase text-red-600 dark:text-red-400 tracking-widest block font-mono">Out of stock status</span>
+              <p className="text-3xl font-extrabold text-red-700 dark:text-red-400">{loading ? '...' : outOfStockCount}</p>
+              <p className="text-[11px] text-red-500 dark:text-red-400 font-semibold">Zero units available on store shelf</p>
             </div>
-            <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center text-red-600">
+            <div className="w-12 h-12 rounded-full bg-red-50 dark:bg-red-950/30 flex items-center justify-center text-red-600 dark:text-red-400">
               <BadgeAlert className="w-6 h-6" />
             </div>
           </CardContent>
@@ -209,15 +209,15 @@ export default function AdminInventory() {
       </div>
 
       {/* Navigation and Search Utilities */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-        <div className="flex border border-gray-200 rounded-md p-1 bg-gray-50/50 shrink-0 select-none">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white dark:bg-zinc-900 p-4 rounded-xl border border-gray-100 dark:border-zinc-800 shadow-sm">
+        <div className="flex border border-gray-200 dark:border-zinc-700 rounded-md p-1 bg-gray-50/50 dark:bg-zinc-800 shrink-0 select-none">
           <button
             onClick={() => setActiveTab('levels')}
             className={cn(
               "px-4 py-2 text-xs font-bold rounded transiton-all cursor-pointer flex items-center gap-1.5 border-none",
               activeTab === 'levels' 
-                ? "bg-white text-blue-600 shadow-sm" 
-                : "text-gray-500 hover:text-gray-900"
+                ? "bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm" 
+                : "text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white"
             )}
             id="tab-stock-levels"
           >
@@ -228,8 +228,8 @@ export default function AdminInventory() {
             className={cn(
               "px-4 py-2 text-xs font-bold rounded transiton-all cursor-pointer flex items-center gap-1.5 border-none",
               activeTab === 'history' 
-                ? "bg-white text-blue-600 shadow-sm" 
-                : "text-gray-500 hover:text-gray-900"
+                ? "bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm" 
+                : "text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white"
             )}
             id="tab-stock-logs"
           >
@@ -238,12 +238,12 @@ export default function AdminInventory() {
         </div>
 
         <div className="relative w-full max-w-sm">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-zinc-500" />
           <Input
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={activeTab === 'levels' ? 'Search items, categories...' : 'Search logs, orders, actor...'}
-            className="pl-10 h-10 border-gray-200 rounded-md bg-gray-50/30 text-sm focus:bg-white"
+            className="pl-10 h-10 border-gray-200 dark:border-zinc-700 rounded-md bg-gray-50/30 dark:bg-zinc-800 text-sm focus:bg-white dark:focus:bg-zinc-900"
             id="inventory-search-input"
           />
         </div>
@@ -260,28 +260,28 @@ export default function AdminInventory() {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.15, ease: 'easeOut' }}
             style={{ willChange: 'transform, opacity' }}
-            className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden"
+            className="bg-white dark:bg-zinc-900 rounded-lg border border-gray-100 dark:border-zinc-800 shadow-sm overflow-hidden"
           >
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse" id="table-stock-levels">
                 <thead>
-                  <tr className="bg-gray-50 border-b border-gray-100">
-                    <th className="p-4 px-6 text-[11px] font-bold text-gray-500 uppercase tracking-widest">Product Details</th>
-                    <th className="p-4 px-6 text-[11px] font-bold text-gray-500 uppercase tracking-widest">Category</th>
-                    <th className="p-4 px-6 text-[11px] font-bold text-gray-500 uppercase tracking-widest text-center">Alert Threshold</th>
-                    <th className="p-4 px-6 text-[11px] font-bold text-gray-500 uppercase tracking-widest text-center animate-pulse">Current Stock</th>
-                    <th className="p-4 px-6 text-[11px] font-bold text-gray-500 uppercase tracking-widest">Audited Health Status</th>
+                  <tr className="bg-gray-50 dark:bg-zinc-800 border-b border-gray-100 dark:border-zinc-700">
+                    <th className="p-4 px-6 text-[11px] font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-widest">Product Details</th>
+                    <th className="p-4 px-6 text-[11px] font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-widest">Category</th>
+                    <th className="p-4 px-6 text-[11px] font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-widest text-center">Alert Threshold</th>
+                    <th className="p-4 px-6 text-[11px] font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-widest text-center animate-pulse">Current Stock</th>
+                    <th className="p-4 px-6 text-[11px] font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-widest">Audited Health Status</th>
                     <th className="p-4 px-6"></th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-50">
+                <tbody className="divide-y divide-gray-50 dark:divide-zinc-800">
                   {loading ? (
                     <tr>
-                      <td colSpan={6} className="p-20 text-center text-gray-400 font-medium text-sm">Synchronizing live stock parameters...</td>
+                      <td colSpan={6} className="p-20 text-center text-gray-400 dark:text-zinc-500 font-medium text-sm">Synchronizing live stock parameters...</td>
                     </tr>
                   ) : filteredProducts.length === 0 ? (
                     <tr>
-                      <td colSpan={6} className="p-20 text-center text-gray-400 font-medium text-sm">No matched inventory instances found.</td>
+                      <td colSpan={6} className="p-20 text-center text-gray-400 dark:text-zinc-500 font-medium text-sm">No matched inventory instances found.</td>
                     </tr>
                   ) : (
                     filteredProducts.map((product) => {
@@ -290,11 +290,11 @@ export default function AdminInventory() {
                       const isHealthy = product.stock > product.lowStockThreshold;
 
                       return (
-                        <tr key={product.id} className="hover:bg-gray-50/50 transition-colors">
+                        <tr key={product.id} className="hover:bg-gray-50/50 dark:hover:bg-zinc-800/50 transition-colors">
                           {/* Name & Photo */}
                           <td className="p-4 px-6">
                             <div className="flex items-center gap-4">
-                              <div className="w-10 h-10 rounded border border-gray-100 overflow-hidden bg-gray-50 shrink-0">
+                              <div className="w-10 h-10 rounded border border-gray-100 dark:border-zinc-700 overflow-hidden bg-gray-50 dark:bg-zinc-800 shrink-0">
                                 <img
                                   src={product.images?.[0] || ''}
                                   alt=""
@@ -302,13 +302,13 @@ export default function AdminInventory() {
                                   className="w-full h-full object-cover"
                                 />
                               </div>
-                              <span className="font-bold text-gray-900 text-sm">{product.name}</span>
+                              <span className="font-bold text-gray-900 dark:text-white text-sm">{product.name}</span>
                             </div>
                           </td>
 
                           {/* Category */}
                           <td className="p-4 px-6">
-                            <span className="text-[10px] font-bold text-gray-500 whitespace-nowrap bg-gray-100 px-2 py-0.5 rounded uppercase tracking-wider">
+                            <span className="text-[10px] font-bold text-gray-500 dark:text-zinc-400 whitespace-nowrap bg-gray-100 dark:bg-zinc-800 px-2 py-0.5 rounded uppercase tracking-wider">
                               {product.category}
                             </span>
                           </td>
@@ -321,13 +321,13 @@ export default function AdminInventory() {
                                   type="number"
                                   value={tempThreshold}
                                   onChange={(e) => setTempThreshold(e.target.value)}
-                                  className="w-14 h-8 text-center text-xs border-blue-200 focus:border-blue-500 p-0"
+                                  className="w-14 h-8 text-center text-xs border-blue-200 dark:border-blue-800 bg-white dark:bg-zinc-800 focus:border-blue-500 p-0"
                                   id={`input-threshold-${product.id}`}
                                 />
                                 <Button
                                   size="sm"
                                   variant="ghost"
-                                  className="h-8 w-8 p-0 text-green-600 hover:text-green-700 bg-green-50"
+                                  className="h-8 w-8 p-0 text-green-600 dark:text-green-400 hover:text-green-700 bg-green-50 dark:bg-green-950/30"
                                   onClick={() => handleSaveThreshold(product)}
                                   title="Save Alert Threshold"
                                   id={`btn-save-threshold-${product.id}`}
@@ -337,7 +337,7 @@ export default function AdminInventory() {
                                 <Button
                                   size="sm"
                                   variant="ghost"
-                                  className="h-8 w-8 p-0 text-red-500 hover:text-red-700 bg-red-50"
+                                  className="h-8 w-8 p-0 text-red-500 dark:text-red-400 hover:text-red-700 bg-red-50 dark:bg-red-950/30"
                                   onClick={() => setEditingThresholdId(null)}
                                   id={`btn-cancel-threshold-${product.id}`}
                                 >
@@ -345,17 +345,17 @@ export default function AdminInventory() {
                                 </Button>
                               </div>
                             ) : (
-                              <div className="flex items-center justify-center gap-2 group/threshold text-gray-600 hover:text-blue-600">
+                              <div className="flex items-center justify-center gap-2 group/threshold text-gray-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400">
                                 <span className="font-mono text-sm font-semibold">{product.lowStockThreshold} units</span>
                                 <button
                                   onClick={() => {
                                     setEditingThresholdId(product.id);
                                     setTempThreshold(String(product.lowStockThreshold));
                                   }}
-                                  className="opacity-0 group-hover/threshold:opacity-100 p-1 flex items-center justify-center rounded hover:bg-gray-100 transition-all cursor-pointer border-none"
+                                  className="opacity-0 group-hover/threshold:opacity-100 p-1 flex items-center justify-center rounded hover:bg-gray-100 dark:hover:bg-zinc-700 transition-all cursor-pointer border-none"
                                   id={`btn-edit-threshold-${product.id}`}
                                 >
-                                  <Edit className="w-3.5 h-3.5 text-gray-400 hover:text-blue-600" />
+                                  <Edit className="w-3.5 h-3.5 text-gray-400 dark:text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400" />
                                 </button>
                               </div>
                             )}
@@ -366,8 +366,8 @@ export default function AdminInventory() {
                             <span 
                               className={cn(
                                 "text-sm font-mono px-3 py-1 rounded inline-block min-w-[50px] text-center",
-                                isOutOfStock ? "bg-red-100 text-red-800" :
-                                isLowStock ? "bg-orange-100 text-orange-850" : "bg-gray-100 text-gray-900"
+                                isOutOfStock ? "bg-red-100 dark:bg-red-950/30 text-red-800 dark:text-red-400" :
+                                isLowStock ? "bg-orange-100 dark:bg-orange-950/30 text-orange-800 dark:text-orange-400" : "bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white"
                               )}
                             >
                               {product.stock}
@@ -377,17 +377,17 @@ export default function AdminInventory() {
                           {/* Inventory Label */}
                           <td className="p-4 px-6">
                             {isOutOfStock && (
-                              <Badge className="bg-red-50 hover:bg-red-50 text-red-650 border border-red-200 py-1 font-bold text-[9px] uppercase tracking-wider rounded-sm shadow-none">
+                              <Badge className="bg-red-50 dark:bg-red-950/30 hover:bg-red-50 dark:hover:bg-red-950/30 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900/50 py-1 font-bold text-[9px] uppercase tracking-wider rounded-sm shadow-none">
                                 Sold Out
                               </Badge>
                             )}
                             {isLowStock && (
-                              <Badge className="bg-orange-50 hover:bg-orange-50 text-orange-650 border border-orange-200 py-1 font-bold text-[9px] uppercase tracking-wider rounded-sm shadow-none">
+                              <Badge className="bg-orange-50 dark:bg-orange-950/30 hover:bg-orange-50 dark:hover:bg-orange-950/30 text-orange-600 dark:text-orange-400 border border-orange-200 dark:border-orange-900/50 py-1 font-bold text-[9px] uppercase tracking-wider rounded-sm shadow-none">
                                 Low Stock Watch Alert
                               </Badge>
                             )}
                             {isHealthy && (
-                              <Badge className="bg-green-50 hover:bg-green-50 text-green-700 border border-green-200 py-1 font-bold text-[9px] uppercase tracking-wider rounded-sm shadow-none">
+                              <Badge className="bg-green-50 dark:bg-green-950/30 hover:bg-green-50 dark:hover:bg-green-950/30 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-900/50 py-1 font-bold text-[9px] uppercase tracking-wider rounded-sm shadow-none">
                                 Stock Level Healthy
                               </Badge>
                             )}
@@ -404,7 +404,7 @@ export default function AdminInventory() {
                                 setAdjustQuantity('10');
                                 setAdjustReason('Manual Restock');
                               }}
-                              className="text-xs h-8 font-bold border-gray-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 rounded cursor-pointer"
+                              className="text-xs h-8 font-bold border-gray-200 dark:border-zinc-700 dark:text-zinc-300 hover:bg-blue-50 dark:hover:bg-blue-950/30 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-200 dark:hover:border-blue-800 rounded cursor-pointer"
                               id={`btn-launch-adjust-${product.id}`}
                             >
                               <ArrowRightLeft className="w-3.5 h-3.5 mr-1" /> Adjust Stock
@@ -429,42 +429,42 @@ export default function AdminInventory() {
             style={{ willChange: 'transform, opacity' }}
             className="space-y-4"
           >
-            <div className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden pb-4">
+            <div className="bg-white dark:bg-zinc-900 rounded-lg border border-gray-100 dark:border-zinc-800 shadow-sm overflow-hidden pb-4">
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse" id="table-inventory-history">
                   <thead>
-                    <tr className="bg-gray-50 border-b border-gray-100">
-                      <th className="p-4 px-6 text-[11px] font-bold text-gray-500 uppercase tracking-widest">Timestamp</th>
-                      <th className="p-4 px-6 text-[11px] font-bold text-gray-500 uppercase tracking-widest">Product Affected</th>
-                      <th className="p-4 px-6 text-[11px] font-bold text-gray-500 uppercase tracking-widest text-center">Movement Change</th>
-                      <th className="p-4 px-6 text-[11px] font-bold text-gray-500 uppercase tracking-widest text-center">Reconciliation Delta</th>
-                      <th className="p-4 px-6 text-[11px] font-bold text-gray-500 uppercase tracking-widest">Adjustment Reason</th>
-                      <th className="p-4 px-6 text-[11px] font-bold text-gray-500 uppercase tracking-widest">Authorized By</th>
+                    <tr className="bg-gray-50 dark:bg-zinc-800 border-b border-gray-100 dark:border-zinc-700">
+                      <th className="p-4 px-6 text-[11px] font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-widest">Timestamp</th>
+                      <th className="p-4 px-6 text-[11px] font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-widest">Product Affected</th>
+                      <th className="p-4 px-6 text-[11px] font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-widest text-center">Movement Change</th>
+                      <th className="p-4 px-6 text-[11px] font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-widest text-center">Reconciliation Delta</th>
+                      <th className="p-4 px-6 text-[11px] font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-widest">Adjustment Reason</th>
+                      <th className="p-4 px-6 text-[11px] font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-widest">Authorized By</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-50">
+                  <tbody className="divide-y divide-gray-50 dark:divide-zinc-800">
                     {loading ? (
                       <tr>
-                        <td colSpan={6} className="p-20 text-center text-gray-400 font-medium text-sm">Decoding audit trails from DB...</td>
+                        <td colSpan={6} className="p-20 text-center text-gray-400 dark:text-zinc-500 font-medium text-sm">Decoding audit trails from DB...</td>
                       </tr>
                     ) : filteredLogs.length === 0 ? (
                       <tr>
-                        <td colSpan={6} className="p-20 text-center text-gray-400 font-medium text-sm">No transaction movements fit filters.</td>
+                        <td colSpan={6} className="p-20 text-center text-gray-400 dark:text-zinc-500 font-medium text-sm">No transaction movements fit filters.</td>
                       </tr>
                     ) : (
                       filteredLogs.map((log: any) => {
                         const isGain = log.quantity > 0;
                         return (
-                          <tr key={log.id} className="hover:bg-gray-50/50 transition-all text-xs font-medium">
+                          <tr key={log.id} className="hover:bg-gray-50/50 dark:hover:bg-zinc-800/50 transition-all text-xs font-medium">
                             {/* Timestamp */}
-                            <td className="p-4 px-6 text-gray-400 whitespace-nowrap font-mono">
+                            <td className="p-4 px-6 text-gray-400 dark:text-zinc-500 whitespace-nowrap font-mono">
                               {new Date(log.createdAt).toLocaleString()}
                             </td>
 
                             {/* Product Name & thumbnail */}
                             <td className="p-4 px-6">
                               <div className="flex items-center gap-3">
-                                <span className="font-bold text-gray-800 tracking-tight max-w-[180px] truncate">
+                                <span className="font-bold text-gray-800 dark:text-zinc-200 tracking-tight max-w-[180px] truncate">
                                   {log.product?.name || "Deleted Product"}
                                 </span>
                               </div>
@@ -473,33 +473,33 @@ export default function AdminInventory() {
                             {/* Quantity Badged Directional Alert */}
                             <td className="p-4 px-6 text-center whitespace-nowrap font-mono">
                               {isGain ? (
-                                <span className="bg-green-50 text-green-700 px-2.5 py-1 rounded font-extrabold text-xs">
+                                <span className="bg-green-50 dark:bg-green-950/30 text-green-700 dark:text-green-400 px-2.5 py-1 rounded font-extrabold text-xs">
                                   +{log.quantity} units
                                 </span>
                               ) : (
-                                <span className="bg-red-50 text-red-700 px-2.5 py-1 rounded font-extrabold text-xs">
+                                <span className="bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-400 px-2.5 py-1 rounded font-extrabold text-xs">
                                   {log.quantity} units
                                 </span>
                               )}
                             </td>
 
                             {/* Pre vs Post stock balance */}
-                            <td className="p-4 px-6 text-center text-gray-650 font-mono">
-                              {log.prevStock} <span className="text-gray-300">→</span> <span className="font-bold text-gray-800">{log.newStock}</span>
+                            <td className="p-4 px-6 text-center text-gray-600 dark:text-zinc-400 font-mono">
+                              {log.prevStock} <span className="text-gray-300 dark:text-zinc-600">→</span> <span className="font-bold text-gray-800 dark:text-zinc-200">{log.newStock}</span>
                             </td>
 
                             {/* Adjustment Reason */}
-                            <td className="p-4 px-6 text-gray-700">
+                            <td className="p-4 px-6 text-gray-700 dark:text-zinc-300">
                               <span className="flex items-center gap-1">
-                                <CornerDownRight className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                                <CornerDownRight className="w-3.5 h-3.5 text-blue-400 dark:text-blue-500 shrink-0" />
                                 <span className="font-semibold">{log.reason}</span>
                               </span>
                             </td>
 
                             {/* Authorized Actor */}
-                            <td className="p-4 px-6 text-gray-400 text-xs flex items-center gap-1.5 whitespace-nowrap mt-2">
-                              <User className="w-3.5 h-3.5 text-gray-300 shrink-0" />
-                              <span className="font-bold text-gray-600 bg-gray-50 pl-1 pr-2 py-0.5 border border-gray-100 rounded">
+                            <td className="p-4 px-6 text-gray-400 dark:text-zinc-500 text-xs flex items-center gap-1.5 whitespace-nowrap mt-2">
+                              <User className="w-3.5 h-3.5 text-gray-300 dark:text-zinc-600 shrink-0" />
+                              <span className="font-bold text-gray-600 dark:text-zinc-300 bg-gray-50 dark:bg-zinc-800 pl-1 pr-2 py-0.5 border border-gray-100 dark:border-zinc-700 rounded">
                                 {log.actor || 'System'}
                               </span>
                             </td>
@@ -517,11 +517,11 @@ export default function AdminInventory() {
 
       {/* MODAL DIALOG: RESTOCK / DEDUCT FOR PRODUCTS */}
       <Dialog open={!!selectedProduct} onOpenChange={(open) => { if (!open) setSelectedProduct(null); }}>
-        <DialogContent className="theme-light-scope max-w-md rounded-lg p-6 bg-white border-none shadow-2xl modal-inventory-adjustment">
+        <DialogContent className="max-w-md rounded-lg p-6 bg-white dark:bg-zinc-900 border-none shadow-2xl modal-inventory-adjustment">
           <DialogHeader>
-            <DialogTitle className="text-lg font-bold text-gray-900 tracking-tight flex items-center gap-2">
-              <CornerDownRight className="w-5 h-5 text-blue-600 block" />
-              Adjust stock for: <span className="text-blue-600">{selectedProduct?.name}</span>
+            <DialogTitle className="text-lg font-bold text-gray-900 dark:text-white tracking-tight flex items-center gap-2">
+              <CornerDownRight className="w-5 h-5 text-blue-600 dark:text-blue-400 block" />
+              Adjust stock for: <span className="text-blue-600 dark:text-blue-400">{selectedProduct?.name}</span>
             </DialogTitle>
           </DialogHeader>
 
@@ -529,7 +529,7 @@ export default function AdminInventory() {
             <div className="space-y-4">
               {/* Type selector (Restock / Deduct) */}
               <div className="space-y-2">
-                <Label className="text-xs font-bold text-gray-700">Adjustment Type</Label>
+                <Label className="text-xs font-bold text-gray-700 dark:text-zinc-300">Adjustment Type</Label>
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     type="button"
@@ -541,7 +541,7 @@ export default function AdminInventory() {
                       "py-2 px-4 rounded-md text-xs font-bold border transition-all cursor-pointer",
                       adjustType === 'restock' 
                         ? "bg-green-500 text-white border-green-500 shadow-sm" 
-                        : "border-gray-200 bg-white text-gray-600 hover:bg-gray-50"
+                        : "border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-700"
                     )}
                   >
                     🚀 Restock (Add)
@@ -556,7 +556,7 @@ export default function AdminInventory() {
                       "py-2 px-4 rounded-md text-xs font-bold border transition-all cursor-pointer",
                       adjustType === 'deduct' 
                         ? "bg-red-500 text-white border-red-500 shadow-sm" 
-                        : "border-gray-200 bg-white text-gray-600 hover:bg-gray-50"
+                        : "border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-700"
                     )}
                   >
                     ⚠️ Deduct (Subtract)
@@ -566,28 +566,28 @@ export default function AdminInventory() {
 
               {/* Quantity */}
               <div className="space-y-1.5">
-                <Label className="text-xs font-bold text-gray-700">Quantity (Units count)</Label>
+                <Label className="text-xs font-bold text-gray-700 dark:text-zinc-300">Quantity (Units count)</Label>
                 <Input
                   type="number"
                   required
                   min="1"
                   value={adjustQuantity}
                   onChange={(e) => setAdjustQuantity(e.target.value)}
-                  className="rounded-md h-10 border-gray-200 text-sm focus:border-blue-500"
+                  className="rounded-md h-10 border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus:border-blue-500"
                   id="adjust-quantity-input"
                 />
               </div>
 
               {/* Custom Reason Log */}
               <div className="space-y-1.5">
-                <Label className="text-xs font-bold text-gray-700">Audit Notification Log Reason</Label>
+                <Label className="text-xs font-bold text-gray-700 dark:text-zinc-300">Audit Notification Log Reason</Label>
                 <Input
                   type="text"
                   required
                   value={adjustReason}
                   onChange={(e) => setAdjustReason(e.target.value)}
                   placeholder="e.g. Replenished shipment, audit discrepancy adjustment"
-                  className="rounded-md h-10 border-gray-200 text-sm focus:border-blue-500"
+                  className="rounded-md h-10 border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus:border-blue-500"
                   id="adjust-reason-input"
                 />
               </div>
@@ -598,7 +598,7 @@ export default function AdminInventory() {
                 variant="outline" 
                 type="button" 
                 onClick={() => setSelectedProduct(null)} 
-                className="flex-1 rounded-md h-10 border-gray-250 text-sm font-semibold cursor-pointer"
+                className="flex-1 rounded-md h-10 border-gray-200 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800 text-sm font-semibold cursor-pointer"
               >
                 Dismiss
               </Button>
@@ -607,7 +607,7 @@ export default function AdminInventory() {
                 disabled={saving}
                 className={cn(
                   "flex-1 h-10 rounded-md text-white border-none font-bold text-sm",
-                  adjustType === 'restock' ? "bg-green-600 hover:bg-green-700" : "bg-red-650 hover:bg-red-750"
+                  adjustType === 'restock' ? "bg-green-600 hover:bg-green-700" : "bg-red-600 hover:bg-red-700"
                 )}
                 id="btn-confirm-adjust"
               >

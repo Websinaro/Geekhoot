@@ -84,7 +84,7 @@ export function CartSkeleton() {
 export function ProfileSkeleton() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 w-full space-y-8 animate-pulse">
-      <div className="flex items-center gap-6 pb-6 border-b border-zinc-100 dark:border-zinc-850">
+      <div className="flex items-center gap-6 pb-6 border-b border-zinc-100 dark:border-zinc-800">
         <div className="w-20 h-20 bg-zinc-200 dark:bg-zinc-800 rounded-full" />
         <div className="space-y-2">
           <div className="h-6 bg-zinc-200 dark:bg-zinc-800 rounded w-48" />
@@ -138,15 +138,15 @@ export function OrderListSkeleton() {
 
 export function ProductDetailSkeleton() {
   return (
-    <div className="bg-[#f1f3f6] min-h-screen pb-20 animate-pulse">
+    <div className="bg-[#f1f3f6] dark:bg-zinc-950 min-h-screen pb-20 animate-pulse">
       <div className="max-w-[1440px] mx-auto px-4 py-4 space-y-4">
         {/* Breadcrumb Skeleton */}
-        <div className="h-10 bg-white rounded shadow-sm w-1/2" />
+        <div className="h-10 bg-white dark:bg-zinc-900 rounded shadow-sm w-1/2" />
 
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Left Column: Images */}
           <div className="lg:w-[40%] space-y-4">
-            <div className="bg-white p-4 rounded shadow-sm">
+            <div className="bg-white dark:bg-zinc-900 p-4 rounded shadow-sm">
               <div className="aspect-square bg-zinc-200 dark:bg-zinc-800 rounded-sm w-full" />
               <div className="flex gap-2 mt-4 overflow-x-auto">
                 {Array.from({ length: 4 }).map((_, i) => (
@@ -157,7 +157,7 @@ export function ProductDetailSkeleton() {
           </div>
 
           {/* Right Column: Information */}
-          <div className="flex-1 bg-white p-6 md:p-8 rounded shadow-sm space-y-6">
+          <div className="flex-1 bg-white dark:bg-zinc-900 p-6 md:p-8 rounded shadow-sm space-y-6">
             <div className="space-y-2">
               <div className="h-4 bg-zinc-200 dark:bg-zinc-800 rounded w-24" />
               <div className="h-8 bg-zinc-200 dark:bg-zinc-800 rounded w-3/4" />

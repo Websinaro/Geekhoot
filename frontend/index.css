@@ -14,12 +14,7 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
 
-/* The dark variant applies inside .dark, EXCEPT inside any subtree marked
-   .theme-light-scope. This lets legacy pages that were never built with
-   dark-mode classes opt out cleanly, instead of inheriting white
-   (--foreground) text from the app shell onto their hardcoded white
-   card backgrounds, which made text invisible in dark mode. */
-@custom-variant dark (&:is(.dark *:not(.theme-light-scope, .theme-light-scope *)));
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
     --font-heading: var(--font-sans);
@@ -153,36 +148,6 @@
   html {
     @apply font-sans;
     }
-
-  /* Legacy pages (Cart, Product, Wishlist, Orders, Profile, Auth, Admin)
-     were built with hardcoded bg-white / bg-[#f1f3f6] cards and no dark:
-     classes. Without this, they inherit --foreground (near-white in dark
-     mode) from the app shell, landing white text on their still-white
-     cards — invisible. Pin the whole subtree back to light-mode values
-     so it always renders the way it was designed, in any color mode. */
-  .theme-light-scope {
-    color-scheme: light;
-    --background: #ffffff;
-    --foreground: #0a0a0a;
-    --card: #ffffff;
-    --card-foreground: #0a0a0a;
-    --popover: #ffffff;
-    --popover-foreground: #0a0a0a;
-    --primary: #c04100;
-    --primary-foreground: #fafafa;
-    --secondary: #f5f5f5;
-    --secondary-foreground: #171717;
-    --muted: #f5f5f5;
-    --muted-foreground: #737373;
-    --accent: #ffe9e2;
-    --accent-foreground: #171717;
-    --destructive: #e40016;
-    --border: #e5e5e5;
-    --input: #e5e5e5;
-    --ring: #c04100;
-    color: #0a0a0a;
-    background-color: inherit;
-  }
 
   /* Input text visibility fix.
      Root cause: old Android WebView "Force Dark Mode" inverts text to

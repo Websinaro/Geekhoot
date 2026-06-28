@@ -23,19 +23,19 @@ const AdminOrders = React.lazy(() => import('./Orders'));
 const AdminInventory = React.lazy(() => import('./Inventory'));
 
 const StatCard = ({ title, value, change, trend, icon: Icon }: any) => (
-  <Card className="rounded-lg border border-gray-100 shadow-sm bg-white overflow-hidden group">
+  <Card className="rounded-lg border border-gray-100 dark:border-zinc-800 shadow-sm bg-white dark:bg-zinc-900 overflow-hidden group">
     <CardContent className="p-6">
       <div className="flex justify-between items-start mb-4">
-        <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center text-[#ff5200] group-hover:bg-[#ff5200] group-hover:text-white transition-all">
+        <div className="w-12 h-12 bg-gray-50 dark:bg-zinc-800 rounded-lg flex items-center justify-center text-[#ff5200] group-hover:bg-[#ff5200] group-hover:text-white transition-all">
           <Icon className="w-6 h-6" />
         </div>
-        <div className={`flex items-center text-[10px] sm:text-xs font-bold ${trend === 'up' ? 'text-green-600' : 'text-red-500'} bg-gray-50 px-2 py-0.5 rounded-full border border-gray-100 shrink-0 whitespace-nowrap`}>
+        <div className={`flex items-center text-[10px] sm:text-xs font-bold ${trend === 'up' ? 'text-green-600 dark:text-green-400' : 'text-red-500 dark:text-red-400'} bg-gray-50 dark:bg-zinc-800 px-2 py-0.5 rounded-full border border-gray-100 dark:border-zinc-700 shrink-0 whitespace-nowrap`}>
           {trend === 'up' ? <ArrowUpRight className="w-3 h-3 mr-1" /> : <ArrowDownRight className="w-3 h-3 mr-1" />}
           {typeof change === 'number' ? change.toFixed(1) : change}%
         </div>
       </div>
-      <h3 className="text-gray-500 text-xs font-medium uppercase tracking-wider mb-2">{title}</h3>
-      <p className="text-2xl font-bold text-gray-900">{value}</p>
+      <h3 className="text-gray-500 dark:text-zinc-400 text-xs font-medium uppercase tracking-wider mb-2">{title}</h3>
+      <p className="text-2xl font-bold text-gray-900 dark:text-white">{value}</p>
     </CardContent>
   </Card>
 );
@@ -61,15 +61,15 @@ const AdminOverview = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="bg-white p-6 rounded-lg border border-gray-150 shadow-sm h-32 space-y-4">
+            <div key={i} className="bg-white dark:bg-zinc-900 p-6 rounded-lg border border-gray-100 dark:border-zinc-800 shadow-sm h-32 space-y-4">
               <div className="h-4 bg-zinc-200 dark:bg-zinc-800 rounded w-1/3" />
               <div className="h-8 bg-zinc-200 dark:bg-zinc-800 rounded w-1/2" />
             </div>
           ))}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="md:col-span-2 bg-white rounded-lg border border-gray-150 p-6 h-64 animate-pulse" />
-          <div className="md:col-span-1 bg-white rounded-lg border border-gray-150 p-6 h-64 animate-pulse" />
+          <div className="md:col-span-2 bg-white dark:bg-zinc-900 rounded-lg border border-gray-100 dark:border-zinc-800 p-6 h-64 animate-pulse" />
+          <div className="md:col-span-1 bg-white dark:bg-zinc-900 rounded-lg border border-gray-100 dark:border-zinc-800 p-6 h-64 animate-pulse" />
         </div>
       </div>
     );
@@ -79,8 +79,8 @@ const AdminOverview = () => {
     <div className="space-y-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-          <p className="text-sm text-gray-500 font-medium">Overview of your store performance</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
+          <p className="text-sm text-gray-500 dark:text-zinc-400 font-medium">Overview of your store performance</p>
         </div>
         <div className="flex gap-3">
            <Button className="bg-blue-600 hover:bg-blue-700 text-white font-bold rounded shadow-sm border-none">
@@ -121,44 +121,44 @@ const AdminOverview = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <Card className="rounded-lg border border-gray-100 shadow-sm bg-white overflow-hidden">
+        <Card className="rounded-lg border border-gray-100 dark:border-zinc-800 shadow-sm bg-white dark:bg-zinc-900 overflow-hidden">
           <CardHeader className="p-6 pb-2">
-            <CardTitle className="text-lg font-bold flex items-center gap-4 text-gray-900">
+            <CardTitle className="text-lg font-bold flex items-center gap-4 text-gray-900 dark:text-white">
                Recent Orders
             </CardTitle>
           </CardHeader>
           <CardContent className="p-0">
-             <div className="divide-y divide-gray-50">
+             <div className="divide-y divide-gray-50 dark:divide-zinc-800">
                {stats.recentOrders.length > 0 ? stats.recentOrders.map((order: any) => (
-                 <div key={order.id} className="flex items-center justify-between p-4 px-6 hover:bg-gray-50 transition-colors">
+                 <div key={order.id} className="flex items-center justify-between p-4 px-6 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
                    <div className="flex items-center gap-4">
-                     <div className="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center font-bold text-gray-400 text-[10px] border border-gray-100">
+                     <div className="w-10 h-10 bg-gray-50 dark:bg-zinc-800 rounded-full flex items-center justify-center font-bold text-gray-400 dark:text-zinc-500 text-[10px] border border-gray-100 dark:border-zinc-700">
                        ODR
                      </div>
                      <div>
-                       <p className="font-bold text-gray-900 text-sm">{order.user.name}</p>
-                       <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wider">{order.user.district || 'Location Unknown'}</p>
+                       <p className="font-bold text-gray-900 dark:text-white text-sm">{order.user.name}</p>
+                       <p className="text-[10px] text-gray-400 dark:text-zinc-500 font-medium uppercase tracking-wider">{order.user.district || 'Location Unknown'}</p>
                      </div>
                    </div>
                    <div className="text-right">
-                     <p className="font-bold text-sm text-gray-900">₹{order.totalAmount.toLocaleString()}</p>
+                     <p className="font-bold text-sm text-gray-900 dark:text-white">₹{order.totalAmount.toLocaleString()}</p>
                      <p className={cn(
                        "text-[9px] font-bold px-2 py-0.5 rounded-sm mt-1",
-                       order.status === 'PENDING' ? 'bg-yellow-50 text-yellow-600' : 
-                       order.status === 'DELIVERED' ? 'bg-green-50 text-green-600' : 'bg-blue-50 text-blue-600'
+                       order.status === 'PENDING' ? 'bg-yellow-50 dark:bg-yellow-950/30 text-yellow-600 dark:text-yellow-400' : 
+                       order.status === 'DELIVERED' ? 'bg-green-50 dark:bg-green-950/30 text-green-600 dark:text-green-400' : 'bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-blue-400'
                      )}>
                        {order.status}
                      </p>
                    </div>
                  </div>
                )) : (
-                 <p className="text-center py-10 text-gray-400 font-medium text-sm">No recent orders.</p>
+                 <p className="text-center py-10 text-gray-400 dark:text-zinc-500 font-medium text-sm">No recent orders.</p>
                )}
              </div>
-             <div className="p-4 bg-gray-50 border-t border-gray-100">
+             <div className="p-4 bg-gray-50 dark:bg-zinc-800 border-t border-gray-100 dark:border-zinc-700">
                 <Link 
                   to="orders" 
-                  className="text-blue-600 font-bold text-xs hover:underline block text-center"
+                  className="text-blue-600 dark:text-blue-400 font-bold text-xs hover:underline block text-center"
                 >
                    View all orders
                 </Link>
@@ -166,34 +166,34 @@ const AdminOverview = () => {
           </CardContent>
         </Card>
 
-        <Card className="rounded-lg border border-gray-100 shadow-sm bg-white overflow-hidden">
+        <Card className="rounded-lg border border-gray-100 dark:border-zinc-800 shadow-sm bg-white dark:bg-zinc-900 overflow-hidden">
           <CardHeader className="p-6 pb-2">
-            <CardTitle className="text-lg font-bold flex items-center gap-4 text-gray-900">
+            <CardTitle className="text-lg font-bold flex items-center gap-4 text-gray-900 dark:text-white">
                Stock Alerts
             </CardTitle>
           </CardHeader>
           <CardContent className="p-6">
              <div className="space-y-3">
                {stats.stockAlerts.length > 0 ? stats.stockAlerts.map((product: any) => (
-                 <div key={product.id} className="flex items-center justify-between p-4 bg-red-50 rounded border border-red-100">
+                 <div key={product.id} className="flex items-center justify-between p-4 bg-red-50 dark:bg-red-950/20 rounded border border-red-100 dark:border-red-900/40">
                    <div className="flex items-center gap-3">
-                      <Package className="w-5 h-5 text-red-500" />
+                      <Package className="w-5 h-5 text-red-500 dark:text-red-400" />
                       <div>
-                        <p className="font-bold text-red-700 text-sm truncate max-w-[150px]">{product.name}</p>
-                        <p className="text-[10px] font-medium text-red-400">Only {product.stock} left</p>
+                        <p className="font-bold text-red-700 dark:text-red-400 text-sm truncate max-w-[150px]">{product.name}</p>
+                        <p className="text-[10px] font-medium text-red-400 dark:text-red-500">Only {product.stock} left</p>
                       </div>
                    </div>
                    <Link 
                      to={`/admin/products`}
-                     className="bg-white px-3 py-1.5 rounded border border-red-200 text-[10px] font-bold text-red-500 hover:bg-red-500 hover:text-white transition-all uppercase"
+                     className="bg-white dark:bg-zinc-900 px-3 py-1.5 rounded border border-red-200 dark:border-red-900/50 text-[10px] font-bold text-red-500 dark:text-red-400 hover:bg-red-500 hover:text-white transition-all uppercase"
                    >
                      Restock
                    </Link>
                  </div>
                )) : (
                  <div className="py-10 text-center">
-                    <ShieldCheck className="w-10 h-10 text-green-500 mx-auto mb-4" />
-                    <p className="text-gray-400 font-medium text-sm">All inventory is looking good.</p>
+                    <ShieldCheck className="w-10 h-10 text-green-500 dark:text-green-400 mx-auto mb-4" />
+                    <p className="text-gray-400 dark:text-zinc-500 font-medium text-sm">All inventory is looking good.</p>
                  </div>
                )}
              </div>
@@ -217,9 +217,9 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="theme-light-scope flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-gray-50 dark:bg-zinc-950">
       {/* Sidebar */}
-      <aside className="hidden lg:flex flex-col w-64 bg-white border-r border-gray-100 sticky top-16 h-[calc(100vh-64px)]">
+      <aside className="hidden lg:flex flex-col w-64 bg-white dark:bg-zinc-900 border-r border-gray-100 dark:border-zinc-800 sticky top-16 h-[calc(100vh-64px)]">
         <div className="p-4 flex flex-col gap-1">
           {sidebarLinks.map((link) => (
             <Link 
@@ -228,18 +228,18 @@ export default function AdminDashboard() {
               className={`flex items-center gap-3 px-4 py-3 rounded-md text-sm font-bold transition-all ${
                 (link.path === '/admin' ? currentPath === '/admin' : currentPath.startsWith(link.path))
                   ? 'bg-blue-600 text-white shadow-sm'
-                  : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'
+                  : 'text-gray-500 dark:text-zinc-400 hover:bg-gray-50 dark:hover:bg-zinc-800 hover:text-gray-900 dark:hover:text-white'
               }`}
             >
-              <link.icon className={cn("w-4 h-4", (link.path === '/admin' ? currentPath === '/admin' : currentPath.startsWith(link.path)) ? "text-white" : "text-gray-400")} />
+              <link.icon className={cn("w-4 h-4", (link.path === '/admin' ? currentPath === '/admin' : currentPath.startsWith(link.path)) ? "text-white" : "text-gray-400 dark:text-zinc-500")} />
               {link.label}
             </Link>
           ))}
         </div>
-        <div className="mt-auto p-4 border-t border-gray-100">
-           <div className="bg-blue-50 rounded-lg p-4 text-center border border-blue-100">
-              <h4 className="text-xs font-bold text-blue-700 mb-1">Admin Panel</h4>
-              <p className="text-[10px] text-blue-500 font-medium mb-3">Version 2.0.4</p>
+        <div className="mt-auto p-4 border-t border-gray-100 dark:border-zinc-800">
+           <div className="bg-blue-50 dark:bg-blue-950/30 rounded-lg p-4 text-center border border-blue-100 dark:border-blue-900/50">
+              <h4 className="text-xs font-bold text-blue-700 dark:text-blue-400 mb-1">Admin Panel</h4>
+              <p className="text-[10px] text-blue-500 dark:text-blue-400 font-medium mb-3">Version 2.0.4</p>
               <Button size="sm" className="w-full h-8 bg-blue-600 text-white hover:bg-blue-700 text-[10px] font-bold border-none">
                 System Status
               </Button>
@@ -248,7 +248,7 @@ export default function AdminDashboard() {
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 p-6 lg:p-10 bg-[#f8f9fa] overflow-x-hidden">
+      <div className="flex-1 p-6 lg:p-10 bg-[#f8f9fa] dark:bg-zinc-950 overflow-x-hidden">
         <div className="max-w-7xl mx-auto">
            {/* Top bar for mobile */}
            <div className="flex lg:hidden flex-wrap items-center gap-2 mb-8 overflow-x-auto no-scrollbar">
@@ -259,7 +259,7 @@ export default function AdminDashboard() {
                  className={`flex items-center gap-2 px-4 py-2 rounded-md font-bold text-xs whitespace-nowrap transition-all border ${
                    (link.path === '/admin' ? currentPath === '/admin' : currentPath.startsWith(link.path))
                      ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
-                     : 'text-gray-500 bg-white border-gray-200'
+                     : 'text-gray-500 dark:text-zinc-400 bg-white dark:bg-zinc-900 border-gray-200 dark:border-zinc-700'
                  }`}
                >
                  <link.icon className="w-4 h-4" />
@@ -271,7 +271,7 @@ export default function AdminDashboard() {
            <React.Suspense fallback={
               <div className="space-y-6 animate-pulse">
                 <div className="h-8 bg-zinc-200 dark:bg-zinc-800 rounded w-1/4 animate-pulse" />
-                <div className="bg-white border border-gray-150 p-6 rounded-lg space-y-4 h-64">
+                <div className="bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 p-6 rounded-lg space-y-4 h-64">
                   <div className="h-4 bg-zinc-200 dark:bg-zinc-800 rounded w-1/2 animate-pulse" />
                   <div className="h-3 bg-zinc-200 dark:bg-zinc-800 rounded w-full animate-pulse" />
                   <div className="h-3 bg-zinc-200 dark:bg-zinc-800 rounded w-3/4 animate-pulse" />
@@ -283,7 +283,7 @@ export default function AdminDashboard() {
              <Route path="/products" element={<AdminProducts />} />
              <Route path="/inventory" element={<AdminInventory />} />
              <Route path="/orders" element={<AdminOrders />} />
-             <Route path="/users" element={<div className="p-12 text-center text-gray-400 font-bold">User Management coming soon...</div>} />
+             <Route path="/users" element={<div className="p-12 text-center text-gray-400 dark:text-zinc-500 font-bold">User Management coming soon...</div>} />
            </Routes>
             </React.Suspense>
         </div>

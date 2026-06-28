@@ -96,10 +96,10 @@ export default function Profile() {
       >
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Main Profile Info */}
-          <div className="theme-light-scope flex-1 space-y-6">
-            <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100 flex flex-col md:flex-row items-center gap-8">
+          <div className="flex-1 space-y-6">
+            <div className="bg-white dark:bg-zinc-900 p-8 rounded-lg shadow-sm border border-gray-100 dark:border-zinc-800 flex flex-col md:flex-row items-center gap-8">
               <div className="relative">
-                <Avatar className="w-32 h-32 rounded-full shadow-sm border-4 border-gray-50 bg-gray-50">
+                <Avatar className="w-32 h-32 rounded-full shadow-sm border-4 border-gray-50 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-800">
                   <AvatarImage src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user.name}`} />
                   <AvatarFallback className="text-3xl font-bold bg-[#ff5200] text-white">
                     {user.name.charAt(0)}
@@ -107,24 +107,24 @@ export default function Profile() {
                 </Avatar>
               </div>
               <div className="text-center md:text-left">
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">{user.name}</h1>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{user.name}</h1>
                 <div className="flex flex-wrap justify-center md:justify-start gap-2">
-                  <Badge className="bg-blue-50 text-blue-600 border border-blue-100 font-bold px-3 py-1">
+                  <Badge className="bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-900/50 font-bold px-3 py-1">
                     {user.role === 'ADMIN' ? 'Administrator' : 'Customer'}
                   </Badge>
-                  <p className="text-sm text-gray-400 font-medium">Member Account</p>
+                  <p className="text-sm text-gray-400 dark:text-zinc-500 font-medium">Member Account</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-              <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-                <h2 className="text-lg font-bold text-gray-900">Personal & Delivery Information</h2>
+            <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-sm border border-gray-100 dark:border-zinc-800 overflow-hidden">
+              <div className="p-6 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between">
+                <h2 className="text-lg font-bold text-gray-900 dark:text-white">Personal & Delivery Information</h2>
                 {!isEditing && (
                   <Button 
                     onClick={() => setIsEditing(true)}
                     variant="outline" 
-                    className="border-gray-300 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-bold text-sm h-9 gap-1.5"
+                    className="border-gray-300 dark:border-zinc-700 text-blue-600 dark:text-blue-400 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30 font-bold text-sm h-9 gap-1.5"
                   >
                     <Edit3 className="w-4 h-4" /> Edit Profile
                   </Button>
@@ -133,133 +133,133 @@ export default function Profile() {
 
               {isEditing ? (
                 <form onSubmit={handleSubmit} className="p-8 space-y-6">
-                  <p className="text-xs font-bold text-blue-600 uppercase tracking-wider">Account Details</p>
+                  <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Account Details</p>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
-                      <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Display Name</label>
+                      <label className="block text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-2">Display Name</label>
                       <input 
                         type="text"
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-2.5 rounded border border-gray-300 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800"
+                        className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Email Address</label>
+                      <label className="block text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-2">Email Address</label>
                       <input 
                         type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-2.5 rounded border border-gray-300 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800"
+                        className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Phone Number</label>
+                      <label className="block text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-2">Phone Number</label>
                       <input 
                         type="text"
                         name="phone"
                         value={formData.phone}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-2.5 rounded border border-gray-300 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800"
+                        className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
                       />
                     </div>
                   </div>
 
-                  <div className="border-t border-gray-100 pt-6 space-y-6">
+                  <div className="border-t border-gray-100 dark:border-zinc-800 pt-6 space-y-6">
                     <div>
-                      <p className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">Detailed Delivery Address</p>
-                      <p className="text-[11px] text-gray-400 mb-4 font-medium">Please fill in these details strictly to complete orders via WhatsApp.</p>
+                      <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-1">Detailed Delivery Address</p>
+                      <p className="text-[11px] text-gray-400 dark:text-zinc-500 mb-4 font-medium">Please fill in these details strictly to complete orders via WhatsApp.</p>
                       
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="md:col-span-1">
-                          <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">House/Flat Number</label>
+                          <label className="block text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-2">House/Flat Number</label>
                           <input 
                             type="text"
                             name="houseNo"
                             value={formData.houseNo}
                             onChange={handleInputChange}
                             placeholder="e.g. Flat 4B, Emerald Apts"
-                            className="w-full px-4 py-2.5 rounded border border-gray-300 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800"
+                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
                           />
                         </div>
                         <div className="md:col-span-1">
-                          <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Street Name / Near Landmark</label>
+                          <label className="block text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-2">Street Name / Near Landmark</label>
                           <input 
                             type="text"
                             name="streetNear"
                             value={formData.streetNear}
                             onChange={handleInputChange}
                             placeholder="e.g. Baker Street, near Clocktower"
-                            className="w-full px-4 py-2.5 rounded border border-gray-300 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800"
+                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
                           />
                         </div>
                         <div className="md:col-span-1">
-                          <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Road / Area / Sector</label>
+                          <label className="block text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-2">Road / Area / Sector</label>
                           <input 
                             type="text"
                             name="road"
                             value={formData.road}
                             onChange={handleInputChange}
                             placeholder="e.g. Ring Road, Sector 4"
-                            className="w-full px-4 py-2.5 rounded border border-gray-300 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800"
+                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
                           />
                         </div>
 
                         <div className="md:col-span-3">
-                          <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Full Inline Address Line (3-line scrollable)</label>
+                          <label className="block text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-2">Full Inline Address Line (3-line scrollable)</label>
                           <Textarea 
                             name="address"
                             value={formData.address}
                             onChange={handleInputChange}
                             placeholder="e.g. Baker Street, Sector 4"
                             rows={3}
-                            className="w-full px-4 py-2.5 rounded border border-gray-300 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 bg-white dark:bg-transparent resize-none overflow-y-auto min-h-[5.5rem] max-h-32"
+                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100 bg-white dark:bg-zinc-800 resize-none overflow-y-auto min-h-[5.5rem] max-h-32"
                           />
                         </div>
 
                         <div>
-                          <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">District / City</label>
+                          <label className="block text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-2">District / City</label>
                           <input 
                             type="text"
                             name="district"
                             value={formData.district}
                             onChange={handleInputChange}
                             placeholder="e.g. Ernakulam"
-                            className="w-full px-4 py-2.5 rounded border border-gray-300 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800"
+                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">State</label>
+                          <label className="block text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-2">State</label>
                           <input 
                             type="text"
                             name="state"
                             value={formData.state}
                             onChange={handleInputChange}
                             placeholder="e.g. Kerala"
-                            className="w-full px-4 py-2.5 rounded border border-gray-300 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800"
+                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Pincode</label>
+                          <label className="block text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-2">Pincode</label>
                           <input 
                             type="text"
                             name="pincode"
                             value={formData.pincode}
                             onChange={handleInputChange}
                             placeholder="e.g. 682011"
-                            className="w-full px-4 py-2.5 rounded border border-gray-300 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800"
+                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
                           />
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex gap-4 border-t border-gray-100 pt-6">
+                  <div className="flex gap-4 border-t border-gray-100 dark:border-zinc-800 pt-6">
                     <Button 
                       type="submit" 
                       disabled={isSaving}
@@ -271,7 +271,7 @@ export default function Profile() {
                       type="button" 
                       variant="outline"
                       onClick={() => setIsEditing(false)}
-                      className="border-gray-300 text-gray-500 hover:text-gray-700 hover:bg-gray-50 font-bold px-6 h-11 gap-1.5"
+                      className="border-gray-300 dark:border-zinc-700 text-gray-500 dark:text-zinc-400 hover:text-gray-700 dark:hover:text-zinc-200 hover:bg-gray-50 dark:hover:bg-zinc-800 font-bold px-6 h-11 gap-1.5"
                     >
                       <X className="w-4 h-4" /> Cancel
                     </Button>
@@ -280,53 +280,53 @@ export default function Profile() {
               ) : (
                 <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
-                    <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Email Address</p>
-                    <div className="flex items-center gap-3 text-gray-900 font-medium font-sans">
-                      <Mail className="w-5 h-5 text-gray-400" />
+                    <p className="text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-widest mb-2">Email Address</p>
+                    <div className="flex items-center gap-3 text-gray-900 dark:text-white font-medium font-sans">
+                      <Mail className="w-5 h-5 text-gray-400 dark:text-zinc-500" />
                       {user.email}
                     </div>
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Phone Number</p>
-                    <div className="flex items-center gap-3 text-gray-900 font-medium font-sans">
-                      <Phone className="w-5 h-5 text-gray-400" />
+                    <p className="text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-widest mb-2">Phone Number</p>
+                    <div className="flex items-center gap-3 text-gray-900 dark:text-white font-medium font-sans">
+                      <Phone className="w-5 h-5 text-gray-400 dark:text-zinc-500" />
                       {user.phone || <span className="text-red-400 italic font-bold">Not filled</span>}
                     </div>
                   </div>
                   <div className="md:col-span-2">
-                    <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Detailed Shipping Address</p>
-                    <div className="bg-gray-50 p-6 rounded-lg border border-gray-100 space-y-4">
+                    <p className="text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-widest mb-2">Detailed Shipping Address</p>
+                    <div className="bg-gray-50 dark:bg-zinc-800 p-6 rounded-lg border border-gray-100 dark:border-zinc-700 space-y-4">
                       <div className="flex items-start gap-4">
                         <MapPin className="w-6 h-6 text-orange-500 shrink-0 mt-1" />
                         <div className="space-y-3 w-full">
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
-                              <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">House/Flat No.</span>
-                              <span className="font-semibold text-gray-800 text-sm font-sans">{user.houseNo || <span className="text-red-400 italic">Not filled</span>}</span>
+                              <span className="block text-[10px] font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-0.5">House/Flat No.</span>
+                              <span className="font-semibold text-gray-800 dark:text-zinc-200 text-sm font-sans">{user.houseNo || <span className="text-red-400 italic">Not filled</span>}</span>
                             </div>
                             <div>
-                              <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Street / Near Landmark</span>
-                              <span className="font-semibold text-gray-800 text-sm font-sans">{user.streetNear || <span className="text-red-400 italic">Not filled</span>}</span>
+                              <span className="block text-[10px] font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-0.5">Street / Near Landmark</span>
+                              <span className="font-semibold text-gray-800 dark:text-zinc-200 text-sm font-sans">{user.streetNear || <span className="text-red-400 italic">Not filled</span>}</span>
                             </div>
                             <div>
-                              <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Road / Area</span>
-                              <span className="font-semibold text-gray-800 text-sm font-sans">{user.road || <span className="text-red-400 italic">Not filled</span>}</span>
+                              <span className="block text-[10px] font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-0.5">Road / Area</span>
+                              <span className="font-semibold text-gray-800 dark:text-zinc-200 text-sm font-sans">{user.road || <span className="text-red-400 italic">Not filled</span>}</span>
                             </div>
                           </div>
                           
-                          <div className="border-t border-gray-200/60 pt-2 font-bold text-gray-950 font-sans">
-                            <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Full Inline Address</span>
+                          <div className="border-t border-gray-200/60 dark:border-zinc-700 pt-2 font-bold text-gray-950 dark:text-white font-sans">
+                            <span className="block text-[10px] font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-0.5">Full Inline Address</span>
                             {user.address || <span className="text-red-400 italic">Not filled</span>}
                           </div>
 
                           <div className="flex flex-wrap gap-2 pt-1">
-                            <span className="text-xs bg-white px-3 py-1 rounded border border-gray-200 text-gray-600 font-bold font-sans">
+                            <span className="text-xs bg-white dark:bg-zinc-900 px-3 py-1 rounded border border-gray-200 dark:border-zinc-700 text-gray-600 dark:text-zinc-300 font-bold font-sans">
                               District: {user.district || 'Not filled'}
                             </span>
-                            <span className="text-xs bg-white px-3 py-1 rounded border border-gray-200 text-gray-600 font-bold font-sans">
+                            <span className="text-xs bg-white dark:bg-zinc-900 px-3 py-1 rounded border border-gray-200 dark:border-zinc-700 text-gray-600 dark:text-zinc-300 font-bold font-sans">
                               State: {user.state || 'Not filled'}
                             </span>
-                            <span className="text-xs bg-white px-3 py-1 rounded border border-gray-200 text-gray-600 font-bold font-sans">
+                            <span className="text-xs bg-white dark:bg-zinc-900 px-3 py-1 rounded border border-gray-200 dark:border-zinc-700 text-gray-600 dark:text-zinc-300 font-bold font-sans">
                               Pincode: {user.pincode || 'Not filled'}
                             </span>
                           </div>
@@ -347,15 +347,15 @@ export default function Profile() {
                 <div className="space-y-1">
                   <button onClick={() => navigate('/orders')} className="w-full flex items-center justify-between p-3 rounded hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer text-left">
                     <div className="flex items-center gap-3">
-                      <Settings className="w-5 h-5 text-gray-450" />
-                      <span className="text-sm font-bold text-gray-750 dark:text-zinc-200 font-sans">My Orders</span>
+                      <Settings className="w-5 h-5 text-gray-400 dark:text-zinc-500" />
+                      <span className="text-sm font-bold text-gray-700 dark:text-zinc-200 font-sans">My Orders</span>
                     </div>
                     <ChevronRight className="w-4 h-4 text-gray-300 dark:text-gray-600" />
                   </button>
                   <button onClick={() => setIsEditing(true)} className="w-full flex items-center justify-between p-3 rounded hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer text-left">
                     <div className="flex items-center gap-3">
-                      <Shield className="w-5 h-5 text-gray-450" />
-                      <span className="text-sm font-bold text-gray-750 dark:text-zinc-200 font-sans">Manage Address</span>
+                      <Shield className="w-5 h-5 text-gray-400 dark:text-zinc-500" />
+                      <span className="text-sm font-bold text-gray-700 dark:text-zinc-200 font-sans">Manage Address</span>
                     </div>
                     <ChevronRight className="w-4 h-4 text-gray-300 dark:text-gray-600" />
                   </button>

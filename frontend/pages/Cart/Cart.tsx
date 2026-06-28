@@ -224,19 +224,19 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
 
   if (cart.length === 0) {
     return (
-      <div className="theme-light-scope min-h-[80vh] flex flex-col items-center justify-center p-8 bg-white text-black">
+      <div className="min-h-[80vh] flex flex-col items-center justify-center p-8 bg-white dark:bg-zinc-950 text-black dark:text-white">
         <motion.div 
           initial={{ scale: 0.92, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.35, ease: 'easeOut' }}
           style={{ willChange: 'transform, opacity' }}
-          className="w-40 h-40 bg-gray-50 rounded-[3rem] flex items-center justify-center mb-10 border border-gray-100 relative overflow-hidden group"
+          className="w-40 h-40 bg-gray-50 dark:bg-zinc-900 rounded-[3rem] flex items-center justify-center mb-10 border border-gray-100 dark:border-zinc-800 relative overflow-hidden group"
         >
           <div className="absolute inset-0 bg-[#ff5200]/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <ShoppingBag className="w-16 h-16 text-gray-300 group-hover:text-[#ff5200] transition-colors relative z-10" />
+          <ShoppingBag className="w-16 h-16 text-gray-300 dark:text-zinc-600 group-hover:text-[#ff5200] transition-colors relative z-10" />
         </motion.div>
         <h2 className="text-5xl lg:text-7xl font-black uppercase tracking-tighter italic mb-6">Cart Empty</h2>
-        <p className="text-gray-400 mb-12 text-center max-w-sm font-bold uppercase tracking-tight text-lg leading-relaxed">
+        <p className="text-gray-400 dark:text-zinc-500 mb-12 text-center max-w-sm font-bold uppercase tracking-tight text-lg leading-relaxed">
           Looks like you haven't added anything to your cart yet. 
         </p>
         <Button 
@@ -250,22 +250,22 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
   }
 
   return (
-    <div className="theme-light-scope bg-[#f1f3f6] min-h-screen text-gray-900">
+    <div className="bg-[#f1f3f6] dark:bg-zinc-950 min-h-screen text-gray-900 dark:text-zinc-100">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Cart Items */}
           <div className="flex-1">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden mb-6">
-              <div className="p-6 border-b border-gray-100 flex items-center justify-between">
+            <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-sm border border-gray-100 dark:border-zinc-800 overflow-hidden mb-6">
+              <div className="p-6 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between">
                 <div>
-                  <h1 className="text-xl font-bold text-gray-900">My Cart ({totalItems})</h1>
+                  <h1 className="text-xl font-bold text-gray-900 dark:text-white">My Cart ({totalItems})</h1>
                 </div>
-                <Button variant="ghost" onClick={clearCart} className="text-red-500 hover:text-red-600 font-bold text-sm h-9 hover:bg-red-50">
+                <Button variant="ghost" onClick={clearCart} className="text-red-500 hover:text-red-600 font-bold text-sm h-9 hover:bg-red-50 dark:hover:bg-red-950/30">
                   <Trash2 className="w-4 h-4 mr-2" /> Clear Cart
                 </Button>
               </div>
 
-              <div className="divide-y divide-gray-50">
+              <div className="divide-y divide-gray-50 dark:divide-zinc-800">
                 <AnimatePresence>
                   {cart.map((item) => (
                     <motion.div
@@ -275,10 +275,10 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
                       exit={{ opacity: 0, x: 8 }}
                       transition={{ duration: 0.2, ease: 'easeOut' }}
                       style={{ willChange: 'transform, opacity' }}
-                      className="p-6 hover:bg-gray-50 transition-colors"
+                      className="p-6 hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors"
                     >
                       <div className="flex flex-col md:flex-row gap-6">
-                        <div className="w-24 h-24 md:w-32 md:h-32 rounded border border-gray-100 bg-gray-50 overflow-hidden shrink-0 mx-auto md:mx-0">
+                        <div className="w-24 h-24 md:w-32 md:h-32 rounded border border-gray-100 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-800 overflow-hidden shrink-0 mx-auto md:mx-0">
                           <img 
                             src={(Array.isArray(item.product.images) && item.product.images.length > 0) ? item.product.images[0] : ''} 
                             alt={item.product.name} 
@@ -287,25 +287,25 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
                         </div>
                         <div className="flex-1">
                           <div className="flex justify-between items-start gap-4 mb-2">
-                            <Link to={`/product/${item.product.id}`} className="font-bold text-lg text-gray-900 hover:text-blue-600 transition-colors line-clamp-2">
+                            <Link to={`/product/${item.product.id}`} className="font-bold text-lg text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors line-clamp-2">
                               {item.product.name}
                             </Link>
                             <Button 
                               variant="ghost" 
                               size="icon" 
-                              className="text-gray-400 hover:text-red-500 h-8 w-8"
+                              className="text-gray-400 dark:text-zinc-500 hover:text-red-500 h-8 w-8"
                               onClick={() => removeFromCart(item.id)}
                             >
                               <Trash2 className="w-5 h-5" />
                             </Button>
                           </div>
-                          <p className="text-sm text-gray-400 mb-4">{item.product.category}</p>
+                          <p className="text-sm text-gray-400 dark:text-zinc-500 mb-4">{item.product.category}</p>
                           
                           <div className="flex flex-wrap items-center justify-between gap-6">
                             <div className="flex items-center gap-4">
-                              <div className="flex items-center border border-gray-200 rounded-sm">
+                              <div className="flex items-center border border-gray-200 dark:border-zinc-700 rounded-sm">
                                 <button 
-                                  className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 disabled:opacity-30"
+                                  className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-zinc-800 disabled:opacity-30"
                                   disabled={item.quantity <= 1}
                                   onClick={() => updateQuantity(item.id, item.quantity - 1)}
                                 >
@@ -313,7 +313,7 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
                                 </button>
                                 <span className="w-10 text-center font-bold text-sm">{item.quantity}</span>
                                 <button 
-                                  className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 disabled:opacity-30"
+                                  className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-zinc-800 disabled:opacity-30"
                                   disabled={item.quantity >= (item.product.stock ?? 9999)}
                                   onClick={() => {
                                     if (item.quantity >= (item.product.stock ?? 9999)) {
@@ -327,7 +327,7 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
                                 </button>
                               </div>
                             </div>
-                            <div className="font-bold text-xl text-gray-900">
+                            <div className="font-bold text-xl text-gray-900 dark:text-white">
                               ₹{(item.product.price * item.quantity).toLocaleString()}
                             </div>
                           </div>
@@ -339,7 +339,7 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
               </div>
             </div>
             
-            <div className="flex justify-end p-6 bg-white rounded-lg shadow-sm border border-gray-100">
+            <div className="flex justify-end p-6 bg-white dark:bg-zinc-900 rounded-lg shadow-sm border border-gray-100 dark:border-zinc-800">
                <Button 
                 onClick={handleCheckout} 
                 className="bg-[#fb641b] hover:bg-[#ff5200] text-white font-bold h-12 px-12 rounded-sm shadow-md border-none uppercase text-sm"
@@ -351,30 +351,30 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
 
           {/* Summary Card */}
           <div className="lg:w-96">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 sticky top-24">
-              <h2 className="text-lg font-bold text-gray-400 uppercase tracking-widest mb-6 border-b border-gray-50 pb-4">Price Details</h2>
+            <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-sm border border-gray-100 dark:border-zinc-800 p-6 sticky top-24">
+              <h2 className="text-lg font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-widest mb-6 border-b border-gray-50 dark:border-zinc-800 pb-4">Price Details</h2>
               <div className="space-y-4 text-sm">
-                <div className="flex justify-between items-center text-gray-600">
+                <div className="flex justify-between items-center text-gray-600 dark:text-zinc-400">
                   <span>Price ({totalItems} items)</span>
                   <span className="font-medium">₹{totalPrice.toLocaleString()}</span>
                 </div>
-                <div className="flex justify-between items-center text-gray-600">
+                <div className="flex justify-between items-center text-gray-600 dark:text-zinc-400">
                   <span>Delivery Charges</span>
-                  <span className="text-green-600 font-bold uppercase text-[10px]">Free</span>
+                  <span className="text-green-600 dark:text-green-400 font-bold uppercase text-[10px]">Free</span>
                 </div>
-                <Separator className="bg-gray-50" />
-                <div className="flex justify-between items-center text-lg font-bold text-gray-900 pt-2">
+                <Separator className="bg-gray-50 dark:bg-zinc-800" />
+                <div className="flex justify-between items-center text-lg font-bold text-gray-900 dark:text-white pt-2">
                   <span>Total Amount</span>
                   <span>₹{totalPrice.toLocaleString()}</span>
                 </div>
                 <div className="pt-2">
-                  <p className="text-green-600 font-bold text-xs">You will save ₹{(totalPrice * 0.1).toLocaleString()} on this order</p>
+                  <p className="text-green-600 dark:text-green-400 font-bold text-xs">You will save ₹{(totalPrice * 0.1).toLocaleString()} on this order</p>
                 </div>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-gray-50">
-                <div className="flex items-center gap-3 text-xs text-gray-500 font-medium">
-                  <Truck className="w-5 h-5 text-gray-400" />
+              <div className="mt-8 pt-6 border-t border-gray-50 dark:border-zinc-800">
+                <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-zinc-500 font-medium">
+                  <Truck className="w-5 h-5 text-gray-400 dark:text-zinc-500" />
                   <span>Safe and Secure Payments. 100% Authentic products.</span>
                 </div>
               </div>
@@ -385,10 +385,10 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
 
       {/* Location Selection Dialog */}
       <Dialog open={isLocationDialogOpen} onOpenChange={setIsLocationDialogOpen}>
-        <DialogContent className="theme-light-scope max-w-md rounded-lg p-6 bg-white border-none shadow-2xl">
+        <DialogContent className="max-w-md rounded-lg p-6 bg-white dark:bg-zinc-900 border-none shadow-2xl">
           <DialogHeader className="mb-6">
-            <DialogTitle className="text-xl font-bold text-gray-900">Delivery Location</DialogTitle>
-            <DialogDescription className="text-sm text-gray-500 mt-2">
+            <DialogTitle className="text-xl font-bold text-gray-900 dark:text-white">Delivery Location</DialogTitle>
+            <DialogDescription className="text-sm text-gray-500 dark:text-zinc-400 mt-2">
               Please choose how you'd like to provide your delivery location.
             </DialogDescription>
           </DialogHeader>
@@ -396,27 +396,27 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
           <div className="grid grid-cols-1 gap-4 py-4">
             <button 
               onClick={() => processCheckoutWithLocation(true)}
-              className="flex items-center gap-4 p-4 rounded-lg bg-blue-50 border border-blue-100 hover:bg-blue-100 transition-all text-left"
+              className="flex items-center gap-4 p-4 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900/50 hover:bg-blue-100 dark:hover:bg-blue-950/50 transition-all text-left"
             >
               <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center shrink-0">
                 <MapPinned className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="font-bold text-blue-900 text-sm">Use Live Location</p>
-                <p className="text-xs text-blue-700">Perfect for pinpoint accuracy</p>
+                <p className="font-bold text-blue-900 dark:text-blue-300 text-sm">Use Live Location</p>
+                <p className="text-xs text-blue-700 dark:text-blue-400">Perfect for pinpoint accuracy</p>
               </div>
             </button>
 
             <button 
               onClick={() => processCheckoutWithLocation(false)}
-              className="flex items-center gap-4 p-4 rounded-lg bg-gray-50 border border-gray-100 hover:bg-gray-100 transition-all text-left"
+              className="flex items-center gap-4 p-4 rounded-lg bg-gray-50 dark:bg-zinc-800 border border-gray-100 dark:border-zinc-700 hover:bg-gray-100 dark:hover:bg-zinc-700/70 transition-all text-left"
             >
-              <div className="w-12 h-12 bg-gray-400 rounded-full flex items-center justify-center shrink-0">
+              <div className="w-12 h-12 bg-gray-400 dark:bg-zinc-600 rounded-full flex items-center justify-center shrink-0">
                 <MapPin className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="font-bold text-gray-900 text-sm">Use Profile Address</p>
-                <p className="text-xs text-gray-500">Shipping to your saved address</p>
+                <p className="font-bold text-gray-900 dark:text-white text-sm">Use Profile Address</p>
+                <p className="text-xs text-gray-500 dark:text-zinc-400">Shipping to your saved address</p>
               </div>
             </button>
           </div>
@@ -425,12 +425,12 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
 
       {/* Loading Overlay */}
       {isOrdering && (
-        <div className="theme-light-scope fixed inset-0 bg-white/80 backdrop-blur-sm z-[100] flex items-center justify-center">
+        <div className="fixed inset-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm z-[100] flex items-center justify-center">
            <div className="text-center space-y-4">
-              <div className="w-48 h-2 bg-zinc-200 rounded overflow-hidden mx-auto relative">
+              <div className="w-48 h-2 bg-zinc-200 dark:bg-zinc-700 rounded overflow-hidden mx-auto relative">
                 <div className="absolute top-0 left-0 h-full bg-[#fb641b] rounded animate-pulse w-full" />
               </div>
-              <p className="text-sm font-bold text-gray-900 animate-pulse">Redirecting to WhatsApp...</p>
+              <p className="text-sm font-bold text-gray-900 dark:text-white animate-pulse">Redirecting to WhatsApp...</p>
            </div>
         </div>
       )}

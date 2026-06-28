@@ -173,8 +173,8 @@ export default function ProductList() {
   const renderFilters = () => {
     return (
       <div className="space-y-6">
-        <div className="flex items-center justify-between border-b pb-3">
-          <h3 className="font-bold text-lg text-gray-950">Filter Products</h3>
+        <div className="flex items-center justify-between border-b dark:border-zinc-800 pb-3">
+          <h3 className="font-bold text-lg text-gray-950 dark:text-white">Filter Products</h3>
           {isFiltered && (
             <button
               onClick={handleClearAll}
@@ -187,7 +187,7 @@ export default function ProductList() {
 
         {/* Categories Section */}
         <div className="space-y-1">
-          <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Category</p>
+          <p className="text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-2">Category</p>
           {['all', 'T-Shirts', 'Name Slips', 'Bottles', 'Mugs', 'Photo Frames', 'Keychain', 'Stationery', 'Mobile Case'].map((cat) => (
             <button 
               key={cat}
@@ -195,8 +195,8 @@ export default function ProductList() {
               className={cn(
                 "w-full text-left py-2 px-3 rounded-md text-sm transition-colors",
                 category === cat 
-                ? "bg-orange-50 text-[#ff5200] font-bold" 
-                : "text-gray-600 hover:bg-gray-50"
+                ? "bg-orange-50 dark:bg-orange-950/30 text-[#ff5200] font-bold" 
+                : "text-gray-600 dark:text-zinc-400 hover:bg-gray-50 dark:hover:bg-zinc-800"
               )}
             >
               {cat === 'all' ? 'All' : cat}
@@ -205,11 +205,11 @@ export default function ProductList() {
         </div>
 
         {/* Pricing Range Filters */}
-        <div className="border-t pt-4 space-y-4">
-          <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Price Range</p>
+        <div className="border-t dark:border-zinc-800 pt-4 space-y-4">
+          <p className="text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-2">Price Range</p>
           <div className="flex items-center gap-2">
             <div className="relative flex-1">
-              <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs font-bold">₹</span>
+              <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-zinc-500 text-xs font-bold">₹</span>
               <Input
                 type="number"
                 placeholder="Min"
@@ -219,12 +219,12 @@ export default function ProductList() {
                   setMinPrice(val === '' ? undefined : Number(val));
                   setPage(1);
                 }}
-                className="pl-6 h-9 text-xs rounded border-gray-200 bg-gray-50 focus:bg-white text-black"
+                className="pl-6 h-9 text-xs rounded border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 focus:bg-white dark:focus:bg-zinc-900"
               />
             </div>
-            <span className="text-gray-400 text-xs">to</span>
+            <span className="text-gray-400 dark:text-zinc-500 text-xs">to</span>
             <div className="relative flex-1">
-              <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs font-bold">₹</span>
+              <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-zinc-500 text-xs font-bold">₹</span>
               <Input
                 type="number"
                 placeholder="Max"
@@ -234,7 +234,7 @@ export default function ProductList() {
                   setMaxPrice(val === '' ? undefined : Number(val));
                   setPage(1);
                 }}
-                className="pl-6 h-9 text-xs rounded border-gray-200 bg-gray-50 focus:bg-white text-black"
+                className="pl-6 h-9 text-xs rounded border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 focus:bg-white dark:focus:bg-zinc-900"
               />
             </div>
           </div>
@@ -245,8 +245,8 @@ export default function ProductList() {
               className={cn(
                 "text-xs px-2.5 py-1 rounded border transition-colors",
                 minPrice === undefined && maxPrice === 250
-                  ? "border-[#ff5200] bg-orange-50 text-[#ff5200] font-semibold"
-                  : "border-gray-200 hover:bg-gray-50 text-gray-600"
+                  ? "border-[#ff5200] bg-orange-50 dark:bg-orange-950/30 text-[#ff5200] font-semibold"
+                  : "border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800 text-gray-600 dark:text-zinc-400"
               )}
             >
               Under ₹250
@@ -256,8 +256,8 @@ export default function ProductList() {
               className={cn(
                 "text-xs px-2.5 py-1 rounded border transition-colors",
                 minPrice === 250 && maxPrice === 500
-                  ? "border-[#ff5200] bg-orange-50 text-[#ff5200] font-semibold"
-                  : "border-gray-200 hover:bg-gray-50 text-gray-600"
+                  ? "border-[#ff5200] bg-orange-50 dark:bg-orange-950/30 text-[#ff5200] font-semibold"
+                  : "border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800 text-gray-600 dark:text-zinc-400"
               )}
             >
               ₹250 - ₹500
@@ -267,8 +267,8 @@ export default function ProductList() {
               className={cn(
                 "text-xs px-2.5 py-1 rounded border transition-colors",
                 minPrice === 500 && maxPrice === undefined
-                  ? "border-[#ff5200] bg-orange-50 text-[#ff5200] font-semibold"
-                  : "border-gray-200 hover:bg-gray-50 text-gray-600"
+                  ? "border-[#ff5200] bg-orange-50 dark:bg-orange-950/30 text-[#ff5200] font-semibold"
+                  : "border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800 text-gray-600 dark:text-zinc-400"
               )}
             >
               Over ₹500
@@ -277,8 +277,8 @@ export default function ProductList() {
         </div>
 
         {/* Rating Filters */}
-        <div className="border-t pt-4 space-y-2">
-          <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Customer Rating</p>
+        <div className="border-t dark:border-zinc-800 pt-4 space-y-2">
+          <p className="text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-2">Customer Rating</p>
           <div className="flex flex-col gap-1.5">
             {[4, 3, 2].map((stars) => {
               const active = minRating === stars;
@@ -292,8 +292,8 @@ export default function ProductList() {
                   className={cn(
                     "flex items-center gap-2 py-1.5 px-2 rounded text-xs transition-colors text-left w-full",
                     active
-                      ? "bg-amber-50 text-amber-700 font-bold"
-                      : "text-gray-600 hover:bg-gray-50"
+                      ? "bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 font-bold"
+                      : "text-gray-600 dark:text-zinc-400 hover:bg-gray-50 dark:hover:bg-zinc-800"
                   )}
                 >
                   <div className="flex items-center gap-0.5 text-amber-500">
@@ -302,7 +302,7 @@ export default function ProductList() {
                         key={i}
                         className={cn(
                           "w-3.5 h-3.5",
-                          i < stars ? "fill-amber-500 text-amber-500" : "text-gray-200"
+                          i < stars ? "fill-amber-500 text-amber-500" : "text-gray-200 dark:text-zinc-700"
                         )}
                       />
                     ))}
@@ -318,24 +318,24 @@ export default function ProductList() {
   };
 
   return (
-    <div className="theme-light-scope bg-[#f1f3f6] min-h-screen text-black">
+    <div className="bg-[#f1f3f6] dark:bg-zinc-950 min-h-screen text-black dark:text-white">
       <div className="max-w-[1440px] mx-auto px-4 py-8 lg:py-12">
         {/* Header & Filters */}
         <div className="flex flex-col gap-6 mb-8">
-          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="bg-white dark:bg-zinc-900 p-6 rounded-lg shadow-sm border border-gray-100 dark:border-zinc-800 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 mb-1">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
                 {category !== 'all' ? category : 'Store Catalog'}
-                <span className="text-gray-400 text-sm font-normal ml-3">({total} items)</span>
+                <span className="text-gray-400 dark:text-zinc-500 text-sm font-normal ml-3">({total} items)</span>
               </h1>
-              <div className="flex items-center gap-2 text-xs text-gray-500">
+              <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-zinc-500">
                 <span>Home</span>
                 <ChevronRight className="w-3 h-3" />
-                <span className="font-semibold text-gray-900">{category !== 'all' ? category : 'Store'}</span>
+                <span className="font-semibold text-gray-900 dark:text-zinc-300">{category !== 'all' ? category : 'Store'}</span>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4 text-black">
+            <div className="flex flex-col sm:flex-row items-center gap-4 text-black dark:text-white">
               {/* Smart Search Input with Suggestions */}
               <div ref={suggestionsRef} className="relative w-full sm:w-80">
                 <div className="relative">
@@ -348,9 +348,9 @@ export default function ProductList() {
                       setShowSuggestions(true);
                     }}
                     onFocus={() => setShowSuggestions(true)}
-                    className="pl-10 pr-8 h-10 rounded-md border-gray-200 bg-gray-50 focus:bg-white text-sm text-black"
+                    className="pl-10 pr-8 h-10 rounded-md border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 focus:bg-white dark:focus:bg-zinc-900 text-sm"
                   />
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-zinc-500" />
                   {searchTerm && (
                     <button 
                       onClick={() => {
@@ -358,7 +358,7 @@ export default function ProductList() {
                         setSearch('');
                         setPage(1);
                       }}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-zinc-500 hover:text-gray-600 dark:hover:text-zinc-300"
                     >
                       <X className="w-3.5 h-3.5" />
                     </button>
@@ -371,11 +371,11 @@ export default function ProductList() {
                    suggestionsData.categories?.length > 0 || 
                    suggestionsData.queries?.length > 0)
                 ) && (
-                  <div className="absolute top-11 left-0 right-0 z-50 bg-white rounded-lg shadow-xl border border-gray-150 overflow-hidden text-left max-h-[380px] overflow-y-auto">
+                  <div className="absolute top-11 left-0 right-0 z-50 bg-white dark:bg-zinc-900 rounded-lg shadow-xl border border-gray-100 dark:border-zinc-700 overflow-hidden text-left max-h-[380px] overflow-y-auto">
                     {/* Categories recommendations */}
                     {suggestionsData.categories?.length > 0 && (
-                      <div className="p-3 border-b border-gray-100">
-                        <p className="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-2">Category Suggestions</p>
+                      <div className="p-3 border-b border-gray-100 dark:border-zinc-800">
+                        <p className="text-[10px] font-extrabold text-gray-400 dark:text-zinc-500 uppercase tracking-widest mb-2">Category Suggestions</p>
                         <div className="flex flex-wrap gap-1.5">
                           {suggestionsData.categories.map((cat, idx) => (
                             <button
@@ -398,8 +398,8 @@ export default function ProductList() {
 
                     {/* Quick Queries matching */}
                     {suggestionsData.queries?.length > 0 && (
-                      <div className="p-2 border-b border-gray-100">
-                        <p className="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest px-2 mb-1">Search Keywords</p>
+                      <div className="p-2 border-b border-gray-100 dark:border-zinc-800">
+                        <p className="text-[10px] font-extrabold text-gray-400 dark:text-zinc-500 uppercase tracking-widest px-2 mb-1">Search Keywords</p>
                         <div className="space-y-0.5">
                           {suggestionsData.queries.map((qText, idx) => (
                             <button
@@ -410,9 +410,9 @@ export default function ProductList() {
                                 setShowSuggestions(false);
                                 setPage(1);
                               }}
-                              className="w-full text-left px-2.5 py-1.5 text-xs text-gray-700 hover:bg-gray-50 rounded-md transition-colors flex items-center gap-2"
+                              className="w-full text-left px-2.5 py-1.5 text-xs text-gray-700 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 rounded-md transition-colors flex items-center gap-2"
                             >
-                              <Search className="w-3.5 h-3.5 text-gray-400" />
+                              <Search className="w-3.5 h-3.5 text-gray-400 dark:text-zinc-500" />
                               <span>{qText}</span>
                             </button>
                           ))}
@@ -423,7 +423,7 @@ export default function ProductList() {
                     {/* Products matches matching */}
                     {suggestionsData.products?.length > 0 && (
                       <div className="p-2">
-                        <p className="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest px-2 mb-1">Products</p>
+                        <p className="text-[10px] font-extrabold text-gray-400 dark:text-zinc-500 uppercase tracking-widest px-2 mb-1">Products</p>
                         <div className="space-y-0.5">
                           {suggestionsData.products.map((p, idx) => (
                             <button
@@ -432,17 +432,17 @@ export default function ProductList() {
                                 setShowSuggestions(false);
                                 navigate(`/product/${p.id}`);
                               }}
-                              className="w-full flex items-center gap-3 p-1.5 hover:bg-gray-50 rounded-md text-left transition-all"
+                              className="w-full flex items-center gap-3 p-1.5 hover:bg-gray-50 dark:hover:bg-zinc-800 rounded-md text-left transition-all"
                             >
                               <LazyProductImage
                                 src={p.images?.[0]}
                                 alt={p.name}
-                                className="rounded bg-gray-100"
-                                containerClassName="w-8 h-8 rounded bg-gray-100 shrink-0"
+                                className="rounded bg-gray-100 dark:bg-zinc-800"
+                                containerClassName="w-8 h-8 rounded bg-gray-100 dark:bg-zinc-800 shrink-0"
                               />
                               <div className="flex-1 min-w-0">
-                                <p className="text-xs font-bold text-gray-900 truncate">{p.name}</p>
-                                <p className="text-[10px] text-gray-400 font-medium">{p.category}</p>
+                                <p className="text-xs font-bold text-gray-900 dark:text-white truncate">{p.name}</p>
+                                <p className="text-[10px] text-gray-400 dark:text-zinc-500 font-medium">{p.category}</p>
                               </div>
                               <p className="text-xs font-bold text-[#ff5200] shrink-0 pr-1">₹{p.price}</p>
                             </button>
@@ -455,10 +455,10 @@ export default function ProductList() {
               </div>
 
               <Select value={sort} onValueChange={setSort}>
-                <SelectTrigger className="w-[180px] h-10 rounded-md border-gray-200 bg-gray-50 text-sm focus:ring-1 focus:ring-orange-500">
+                <SelectTrigger className="w-[180px] h-10 rounded-md border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 text-sm focus:ring-1 focus:ring-orange-500">
                   <SelectValue placeholder="Sort By" />
                 </SelectTrigger>
-                <SelectContent className="theme-light-scope bg-white border-gray-100">
+                <SelectContent className="bg-white dark:bg-zinc-900 border-gray-100 dark:border-zinc-800">
                   <SelectItem value="newest">Newest First</SelectItem>
                   <SelectItem value="price_asc">Price: Low to High</SelectItem>
                   <SelectItem value="price_desc">Price: High to Low</SelectItem>
@@ -467,14 +467,14 @@ export default function ProductList() {
               </Select>
 
               <Sheet>
-                <SheetTrigger className={cn(buttonVariants({ variant: "outline" }), "rounded-md h-10 px-4 border-gray-200 bg-gray-50 md:hidden text-sm")}>
+                <SheetTrigger className={cn(buttonVariants({ variant: "outline" }), "rounded-md h-10 px-4 border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 md:hidden text-sm")}>
                   <Filter className="w-4 h-4 mr-2" /> Filter
                 </SheetTrigger>
-                <SheetContent side="right" className="theme-light-scope bg-white w-full sm:max-w-xs p-6 overflow-y-auto">
+                <SheetContent side="right" className="bg-white dark:bg-zinc-900 w-full sm:max-w-xs p-6 overflow-y-auto">
                   <SheetHeader className="mb-4">
                     <SheetTitle className="text-xl font-bold flex items-center justify-between">Filters</SheetTitle>
                   </SheetHeader>
-                  <div className="mt-4 text-black">
+                  <div className="mt-4 text-black dark:text-white">
                     {renderFilters()}
                   </div>
                 </SheetContent>
@@ -486,7 +486,7 @@ export default function ProductList() {
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Desktop Sidebar Filters */}
           <div className="hidden lg:block w-64 shrink-0 h-fit sticky top-24">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+            <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-sm border border-gray-100 dark:border-zinc-800 p-6">
               {renderFilters()}
             </div>
           </div>
@@ -495,10 +495,10 @@ export default function ProductList() {
             {isLoading && loadedProducts.length === 0 ? (
               <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                 {[...Array(8)].map((_, i) => (
-                  <div key={i} className="aspect-square bg-white rounded-lg border border-gray-100 p-4 animate-pulse flex flex-col justify-between">
-                    <div className="aspect-square bg-gray-100 rounded w-full h-2/3 mb-2 animate-pulse"></div>
-                    <div className="h-4 bg-gray-100 rounded w-3/4 mb-1 animate-pulse"></div>
-                    <div className="h-3 bg-gray-100 rounded w-1/2 animate-pulse"></div>
+                  <div key={i} className="aspect-square bg-white dark:bg-zinc-900 rounded-lg border border-gray-100 dark:border-zinc-800 p-4 animate-pulse flex flex-col justify-between">
+                    <div className="aspect-square bg-gray-100 dark:bg-zinc-800 rounded w-full h-2/3 mb-2 animate-pulse"></div>
+                    <div className="h-4 bg-gray-100 dark:bg-zinc-800 rounded w-3/4 mb-1 animate-pulse"></div>
+                    <div className="h-3 bg-gray-100 dark:bg-zinc-800 rounded w-1/2 animate-pulse"></div>
                   </div>
                 ))}
               </div>
@@ -519,37 +519,37 @@ export default function ProductList() {
                     <div className="w-full mt-4">
                       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 w-full">
                         {[...Array(4)].map((_, i) => (
-                          <div key={i} className="aspect-square bg-white rounded-lg border border-gray-100 p-4 animate-pulse flex flex-col justify-between">
-                            <div className="aspect-square bg-gray-100 rounded w-full h-2/3 mb-2 animate-pulse"></div>
-                            <div className="h-4 bg-gray-100 rounded w-3/4 mb-1 animate-pulse"></div>
-                            <div className="h-3 bg-gray-100 rounded w-1/2 animate-pulse"></div>
+                          <div key={i} className="aspect-square bg-white dark:bg-zinc-900 rounded-lg border border-gray-100 dark:border-zinc-800 p-4 animate-pulse flex flex-col justify-between">
+                            <div className="aspect-square bg-gray-100 dark:bg-zinc-800 rounded w-full h-2/3 mb-2 animate-pulse"></div>
+                            <div className="h-4 bg-gray-100 dark:bg-zinc-800 rounded w-3/4 mb-1 animate-pulse"></div>
+                            <div className="h-3 bg-gray-100 dark:bg-zinc-800 rounded w-1/2 animate-pulse"></div>
                           </div>
                         ))}
                       </div>
-                      <p className="text-xs text-gray-450 font-bold text-center mt-6 animate-pulse">Loading more premium products...</p>
+                      <p className="text-xs text-gray-400 dark:text-zinc-500 font-bold text-center mt-6 animate-pulse">Loading more premium products...</p>
                     </div>
                   )}
                   {!isFetching && page < totalPages && (
                     <Button
                       variant="outline"
                       onClick={() => setPage(p => p + 1)}
-                      className="text-xs font-bold border-gray-200 text-gray-500 hover:text-black hover:border-gray-400 bg-white"
+                      className="text-xs font-bold border-gray-200 dark:border-zinc-700 text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:border-gray-400 dark:hover:border-zinc-500 bg-white dark:bg-zinc-900"
                     >
                       Load More Products
                     </Button>
                   )}
                   {page >= totalPages && total > 0 && (
-                    <span className="text-xs text-gray-400 font-medium">
+                    <span className="text-xs text-gray-400 dark:text-zinc-500 font-medium">
                       You've viewed all {total} products
                     </span>
                   )}
                 </div>
               </>
             ) : (
-              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-20 text-center">
-                <SearchX className="w-16 h-16 text-gray-200 mx-auto mb-6" />
-                <h3 className="text-xl font-bold text-gray-900 mb-2">No results found</h3>
-                <p className="text-gray-500 mb-8">Try adjusting your filters or search keywords</p>
+              <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-sm border border-gray-100 dark:border-zinc-800 p-20 text-center">
+                <SearchX className="w-16 h-16 text-gray-200 dark:text-zinc-700 mx-auto mb-6" />
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">No results found</h3>
+                <p className="text-gray-500 dark:text-zinc-400 mb-8">Try adjusting your filters or search keywords</p>
                 <Button 
                   onClick={handleClearAll}
                   className="bg-[#ff5200] hover:bg-orange-600 text-white rounded-full px-8"
