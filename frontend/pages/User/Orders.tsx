@@ -111,6 +111,7 @@ export default function Orders() {
                         <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1 line-clamp-1">{order.product.name}</h3>
                         <p className="text-sm text-gray-500 dark:text-zinc-400 mb-4">
                           Qty: <span className="font-bold">{order.quantity}</span>
+                          {order.size && <span className="ml-2 font-bold">• Size: {order.size}</span>}
                         </p>
                         
                         <div className="flex flex-wrap items-center gap-4 text-xs text-gray-400 dark:text-zinc-500 font-medium">
@@ -347,6 +348,7 @@ export default function Orders() {
                          <div className="flex items-center gap-3">
                             <span className="text-sm font-bold text-gray-900 dark:text-white">₹{selectedOrder.totalAmount.toLocaleString()}</span>
                             <span className="text-xs text-gray-400 dark:text-zinc-500">Qty: {selectedOrder.quantity}</span>
+                            {selectedOrder.size && <span className="text-xs text-gray-400 dark:text-zinc-500">Size: {selectedOrder.size}</span>}
                          </div>
                       </div>
                    </div>

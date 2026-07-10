@@ -15,6 +15,24 @@ const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
 
 const DEFAULT_FALLBACK_IMAGE = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600";
 
+// Parses the sizeStock field which may arrive as a JSON string (from multipart/form-data)
+// or already as an object (from a JSON request body). Returns null if empty/invalid.
+const parseSizeStock = (value: any): Record<string, number> | null => {
+  if (value === null || value === undefined || value === "") return null;
+  try {
+    const parsed = typeof value === "string" ? JSON.parse(value) : value;
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
+    const result: Record<string, number> = {};
+    for (const [size, qty] of Object.entries(parsed)) {
+      const n = parseInt(qty as any);
+      result[size] = Number.isFinite(n) && n > 0 ? n : 0;
+    }
+    return Object.keys(result).length > 0 ? result : null;
+  } catch {
+    return null;
+  }
+};
+
 const processProductInstance = (product: any) => {
   if (!product) return product;
   if (!product.images || !Array.isArray(product.images) || product.images.length === 0) {
@@ -82,6 +100,13 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
     }
     if (data.stock) data.stock = parseInt(data.stock);
     if (data.rating) data.rating = parseFloat(data.rating);
+    if (data.sizeStock !== undefined) {
+      data.sizeStock = parseSizeStock(data.sizeStock);
+      // Keep the overall stock count in sync with the sum of per-size stock
+      if (data.sizeStock) {
+        data.stock = Object.values(data.sizeStock).reduce((a: number, b: any) => a + Number(b), 0);
+      }
+    }
 
     if (req.file) {
       data.images = [await uploadBufferToCloudinary(req.file.buffer, req.file.mimetype)];
@@ -112,6 +137,13 @@ export const updateProduct = async (req: Request, res: Response, next: NextFunct
     if (data.stock !== undefined) data.stock = parseInt(data.stock);
     if (data.lowStockThreshold !== undefined) data.lowStockThreshold = parseInt(data.lowStockThreshold);
     if (data.rating) data.rating = parseFloat(data.rating);
+    if (data.sizeStock !== undefined) {
+      data.sizeStock = parseSizeStock(data.sizeStock);
+      // Keep the overall stock count in sync with the sum of per-size stock
+      if (data.sizeStock) {
+        data.stock = Object.values(data.sizeStock).reduce((a: number, b: any) => a + Number(b), 0);
+      }
+    }
 
     if (req.file) {
       data.images = [await uploadBufferToCloudinary(req.file.buffer, req.file.mimetype)];

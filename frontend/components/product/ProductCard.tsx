@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Star, ShoppingCart, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
@@ -8,6 +8,7 @@ import { useCartStore } from '@/src/store/cartStore';
 import { useWishlistStore } from '@/src/store/wishlistStore';
 import { toast } from 'sonner';
 import { Product } from '@/src/types';
+import { isSizedCategory } from '@/lib/sizes';
 import LazyProductImage from './LazyProductImage';
 
 interface ProductCardProps {
@@ -18,11 +19,19 @@ interface ProductCardProps {
 export default function ProductCard({ product, priority = false }: ProductCardProps) {
   const { addItem } = useCartStore();
   const { toggleWishlist, isInWishlist } = useWishlistStore();
+  const navigate = useNavigate();
   const isWish = isInWishlist(product.id);
+  const needsSizeSelection = isSizedCategory(product.category) && !!product.sizeStock;
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    if (needsSizeSelection) {
+      // Sized products require picking a size first, so send the shopper to the product page.
+      navigate(`/product/${product.id}`);
+      toast.info('Please select a size to add this item to your cart');
+      return;
+    }
     addItem(product);
     toast.success(`${product.name} added to cart`);
   };
@@ -148,7 +157,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
           )}
         >
           <ShoppingCart className="w-4 h-4" aria-hidden="true" />
-          {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+          {product.stock === 0 ? 'Out of Stock' : needsSizeSelection ? 'Select Size' : 'Add to Cart'}
         </button>
       </div>
     </motion.div>

@@ -64,6 +64,7 @@ export default function Cart() {
                 images: data.images,
                 stock: data.stock,
                 category: data.category,
+                sizeStock: data.sizeStock,
               }
             });
             if (
@@ -157,6 +158,7 @@ export default function Cart() {
             userId: user.id,
             productId: item.productId,
             quantity: item.quantity,
+            size: item.size || undefined,
             totalAmount: item.product.price * item.quantity,
             orderCode: uniqueId,
             locationUrl: locationUrl
@@ -190,7 +192,7 @@ export default function Cart() {
   };
 
   const sendWhatsAppMessage = (adminNumber: string, orderCodes: string[], locationUrl?: string) => {
-    let productDetails = cart.map(item => `- ${item.product.name} (Qty: ${item.quantity})`).join('\n');
+    let productDetails = cart.map(item => `- ${item.product.name}${item.size ? ` [Size: ${item.size}]` : ''} (Qty: ${item.quantity})`).join('\n');
     const codesString = orderCodes.length > 0 ? `*Order IDs:* ${orderCodes.map(c => `#${c}`).join(', ')}` : '';
 
     const message = `Hello Geekhoot Admin,
@@ -299,7 +301,12 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
                               <Trash2 className="w-5 h-5" />
                             </Button>
                           </div>
-                          <p className="text-sm text-gray-400 dark:text-zinc-500 mb-4">{item.product.category}</p>
+                          <p className="text-sm text-gray-400 dark:text-zinc-500 mb-1">{item.product.category}</p>
+                          {item.size && (
+                            <p className="text-xs font-bold text-gray-600 dark:text-zinc-300 mb-4">
+                              Size: <span className="inline-flex items-center justify-center px-2 py-0.5 rounded bg-gray-100 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 ml-1">{item.size}</span>
+                            </p>
+                          )}
                           
                           <div className="flex flex-wrap items-center justify-between gap-6">
                             <div className="flex items-center gap-4">
@@ -314,10 +321,17 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
                                 <span className="w-10 text-center font-bold text-sm">{item.quantity}</span>
                                 <button 
                                   className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-zinc-800 disabled:opacity-30"
-                                  disabled={item.quantity >= (item.product.stock ?? 9999)}
+                                  disabled={item.quantity >= (
+                                    item.size && item.product.sizeStock
+                                      ? (item.product.sizeStock[item.size] ?? 0)
+                                      : (item.product.stock ?? 9999)
+                                  )}
                                   onClick={() => {
-                                    if (item.quantity >= (item.product.stock ?? 9999)) {
-                                      toast.error(`Only ${item.product.stock} items left in stock`);
+                                    const maxQty = item.size && item.product.sizeStock
+                                      ? (item.product.sizeStock[item.size] ?? 0)
+                                      : (item.product.stock ?? 9999);
+                                    if (item.quantity >= maxQty) {
+                                      toast.error(`Only ${maxQty} items left in stock${item.size ? ` for size ${item.size}` : ''}`);
                                       return;
                                     }
                                     updateQuantity(item.id, item.quantity + 1);

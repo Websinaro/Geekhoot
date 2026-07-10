@@ -41,6 +41,7 @@ import {
 } from '@/components/ui/dialog';
 import { toast } from 'sonner';
 import { Product } from '@/src/types';
+import { TSHIRT_SIZES, isSizedCategory } from '@/lib/sizes';
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -81,6 +82,7 @@ function ProductDetailContent({ id }: { id: string }) {
   
   const [activeImage, setActiveImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [reviewData, setReviewData] = useState({ rating: 5, comment: '' });
   const [isLocationDialogOpen, setIsLocationDialogOpen] = useState(false);
@@ -89,6 +91,7 @@ function ProductDetailContent({ id }: { id: string }) {
   React.useEffect(() => {
     setActiveImage(0);
     setQuantity(1);
+    setSelectedSize(null);
     setShowReviewForm(false);
     setReviewData({ rating: 5, comment: '' });
   }, [id]);
@@ -133,12 +136,16 @@ function ProductDetailContent({ id }: { id: string }) {
       return;
     }
 
-    if (product.stock === 0) {
-      toast.error('This product is out of stock!');
+    if (sizeRequiredButNotChosen) {
+      toast.error('Please select a size before ordering');
       return;
     }
-    if (quantity > product.stock) {
-      toast.error(`Only ${product.stock} items left in stock`);
+    if (effectiveStock === 0) {
+      toast.error(hasSizes ? `Size ${selectedSize} is out of stock!` : 'This product is out of stock!');
+      return;
+    }
+    if (quantity > effectiveStock) {
+      toast.error(`Only ${effectiveStock} items left in stock${hasSizes ? ` for size ${selectedSize}` : ''}`);
       return;
     }
     setIsLocationDialogOpen(true);
@@ -180,6 +187,7 @@ function ProductDetailContent({ id }: { id: string }) {
         userId: user.id,
         productId: product.id,
         quantity: quantity,
+        size: selectedSize || undefined,
         totalAmount: product.price * quantity,
         orderCode: uniqueId,
         locationUrl: locationUrl
@@ -199,7 +207,7 @@ function ProductDetailContent({ id }: { id: string }) {
     const message = `Hello Geekhoot,
 I want to order:
 *Product:* ${product.name}
-*Qty:* ${quantity}
+${selectedSize ? `*Size:* ${selectedSize}\n` : ''}*Qty:* ${quantity}
 *Total:* ₹${(product.price * quantity).toLocaleString()}
 *Order ID:* #${uniqueId}
 
@@ -222,17 +230,21 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
   };
 
   const handleAddToCart = () => {
-    if (product.stock === 0) {
-      toast.error('This product is out of stock!');
+    if (sizeRequiredButNotChosen) {
+      toast.error('Please select a size before adding to cart');
       return;
     }
-    const existingItem = cart.find(item => item.productId === product.id);
+    if (effectiveStock === 0) {
+      toast.error(hasSizes ? `Size ${selectedSize} is out of stock!` : 'This product is out of stock!');
+      return;
+    }
+    const existingItem = cart.find(item => item.productId === product.id && (item.size || null) === (selectedSize || null));
     const existingQty = existingItem ? existingItem.quantity : 0;
-    if (existingQty + quantity > product.stock) {
-      toast.error(`Only ${product.stock} items available in stock. You have ${existingQty} in your cart.`);
+    if (existingQty + quantity > effectiveStock) {
+      toast.error(`Only ${effectiveStock} items available in stock${hasSizes ? ` for size ${selectedSize}` : ''}. You have ${existingQty} in your cart.`);
       return;
     }
-    addItem(product, quantity);
+    addItem(product, quantity, selectedSize);
     toast.success('Added to cart');
   };
 
@@ -310,6 +322,14 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
     ? product.images[activeImage] 
     : '';
 
+  // Sized products (e.g. T-Shirts) track stock per-size instead of (or in addition to) overall stock.
+  const hasSizes = isSizedCategory(product.category) && !!product.sizeStock;
+  const sizeStock: Record<string, number> = (product.sizeStock as Record<string, number>) || {};
+  const effectiveStock = hasSizes
+    ? (selectedSize ? (sizeStock[selectedSize] ?? 0) : 0)
+    : product.stock;
+  const sizeRequiredButNotChosen = hasSizes && !selectedSize;
+
   return (
     <div className="bg-[#f1f3f6] dark:bg-zinc-950 min-h-screen pb-20">
       <div className="max-w-[1440px] mx-auto px-4 py-4">
@@ -359,18 +379,21 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                   variant="outline"
                   className="h-14 rounded-sm border-gray-300 dark:border-zinc-700 font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   onClick={handleAddToCart}
-                  disabled={product.stock === 0}
+                  disabled={product.stock === 0 || sizeRequiredButNotChosen || effectiveStock === 0}
                 >
-                  <ShoppingCart className="w-5 h-5 text-[#ff5200]" /> {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+                  <ShoppingCart className="w-5 h-5 text-[#ff5200]" /> {product.stock === 0 ? 'Out of Stock' : (hasSizes && effectiveStock === 0 && selectedSize) ? 'Out of Stock' : 'Add to Cart'}
                 </Button>
                 <Button 
                   className="h-14 rounded-sm bg-[#fb641b] hover:bg-[#ff5200] text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 shadow-sm disabled:bg-gray-300 dark:disabled:bg-zinc-700 disabled:text-gray-500 dark:disabled:text-zinc-400 disabled:cursor-not-allowed border-none"
                   onClick={handleWhatsAppOrder}
-                  disabled={product.stock === 0}
+                  disabled={product.stock === 0 || sizeRequiredButNotChosen || effectiveStock === 0}
                 >
                   <Zap className="w-5 h-5 fill-white" /> {product.stock === 0 ? 'Out of Stock' : 'Buy Now'}
                 </Button>
               </div>
+              {sizeRequiredButNotChosen && (
+                <p className="text-[11px] text-center text-[#ff5200] font-bold mt-2">Select a size to continue</p>
+              )}
 
               {/* Wishlist Toggle Action Button */}
               {(() => {
@@ -434,11 +457,55 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                   )}
                 </div>
 
-                {product.stock <= 5 && product.stock > 0 && (
+                {!hasSizes && product.stock <= 5 && product.stock > 0 && (
                   <p className="text-red-500 dark:text-red-400 text-sm font-bold mb-4 italic">Only {product.stock} left in stock - order soon!</p>
                 )}
-                {product.stock === 0 && (
+                {!hasSizes && product.stock === 0 && (
                   <p className="text-red-500 dark:text-red-400 text-sm font-bold mb-4">Currently Out of Stock</p>
+                )}
+                {hasSizes && selectedSize && effectiveStock > 0 && effectiveStock <= 5 && (
+                  <p className="text-red-500 dark:text-red-400 text-sm font-bold mb-4 italic">Only {effectiveStock} left in size {selectedSize} - order soon!</p>
+                )}
+                {hasSizes && selectedSize && effectiveStock === 0 && (
+                  <p className="text-red-500 dark:text-red-400 text-sm font-bold mb-4">Size {selectedSize} is currently out of stock</p>
+                )}
+
+                {hasSizes && (
+                  <div className="mb-4">
+                    <span className="text-xs font-bold text-gray-600 dark:text-zinc-400 uppercase tracking-widest block mb-2">
+                      Select Size {selectedSize && <span className="text-gray-900 dark:text-white normal-case font-bold">— {selectedSize}</span>}
+                    </span>
+                    <div className="flex flex-wrap gap-2" role="group" aria-label="Size selector">
+                      {TSHIRT_SIZES.map((size) => {
+                        const qty = sizeStock[size] ?? 0;
+                        const outOfStock = qty <= 0;
+                        const isSelected = selectedSize === size;
+                        return (
+                          <button
+                            key={size}
+                            type="button"
+                            disabled={outOfStock}
+                            onClick={() => {
+                              setSelectedSize(size);
+                              setQuantity(1);
+                            }}
+                            aria-pressed={isSelected}
+                            aria-label={outOfStock ? `Size ${size}, out of stock` : `Select size ${size}`}
+                            className={cn(
+                              "w-12 h-12 rounded-md border text-sm font-bold flex items-center justify-center transition-all",
+                              outOfStock
+                                ? "bg-gray-100 dark:bg-zinc-800 text-gray-300 dark:text-zinc-600 border-gray-200 dark:border-zinc-700 cursor-not-allowed line-through"
+                                : isSelected
+                                  ? "bg-[#fb641b] border-[#fb641b] text-white shadow-sm"
+                                  : "bg-white dark:bg-zinc-900 border-gray-300 dark:border-zinc-700 text-gray-800 dark:text-zinc-200 hover:border-[#ff5200] hover:text-[#ff5200]"
+                            )}
+                          >
+                            {size}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
                 )}
               </div>
 
@@ -457,16 +524,16 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                           onClick={() => setQuantity(Math.max(1, quantity - 1))}
                           aria-label="Decrease quantity"
                           className="p-2 border-r dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800 disabled:opacity-30"
-                          disabled={product.stock === 0 || quantity <= 1}
+                          disabled={effectiveStock === 0 || quantity <= 1}
                         >
                           <Minus className="w-4 h-4" aria-hidden="true" />
                         </button>
-                        <span className="w-12 text-center text-sm font-bold" aria-live="polite" aria-label={`Quantity: ${product.stock === 0 ? 0 : quantity}`}>{product.stock === 0 ? 0 : quantity}</span>
+                        <span className="w-12 text-center text-sm font-bold" aria-live="polite" aria-label={`Quantity: ${effectiveStock === 0 ? 0 : quantity}`}>{effectiveStock === 0 ? 0 : quantity}</span>
                         <button
                           onClick={() => setQuantity(quantity + 1)}
                           aria-label="Increase quantity"
                           className="p-2 border-l dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800 disabled:opacity-30"
-                          disabled={product.stock === 0 || quantity >= product.stock}
+                          disabled={effectiveStock === 0 || quantity >= effectiveStock}
                         >
                           <Plus className="w-4 h-4" aria-hidden="true" />
                         </button>

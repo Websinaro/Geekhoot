@@ -30,6 +30,7 @@ export const createOrderService = async (userId: string, data: any) => {
 
   const productId = orderData.productId;
   const quantity = parseInt(orderData.quantity) || 1;
+  const size = orderData.size || null;
 
   if (!productId) {
     throw new AppError('Product ID is required to place an order', 400);
@@ -45,12 +46,24 @@ export const createOrderService = async (userId: string, data: any) => {
       throw new AppError('Product not found', 404);
     }
 
-    // 2. Check stock level
+    // 1.5 If the product tracks per-size stock and a size was chosen, validate against that size's stock
+    const sizeStock = (product.sizeStock as Record<string, number> | null) || null;
+    let updatedSizeStock: Record<string, number> | undefined = undefined;
+
+    if (sizeStock && size) {
+      const currentSizeQty = Number(sizeStock[size] ?? 0);
+      if (currentSizeQty < quantity) {
+        throw new AppError(`Only ${currentSizeQty} items left in stock for size ${size}`, 400);
+      }
+      updatedSizeStock = { ...sizeStock, [size]: currentSizeQty - quantity };
+    }
+
+    // 2. Check overall stock level
     if (product.stock < quantity) {
       throw new AppError(`Only ${product.stock} items left in stock`, 400);
     }
 
-    // 3. Decrement stock & increment bookings
+    // 3. Decrement stock (overall + per-size) & increment bookings
     const updatedProduct = await tx.product.update({
       where: { id: productId },
       data: {
@@ -60,6 +73,7 @@ export const createOrderService = async (userId: string, data: any) => {
         bookings: {
           increment: quantity,
         },
+        ...(updatedSizeStock ? { sizeStock: updatedSizeStock } : {}),
       },
     });
 

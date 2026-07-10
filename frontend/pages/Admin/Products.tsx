@@ -37,6 +37,16 @@ import { cn } from '@/lib/utils';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
+import { TSHIRT_SIZES, isSizedCategory } from '@/lib/sizes';
+
+const buildInitialSizeStock = (product: any): Record<string, string> => {
+  const stock = product?.sizeStock || {};
+  const result: Record<string, string> = {};
+  TSHIRT_SIZES.forEach((size) => {
+    result[size] = stock[size] !== undefined ? String(stock[size]) : '';
+  });
+  return result;
+};
 
 export default function AdminProducts() {
   const [products, setProducts] = useState([]);
@@ -44,12 +54,15 @@ export default function AdminProducts() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<any>(null);
   const [selectedCategory, setSelectedCategory] = useState("T-Shirts");
+  const [sizeStock, setSizeStock] = useState<Record<string, string>>(buildInitialSizeStock(null));
 
   useEffect(() => {
     if (editingProduct) {
       setSelectedCategory(editingProduct.category);
+      setSizeStock(buildInitialSizeStock(editingProduct));
     } else {
       setSelectedCategory("T-Shirts");
+      setSizeStock(buildInitialSizeStock(null));
     }
   }, [editingProduct]);
 
@@ -72,6 +85,16 @@ export default function AdminProducts() {
   const handleCreateOrUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+
+    if (isSizedCategory(selectedCategory)) {
+      const payload: Record<string, number> = {};
+      TSHIRT_SIZES.forEach((size) => {
+        payload[size] = Math.max(0, parseInt(sizeStock[size]) || 0);
+      });
+      formData.set('sizeStock', JSON.stringify(payload));
+      // Overall stock is derived from the sum of per-size stock for sized products
+      formData.set('stock', String(Object.values(payload).reduce((a, b) => a + b, 0)));
+    }
     
     try {
       if (editingProduct) {
@@ -181,9 +204,41 @@ export default function AdminProducts() {
                 </div>
                 <div className="space-y-2">
                   <Label className="text-xs font-bold text-gray-700 dark:text-zinc-300">Stock Quantity</Label>
-                  <Input name="stock" type="number" defaultValue={editingProduct?.stock} required className="rounded-md h-10 border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800" />
+                  <Input
+                    name="stock"
+                    type="number"
+                    defaultValue={editingProduct?.stock}
+                    required
+                    disabled={isSizedCategory(selectedCategory)}
+                    className="rounded-md h-10 border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 disabled:opacity-60"
+                  />
+                  {isSizedCategory(selectedCategory) && (
+                    <p className="text-[11px] text-gray-400 dark:text-zinc-500">Auto-calculated from the per-size stock below</p>
+                  )}
                 </div>
               </div>
+
+              {isSizedCategory(selectedCategory) && (
+                <div className="space-y-2 bg-blue-50/50 dark:bg-blue-950/20 border border-blue-100 dark:border-blue-900/40 rounded-lg p-4">
+                  <Label className="text-xs font-bold text-gray-700 dark:text-zinc-300">Size-wise Stock (T-Shirts)</Label>
+                  <p className="text-[11px] text-gray-500 dark:text-zinc-400 mb-2">Set available quantity for each size. A size with 0 stock will show as out of stock and greyed out to customers.</p>
+                  <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
+                    {TSHIRT_SIZES.map((size) => (
+                      <div key={size} className="space-y-1">
+                        <Label className="text-[10px] font-bold text-gray-500 dark:text-zinc-400 uppercase text-center block">{size}</Label>
+                        <Input
+                          type="number"
+                          min={0}
+                          value={sizeStock[size]}
+                          onChange={(e) => setSizeStock((prev) => ({ ...prev, [size]: e.target.value }))}
+                          placeholder="0"
+                          className="rounded-md h-10 text-center border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
               <div className="space-y-2">
                 <Label className="text-xs font-bold text-gray-700 dark:text-zinc-300">Description</Label>
                 <Textarea name="description" defaultValue={editingProduct?.description} required placeholder="Product details and specifications..." className="rounded-md min-h-[100px] border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800" />
@@ -275,6 +330,25 @@ export default function AdminProducts() {
                   </td>
                   <td className="p-4 px-6">
                      <span className={`text-sm font-bold ${product.stock < 5 ? 'text-red-600 dark:text-red-400' : 'text-gray-900 dark:text-white'}`}>{product.stock}</span>
+                     {product.sizeStock && (
+                       <div className="flex flex-wrap gap-1 mt-1.5">
+                         {TSHIRT_SIZES.map((size) => {
+                           const qty = product.sizeStock[size] ?? 0;
+                           return (
+                             <span
+                               key={size}
+                               className={`text-[9px] font-bold px-1.5 py-0.5 rounded-sm border ${
+                                 qty <= 0
+                                   ? 'bg-gray-100 dark:bg-zinc-800 text-gray-300 dark:text-zinc-600 border-gray-200 dark:border-zinc-700'
+                                   : 'bg-gray-50 dark:bg-zinc-800 text-gray-600 dark:text-zinc-300 border-gray-200 dark:border-zinc-700'
+                               }`}
+                             >
+                               {size}:{qty}
+                             </span>
+                           );
+                         })}
+                       </div>
+                     )}
                   </td>
                   <td className="p-4 px-6">
                     {product.stock > 0 ? (

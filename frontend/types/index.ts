@@ -24,6 +24,7 @@ export interface Product {
   rating: number;
   bookings: number;
   category: string;
+  sizeStock?: Record<string, number> | null;
   _count?: {
     reviews: number;
   };
@@ -36,6 +37,7 @@ export interface CartItem {
   userId: string;
   productId: string;
   quantity: number;
+  size?: string;
   product: Product;
 }
 
@@ -57,6 +59,7 @@ export interface Order {
   userId: string;
   productId: string;
   quantity: number;
+  size?: string;
   totalAmount: number;
   status: 'PENDING' | 'CONFIRMED' | 'PACKED' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED';
   trackingId?: string;

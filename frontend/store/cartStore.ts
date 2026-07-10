@@ -5,6 +5,7 @@ export interface CartItem {
   id: string;
   productId: string;
   quantity: number;
+  size?: string | null;
   product: {
     id: string;
     name: string;
@@ -12,13 +13,14 @@ export interface CartItem {
     images: string[];
     stock: number;
     category: string;
+    sizeStock?: Record<string, number> | null;
   };
 }
 
 interface CartState {
   items: CartItem[];
   setItems: (items: CartItem[]) => void;
-  addItem: (product: any, quantity?: number) => void;
+  addItem: (product: any, quantity?: number, size?: string | null) => void;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
@@ -31,13 +33,17 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
       setItems: (items) => set({ items }),
-      addItem: (product, quantity = 1) => {
+      addItem: (product, quantity = 1, size = null) => {
         const items = get().items;
-        const existingItem = items.find((item) => item.productId === product.id);
+        // Items are matched by product + size, so the same product in two
+        // different sizes is tracked as two separate cart lines.
+        const existingItem = items.find(
+          (item) => item.productId === product.id && (item.size || null) === (size || null)
+        );
         if (existingItem) {
           set({
             items: items.map((item) =>
-              item.productId === product.id
+              item.id === existingItem.id
                 ? { ...item, quantity: item.quantity + quantity }
                 : item
             ),
@@ -50,6 +56,7 @@ export const useCartStore = create<CartState>()(
                 id: Math.random().toString(36).substring(7),
                 productId: product.id,
                 quantity,
+                size: size || undefined,
                 product,
               },
             ],

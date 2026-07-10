@@ -165,7 +165,14 @@ export default function AdminOrders() {
                       </td>
                       <td className="p-4 px-6">
                         <p className="font-medium text-gray-900 dark:text-white text-sm truncate max-w-[150px]">{order.product.name}</p>
-                        <p className="text-[11px] text-gray-500 dark:text-zinc-400 mt-0.5">Qty: {order.quantity}</p>
+                        <p className="text-[11px] text-gray-500 dark:text-zinc-400 mt-0.5">
+                          Qty: {order.quantity}
+                          {order.size && (
+                            <span className="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-sm bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-zinc-300 font-bold text-[10px]">
+                              Size: {order.size}
+                            </span>
+                          )}
+                        </p>
                       </td>
                       <td className="p-4 px-6">
                         <p className="font-bold text-gray-900 dark:text-white text-sm">₹{order.totalAmount.toLocaleString()}</p>
