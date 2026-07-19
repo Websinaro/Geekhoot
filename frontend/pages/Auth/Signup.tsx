@@ -91,8 +91,8 @@ export default function Signup() {
     <div className="min-h-[calc(100vh-80px)] overflow-y-auto py-12 flex items-center justify-center p-6 bg-gray-50/50 dark:bg-zinc-950 relative font-sans">
       {/* Background decoration */}
       <div className="absolute inset-0 z-0 opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:30px_30px]" />
-      <div className="absolute top-1/6 right-1/6 w-96 h-96 bg-[#ff5200]/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/6 left-1/6 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/6 right-1/6 w-96 h-96 bg-[#e0122a]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/6 left-1/6 w-96 h-96 bg-red-500/5 rounded-full blur-3xl pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, scale: 0.99 }}
@@ -103,7 +103,7 @@ export default function Signup() {
       >
         <Card className="rounded-2xl border border-gray-100 dark:border-zinc-800 shadow-xl bg-white dark:bg-zinc-900 p-6 sm:p-10 relative overflow-hidden">
           {/* Top orange gradient bar */}
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-[#ff5200] to-orange-400" />
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 via-[#e0122a] to-red-400" />
           
           <CardHeader className="text-center sm:text-left pb-8 pt-0 px-0 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-gray-50 dark:border-zinc-800 mb-8">
             <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
@@ -120,7 +120,7 @@ export default function Signup() {
                 </CardDescription>
               </div>
             </div>
-            <div className="text-sm font-semibold text-[#ff5200] bg-orange-50/50 dark:bg-orange-950/30 px-3.5 py-1.5 rounded-full border border-orange-100/50 dark:border-orange-900/40 self-center">
+            <div className="text-sm font-semibold text-[#e0122a] bg-red-50/50 dark:bg-red-950/30 px-3.5 py-1.5 rounded-full border border-red-100/50 dark:border-red-900/40 self-center">
               Customer Registration
             </div>
           </CardHeader>
@@ -132,7 +132,7 @@ export default function Signup() {
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-sm font-bold text-gray-900 dark:text-white flex items-center gap-2 pb-3 border-b border-gray-100 dark:border-zinc-800 mb-6">
-                      <span className="flex items-center justify-center w-5 h-5 rounded-full bg-orange-50 dark:bg-orange-950/30 text-[#ff5200] text-xs">1</span>
+                      <span className="flex items-center justify-center w-5 h-5 rounded-full bg-red-50 dark:bg-red-950/30 text-[#e0122a] text-xs">1</span>
                       Personal Details
                     </h3>
                     
@@ -142,10 +142,10 @@ export default function Signup() {
                         <div className="relative group">
                           <Input 
                             placeholder="John Doe" 
-                            className="pl-10 h-11 rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-orange-500/20 focus-visible:border-[#ff5200] transition-colors" 
+                            className="pl-10 h-11 rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-red-500/20 focus-visible:border-[#e0122a] transition-colors" 
                             {...form.register('name')} 
                           />
-                          <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 dark:text-zinc-500 group-focus-within:text-[#ff5200] transition-colors" />
+                          <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 dark:text-zinc-500 group-focus-within:text-[#e0122a] transition-colors" />
                         </div>
                         {form.formState.errors.name && (
                           <p className="text-xs text-red-500 dark:text-red-400 font-medium">{form.formState.errors.name.message}</p>
@@ -158,10 +158,10 @@ export default function Signup() {
                           <Input 
                             type="email" 
                             placeholder="john@example.com" 
-                            className="pl-10 h-11 rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-orange-500/20 focus-visible:border-[#ff5200] transition-colors" 
+                            className="pl-10 h-11 rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-red-500/20 focus-visible:border-[#e0122a] transition-colors" 
                             {...form.register('email')} 
                           />
-                          <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 dark:text-zinc-500 group-focus-within:text-[#ff5200] transition-colors" />
+                          <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 dark:text-zinc-500 group-focus-within:text-[#e0122a] transition-colors" />
                         </div>
                         {form.formState.errors.email && (
                           <p className="text-xs text-red-500 dark:text-red-400 font-medium">{form.formState.errors.email.message}</p>
@@ -173,10 +173,10 @@ export default function Signup() {
                         <div className="relative group">
                           <Input 
                             placeholder="9876543210" 
-                            className="pl-10 h-11 rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-orange-500/20 focus-visible:border-[#ff5200] transition-colors" 
+                            className="pl-10 h-11 rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-red-500/20 focus-visible:border-[#e0122a] transition-colors" 
                             {...form.register('phone')} 
                           />
-                          <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 dark:text-zinc-500 group-focus-within:text-[#ff5200] transition-colors" />
+                          <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 dark:text-zinc-500 group-focus-within:text-[#e0122a] transition-colors" />
                         </div>
                         {form.formState.errors.phone && (
                           <p className="text-xs text-red-500 dark:text-red-400 font-medium">{form.formState.errors.phone.message}</p>
@@ -189,15 +189,15 @@ export default function Signup() {
                           <Input 
                             type={showPassword ? "text" : "password"} 
                             placeholder="••••••••" 
-                            className="pl-10 pr-10 h-11 rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-orange-500/20 focus-visible:border-[#ff5200] transition-colors" 
+                            className="pl-10 pr-10 h-11 rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-red-500/20 focus-visible:border-[#e0122a] transition-colors" 
                             {...form.register('password')} 
                           />
-                          <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 dark:text-zinc-500 group-focus-within:text-[#ff5200] transition-colors" />
+                          <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 dark:text-zinc-500 group-focus-within:text-[#e0122a] transition-colors" />
                           <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
                             aria-label={showPassword ? 'Hide password' : 'Show password'}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-zinc-500 hover:text-[#ff5200] transition-colors h-8 w-8 flex items-center justify-center p-0 rounded-full"
+                            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-zinc-500 hover:text-[#e0122a] transition-colors h-8 w-8 flex items-center justify-center p-0 rounded-full"
                           >
                             {showPassword
                               ? <EyeOff className="w-4.5 h-4.5" aria-hidden="true" />
@@ -216,7 +216,7 @@ export default function Signup() {
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-sm font-bold text-gray-900 dark:text-white flex items-center gap-2 pb-3 border-b border-gray-100 dark:border-zinc-800 mb-6">
-                      <span className="flex items-center justify-center w-5 h-5 rounded-full bg-orange-50 dark:bg-orange-950/30 text-[#ff5200] text-xs">2</span>
+                      <span className="flex items-center justify-center w-5 h-5 rounded-full bg-red-50 dark:bg-red-950/30 text-[#e0122a] text-xs">2</span>
                       Logistics & Address
                     </h3>
                     
@@ -227,10 +227,10 @@ export default function Signup() {
                           <Textarea 
                             placeholder="Flat/House No, Street, Landmark" 
                             rows={3}
-                            className="pl-10 min-h-[5.5rem] max-h-32 resize-none overflow-y-auto rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-orange-500/20 focus-visible:border-[#ff5200] transition-colors" 
+                            className="pl-10 min-h-[5.5rem] max-h-32 resize-none overflow-y-auto rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-red-500/20 focus-visible:border-[#e0122a] transition-colors" 
                             {...form.register('address')} 
                           />
-                          <Home className="absolute left-3.5 top-3.5 w-4.5 h-4.5 text-gray-400 dark:text-zinc-500 group-focus-within:text-[#ff5200] transition-colors" />
+                          <Home className="absolute left-3.5 top-3.5 w-4.5 h-4.5 text-gray-400 dark:text-zinc-500 group-focus-within:text-[#e0122a] transition-colors" />
                         </div>
                         {form.formState.errors.address && (
                           <p className="text-xs text-red-500 dark:text-red-400 font-medium">{form.formState.errors.address.message}</p>
@@ -242,7 +242,7 @@ export default function Signup() {
                           <Label className="text-xs font-semibold text-gray-700 dark:text-zinc-300">District</Label>
                           <Input 
                             placeholder="District" 
-                            className="h-11 rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-orange-500/20 focus-visible:border-[#ff5200] transition-colors" 
+                            className="h-11 rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-red-500/20 focus-visible:border-[#e0122a] transition-colors" 
                             {...form.register('district')} 
                           />
                           {form.formState.errors.district && (
@@ -253,7 +253,7 @@ export default function Signup() {
                           <Label className="text-xs font-semibold text-gray-700 dark:text-zinc-300">State</Label>
                           <Input 
                             placeholder="State" 
-                            className="h-11 rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-orange-500/20 focus-visible:border-[#ff5200] transition-colors" 
+                            className="h-11 rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-red-500/20 focus-visible:border-[#e0122a] transition-colors" 
                             {...form.register('state')} 
                           />
                           {form.formState.errors.state && (
@@ -267,10 +267,10 @@ export default function Signup() {
                         <div className="relative group">
                           <Input 
                             placeholder="682001" 
-                            className="pl-10 h-11 rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-orange-500/20 focus-visible:border-[#ff5200] transition-colors" 
+                            className="pl-10 h-11 rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-red-500/20 focus-visible:border-[#e0122a] transition-colors" 
                             {...form.register('pincode')} 
                           />
-                          <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 dark:text-zinc-500 group-focus-within:text-[#ff5200] transition-colors" />
+                          <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 dark:text-zinc-500 group-focus-within:text-[#e0122a] transition-colors" />
                         </div>
                         {form.formState.errors.pincode && (
                           <p className="text-xs text-red-500 dark:text-red-400 font-medium">{form.formState.errors.pincode.message}</p>
@@ -281,10 +281,10 @@ export default function Signup() {
                         <Button 
                           type="button" 
                           variant="outline" 
-                          className="w-full h-11 rounded-lg border-dashed border-2 border-orange-200/50 dark:border-orange-900/40 bg-orange-50/20 dark:bg-orange-950/20 hover:bg-orange-50/50 dark:hover:bg-orange-950/40 text-[#ff5200] font-bold text-xs transition-all flex items-center justify-center gap-2"
+                          className="w-full h-11 rounded-lg border-dashed border-2 border-red-200/50 dark:border-red-900/40 bg-red-50/20 dark:bg-red-950/20 hover:bg-red-50/50 dark:hover:bg-red-950/40 text-[#e0122a] font-bold text-xs transition-all flex items-center justify-center gap-2"
                           onClick={getGeoLocation}
                         >
-                          <MapPinned className="w-4 h-4 text-[#ff5200]" />
+                          <MapPinned className="w-4 h-4 text-[#e0122a]" />
                           {coords.lat ? (
                             <span className="flex items-center gap-1.5 text-green-600">
                               <CheckCircle2 className="w-4 h-4 text-green-600" /> GPS Location Synced
@@ -302,7 +302,7 @@ export default function Signup() {
               <div className="pt-4 flex flex-col items-center gap-4">
                 <Button 
                   type="submit" 
-                  className="w-full h-12 rounded-xl text-white bg-[#ff5200] hover:bg-[#e04800] shadow-md shadow-orange-500/10 transition-all active:scale-[0.98] border-none font-bold text-sm tracking-wide flex items-center justify-center gap-2 cursor-pointer" 
+                  className="w-full h-12 rounded-xl text-white bg-[#e0122a] hover:bg-[#0b0b0d] shadow-md shadow-red-500/10 transition-all active:scale-[0.98] border-none font-bold text-sm tracking-wide flex items-center justify-center gap-2 cursor-pointer" 
                   disabled={isSubmitting}
                 >
                   <span>{isSubmitting ? 'Registering Account...' : 'Complete Registration'}</span>
@@ -311,7 +311,7 @@ export default function Signup() {
                 
                 <p className="text-xs font-semibold text-gray-500 dark:text-zinc-400">
                   Already have an account?{' '}
-                  <Link to="/login" className="text-[#ff5200] hover:text-[#e04800] font-bold transition-colors underline underline-offset-4">
+                  <Link to="/login" className="text-[#e0122a] hover:text-[#0b0b0d] font-bold transition-colors underline underline-offset-4">
                     Sign In
                   </Link>
                 </p>

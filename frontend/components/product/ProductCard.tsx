@@ -62,7 +62,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         {/* Badges */}
         <div className="absolute top-2.5 left-2.5 z-20 flex flex-col gap-1">
           {discountPct > 0 && (
-            <Badge className="bg-[#ff5200] text-white text-[10px] font-bold px-2 py-0.5 rounded-sm border-none shadow-sm">
+            <Badge className="bg-[#e0122a] text-white text-[10px] font-bold px-2 py-0.5 rounded-sm border-none shadow-sm">
               {discountPct}% off
             </Badge>
           )}
@@ -112,7 +112,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         </p>
 
         {/* Name */}
-        <h3 className="font-semibold text-sm sm:text-base text-gray-900 dark:text-white group-hover:text-[#ff5200] transition-colors line-clamp-2 mb-2 leading-snug">
+        <h3 className="font-semibold text-sm sm:text-base text-gray-900 dark:text-white group-hover:text-[#e0122a] transition-colors line-clamp-2 mb-2 leading-snug">
           {product.name}
         </h3>
 
@@ -153,7 +153,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
             "border-none shadow-sm",
             product.stock === 0
               ? "bg-gray-100 dark:bg-zinc-800 text-gray-400 dark:text-zinc-500 cursor-not-allowed"
-              : "bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-[#ff5200] dark:hover:bg-[#ff5200] dark:hover:text-white"
+              : "bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-[#e0122a] dark:hover:bg-[#e0122a] dark:hover:text-white"
           )}
         >
           <ShoppingCart className="w-4 h-4" aria-hidden="true" />

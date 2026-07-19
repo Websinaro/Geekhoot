@@ -58,8 +58,8 @@ export default function Login() {
     <div className="min-h-[calc(100vh-80px)] overflow-y-auto flex items-center justify-center p-6 bg-gray-50/50 dark:bg-zinc-950 relative font-sans">
       {/* Dynamic Background Accents */}
       <div className="absolute inset-0 z-0 opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:30px_30px]" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#ff5200]/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#e0122a]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-red-500/5 rounded-full blur-3xl pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, y: 15 }}
@@ -70,7 +70,7 @@ export default function Login() {
       >
         <Card className="rounded-2xl border border-gray-100 dark:border-zinc-800 shadow-xl bg-white dark:bg-zinc-900 p-6 sm:p-8 relative overflow-hidden">
           {/* Top Brand Accent strip */}
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#ff5200] to-orange-400" />
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#e0122a] to-red-400" />
           
           <CardHeader className="space-y-1.5 text-center pb-6">
             <div className="flex justify-center mb-4">
@@ -98,10 +98,10 @@ export default function Login() {
                     id="identifier"
                     type="text"
                     placeholder="name@example.com / 9876543210"
-                    className="pl-10 h-11 rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-orange-500/20 focus-visible:border-[#ff5200] transition-colors"
+                    className="pl-10 h-11 rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-red-500/20 focus-visible:border-[#e0122a] transition-colors"
                     {...form.register('identifier')}
                   />
-                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 dark:text-zinc-500 group-focus-within:text-[#ff5200] transition-colors" />
+                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 dark:text-zinc-500 group-focus-within:text-[#e0122a] transition-colors" />
                 </div>
                 {form.formState.errors.identifier && (
                   <p className="text-xs font-medium text-red-500 dark:text-red-400">{form.formState.errors.identifier.message}</p>
@@ -115,10 +115,10 @@ export default function Login() {
                     id="password"
                     type="password"
                     placeholder="••••••••"
-                    className="pl-10 h-11 rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-orange-500/20 focus-visible:border-[#ff5200] transition-colors"
+                    className="pl-10 h-11 rounded-lg border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus-visible:ring-2 focus-visible:ring-red-500/20 focus-visible:border-[#e0122a] transition-colors"
                     {...form.register('password')}
                   />
-                  <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 dark:text-zinc-500 group-focus-within:text-[#ff5200] transition-colors" />
+                  <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 dark:text-zinc-500 group-focus-within:text-[#e0122a] transition-colors" />
                 </div>
                 {form.formState.errors.password && (
                   <p className="text-xs font-medium text-red-500 dark:text-red-400">{form.formState.errors.password.message}</p>
@@ -128,7 +128,7 @@ export default function Login() {
               <div className="pt-2">
                 <Button 
                   type="submit" 
-                  className="w-full h-11 bg-[#ff5200] hover:bg-[#e04800] text-white font-bold rounded-lg text-sm shadow-md shadow-orange-500/10 transition-all active:scale-[0.98] border-none flex items-center justify-center gap-2"
+                  className="w-full h-11 bg-[#e0122a] hover:bg-[#0b0b0d] text-white font-bold rounded-lg text-sm shadow-md shadow-red-500/10 transition-all active:scale-[0.98] border-none flex items-center justify-center gap-2"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? 'Signing in...' : (
@@ -148,7 +148,7 @@ export default function Login() {
               <button
                 type="button"
                 onClick={() => navigate('/signup')}
-                className="text-[#ff5200] hover:text-[#e04800] font-semibold hover:underline bg-transparent border-none p-0 cursor-pointer"
+                className="text-[#e0122a] hover:text-[#0b0b0d] font-semibold hover:underline bg-transparent border-none p-0 cursor-pointer"
               >
                 Create an account
               </button>

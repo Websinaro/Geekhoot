@@ -234,8 +234,8 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
           style={{ willChange: 'transform, opacity' }}
           className="w-40 h-40 bg-gray-50 dark:bg-zinc-900 rounded-[3rem] flex items-center justify-center mb-10 border border-gray-100 dark:border-zinc-800 relative overflow-hidden group"
         >
-          <div className="absolute inset-0 bg-[#ff5200]/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <ShoppingBag className="w-16 h-16 text-gray-300 dark:text-zinc-600 group-hover:text-[#ff5200] transition-colors relative z-10" />
+          <div className="absolute inset-0 bg-[#e0122a]/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <ShoppingBag className="w-16 h-16 text-gray-300 dark:text-zinc-600 group-hover:text-[#e0122a] transition-colors relative z-10" />
         </motion.div>
         <h2 className="text-5xl lg:text-7xl font-black uppercase tracking-tighter italic mb-6">Cart Empty</h2>
         <p className="text-gray-400 dark:text-zinc-500 mb-12 text-center max-w-sm font-bold uppercase tracking-tight text-lg leading-relaxed">
@@ -243,7 +243,7 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
         </p>
         <Button 
           onClick={() => navigate('/products')} 
-          className="rounded-[2rem] h-20 px-12 text-xs font-black uppercase tracking-[0.4em] bg-[#ff5200] hover:bg-black text-white transition-all shadow-xl shadow-orange-100 group"
+          className="rounded-[2rem] h-20 px-12 text-xs font-black uppercase tracking-[0.4em] bg-[#e0122a] hover:bg-black text-white transition-all shadow-xl shadow-red-100 group"
         >
           Shop Now <Plus className="ml-4 w-5 h-5 group-hover:rotate-90 transition-transform" />
         </Button>
@@ -289,7 +289,7 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
                         </div>
                         <div className="flex-1">
                           <div className="flex justify-between items-start gap-4 mb-2">
-                            <Link to={`/product/${item.product.id}`} className="font-bold text-lg text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors line-clamp-2">
+                            <Link to={`/product/${item.product.id}`} className="font-bold text-lg text-gray-900 dark:text-white hover:text-red-600 dark:hover:text-red-400 transition-colors line-clamp-2">
                               {item.product.name}
                             </Link>
                             <Button 
@@ -356,7 +356,7 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
             <div className="flex justify-end p-6 bg-white dark:bg-zinc-900 rounded-lg shadow-sm border border-gray-100 dark:border-zinc-800">
                <Button 
                 onClick={handleCheckout} 
-                className="bg-[#fb641b] hover:bg-[#ff5200] text-white font-bold h-12 px-12 rounded-sm shadow-md border-none uppercase text-sm"
+                className="bg-[#c00e22] hover:bg-[#e0122a] text-white font-bold h-12 px-12 rounded-sm shadow-md border-none uppercase text-sm"
                >
                  Place Order
                </Button>
@@ -410,14 +410,14 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
           <div className="grid grid-cols-1 gap-4 py-4">
             <button 
               onClick={() => processCheckoutWithLocation(true)}
-              className="flex items-center gap-4 p-4 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900/50 hover:bg-blue-100 dark:hover:bg-blue-950/50 transition-all text-left"
+              className="flex items-center gap-4 p-4 rounded-lg bg-red-50 dark:bg-red-950/30 border border-red-100 dark:border-red-900/50 hover:bg-red-100 dark:hover:bg-red-950/50 transition-all text-left"
             >
-              <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center shrink-0">
+              <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center shrink-0">
                 <MapPinned className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="font-bold text-blue-900 dark:text-blue-300 text-sm">Use Live Location</p>
-                <p className="text-xs text-blue-700 dark:text-blue-400">Perfect for pinpoint accuracy</p>
+                <p className="font-bold text-red-900 dark:text-red-300 text-sm">Use Live Location</p>
+                <p className="text-xs text-red-700 dark:text-red-400">Perfect for pinpoint accuracy</p>
               </div>
             </button>
 
@@ -442,7 +442,7 @@ Please confirm the order. Admin, you can search for these IDs in your dashboard.
         <div className="fixed inset-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm z-[100] flex items-center justify-center">
            <div className="text-center space-y-4">
               <div className="w-48 h-2 bg-zinc-200 dark:bg-zinc-700 rounded overflow-hidden mx-auto relative">
-                <div className="absolute top-0 left-0 h-full bg-[#fb641b] rounded animate-pulse w-full" />
+                <div className="absolute top-0 left-0 h-full bg-[#c00e22] rounded animate-pulse w-full" />
               </div>
               <p className="text-sm font-bold text-gray-900 dark:text-white animate-pulse">Redirecting to WhatsApp...</p>
            </div>

@@ -17,8 +17,8 @@ export default function ShippingPolicy() {
 
         {/* Header */}
         <div className="flex items-center gap-3 mb-8">
-          <div className="w-10 h-10 rounded-xl bg-[#ff5200]/10 flex items-center justify-center shrink-0">
-            <Truck className="w-5 h-5 text-[#ff5200]" />
+          <div className="w-10 h-10 rounded-xl bg-[#e0122a]/10 flex items-center justify-center shrink-0">
+            <Truck className="w-5 h-5 text-[#e0122a]" />
           </div>
           <div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Shipping & Delivery Policy</h1>
@@ -37,13 +37,13 @@ export default function ShippingPolicy() {
               <div className="space-y-6">
                 {stages.map((stage, i) => (
                   <div key={i} className="flex gap-4 relative">
-                    <div className="w-9 h-9 rounded-full bg-[#ff5200]/10 border-2 border-[#ff5200] flex items-center justify-center shrink-0 z-10">
-                      <span className="text-[10px] font-bold text-[#ff5200]">{i + 1}</span>
+                    <div className="w-9 h-9 rounded-full bg-[#e0122a]/10 border-2 border-[#e0122a] flex items-center justify-center shrink-0 z-10">
+                      <span className="text-[10px] font-bold text-[#e0122a]">{i + 1}</span>
                     </div>
                     <div className="pt-1.5">
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-sm font-semibold text-gray-900 dark:text-white">{stage.label}</span>
-                        <span className="text-xs bg-[#ff5200]/10 text-[#ff5200] px-2 py-0.5 rounded-full font-medium">{stage.days}</span>
+                        <span className="text-xs bg-[#e0122a]/10 text-[#e0122a] px-2 py-0.5 rounded-full font-medium">{stage.days}</span>
                       </div>
                       <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{stage.desc}</p>
                     </div>
@@ -102,7 +102,7 @@ export default function ShippingPolicy() {
 
             <section className="space-y-2">
               <h2 className="text-base font-semibold text-gray-900 dark:text-white">Contact</h2>
-              <p>For shipping queries, reach us at <a href="mailto:mygeekhoot@gmail.com" className="text-[#ff5200] hover:underline">mygeekhoot@gmail.com</a> or call <a href="tel:+916238777570" className="text-[#ff5200] hover:underline">+91 62387 77570</a>.</p>
+              <p>For shipping queries, reach us at <a href="mailto:mygeekhoot@gmail.com" className="text-[#e0122a] hover:underline">mygeekhoot@gmail.com</a> or call <a href="tel:+916238777570" className="text-[#e0122a] hover:underline">+91 62387 77570</a>.</p>
             </section>
 
           </div>

@@ -44,32 +44,32 @@ export default function ContactUs() {
               <h2 className="text-sm font-bold text-gray-900 dark:text-white">Get in Touch</h2>
 
               <div className="flex items-start gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#ff5200]/10 flex items-center justify-center shrink-0">
-                  <Mail className="w-4 h-4 text-[#ff5200]" />
+                <div className="w-9 h-9 rounded-xl bg-[#e0122a]/10 flex items-center justify-center shrink-0">
+                  <Mail className="w-4 h-4 text-[#e0122a]" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-400 mb-0.5">Email</p>
-                  <a href="mailto:mygeekhoot@gmail.com" className="text-sm font-medium text-gray-800 dark:text-gray-200 hover:text-[#ff5200] transition-colors">
+                  <a href="mailto:mygeekhoot@gmail.com" className="text-sm font-medium text-gray-800 dark:text-gray-200 hover:text-[#e0122a] transition-colors">
                     mygeekhoot@gmail.com
                   </a>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#ff5200]/10 flex items-center justify-center shrink-0">
-                  <Phone className="w-4 h-4 text-[#ff5200]" />
+                <div className="w-9 h-9 rounded-xl bg-[#e0122a]/10 flex items-center justify-center shrink-0">
+                  <Phone className="w-4 h-4 text-[#e0122a]" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-400 mb-0.5">Phone / WhatsApp</p>
-                  <a href="tel:+916238777570" className="text-sm font-medium text-gray-800 dark:text-gray-200 hover:text-[#ff5200] transition-colors">
+                  <a href="tel:+916238777570" className="text-sm font-medium text-gray-800 dark:text-gray-200 hover:text-[#e0122a] transition-colors">
                     +91 62387 77570
                   </a>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#ff5200]/10 flex items-center justify-center shrink-0">
-                  <MapPin className="w-4 h-4 text-[#ff5200]" />
+                <div className="w-9 h-9 rounded-xl bg-[#e0122a]/10 flex items-center justify-center shrink-0">
+                  <MapPin className="w-4 h-4 text-[#e0122a]" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-400 mb-0.5">Address</p>
@@ -83,8 +83,8 @@ export default function ContactUs() {
               </div>
 
               <div className="flex items-start gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#ff5200]/10 flex items-center justify-center shrink-0">
-                  <Clock className="w-4 h-4 text-[#ff5200]" />
+                <div className="w-9 h-9 rounded-xl bg-[#e0122a]/10 flex items-center justify-center shrink-0">
+                  <Clock className="w-4 h-4 text-[#e0122a]" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-400 mb-0.5">Business Hours</p>
@@ -120,7 +120,7 @@ export default function ContactUs() {
                   </p>
                   <button
                     onClick={() => { setSubmitted(false); setForm({ name: '', email: '', subject: '', message: '' }); }}
-                    className="mt-2 text-sm text-[#ff5200] hover:underline"
+                    className="mt-2 text-sm text-[#e0122a] hover:underline"
                   >
                     Send another message
                   </button>
@@ -138,7 +138,7 @@ export default function ContactUs() {
                         value={form.name}
                         onChange={handleChange}
                         placeholder="John Doe"
-                        className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-[#ff5200] transition-colors"
+                        className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-[#e0122a] transition-colors"
                       />
                     </div>
                     <div>
@@ -149,7 +149,7 @@ export default function ContactUs() {
                         value={form.email}
                         onChange={handleChange}
                         placeholder="you@example.com"
-                        className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-[#ff5200] transition-colors"
+                        className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-[#e0122a] transition-colors"
                       />
                     </div>
                   </div>
@@ -160,7 +160,7 @@ export default function ContactUs() {
                       name="subject"
                       value={form.subject}
                       onChange={handleChange}
-                      className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 text-sm text-gray-900 dark:text-white focus:outline-none focus:border-[#ff5200] transition-colors"
+                      className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 text-sm text-gray-900 dark:text-white focus:outline-none focus:border-[#e0122a] transition-colors"
                     >
                       <option value="">Select a topic</option>
                       <option value="Order Enquiry">Order Enquiry</option>
@@ -180,14 +180,14 @@ export default function ContactUs() {
                       onChange={handleChange}
                       rows={5}
                       placeholder="Tell us how we can help you..."
-                      className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-[#ff5200] transition-colors resize-none"
+                      className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-[#e0122a] transition-colors resize-none"
                     />
                   </div>
 
                   <button
                     onClick={handleSubmit}
                     disabled={loading || !form.name || !form.email || !form.message}
-                    className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#ff5200] hover:bg-[#e04800] disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-semibold transition-colors"
+                    className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#e0122a] hover:bg-[#0b0b0d] disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-semibold transition-colors"
                   >
                     {loading ? (
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

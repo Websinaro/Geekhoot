@@ -26,7 +26,7 @@ const StatCard = ({ title, value, change, trend, icon: Icon }: any) => (
   <Card className="rounded-lg border border-gray-100 dark:border-zinc-800 shadow-sm bg-white dark:bg-zinc-900 overflow-hidden group">
     <CardContent className="p-6">
       <div className="flex justify-between items-start mb-4">
-        <div className="w-12 h-12 bg-gray-50 dark:bg-zinc-800 rounded-lg flex items-center justify-center text-[#ff5200] group-hover:bg-[#ff5200] group-hover:text-white transition-all">
+        <div className="w-12 h-12 bg-gray-50 dark:bg-zinc-800 rounded-lg flex items-center justify-center text-[#e0122a] group-hover:bg-[#e0122a] group-hover:text-white transition-all">
           <Icon className="w-6 h-6" />
         </div>
         <div className={`flex items-center text-[10px] sm:text-xs font-bold ${trend === 'up' ? 'text-green-600 dark:text-green-400' : 'text-red-500 dark:text-red-400'} bg-gray-50 dark:bg-zinc-800 px-2 py-0.5 rounded-full border border-gray-100 dark:border-zinc-700 shrink-0 whitespace-nowrap`}>

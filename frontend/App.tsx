@@ -34,7 +34,7 @@ function AdminSkeleton() {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <div className="flex flex-col items-center gap-3">
-        <div className="w-10 h-10 rounded-full border-4 border-[#ff5200] border-t-transparent animate-spin" />
+        <div className="w-10 h-10 rounded-full border-4 border-[#e0122a] border-t-transparent animate-spin" />
         <p className="text-sm text-gray-400 font-medium">Loading admin panel…</p>
       </div>
     </div>
@@ -80,7 +80,7 @@ function AppRoutes() {
   }, [location]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground selection:bg-[#ff5200]/20 selection:text-[#ff5200] transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-background text-foreground selection:bg-[#e0122a]/20 selection:text-[#e0122a] transition-colors duration-200">
       <Navbar />
       <main className="flex-grow">
         <Routes>

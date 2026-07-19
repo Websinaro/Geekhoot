@@ -5,7 +5,7 @@ import { Facebook, Youtube, Instagram, Mail, Phone, MapPin } from 'lucide-react'
 export default function Footer() {
   return (
     <footer className="bg-white dark:bg-zinc-950 border-t border-gray-100 dark:border-zinc-900 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-[#ff5200]/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-[#e0122a]/5 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 py-14 lg:py-20 relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
@@ -29,7 +29,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="w-10 h-10 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center text-gray-500 hover:bg-[#ff5200] hover:text-white hover:border-[#ff5200] transition-all duration-150 active:opacity-75 group"
+                className="w-10 h-10 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center text-gray-500 hover:bg-[#e0122a] hover:text-white hover:border-[#e0122a] transition-all duration-150 active:opacity-75 group"
               >
                 <Instagram className="w-4 h-4 group-hover:text-white transition-colors" aria-hidden="true" />
               </a>
@@ -38,7 +38,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="w-10 h-10 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center text-gray-500 hover:bg-[#ff5200] hover:text-white hover:border-[#ff5200] transition-all duration-150 active:opacity-75 group"
+                className="w-10 h-10 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center text-gray-500 hover:bg-[#e0122a] hover:text-white hover:border-[#e0122a] transition-all duration-150 active:opacity-75 group"
               >
                 <Facebook className="w-4 h-4 group-hover:text-white transition-colors" aria-hidden="true" />
               </a>
@@ -47,7 +47,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="YouTube"
-                className="w-10 h-10 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center text-gray-500 hover:bg-[#ff5200] hover:text-white hover:border-[#ff5200] transition-all duration-150 active:opacity-75 group"
+                className="w-10 h-10 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center text-gray-500 hover:bg-[#e0122a] hover:text-white hover:border-[#e0122a] transition-all duration-150 active:opacity-75 group"
               >
                 <Youtube className="w-4 h-4 group-hover:text-white transition-colors" aria-hidden="true" />
               </a>
@@ -56,7 +56,7 @@ export default function Footer() {
 
           {/* Shop */}
           <div className="space-y-5">
-            <h3 className="text-sm font-bold text-gray-900 dark:text-white tracking-wide border-l-2 border-[#ff5200] pl-3">
+            <h3 className="text-sm font-bold text-gray-900 dark:text-white tracking-wide border-l-2 border-[#e0122a] pl-3">
               Shop
             </h3>
             <ul className="space-y-3">
@@ -70,7 +70,7 @@ export default function Footer() {
                 <li key={label}>
                   <Link
                     to={to}
-                    className="text-sm text-gray-500 dark:text-gray-400 hover:text-[#ff5200] dark:hover:text-[#ff5200] transition-colors"
+                    className="text-sm text-gray-500 dark:text-gray-400 hover:text-[#e0122a] dark:hover:text-[#e0122a] transition-colors"
                   >
                     {label}
                   </Link>
@@ -81,7 +81,7 @@ export default function Footer() {
 
           {/* Support */}
           <div className="space-y-5">
-            <h3 className="text-sm font-bold text-gray-900 dark:text-white tracking-wide border-l-2 border-[#ff5200] pl-3">
+            <h3 className="text-sm font-bold text-gray-900 dark:text-white tracking-wide border-l-2 border-[#e0122a] pl-3">
               Support
             </h3>
             <ul className="space-y-3">
@@ -96,7 +96,7 @@ export default function Footer() {
                 <li key={label}>
                   <Link
                     to={to}
-                    className="text-sm text-gray-500 dark:text-gray-400 hover:text-[#ff5200] dark:hover:text-[#ff5200] transition-colors"
+                    className="text-sm text-gray-500 dark:text-gray-400 hover:text-[#e0122a] dark:hover:text-[#e0122a] transition-colors"
                   >
                     {label}
                   </Link>
@@ -107,7 +107,7 @@ export default function Footer() {
 
           {/* Legal */}
           <div className="space-y-5">
-            <h3 className="text-sm font-bold text-gray-900 dark:text-white tracking-wide border-l-2 border-[#ff5200] pl-3">
+            <h3 className="text-sm font-bold text-gray-900 dark:text-white tracking-wide border-l-2 border-[#e0122a] pl-3">
               Legal
             </h3>
             <ul className="space-y-3">
@@ -120,7 +120,7 @@ export default function Footer() {
                 <li key={label}>
                   <Link
                     to={to}
-                    className="text-sm text-gray-500 dark:text-gray-400 hover:text-[#ff5200] dark:hover:text-[#ff5200] transition-colors"
+                    className="text-sm text-gray-500 dark:text-gray-400 hover:text-[#e0122a] dark:hover:text-[#e0122a] transition-colors"
                   >
                     {label}
                   </Link>
@@ -131,12 +131,12 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="space-y-5">
-            <h3 className="text-sm font-bold text-gray-900 dark:text-white tracking-wide border-l-2 border-[#ff5200] pl-3">
+            <h3 className="text-sm font-bold text-gray-900 dark:text-white tracking-wide border-l-2 border-[#e0122a] pl-3">
               Contact Us
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-[#ff5200] shrink-0 mt-0.5" aria-hidden="true" />
+                <MapPin className="w-4 h-4 text-[#e0122a] shrink-0 mt-0.5" aria-hidden="true" />
                 <span className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
                   Kausthubham Pattara, Kurumpayam PO,<br />
                   Kallara, Thiruvananthapuram,<br />
@@ -144,19 +144,19 @@ export default function Footer() {
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-[#ff5200] shrink-0" aria-hidden="true" />
+                <Phone className="w-4 h-4 text-[#e0122a] shrink-0" aria-hidden="true" />
                 <a
                   href="tel:+916238777570"
-                  className="text-sm text-gray-500 dark:text-gray-400 hover:text-[#ff5200] transition-colors"
+                  className="text-sm text-gray-500 dark:text-gray-400 hover:text-[#e0122a] transition-colors"
                 >
                   +91 62387 77570
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="w-4 h-4 text-[#ff5200] shrink-0" aria-hidden="true" />
+                <Mail className="w-4 h-4 text-[#e0122a] shrink-0" aria-hidden="true" />
                 <a
                   href="mailto:mygeekhoot@gmail.com"
-                  className="text-sm text-gray-500 dark:text-gray-400 hover:text-[#ff5200] transition-colors"
+                  className="text-sm text-gray-500 dark:text-gray-400 hover:text-[#e0122a] transition-colors"
                 >
                   mygeekhoot@gmail.com
                 </a>
@@ -177,14 +177,14 @@ export default function Footer() {
               { to: '/refund-policy',   label: 'Refunds'        },
               { to: '/contact',         label: 'Contact'        },
             ].map(({ to, label }) => (
-              <Link key={to} to={to} className="text-xs text-gray-400 hover:text-[#ff5200] transition-colors">
+              <Link key={to} to={to} className="text-xs text-gray-400 hover:text-[#e0122a] transition-colors">
                 {label}
               </Link>
             ))}
           </div>
           <p className="text-xs text-gray-400 dark:text-gray-500">
             Powered by{' '}
-            <span className="text-[#ff5200] font-semibold">Websinaro</span>
+            <span className="text-[#e0122a] font-semibold">Websinaro</span>
           </p>
         </div>
       </div>

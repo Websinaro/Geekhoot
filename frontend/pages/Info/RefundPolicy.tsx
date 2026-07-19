@@ -15,8 +15,8 @@ export default function RefundPolicy() {
 
         {/* Header */}
         <div className="flex items-center gap-3 mb-8">
-          <div className="w-10 h-10 rounded-xl bg-[#ff5200]/10 flex items-center justify-center shrink-0">
-            <RefreshCw className="w-5 h-5 text-[#ff5200]" />
+          <div className="w-10 h-10 rounded-xl bg-[#e0122a]/10 flex items-center justify-center shrink-0">
+            <RefreshCw className="w-5 h-5 text-[#e0122a]" />
           </div>
           <div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Return & Refund Policy</h1>
@@ -35,7 +35,7 @@ export default function RefundPolicy() {
             ].map(({ label, value, sub }) => (
               <div key={label} className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-100 dark:border-zinc-800 p-5 text-center">
                 <p className="text-xs text-gray-400 mb-1">{label}</p>
-                <p className="text-xl font-bold text-[#ff5200]">{value}</p>
+                <p className="text-xl font-bold text-[#e0122a]">{value}</p>
                 <p className="text-xs text-gray-400 mt-0.5">{sub}</p>
               </div>
             ))}
@@ -47,7 +47,7 @@ export default function RefundPolicy() {
             <div className="space-y-5">
               {steps.map(({ step, title, desc }) => (
                 <div key={step} className="flex gap-4">
-                  <div className="w-8 h-8 rounded-full bg-[#ff5200] flex items-center justify-center shrink-0 text-white text-xs font-bold">{step}</div>
+                  <div className="w-8 h-8 rounded-full bg-[#e0122a] flex items-center justify-center shrink-0 text-white text-xs font-bold">{step}</div>
                   <div>
                     <p className="text-sm font-semibold text-gray-900 dark:text-white">{title}</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">{desc}</p>
@@ -101,15 +101,15 @@ export default function RefundPolicy() {
               <ul className="list-disc pl-5 space-y-1">
                 <li>Orders can be cancelled within <strong className="text-gray-700 dark:text-gray-300">24 hours</strong> of placing, provided production has not started.</li>
                 <li>Once production begins (especially for custom items), cancellation is not possible.</li>
-                <li>To cancel, email us immediately at <a href="mailto:mygeekhoot@gmail.com" className="text-[#ff5200] hover:underline">mygeekhoot@gmail.com</a> with your order ID.</li>
+                <li>To cancel, email us immediately at <a href="mailto:mygeekhoot@gmail.com" className="text-[#e0122a] hover:underline">mygeekhoot@gmail.com</a> with your order ID.</li>
               </ul>
             </section>
 
             <section className="space-y-2">
               <h2 className="text-base font-semibold text-gray-900 dark:text-white">Contact for Returns</h2>
               <p>
-                Email: <a href="mailto:mygeekhoot@gmail.com" className="text-[#ff5200] hover:underline">mygeekhoot@gmail.com</a><br />
-                Phone: <a href="tel:+916238777570" className="text-[#ff5200] hover:underline">+91 62387 77570</a><br />
+                Email: <a href="mailto:mygeekhoot@gmail.com" className="text-[#e0122a] hover:underline">mygeekhoot@gmail.com</a><br />
+                Phone: <a href="tel:+916238777570" className="text-[#e0122a] hover:underline">+91 62387 77570</a><br />
                 Address: Kausthubham Pattara, Kurumpayam PO, Kallara, Thiruvananthapuram, Kerala — 695608
               </p>
             </section>

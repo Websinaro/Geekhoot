@@ -57,7 +57,7 @@ export default function SplashScreen({ onFinish }: { onFinish: () => void }) {
           {/* Progress bar — scaleX (compositor-only, no layout recalc) */}
           <div className="absolute bottom-16 left-12 right-12 h-[3px] bg-gray-100 rounded-full overflow-hidden">
             <motion.div
-              className="h-full w-full bg-[#ff5200] origin-left"
+              className="h-full w-full bg-[#e0122a] origin-left"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 2.6, ease: 'linear' }}

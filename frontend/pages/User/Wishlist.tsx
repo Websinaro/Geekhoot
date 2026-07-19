@@ -77,7 +77,7 @@ export default function Wishlist() {
               Save items you like in your wishlist to purchase or customize them later.
             </p>
             <Link to="/products">
-              <Button className="bg-[#ff5200] hover:bg-orange-600 text-white font-bold rounded-full px-8 h-11 border-none shadow-sm cursor-pointer">
+              <Button className="bg-[#e0122a] hover:bg-red-600 text-white font-bold rounded-full px-8 h-11 border-none shadow-sm cursor-pointer">
                 Discover Products
               </Button>
             </Link>
@@ -122,7 +122,7 @@ export default function Wishlist() {
 
                   <div className="p-4 flex flex-col">
                     <p className="text-xs text-gray-400 dark:text-zinc-500 font-medium mb-1">{product.category}</p>
-                    <h3 className="font-semibold text-sm text-gray-900 dark:text-white group-hover:text-[#ff5200] transition-colors line-clamp-2 mb-2 min-h-[40px]">
+                    <h3 className="font-semibold text-sm text-gray-900 dark:text-white group-hover:text-[#e0122a] transition-colors line-clamp-2 mb-2 min-h-[40px]">
                       {product.name}
                     </h3>
                     
@@ -139,7 +139,7 @@ export default function Wishlist() {
                   <Button
                     onClick={() => handleMoveToCart(product)}
                     disabled={product.stock === 0}
-                    className="w-full h-11 bg-[#ff5200] hover:bg-[#e04800] text-white disabled:bg-gray-100 dark:disabled:bg-zinc-800 disabled:text-gray-400 dark:disabled:text-zinc-500 rounded-md text-sm font-bold transition-all flex items-center justify-center gap-2 border-none shadow-sm cursor-pointer"
+                    className="w-full h-11 bg-[#e0122a] hover:bg-[#0b0b0d] text-white disabled:bg-gray-100 dark:disabled:bg-zinc-800 disabled:text-gray-400 dark:disabled:text-zinc-500 rounded-md text-sm font-bold transition-all flex items-center justify-center gap-2 border-none shadow-sm cursor-pointer"
                   >
                     <ShoppingCart className="w-4 h-4" /> Move to Cart
                   </Button>

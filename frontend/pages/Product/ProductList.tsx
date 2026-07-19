@@ -178,7 +178,7 @@ export default function ProductList() {
           {isFiltered && (
             <button
               onClick={handleClearAll}
-              className="text-xs font-semibold text-[#ff5200] hover:underline"
+              className="text-xs font-semibold text-[#e0122a] hover:underline"
             >
               Clear All
             </button>
@@ -195,7 +195,7 @@ export default function ProductList() {
               className={cn(
                 "w-full text-left py-2 px-3 rounded-md text-sm transition-colors",
                 category === cat 
-                ? "bg-orange-50 dark:bg-orange-950/30 text-[#ff5200] font-bold" 
+                ? "bg-red-50 dark:bg-red-950/30 text-[#e0122a] font-bold" 
                 : "text-gray-600 dark:text-zinc-400 hover:bg-gray-50 dark:hover:bg-zinc-800"
               )}
             >
@@ -245,7 +245,7 @@ export default function ProductList() {
               className={cn(
                 "text-xs px-2.5 py-1 rounded border transition-colors",
                 minPrice === undefined && maxPrice === 250
-                  ? "border-[#ff5200] bg-orange-50 dark:bg-orange-950/30 text-[#ff5200] font-semibold"
+                  ? "border-[#e0122a] bg-red-50 dark:bg-red-950/30 text-[#e0122a] font-semibold"
                   : "border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800 text-gray-600 dark:text-zinc-400"
               )}
             >
@@ -256,7 +256,7 @@ export default function ProductList() {
               className={cn(
                 "text-xs px-2.5 py-1 rounded border transition-colors",
                 minPrice === 250 && maxPrice === 500
-                  ? "border-[#ff5200] bg-orange-50 dark:bg-orange-950/30 text-[#ff5200] font-semibold"
+                  ? "border-[#e0122a] bg-red-50 dark:bg-red-950/30 text-[#e0122a] font-semibold"
                   : "border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800 text-gray-600 dark:text-zinc-400"
               )}
             >
@@ -267,7 +267,7 @@ export default function ProductList() {
               className={cn(
                 "text-xs px-2.5 py-1 rounded border transition-colors",
                 minPrice === 500 && maxPrice === undefined
-                  ? "border-[#ff5200] bg-orange-50 dark:bg-orange-950/30 text-[#ff5200] font-semibold"
+                  ? "border-[#e0122a] bg-red-50 dark:bg-red-950/30 text-[#e0122a] font-semibold"
                   : "border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800 text-gray-600 dark:text-zinc-400"
               )}
             >
@@ -387,7 +387,7 @@ export default function ProductList() {
                                 setShowSuggestions(false);
                                 setPage(1);
                               }}
-                              className="text-xs font-semibold bg-orange-50 hover:bg-orange-100 text-[#ff5200] px-3 py-1 rounded-full transition-all"
+                              className="text-xs font-semibold bg-red-50 hover:bg-red-100 text-[#e0122a] px-3 py-1 rounded-full transition-all"
                             >
                               {cat}
                             </button>
@@ -444,7 +444,7 @@ export default function ProductList() {
                                 <p className="text-xs font-bold text-gray-900 dark:text-white truncate">{p.name}</p>
                                 <p className="text-[10px] text-gray-400 dark:text-zinc-500 font-medium">{p.category}</p>
                               </div>
-                              <p className="text-xs font-bold text-[#ff5200] shrink-0 pr-1">₹{p.price}</p>
+                              <p className="text-xs font-bold text-[#e0122a] shrink-0 pr-1">₹{p.price}</p>
                             </button>
                           ))}
                         </div>
@@ -455,7 +455,7 @@ export default function ProductList() {
               </div>
 
               <Select value={sort} onValueChange={setSort}>
-                <SelectTrigger className="w-[180px] h-10 rounded-md border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 text-sm focus:ring-1 focus:ring-orange-500">
+                <SelectTrigger className="w-[180px] h-10 rounded-md border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 text-sm focus:ring-1 focus:ring-red-500">
                   <SelectValue placeholder="Sort By" />
                 </SelectTrigger>
                 <SelectContent className="bg-white dark:bg-zinc-900 border-gray-100 dark:border-zinc-800">
@@ -552,7 +552,7 @@ export default function ProductList() {
                 <p className="text-gray-500 dark:text-zinc-400 mb-8">Try adjusting your filters or search keywords</p>
                 <Button 
                   onClick={handleClearAll}
-                  className="bg-[#ff5200] hover:bg-orange-600 text-white rounded-full px-8"
+                  className="bg-[#e0122a] hover:bg-red-600 text-white rounded-full px-8"
                 >
                   Clear all filters
                 </Button>

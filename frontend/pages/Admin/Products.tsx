@@ -187,7 +187,7 @@ export default function AdminProducts() {
                 </div>
                 <div className="bg-orange-50/70 dark:bg-orange-950/20 border border-orange-100 dark:border-orange-900/40 rounded-lg p-3.5 space-y-1 md:col-span-2">
                   <p className="text-xs font-bold text-orange-900 dark:text-orange-300 flex items-center gap-1.5">
-                    <Info className="w-4 h-4 text-[#ff5200]" /> Real Price & Discount Calculation Notice
+                    <Info className="w-4 h-4 text-[#e0122a]" /> Real Price & Discount Calculation Notice
                   </p>
                   <p className="text-[11px] text-gray-600 dark:text-zinc-400 leading-normal">
                     Please provide the <strong>real, current Selling Price</strong> and the <strong>Original Price (MRP)</strong> for discount calculation. 

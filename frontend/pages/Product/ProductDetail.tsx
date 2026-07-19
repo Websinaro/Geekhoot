@@ -55,14 +55,14 @@ export default function ProductDetail() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#f1f3f6] dark:bg-zinc-950 px-4">
         <div className="text-center max-w-md bg-white dark:bg-zinc-900 p-8 rounded-lg shadow-sm border border-gray-100 dark:border-zinc-800">
-          <div className="w-16 h-16 bg-red-50 dark:bg-red-950/30 text-[#ff5200] rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-red-50 dark:bg-red-950/30 text-[#e0122a] rounded-full flex items-center justify-center mx-auto mb-4">
              <span className="text-2xl font-bold">!</span>
           </div>
           <h2 className="text-xl font-bold text-gray-950 dark:text-white mb-2">Product Not Found</h2>
           <p className="text-sm text-gray-500 dark:text-zinc-400 mb-6">
             The product you are trying to view does not exist or has been removed.
           </p>
-          <Button onClick={() => navigate('/products')} className="bg-[#ff5200] hover:bg-[#e04800] text-white font-bold w-full rounded-sm h-11 border-none">
+          <Button onClick={() => navigate('/products')} className="bg-[#e0122a] hover:bg-[#0b0b0d] text-white font-bold w-full rounded-sm h-11 border-none">
             Back to Shop
           </Button>
         </div>
@@ -299,14 +299,14 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#f1f3f6] dark:bg-zinc-950 px-4">
         <div className="text-center max-w-md bg-white dark:bg-zinc-900 p-8 rounded-lg shadow-sm border border-gray-100 dark:border-zinc-800">
-          <div className="w-16 h-16 bg-red-50 dark:bg-red-950/30 text-[#ff5200] rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-red-50 dark:bg-red-950/30 text-[#e0122a] rounded-full flex items-center justify-center mx-auto mb-4">
              <span className="text-2xl font-bold">!</span>
           </div>
           <h2 className="text-xl font-bold text-gray-950 dark:text-white mb-2">Product Not Found</h2>
           <p className="text-sm text-gray-500 dark:text-zinc-400 mb-6">
             The product you are trying to view does not exist or has been removed.
           </p>
-          <Button onClick={() => navigate('/products')} className="bg-[#ff5200] hover:bg-[#e04800] text-white font-bold w-full rounded-sm h-11 border-none">
+          <Button onClick={() => navigate('/products')} className="bg-[#e0122a] hover:bg-[#0b0b0d] text-white font-bold w-full rounded-sm h-11 border-none">
             Back to Shop
           </Button>
         </div>
@@ -335,9 +335,9 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
       <div className="max-w-[1440px] mx-auto px-4 py-4">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-xs text-gray-500 dark:text-zinc-500 mb-4 bg-white dark:bg-zinc-900 p-3 rounded shadow-sm">
-          <Link to="/" className="hover:text-blue-600 dark:hover:text-blue-400">Home</Link>
+          <Link to="/" className="hover:text-red-600 dark:hover:text-red-400">Home</Link>
           <ChevronRight className="w-3 h-3" />
-          <Link to="/products" className="hover:text-blue-600 dark:hover:text-blue-400">Collection</Link>
+          <Link to="/products" className="hover:text-red-600 dark:hover:text-red-400">Collection</Link>
           <ChevronRight className="w-3 h-3" />
           <span className="text-gray-900 dark:text-zinc-200 font-medium truncate">{product.name}</span>
         </nav>
@@ -362,7 +362,7 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                     onClick={() => setActiveImage(i)}
                     aria-label={`View image ${i + 1} of ${product.images.length}`}
                     aria-pressed={activeImage === i}
-                    className={`w-16 h-16 shrink-0 rounded border-2 transition-all p-1 flex items-center justify-center ${activeImage === i ? 'border-[#ff5200]' : 'border-gray-100 dark:border-zinc-800'}`}
+                    className={`w-16 h-16 shrink-0 rounded border-2 transition-all p-1 flex items-center justify-center ${activeImage === i ? 'border-[#e0122a]' : 'border-gray-100 dark:border-zinc-800'}`}
                   >
                     <LazyProductImage
                       src={img}
@@ -381,10 +381,10 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                   onClick={handleAddToCart}
                   disabled={product.stock === 0 || sizeRequiredButNotChosen || effectiveStock === 0}
                 >
-                  <ShoppingCart className="w-5 h-5 text-[#ff5200]" /> {product.stock === 0 ? 'Out of Stock' : (hasSizes && effectiveStock === 0 && selectedSize) ? 'Out of Stock' : 'Add to Cart'}
+                  <ShoppingCart className="w-5 h-5 text-[#e0122a]" /> {product.stock === 0 ? 'Out of Stock' : (hasSizes && effectiveStock === 0 && selectedSize) ? 'Out of Stock' : 'Add to Cart'}
                 </Button>
                 <Button 
-                  className="h-14 rounded-sm bg-[#fb641b] hover:bg-[#ff5200] text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 shadow-sm disabled:bg-gray-300 dark:disabled:bg-zinc-700 disabled:text-gray-500 dark:disabled:text-zinc-400 disabled:cursor-not-allowed border-none"
+                  className="h-14 rounded-sm bg-[#c00e22] hover:bg-[#e0122a] text-white font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 shadow-sm disabled:bg-gray-300 dark:disabled:bg-zinc-700 disabled:text-gray-500 dark:disabled:text-zinc-400 disabled:cursor-not-allowed border-none"
                   onClick={handleWhatsAppOrder}
                   disabled={product.stock === 0 || sizeRequiredButNotChosen || effectiveStock === 0}
                 >
@@ -392,7 +392,7 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                 </Button>
               </div>
               {sizeRequiredButNotChosen && (
-                <p className="text-[11px] text-center text-[#ff5200] font-bold mt-2">Select a size to continue</p>
+                <p className="text-[11px] text-center text-[#e0122a] font-bold mt-2">Select a size to continue</p>
               )}
 
               {/* Wishlist Toggle Action Button */}
@@ -496,8 +496,8 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                               outOfStock
                                 ? "bg-gray-100 dark:bg-zinc-800 text-gray-300 dark:text-zinc-600 border-gray-200 dark:border-zinc-700 cursor-not-allowed line-through"
                                 : isSelected
-                                  ? "bg-[#fb641b] border-[#fb641b] text-white shadow-sm"
-                                  : "bg-white dark:bg-zinc-900 border-gray-300 dark:border-zinc-700 text-gray-800 dark:text-zinc-200 hover:border-[#ff5200] hover:text-[#ff5200]"
+                                  ? "bg-[#c00e22] border-[#c00e22] text-white shadow-sm"
+                                  : "bg-white dark:bg-zinc-900 border-gray-300 dark:border-zinc-700 text-gray-800 dark:text-zinc-200 hover:border-[#e0122a] hover:text-[#e0122a]"
                             )}
                           >
                             {size}
@@ -596,7 +596,7 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                                     </div>
                                 </div>
                                 <textarea
-                                    className="w-full border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-gray-900 dark:text-zinc-100 rounded-md p-4 text-sm focus:ring-1 focus:ring-[#ff5200] outline-none"
+                                    className="w-full border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-gray-900 dark:text-zinc-100 rounded-md p-4 text-sm focus:ring-1 focus:ring-[#e0122a] outline-none"
                                     placeholder="Write your review here..."
                                     rows={4}
                                     value={reviewData.comment}
@@ -643,11 +643,11 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
                                             className={cn(
                                                 "flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full border transition-all cursor-pointer",
                                                 userLiked
-                                                    ? "bg-orange-50 dark:bg-orange-950/30 text-[#ff5200] border-orange-200 dark:border-orange-900/50 font-semibold"
+                                                    ? "bg-red-50 dark:bg-red-950/30 text-[#e0122a] border-red-200 dark:border-red-900/50 font-semibold"
                                                     : "bg-white dark:bg-zinc-800 text-gray-500 dark:text-zinc-400 border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-700"
                                             )}
                                         >
-                                            <ThumbsUp className={cn("w-3 h-3", userLiked && "fill-[#ff5200]")} />
+                                            <ThumbsUp className={cn("w-3 h-3", userLiked && "fill-[#e0122a]")} />
                                             <span>Helpful ({review.likes || 0})</span>
                                         </button>
 
@@ -693,9 +693,9 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
           <div className="space-y-4">
             <button 
               onClick={() => processOrderWithLocation(true)}
-              className="w-full flex items-center gap-4 p-4 rounded-lg bg-orange-50 dark:bg-orange-950/30 border border-orange-200 dark:border-orange-900/50 hover:bg-orange-100 dark:hover:bg-orange-950/50 transition-colors text-left"
+              className="w-full flex items-center gap-4 p-4 rounded-lg bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900/50 hover:bg-red-100 dark:hover:bg-red-950/50 transition-colors text-left"
             >
-              <MapPinned className="w-6 h-6 text-[#ff5200]" />
+              <MapPinned className="w-6 h-6 text-[#e0122a]" />
               <div>
                 <p className="font-bold text-gray-900 dark:text-white">Current Location</p>
                 <p className="text-xs text-gray-500 dark:text-zinc-400">Detected via GPS for precision</p>
@@ -721,7 +721,7 @@ ${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
         <div className="fixed inset-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm z-[100] flex items-center justify-center">
             <div className="text-center space-y-4">
                 <div className="w-48 h-2 bg-zinc-200 dark:bg-zinc-700 rounded overflow-hidden mx-auto relative">
-                  <div className="absolute top-0 left-0 h-full bg-[#ff5200] rounded animate-pulse w-full" />
+                  <div className="absolute top-0 left-0 h-full bg-[#e0122a] rounded animate-pulse w-full" />
                 </div>
                 <p className="text-sm font-bold text-gray-600 dark:text-zinc-300 animate-pulse">Processing Order...</p>
             </div>

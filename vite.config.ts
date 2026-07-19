@@ -16,7 +16,7 @@ export default defineConfig(() => {
           name: 'Geekhoot Printing Store',
           short_name: 'Geekhoot',
           description: 'Premium print processing and customization ecommerce store.',
-          theme_color: '#ff5200',
+          theme_color: '#e0122a',
           background_color: '#ffffff',
           display: 'standalone',
           scope: '/',

@@ -8,8 +8,8 @@ export default function TermsOfService() {
 
         {/* Header */}
         <div className="flex items-center gap-3 mb-8">
-          <div className="w-10 h-10 rounded-xl bg-[#ff5200]/10 flex items-center justify-center shrink-0">
-            <FileText className="w-5 h-5 text-[#ff5200]" />
+          <div className="w-10 h-10 rounded-xl bg-[#e0122a]/10 flex items-center justify-center shrink-0">
+            <FileText className="w-5 h-5 text-[#e0122a]" />
           </div>
           <div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Terms of Service</h1>
@@ -99,7 +99,7 @@ export default function TermsOfService() {
           <section className="space-y-2">
             <h2 className="text-base font-semibold text-gray-900 dark:text-white">10. Contact</h2>
             <p>
-              For questions regarding these Terms, contact us at <a href="mailto:mygeekhoot@gmail.com" className="text-[#ff5200] hover:underline">mygeekhoot@gmail.com</a>.
+              For questions regarding these Terms, contact us at <a href="mailto:mygeekhoot@gmail.com" className="text-[#e0122a] hover:underline">mygeekhoot@gmail.com</a>.
             </p>
           </section>
 

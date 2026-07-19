@@ -101,7 +101,7 @@ export default function Profile() {
               <div className="relative">
                 <Avatar className="w-32 h-32 rounded-full shadow-sm border-4 border-gray-50 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-800">
                   <AvatarImage src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user.name}`} />
-                  <AvatarFallback className="text-3xl font-bold bg-[#ff5200] text-white">
+                  <AvatarFallback className="text-3xl font-bold bg-[#e0122a] text-white">
                     {user.name.charAt(0)}
                   </AvatarFallback>
                 </Avatar>
@@ -109,7 +109,7 @@ export default function Profile() {
               <div className="text-center md:text-left">
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{user.name}</h1>
                 <div className="flex flex-wrap justify-center md:justify-start gap-2">
-                  <Badge className="bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-900/50 font-bold px-3 py-1">
+                  <Badge className="bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400 border border-red-100 dark:border-red-900/50 font-bold px-3 py-1">
                     {user.role === 'ADMIN' ? 'Administrator' : 'Customer'}
                   </Badge>
                   <p className="text-sm text-gray-400 dark:text-zinc-500 font-medium">Member Account</p>
@@ -124,7 +124,7 @@ export default function Profile() {
                   <Button 
                     onClick={() => setIsEditing(true)}
                     variant="outline" 
-                    className="border-gray-300 dark:border-zinc-700 text-blue-600 dark:text-blue-400 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30 font-bold text-sm h-9 gap-1.5"
+                    className="border-gray-300 dark:border-zinc-700 text-red-600 dark:text-red-400 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950/30 font-bold text-sm h-9 gap-1.5"
                   >
                     <Edit3 className="w-4 h-4" /> Edit Profile
                   </Button>
@@ -133,7 +133,7 @@ export default function Profile() {
 
               {isEditing ? (
                 <form onSubmit={handleSubmit} className="p-8 space-y-6">
-                  <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Account Details</p>
+                  <p className="text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wider">Account Details</p>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
                       <label className="block text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-2">Display Name</label>
@@ -143,7 +143,7 @@ export default function Profile() {
                         value={formData.name}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
+                        className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-red-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
                       />
                     </div>
                     <div>
@@ -154,7 +154,7 @@ export default function Profile() {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
+                        className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-red-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
                       />
                     </div>
                     <div>
@@ -165,14 +165,14 @@ export default function Profile() {
                         value={formData.phone}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
+                        className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-red-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
                       />
                     </div>
                   </div>
 
                   <div className="border-t border-gray-100 dark:border-zinc-800 pt-6 space-y-6">
                     <div>
-                      <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-1">Detailed Delivery Address</p>
+                      <p className="text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wider mb-1">Detailed Delivery Address</p>
                       <p className="text-[11px] text-gray-400 dark:text-zinc-500 mb-4 font-medium">Please fill in these details strictly to complete orders via WhatsApp.</p>
                       
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -184,7 +184,7 @@ export default function Profile() {
                             value={formData.houseNo}
                             onChange={handleInputChange}
                             placeholder="e.g. Flat 4B, Emerald Apts"
-                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
+                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-red-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
                           />
                         </div>
                         <div className="md:col-span-1">
@@ -195,7 +195,7 @@ export default function Profile() {
                             value={formData.streetNear}
                             onChange={handleInputChange}
                             placeholder="e.g. Baker Street, near Clocktower"
-                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
+                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-red-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
                           />
                         </div>
                         <div className="md:col-span-1">
@@ -206,7 +206,7 @@ export default function Profile() {
                             value={formData.road}
                             onChange={handleInputChange}
                             placeholder="e.g. Ring Road, Sector 4"
-                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
+                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-red-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
                           />
                         </div>
 
@@ -218,7 +218,7 @@ export default function Profile() {
                             onChange={handleInputChange}
                             placeholder="e.g. Baker Street, Sector 4"
                             rows={3}
-                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100 bg-white dark:bg-zinc-800 resize-none overflow-y-auto min-h-[5.5rem] max-h-32"
+                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 focus:outline-none focus:border-red-500 font-medium text-sm text-gray-800 dark:text-zinc-100 bg-white dark:bg-zinc-800 resize-none overflow-y-auto min-h-[5.5rem] max-h-32"
                           />
                         </div>
 
@@ -230,7 +230,7 @@ export default function Profile() {
                             value={formData.district}
                             onChange={handleInputChange}
                             placeholder="e.g. Ernakulam"
-                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
+                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-red-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
                           />
                         </div>
                         <div>
@@ -241,7 +241,7 @@ export default function Profile() {
                             value={formData.state}
                             onChange={handleInputChange}
                             placeholder="e.g. Kerala"
-                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
+                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-red-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
                           />
                         </div>
                         <div>
@@ -252,7 +252,7 @@ export default function Profile() {
                             value={formData.pincode}
                             onChange={handleInputChange}
                             placeholder="e.g. 682011"
-                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-blue-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
+                            className="w-full px-4 py-2.5 rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:border-red-500 font-medium text-sm text-gray-800 dark:text-zinc-100"
                           />
                         </div>
                       </div>
@@ -263,7 +263,7 @@ export default function Profile() {
                     <Button 
                       type="submit" 
                       disabled={isSaving}
-                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 h-11 gap-1.5 border-none"
+                      className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 h-11 gap-1.5 border-none"
                     >
                       <Save className="w-4 h-4" /> {isSaving ? 'Saving...' : 'Save Details'}
                     </Button>
@@ -297,7 +297,7 @@ export default function Profile() {
                     <p className="text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-widest mb-2">Detailed Shipping Address</p>
                     <div className="bg-gray-50 dark:bg-zinc-800 p-6 rounded-lg border border-gray-100 dark:border-zinc-700 space-y-4">
                       <div className="flex items-start gap-4">
-                        <MapPin className="w-6 h-6 text-orange-500 shrink-0 mt-1" />
+                        <MapPin className="w-6 h-6 text-red-500 shrink-0 mt-1" />
                         <div className="space-y-3 w-full">
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
@@ -385,7 +385,7 @@ export default function Profile() {
                   onClick={() => setTheme('light')}
                   className={`flex flex-col items-center justify-center p-3 rounded border text-[11px] font-bold transition-all gap-1.5 cursor-pointer ${
                     theme === 'light'
-                      ? 'border-[#ff5200] bg-orange-50/10 text-[#ff5200] dark:bg-orange-950/20'
+                      ? 'border-[#e0122a] bg-red-50/10 text-[#e0122a] dark:bg-red-950/20'
                       : 'border-gray-100 dark:border-zinc-800 text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:hover:bg-zinc-800'
                   }`}
                 >
@@ -396,7 +396,7 @@ export default function Profile() {
                   onClick={() => setTheme('dark')}
                   className={`flex flex-col items-center justify-center p-3 rounded border text-[11px] font-bold transition-all gap-1.5 cursor-pointer ${
                     theme === 'dark'
-                      ? 'border-[#ff5200] bg-orange-50/10 text-[#ff5200] dark:bg-orange-950/20'
+                      ? 'border-[#e0122a] bg-red-50/10 text-[#e0122a] dark:bg-red-950/20'
                       : 'border-gray-100 dark:border-zinc-800 text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:hover:bg-zinc-800'
                   }`}
                 >
@@ -407,7 +407,7 @@ export default function Profile() {
                   onClick={() => setTheme('system')}
                   className={`flex flex-col items-center justify-center p-3 rounded border text-[11px] font-bold transition-all gap-1.5 cursor-pointer ${
                     theme === 'system'
-                      ? 'border-[#ff5200] bg-orange-50/10 text-[#ff5200] dark:bg-orange-950/20'
+                      ? 'border-[#e0122a] bg-red-50/10 text-[#e0122a] dark:bg-red-950/20'
                       : 'border-gray-100 dark:border-zinc-800 text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:hover:bg-zinc-800'
                   }`}
                 >
@@ -417,12 +417,12 @@ export default function Profile() {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-[#ff5200] to-orange-600 rounded-lg p-8 text-white shadow-md">
+            <div className="bg-gradient-to-br from-[#e0122a] to-red-600 rounded-lg p-8 text-white shadow-md">
                <h4 className="text-xl font-bold mb-2">WhatsApp Ordering</h4>
-               <p className="text-sm text-orange-50 mb-6 font-medium">Make sure your detailed address (House No, Street Near, Road) is complete before purchasing items.</p>
+               <p className="text-sm text-red-50 mb-6 font-medium">Make sure your detailed address (House No, Street Near, Road) is complete before purchasing items.</p>
                <Button 
                 onClick={() => navigate('/')}
-                className="w-full bg-white text-[#ff5200] hover:bg-orange-50 font-bold h-10 rounded shadow-sm border-none cursor-pointer"
+                className="w-full bg-white text-[#e0122a] hover:bg-red-50 font-bold h-10 rounded shadow-sm border-none cursor-pointer"
                >
                  Go to Store
                </Button>

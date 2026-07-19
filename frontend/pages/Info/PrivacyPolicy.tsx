@@ -8,8 +8,8 @@ export default function PrivacyPolicy() {
 
         {/* Header */}
         <div className="flex items-center gap-3 mb-8">
-          <div className="w-10 h-10 rounded-xl bg-[#ff5200]/10 flex items-center justify-center shrink-0">
-            <Shield className="w-5 h-5 text-[#ff5200]" />
+          <div className="w-10 h-10 rounded-xl bg-[#e0122a]/10 flex items-center justify-center shrink-0">
+            <Shield className="w-5 h-5 text-[#e0122a]" />
           </div>
           <div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Privacy Policy</h1>
@@ -83,7 +83,7 @@ export default function PrivacyPolicy() {
               <li>Request deletion of your account and associated data.</li>
               <li>Opt out of marketing communications at any time.</li>
             </ul>
-            <p className="mt-2">To exercise any of these rights, email us at <a href="mailto:mygeekhoot@gmail.com" className="text-[#ff5200] hover:underline">mygeekhoot@gmail.com</a>.</p>
+            <p className="mt-2">To exercise any of these rights, email us at <a href="mailto:mygeekhoot@gmail.com" className="text-[#e0122a] hover:underline">mygeekhoot@gmail.com</a>.</p>
           </section>
 
           <section className="space-y-2">
@@ -103,7 +103,7 @@ export default function PrivacyPolicy() {
 
           <section className="space-y-2">
             <h2 className="text-base font-semibold text-gray-900 dark:text-white">11. Contact</h2>
-            <p>For any privacy-related questions, contact us at <a href="mailto:mygeekhoot@gmail.com" className="text-[#ff5200] hover:underline">mygeekhoot@gmail.com</a> or call <a href="tel:+916238777570" className="text-[#ff5200] hover:underline">+91 62387 77570</a>.</p>
+            <p>For any privacy-related questions, contact us at <a href="mailto:mygeekhoot@gmail.com" className="text-[#e0122a] hover:underline">mygeekhoot@gmail.com</a> or call <a href="tel:+916238777570" className="text-[#e0122a] hover:underline">+91 62387 77570</a>.</p>
           </section>
 
         </div>

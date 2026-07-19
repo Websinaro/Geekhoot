@@ -135,7 +135,7 @@ export default function Orders() {
                              e.stopPropagation();
                              setSelectedOrder(order);
                            }}
-                           className="text-[#ff5200] font-bold hover:bg-orange-50 dark:hover:bg-orange-950/30 gap-2 cursor-pointer transition-all"
+                           className="text-[#e0122a] font-bold hover:bg-red-50 dark:hover:bg-red-950/30 gap-2 cursor-pointer transition-all"
                          >
                            View Details <ArrowRight className="w-4 h-4" />
                          </Button>
@@ -152,7 +152,7 @@ export default function Orders() {
            <Package className="w-16 h-16 text-gray-100 dark:text-zinc-700 mx-auto mb-6" />
            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">No Orders Found</h3>
            <p className="text-sm text-gray-400 dark:text-zinc-500 mb-8 max-w-xs mx-auto font-medium">Looks like you haven't placed any orders yet. Explore our products and start shopping.</p>
-           <Button onClick={() => navigate('/products')} className="bg-[#fb641b] hover:bg-[#ff5200] text-white font-bold h-11 px-8 rounded-sm shadow-sm border-none">Start Shopping</Button>
+           <Button onClick={() => navigate('/products')} className="bg-[#c00e22] hover:bg-[#e0122a] text-white font-bold h-11 px-8 rounded-sm shadow-sm border-none">Start Shopping</Button>
         </div>
       )}
 
@@ -178,7 +178,7 @@ export default function Orders() {
                   <div className="relative flex justify-between">
                     <div className="absolute top-5 left-0 w-full h-1 bg-gray-100 dark:bg-zinc-800 rounded-full"></div>
                     <div 
-                      className="absolute top-5 left-0 h-1 bg-[#ff5200] rounded-full transition-all duration-700"
+                      className="absolute top-5 left-0 h-1 bg-[#e0122a] rounded-full transition-all duration-700"
                       style={{ width: `${(STATUS_CONFIG[selectedOrder.status]?.step || 0) * 25}%` }}
                     ></div>
                     
@@ -192,10 +192,10 @@ export default function Orders() {
                       const isActive = (STATUS_CONFIG[selectedOrder.status]?.step || 0) >= item.step;
                       return (
                         <div key={item.step} className="flex flex-col items-center z-10">
-                          <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border-2 ${isActive ? 'bg-[#ff5200] border-[#ff5200] text-white shadow-md' : 'bg-white dark:bg-zinc-900 border-gray-100 dark:border-zinc-700 text-gray-300 dark:text-zinc-600'}`}>
+                          <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border-2 ${isActive ? 'bg-[#e0122a] border-[#e0122a] text-white shadow-md' : 'bg-white dark:bg-zinc-900 border-gray-100 dark:border-zinc-700 text-gray-300 dark:text-zinc-600'}`}>
                             <item.icon className="w-5 h-5" />
                           </div>
-                          <p className={`mt-2 text-[10px] font-bold ${isActive ? 'text-[#ff5200]' : 'text-gray-400 dark:text-zinc-500'}`}>
+                          <p className={`mt-2 text-[10px] font-bold ${isActive ? 'text-[#e0122a]' : 'text-gray-400 dark:text-zinc-500'}`}>
                             {item.label}
                           </p>
                         </div>
@@ -262,7 +262,7 @@ export default function Orders() {
                       {/* Vertical Tracker Milestones Stepper */}
                       <div className="space-y-4 pt-1 bg-white dark:bg-zinc-900 p-4 h-[220px] overflow-y-auto rounded-lg border border-slate-100 dark:border-zinc-700 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
                         <h4 className="text-xs font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-widest border-b border-gray-50 dark:border-zinc-800 pb-2 flex items-center gap-1.5 sticky top-0 bg-white dark:bg-zinc-900 z-10">
-                          <MapPin className="w-4 h-4 text-orange-500" /> Transit Checkpoint Milestones
+                          <MapPin className="w-4 h-4 text-[#e0122a]" /> Transit Checkpoint Milestones
                         </h4>
                         <div className="relative pl-6 border-l border-blue-105 dark:border-blue-900/50 space-y-6 mt-2">
                             {trackingInfo.milestones.map((log, idx) => {
@@ -270,14 +270,14 @@ export default function Orders() {
                               return (
                                 <div key={idx} className="relative">
                                   {/* Milestone Pin dot */}
-                                  <div className={`absolute -left-[30px] top-0.5 w-4 h-4 rounded-full border-2 bg-white dark:bg-zinc-900 flex items-center justify-center ${isLatest ? 'border-[#ff5200]' : 'border-blue-400 dark:border-blue-700'}`}>
-                                    <div className={`w-1.5 h-1.5 rounded-full ${isLatest ? 'bg-[#ff5200] animate-pulse' : 'bg-blue-400 dark:bg-blue-700'}`}></div>
+                                  <div className={`absolute -left-[30px] top-0.5 w-4 h-4 rounded-full border-2 bg-white dark:bg-zinc-900 flex items-center justify-center ${isLatest ? 'border-[#e0122a]' : 'border-blue-400 dark:border-blue-700'}`}>
+                                    <div className={`w-1.5 h-1.5 rounded-full ${isLatest ? 'bg-[#e0122a] animate-pulse' : 'bg-blue-400 dark:bg-blue-700'}`}></div>
                                   </div>
 
                                   {/* Label and Content */}
                                   <div className="space-y-1">
                                     <div className="flex flex-wrap items-center justify-between gap-1.5">
-                                      <span className={`text-[11px] font-bold ${isLatest ? 'text-[#ff5200]' : 'text-gray-800 dark:text-zinc-200'}`}>
+                                      <span className={`text-[11px] font-bold ${isLatest ? 'text-[#e0122a]' : 'text-gray-800 dark:text-zinc-200'}`}>
                                         {log.location}
                                       </span>
                                       <span className="text-[10px] font-mono text-gray-400 dark:text-zinc-500 whitespace-nowrap">
@@ -297,7 +297,7 @@ export default function Orders() {
                       {/* Help/Hotline Footer */}
                       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 pt-2 text-[11px] text-gray-400 dark:text-zinc-500 font-medium border-t border-slate-100 dark:border-zinc-700">
                         <span>Need route support? Courier Helpline: <span className="font-bold text-gray-700 dark:text-zinc-300 font-mono">{trackingInfo.carrierSupportPhone}</span></span>
-                        <span className="text-[9px] uppercase tracking-widest bg-orange-50 dark:bg-orange-950/30 text-[#ff5200] px-2 py-0.5 rounded font-bold">Autodetected {trackingInfo.carrier}</span>
+                        <span className="text-[9px] uppercase tracking-widest bg-red-50 dark:bg-red-950/30 text-[#e0122a] px-2 py-0.5 rounded font-bold">Autodetected {trackingInfo.carrier}</span>
                       </div>
                     </div>
                   );
@@ -357,7 +357,7 @@ export default function Orders() {
                 <div className="flex justify-end gap-3 pt-4 font-sans">
                   <Button 
                     variant="outline"
-                    className="h-9 px-4 border-[#ff5200] text-[#ff5200] hover:bg-orange-50 dark:hover:bg-orange-950/30 hover:text-[#e04800] text-xs font-bold cursor-pointer transition-all active:scale-[0.98] rounded-md shadow-sm border-2"
+                    className="h-9 px-4 border-[#e0122a] text-[#e0122a] hover:bg-red-50 dark:hover:bg-red-950/30 hover:text-[#0b0b0d] text-xs font-bold cursor-pointer transition-all active:scale-[0.98] rounded-md shadow-sm border-2"
                     onClick={() => {
                       setSelectedOrder(null);
                       navigate(`/product/${selectedOrder.product.id}`);

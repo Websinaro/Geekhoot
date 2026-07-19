@@ -19,7 +19,7 @@ export async function sendVerificationEmail(email: string, name: string, code: s
   const codeHtml = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; padding: 32px; border: 1px solid #e2e8f0; border-radius: 12px; max-width: 500px; margin: 20px auto; color: #1e293b; background-color: #ffffff; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
       <div style="text-align: center; margin-bottom: 24px;">
-        <h1 style="color: #ff5200; font-size: 28px; font-weight: 800; margin: 0; letter-spacing: -0.025em; text-transform: uppercase; font-style: italic;">Geekhoot</h1>
+        <h1 style="color: #e0122a; font-size: 28px; font-weight: 800; margin: 0; letter-spacing: -0.025em; text-transform: uppercase; font-style: italic;">Geekhoot</h1>
         <p style="color: #64748b; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin: 4px 0 0 0;">Premium Printing Store</p>
       </div>
       
@@ -29,7 +29,7 @@ export async function sendVerificationEmail(email: string, name: string, code: s
         Thank you for signing up with Geekhoot. To complete your registration and activate your account, please enter the professional verification code below:
       </p>
       
-      <div style="text-align: center; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px; margin: 24px 0; letter-spacing: 6px; font-size: 28px; font-weight: 800; color: #ff5200; font-family: monospace;">
+      <div style="text-align: center; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px; margin: 24px 0; letter-spacing: 6px; font-size: 28px; font-weight: 800; color: #e0122a; font-family: monospace;">
         ${code}
       </div>
       

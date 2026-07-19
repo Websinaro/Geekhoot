@@ -93,8 +93,8 @@ export default function Navbar() {
                 className="h-8 w-8 object-contain dark:invert transition-opacity group-hover:opacity-80"
                 draggable={false}
               />
-              <span className="text-xl font-black tracking-tight text-gray-900 dark:text-white group-hover:text-[#ff5200] transition-colors">
-                GeekHoot
+              <span style={{ fontFamily: 'var(--font-heading)' }} className="text-xl font-bold tracking-tight text-gray-900 dark:text-white group-hover:text-[#e0122a] transition-colors">
+                Geek<span className="text-[#e0122a] group-hover:text-gray-900 dark:group-hover:text-white transition-colors">Hoot</span>
               </span>
             </Link>
           </div>
@@ -106,7 +106,7 @@ export default function Navbar() {
                 type="search"
                 placeholder="Search for products, brands and more"
                 aria-label="Search products"
-                className="w-full h-10 pl-10 pr-4 bg-[#f0f5ff] dark:bg-zinc-900 border-none focus-visible:ring-1 focus-visible:ring-orange-500 text-sm text-gray-900 dark:text-white rounded shadow-inner"
+                className="w-full h-10 pl-10 pr-4 bg-[#f4f4f5] dark:bg-zinc-900 border-none focus-visible:ring-1 focus-visible:ring-red-500 text-sm text-gray-900 dark:text-white rounded-full shadow-inner"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -121,7 +121,7 @@ export default function Navbar() {
             <DropdownMenu>
               <DropdownMenuTrigger
                 aria-label={themeLabel + ' — click to change theme'}
-                className="p-2 rounded-full hover:bg-gray-50 dark:hover:bg-zinc-900 transition-all cursor-pointer text-gray-600 dark:text-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
+                className="p-2 rounded-full hover:bg-gray-50 dark:hover:bg-zinc-900 transition-all cursor-pointer text-gray-600 dark:text-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
               >
                 {theme === 'light'  && <Sun    className="w-5 h-5 text-amber-500"  aria-hidden="true" />}
                 {theme === 'dark'   && <Moon   className="w-5 h-5 text-indigo-400" aria-hidden="true" />}
@@ -133,15 +133,15 @@ export default function Navbar() {
                 <DropdownMenuSeparator className="bg-gray-100 dark:bg-zinc-900" />
                 <DropdownMenuItem onClick={() => setTheme('light')} className="cursor-pointer text-sm font-semibold flex items-center justify-between dark:hover:bg-zinc-900 focus:bg-gray-50 dark:focus:bg-zinc-900">
                   <span className="flex items-center gap-2"><Sun  className="w-4 h-4 text-amber-500"  aria-hidden="true" /> Light</span>
-                  {theme === 'light'  && <Check className="w-3.5 h-3.5 text-orange-500" aria-hidden="true" />}
+                  {theme === 'light'  && <Check className="w-3.5 h-3.5 text-red-500" aria-hidden="true" />}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme('dark')} className="cursor-pointer text-sm font-semibold flex items-center justify-between dark:hover:bg-zinc-900 focus:bg-gray-50 dark:focus:bg-zinc-900">
                   <span className="flex items-center gap-2"><Moon className="w-4 h-4 text-indigo-400" aria-hidden="true" /> Dark</span>
-                  {theme === 'dark'   && <Check className="w-3.5 h-3.5 text-orange-500" aria-hidden="true" />}
+                  {theme === 'dark'   && <Check className="w-3.5 h-3.5 text-red-500" aria-hidden="true" />}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme('system')} className="cursor-pointer text-sm font-semibold flex items-center justify-between dark:hover:bg-zinc-900 focus:bg-gray-50 dark:focus:bg-zinc-900">
                   <span className="flex items-center gap-2"><Laptop className="w-4 h-4 text-gray-500" aria-hidden="true" /> System</span>
-                  {theme === 'system' && <Check className="w-3.5 h-3.5 text-orange-500" aria-hidden="true" />}
+                  {theme === 'system' && <Check className="w-3.5 h-3.5 text-red-500" aria-hidden="true" />}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -151,7 +151,7 @@ export default function Navbar() {
               <DropdownMenu>
                 <DropdownMenuTrigger
                   aria-label={unreadCount > 0 ? `${unreadCount} unread notifications` : 'Notifications'}
-                  className="relative p-2 rounded-full hover:bg-gray-50 dark:hover:bg-zinc-900 transition-all cursor-pointer text-gray-600 dark:text-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
+                  className="relative p-2 rounded-full hover:bg-gray-50 dark:hover:bg-zinc-900 transition-all cursor-pointer text-gray-600 dark:text-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
                 >
                   <Bell className="w-5 h-5" aria-hidden="true" />
                   {unreadCount > 0 && (
@@ -163,7 +163,7 @@ export default function Navbar() {
                 <DropdownMenuContent align="end" className="w-[360px] max-h-[480px] overflow-y-auto bg-white dark:bg-zinc-950 border-gray-100 dark:border-zinc-900 shadow-xl rounded-md p-0">
                   <div className="p-4 border-b border-gray-100 dark:border-zinc-900 flex items-center justify-between">
                     <h3 className="font-bold text-sm text-gray-900 dark:text-white">Store Notifications</h3>
-                    <span className="text-[11px] bg-orange-50 dark:bg-orange-950/40 text-[#ff5200] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+                    <span className="text-[11px] bg-red-50 dark:bg-red-950/40 text-[#e0122a] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
                       {unreadCount} New
                     </span>
                   </div>
@@ -177,10 +177,10 @@ export default function Navbar() {
                           onClick={() => handleNotificationClick(notif)}
                           onKeyDown={(e) => e.key === 'Enter' && handleNotificationClick(notif)}
                           aria-label={`${notif.read ? '' : 'Unread: '}${notif.title}`}
-                          className={`p-4 hover:bg-gray-50 dark:hover:bg-zinc-900/40 cursor-pointer transition-colors relative flex gap-3 ${!notif.read ? 'bg-orange-50/20 dark:bg-zinc-900/30' : ''}`}
+                          className={`p-4 hover:bg-gray-50 dark:hover:bg-zinc-900/40 cursor-pointer transition-colors relative flex gap-3 ${!notif.read ? 'bg-red-50/20 dark:bg-zinc-900/30' : ''}`}
                         >
-                          <div className="shrink-0 w-8 h-8 rounded-full bg-orange-50 dark:bg-orange-950/30 flex items-center justify-center">
-                            <Sparkles className="w-4 h-4 text-[#ff5200]" aria-hidden="true" />
+                          <div className="shrink-0 w-8 h-8 rounded-full bg-red-50 dark:bg-red-950/30 flex items-center justify-center">
+                            <Sparkles className="w-4 h-4 text-[#e0122a]" aria-hidden="true" />
                           </div>
                           <div className="space-y-1 w-full pr-4">
                             <p className="text-xs font-bold text-gray-900 dark:text-white leading-snug">{notif.title}</p>
@@ -191,7 +191,7 @@ export default function Navbar() {
                             </p>
                           </div>
                           {!notif.read && (
-                            <span aria-hidden="true" className="absolute top-4 right-4 w-2 h-2 rounded-full bg-[#ff5200]" />
+                            <span aria-hidden="true" className="absolute top-4 right-4 w-2 h-2 rounded-full bg-[#e0122a]" />
                           )}
                         </div>
                       ))
@@ -211,7 +211,7 @@ export default function Navbar() {
               <DropdownMenu>
                 <DropdownMenuTrigger
                   aria-label={`Account menu for ${user.name}`}
-                  className="flex items-center gap-2 font-semibold text-sm hover:text-[#ff5200] dark:text-white dark:hover:text-[#ff5200] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded"
+                  className="flex items-center gap-2 font-semibold text-sm hover:text-[#e0122a] dark:text-white dark:hover:text-[#e0122a] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded"
                 >
                   <span>{user.name}</span>
                   <Menu className="w-4 h-4" aria-hidden="true" />
@@ -224,7 +224,7 @@ export default function Navbar() {
                     <Package className="h-4 w-4 text-gray-500" aria-hidden="true" /> My Orders
                   </DropdownMenuItem>
                   {user.role === 'ADMIN' && (
-                    <DropdownMenuItem onClick={() => navigate('/admin')} className="rounded h-10 cursor-pointer text-sm font-bold flex items-center gap-2 px-3 text-[#ff5200] hover:bg-orange-50 dark:hover:bg-zinc-900">
+                    <DropdownMenuItem onClick={() => navigate('/admin')} className="rounded h-10 cursor-pointer text-sm font-bold flex items-center gap-2 px-3 text-[#e0122a] hover:bg-red-50 dark:hover:bg-zinc-900">
                       <LayoutDashboard className="h-4 w-4" aria-hidden="true" /> Admin Panel
                     </DropdownMenuItem>
                   )}
@@ -237,7 +237,7 @@ export default function Navbar() {
             ) : (
               <Button
                 onClick={() => navigate('/login')}
-                className="bg-[#2874f0] text-white hover:bg-blue-600 rounded-sm px-8 h-9 font-bold text-sm shadow-sm border-none cursor-pointer"
+                className="bg-[#e0122a] text-white hover:bg-[#0b0b0d] rounded-full px-8 h-9 font-bold text-sm shadow-sm border-none cursor-pointer"
               >
                 Login
               </Button>
@@ -247,7 +247,7 @@ export default function Navbar() {
             <Link
               to="/wishlist"
               aria-label={wishlistCount > 0 ? `Wishlist — ${wishlistCount} item${wishlistCount !== 1 ? 's' : ''}` : 'Wishlist'}
-              className="flex items-center gap-2 hover:text-[#ff5200] transition-colors"
+              className="flex items-center gap-2 hover:text-[#e0122a] transition-colors"
             >
               <div className="relative">
                 <Heart className="w-5 h-5 text-gray-600 dark:text-gray-300" aria-hidden="true" />
@@ -264,12 +264,12 @@ export default function Navbar() {
             <Link
               to="/cart"
               aria-label={totalItems > 0 ? `Cart — ${totalItems} item${totalItems !== 1 ? 's' : ''}` : 'Cart'}
-              className="flex items-center gap-2 hover:text-[#ff5200] transition-colors"
+              className="flex items-center gap-2 hover:text-[#e0122a] transition-colors"
             >
               <div className="relative">
                 <ShoppingCart className="w-5 h-5 text-gray-600 dark:text-gray-300" aria-hidden="true" />
                 {totalItems > 0 && (
-                  <span aria-hidden="true" className="absolute -top-2 -right-2 bg-[#ff5200] text-white min-w-[16px] h-[16px] px-1 flex items-center justify-center text-[10px] font-bold rounded-full">
+                  <span aria-hidden="true" className="absolute -top-2 -right-2 bg-[#e0122a] text-white min-w-[16px] h-[16px] px-1 flex items-center justify-center text-[10px] font-bold rounded-full">
                     {totalItems}
                   </span>
                 )}
@@ -284,7 +284,7 @@ export default function Navbar() {
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-              className="p-1.5 rounded-full text-gray-600 dark:text-gray-300 cursor-pointer focus-visible:ring-2 focus-visible:ring-orange-500 focus:outline-none"
+              className="p-1.5 rounded-full text-gray-600 dark:text-gray-300 cursor-pointer focus-visible:ring-2 focus-visible:ring-red-500 focus:outline-none"
             >
               {theme === 'dark'
                 ? <Sun  className="w-5 h-5 text-amber-500" aria-hidden="true" />
@@ -311,14 +311,14 @@ export default function Navbar() {
             >
               <ShoppingCart className="w-6 h-6 text-gray-700 dark:text-gray-300" aria-hidden="true" />
               {totalItems > 0 && (
-                <span aria-hidden="true" className="absolute -top-1 -right-1 bg-[#ff5200] text-white min-w-[16px] h-[16px] flex items-center justify-center text-[10px] font-bold rounded-full">
+                <span aria-hidden="true" className="absolute -top-1 -right-1 bg-[#e0122a] text-white min-w-[16px] h-[16px] flex items-center justify-center text-[10px] font-bold rounded-full">
                   {totalItems}
                 </span>
               )}
             </Link>
 
             <Sheet>
-              <SheetTrigger aria-label="Open navigation menu" className="p-1 focus-visible:ring-2 focus-visible:ring-orange-500 focus:outline-none rounded">
+              <SheetTrigger aria-label="Open navigation menu" className="p-1 focus-visible:ring-2 focus-visible:ring-red-500 focus:outline-none rounded">
                 <Menu className="w-7 h-7 text-gray-700 dark:text-gray-300" aria-hidden="true" />
               </SheetTrigger>
               <SheetContent side="right" className="w-[80%] p-0 border-none bg-white dark:bg-zinc-950 text-black dark:text-white">
@@ -330,8 +330,8 @@ export default function Navbar() {
                       className="h-8 w-8 object-contain dark:invert"
                       draggable={false}
                     />
-                    <span className="text-xl font-black tracking-tight text-gray-900 dark:text-white">
-                      GeekHoot
+                    <span style={{ fontFamily: 'var(--font-heading)' }} className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      Geek<span className="text-[#e0122a]">Hoot</span>
                     </span>
                   </div>
 
@@ -355,7 +355,7 @@ export default function Navbar() {
                   </nav>
 
                   {user?.role === 'ADMIN' && (
-                    <Link to="/admin" className="p-4 bg-orange-50 dark:bg-orange-950/20 border border-orange-100 dark:border-orange-900/30 rounded-md flex items-center gap-4 text-[#ff5200]">
+                    <Link to="/admin" className="p-4 bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/30 rounded-md flex items-center gap-4 text-[#e0122a]">
                       <LayoutDashboard className="w-5 h-5" aria-hidden="true" />
                       <span className="font-bold text-sm">Admin Panel</span>
                     </Link>
@@ -374,7 +374,7 @@ export default function Navbar() {
                             onClick={() => handleNotificationClick(notif)}
                             onKeyDown={(e) => e.key === 'Enter' && handleNotificationClick(notif)}
                             aria-label={`${notif.read ? '' : 'Unread: '}${notif.title}`}
-                            className="p-2.5 rounded bg-gray-50 dark:bg-zinc-900/60 border border-transparent text-xs hover:border-[#ff5200]/30 transition-colors cursor-pointer"
+                            className="p-2.5 rounded bg-gray-50 dark:bg-zinc-900/60 border border-transparent text-xs hover:border-[#e0122a]/30 transition-colors cursor-pointer"
                           >
                             <div className="flex justify-between items-start">
                               <span className="font-bold text-gray-800 dark:text-white line-clamp-1">{notif.title}</span>
@@ -399,7 +399,7 @@ export default function Navbar() {
                     ) : (
                       <Button
                         onClick={() => navigate('/login')}
-                        className="w-full h-12 rounded-md bg-[#2874f0] text-white font-bold text-sm border-none"
+                        className="w-full h-12 rounded-md bg-[#0b0b0d] text-white font-bold text-sm border-none"
                       >
                         Login / Sign Up
                       </Button>
