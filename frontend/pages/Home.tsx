@@ -1,6 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Truck, ShieldCheck, Zap, Star, Quote, ShieldCheck as BadgeCheck, Headphones, Lock, Gift, Shirt } from 'lucide-react';
+import { ArrowRight, Truck, ShieldCheck, Zap, ShieldCheck as BadgeCheck, Headphones, Lock, Gift, Shirt } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useQuery } from '@tanstack/react-query';
 import api from '@/src/services/api';
@@ -31,6 +32,11 @@ const TRUST_STRIP = [
 export default function Home() {
   const navigate = useNavigate();
 
+  // Hero fades out as the user scrolls it out of view at the top of the viewport
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
+  const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+
   const { data, isLoading } = useQuery({
     queryKey: ['featured-products'],
     queryFn: async () => {
@@ -45,63 +51,41 @@ export default function Home() {
 
   return (
     <div className="flex flex-col bg-background text-foreground min-h-screen transition-colors duration-200">
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-white dark:bg-zinc-950 border-b border-gray-100 dark:border-zinc-900">
-        {/* Decorative marks */}
-        <div className="pointer-events-none absolute -right-24 -top-24 w-[420px] h-[420px] rounded-full bg-[#e0122a]/[0.06] blur-2xl" aria-hidden="true" />
-        <div className="pointer-events-none absolute left-1/3 bottom-0 w-72 h-72 rounded-full bg-[#0b0b0d]/[0.03] dark:bg-white/[0.03] blur-2xl" aria-hidden="true" />
+      {/* Hero — the banner artwork itself is the background; it's aspect-locked so it
+          never crops on any screen size, and fades out as it scrolls past the top. */}
+      <section ref={heroRef} className="relative w-full bg-white dark:bg-zinc-950 border-b border-gray-100 dark:border-zinc-900">
+        <motion.div style={{ opacity: heroOpacity }} className="relative w-full aspect-[1532/688] overflow-hidden">
+          <img
+            src="/hero-banner.jpg"
+            alt="GeekHoot — Gear up, stand out. For geeks, by geeks. Premium quality, unique designs, made for you."
+            width={1532}
+            height={688}
+            fetchPriority="high"
+            loading="eager"
+            decoding="sync"
+            className="absolute inset-0 w-full h-full object-cover object-center select-none"
+            draggable={false}
+          />
 
-        <div className="max-w-7xl mx-auto px-4 md:px-8 pt-10 pb-8 md:pt-16 md:pb-12 relative">
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
-            {/* Copy */}
-            <div className="relative z-10">
-              <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#e0122a] bg-[#fdeaec] dark:bg-red-950/30 px-3 py-1.5 rounded-full mb-5">
-                Gear up. Stand out.
-              </span>
-              <h1 style={{ fontFamily: 'var(--font-heading)' }} className="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.02] tracking-tight text-gray-900 dark:text-white mb-5">
-                For geeks.<br />
-                <span className="text-[#e0122a]">By geeks.</span>
-              </h1>
-              <p className="text-base md:text-lg text-gray-500 dark:text-gray-400 max-w-md mb-8">
-                Premium apparel, mugs, posters and phone cases — custom printed and made just for you.
-              </p>
-              <div className="flex items-center gap-4">
-                <Button
-                  size="lg"
-                  className="bg-[#e0122a] hover:bg-[#c00e22] text-white font-bold h-13 px-8 rounded-full shadow-lg shadow-red-600/20 border-none"
-                  onClick={() => navigate('/products')}
-                >
-                  Shop Now <ArrowRight className="w-4 h-4" aria-hidden="true" />
-                </Button>
-                <div className="hidden sm:flex items-center gap-2 text-xs font-semibold text-gray-500 dark:text-gray-400">
-                  <Truck className="w-4 h-4 text-[#e0122a]" aria-hidden="true" />
-                  Fast delivery, nationwide
-                </div>
-              </div>
-            </div>
+          {/* Shop Now — overlaid on the artwork, scales fluidly with it at every breakpoint */}
+          <button
+            onClick={() => navigate('/products')}
+            aria-label="Shop now"
+            className="absolute left-[4.5%] top-[68%] inline-flex items-center bg-[#e0122a] hover:bg-[#0b0b0d] text-white font-bold rounded-full shadow-lg shadow-black/25 transition-all duration-150 active:scale-95 cursor-pointer"
+            style={{
+              padding: 'clamp(5px,1.3vw,14px) clamp(12px,3.2vw,32px)',
+              fontSize: 'clamp(9px,1.6vw,16px)',
+              gap: 'clamp(3px,0.8vw,8px)',
+            }}
+          >
+            Shop Now
+            <ArrowRight style={{ width: 'clamp(10px,1.5vw,18px)', height: 'clamp(10px,1.5vw,18px)' }} aria-hidden="true" />
+          </button>
+        </motion.div>
 
-            {/* Visual */}
-            <div className="relative z-10 lg:justify-self-end w-full max-w-md">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/10 border border-gray-100 dark:border-zinc-800 aspect-[4/3]">
-                <img
-                  src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop&fm=webp"
-                  alt=""
-                  width={1000}
-                  height={750}
-                  fetchPriority="high"
-                  loading="eager"
-                  decoding="sync"
-                  className="h-full w-full object-cover object-center"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-              </div>
-              <div className="absolute -bottom-5 -left-5 bg-[#0b0b0d] text-white rounded-2xl px-5 py-3 shadow-xl flex items-center gap-2.5">
-                <Zap className="w-4 h-4 text-[#e0122a]" aria-hidden="true" />
-                <span className="text-xs font-bold tracking-wide">Fast Delivery</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Visually hidden heading — keeps the page's semantic structure/SEO intact
+            since the real headline text lives inside the banner image. */}
+        <h1 className="sr-only">GeekHoot — Gear up. Stand out. For geeks, by geeks.</h1>
 
         {/* Category strip */}
         <div className="border-t border-gray-100 dark:border-zinc-900 overflow-x-auto scrollbar-hide">
