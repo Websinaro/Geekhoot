@@ -1,6 +1,6 @@
 import React, { useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Truck, ShieldCheck, Zap, ShieldCheck as BadgeCheck, Headphones, Lock, Gift, Shirt } from 'lucide-react';
+import { ArrowRight, Truck, ShieldCheck, Zap, ShieldCheck as BadgeCheck, Headphones, Lock, Gift, Shirt, Coffee, Image as ImageIcon, Smartphone, MoreHorizontal } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useQuery } from '@tanstack/react-query';
@@ -10,15 +10,14 @@ import AdCard from '@/src/components/product/AdCard';
 import { cn } from '@/lib/utils';
 import { Product } from '@/src/types';
 
-const FEATURED_CATEGORIES = [
-  { label: 'Custom T-Shirts', filter: 'T-Shirts',    icon: '👕' },
-  { label: 'Name Slips',      filter: 'Name Slips',  icon: '🏷️' },
-  { label: 'Printed Bottles', filter: 'Bottles',     icon: '🍼' },
-  { label: 'Mugs',            filter: 'Mugs',        icon: '☕' },
-  { label: 'Photo Frames',    filter: 'Photo Frames',icon: '🖼️' },
-  { label: 'Keychain',        filter: 'Keychain',    icon: '🔑' },
-  { label: 'Stationery',      filter: 'Stationery',  icon: '✏️' },
-  { label: 'Mobile Cases',    filter: 'Mobile Case', icon: '📱' },
+// Themed to match the hero artwork's own category iconography (Apparel / Mugs /
+// Posters / Phone Cases / & More), mapped to the real filterable categories.
+const TOP_CATEGORIES = [
+  { label: 'Apparel',     filter: 'T-Shirts',     icon: Shirt },
+  { label: 'Mugs',        filter: 'Mugs',         icon: Coffee },
+  { label: 'Posters',     filter: 'Photo Frames', icon: ImageIcon },
+  { label: 'Phone Cases', filter: 'Mobile Case',  icon: Smartphone },
+  { label: '& More',      filter: null,           icon: MoreHorizontal },
 ];
 
 const TRUST_STRIP = [
@@ -67,6 +66,26 @@ export default function Home() {
             draggable={false}
           />
 
+          {/* Category selection — overlaid on the artwork's open top band, same
+              treatment as the Shop Now CTA, themed to match the banner's own iconography */}
+          <div
+            className="absolute z-10 hidden sm:flex items-stretch justify-between divide-x divide-black/10"
+            style={{ top: '6%', left: '36%', right: '15%' }}
+          >
+            {TOP_CATEGORIES.map(({ label, filter, icon: Icon }) => (
+              <button
+                key={label}
+                onClick={() => navigate(filter ? `/products?category=${encodeURIComponent(filter)}` : '/products')}
+                aria-label={label}
+                className="flex flex-col items-center justify-center text-gray-800 hover:text-[#e0122a] transition-colors cursor-pointer"
+                style={{ padding: '0 clamp(4px,1.6vw,16px)', gap: 'clamp(1px,0.5vw,5px)' }}
+              >
+                <Icon style={{ width: 'clamp(11px,2.1vw,20px)', height: 'clamp(11px,2.1vw,20px)' }} aria-hidden="true" />
+                <span style={{ fontSize: 'clamp(6px,1.05vw,11px)' }} className="font-bold uppercase tracking-wide whitespace-nowrap">{label}</span>
+              </button>
+            ))}
+          </div>
+
           {/* Shop Now — overlaid on the artwork, scales fluidly with it at every breakpoint */}
           <button
             onClick={() => navigate('/products')}
@@ -87,19 +106,20 @@ export default function Home() {
             since the real headline text lives inside the banner image. */}
         <h1 className="sr-only">GeekHoot — Gear up. Stand out. For geeks, by geeks.</h1>
 
-        {/* Category strip */}
-        <div className="border-t border-gray-100 dark:border-zinc-900 overflow-x-auto scrollbar-hide">
-          <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 gap-8 min-w-max py-5">
-            {FEATURED_CATEGORIES.map((cat, i) => (
+        {/* Category strip — mobile only; desktop/tablet gets the on-image overlay above,
+            since the artwork is too compact there for a legible overlaid row */}
+        <div className="sm:hidden border-t border-gray-100 dark:border-zinc-900 overflow-x-auto scrollbar-hide">
+          <div className="flex items-center justify-between px-4 gap-6 min-w-max py-4">
+            {TOP_CATEGORIES.map(({ label, filter, icon: Icon }) => (
               <div
-                key={i}
-                onClick={() => navigate(`/products?category=${encodeURIComponent(cat.filter)}`)}
+                key={label}
+                onClick={() => navigate(filter ? `/products?category=${encodeURIComponent(filter)}` : '/products')}
                 className="flex flex-col items-center gap-2 cursor-pointer group"
               >
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center text-2xl md:text-3xl transition-all group-hover:scale-110 group-hover:border-[#e0122a]/40 group-hover:bg-[#fdeaec] dark:group-hover:bg-red-950/20">
-                  {cat.icon}
+                <div className="w-12 h-12 rounded-full bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center transition-all group-hover:scale-110 group-hover:border-[#e0122a]/40 group-hover:bg-[#fdeaec] dark:group-hover:bg-red-950/20">
+                  <Icon className="w-5 h-5 text-gray-800 dark:text-gray-200 group-hover:text-[#e0122a]" aria-hidden="true" />
                 </div>
-                <span className="text-[11px] md:text-xs font-semibold text-gray-600 dark:text-gray-400 group-hover:text-[#e0122a] dark:group-hover:text-[#e0122a] text-center leading-tight">{cat.label}</span>
+                <span className="text-[11px] font-semibold text-gray-600 dark:text-gray-400 group-hover:text-[#e0122a] text-center leading-tight whitespace-nowrap">{label}</span>
               </div>
             ))}
           </div>
