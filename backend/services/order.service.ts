@@ -1,7 +1,8 @@
+import crypto from 'crypto';
 import prisma from '../prisma/db';
 import { AppError } from '../middleware/error.middleware';
 import { generateInvoicePdfBuffer } from './invoice.service';
-import { uploadInvoiceToCloudinary } from './cloudinary.service';
+import { config } from '../config/app.config';
 
 export const getUserOrders = async (userId: string) => {
   return await prisma.order.findMany({
@@ -129,10 +130,11 @@ export const getAllOrdersService = async () => {
   });
 };
 
-// Builds a single consolidated PDF invoice covering one or more orders (e.g. a
-// whole cart checkout), uploads it, and returns a shareable, downloadable URL —
-// this is what gets linked in the short WhatsApp message sent to the admin
-// instead of spelling every line item out as raw text.
+// Builds (or reuses) a link to a single consolidated PDF invoice covering one
+// or more orders (e.g. a whole cart checkout). The link points at our own
+// /api/invoices/:token/download route rather than Cloudinary — Cloudinary
+// blocks public delivery of raw PDF/ZIP files by default on most accounts,
+// which is what caused ERR_INVALID_RESPONSE when opening the old links.
 export const generateInvoiceForOrders = async (orderCodes: string[], userId: string, role: string) => {
   if (!orderCodes || orderCodes.length === 0) {
     throw new AppError('No order codes provided', 400);
@@ -140,7 +142,6 @@ export const generateInvoiceForOrders = async (orderCodes: string[], userId: str
 
   const orders = await prisma.order.findMany({
     where: { orderCode: { in: orderCodes } },
-    include: { product: true, user: true },
   });
 
   if (orders.length === 0) {
@@ -152,12 +153,31 @@ export const generateInvoiceForOrders = async (orderCodes: string[], userId: str
     throw new AppError('Not authorized to generate an invoice for these orders', 403);
   }
 
-  // If every one of these orders already has the same invoice on file (e.g. the
-  // download button was clicked again later), just hand back that link instead
-  // of generating and uploading a fresh PDF.
-  const existingUrl = orders[0].invoiceUrl;
-  if (existingUrl && orders.every((o) => o.invoiceUrl === existingUrl)) {
-    return existingUrl;
+  let token = orders[0].invoiceToken;
+  const allShareToken = token && orders.every((o) => o.invoiceToken === token);
+
+  if (!allShareToken) {
+    token = crypto.randomBytes(12).toString('hex');
+    await prisma.order.updateMany({
+      where: { orderCode: { in: orderCodes } },
+      data: { invoiceToken: token },
+    });
+  }
+
+  return `${config.baseUrl}/api/invoices/${token}/download`;
+};
+
+// Regenerates the actual PDF bytes for a token on demand — always fresh, and
+// needs no file storage at all since the underlying order data is the source
+// of truth (order/status/product changes are reflected on next download).
+export const getInvoicePdfByToken = async (token: string) => {
+  const orders = await prisma.order.findMany({
+    where: { invoiceToken: token },
+    include: { product: true, user: true },
+  });
+
+  if (orders.length === 0) {
+    throw new AppError('Invoice not found', 404);
   }
 
   const first = orders[0];
@@ -188,13 +208,6 @@ export const generateInvoiceForOrders = async (orderCodes: string[], userId: str
     locationUrl: first.locationUrl || first.user.locationUrl,
   });
 
-  const filename = `invoice-${orderCodes.join('-').slice(0, 60)}-${Date.now()}`;
-  const invoiceUrl = await uploadInvoiceToCloudinary(buffer, filename);
-
-  await prisma.order.updateMany({
-    where: { orderCode: { in: orderCodes } },
-    data: { invoiceUrl },
-  });
-
-  return invoiceUrl;
+  const filenameCodes = orders.map((o) => o.orderCode).filter(Boolean).join('-') || token;
+  return { buffer, filename: `invoice-${filenameCodes}.pdf` };
 };

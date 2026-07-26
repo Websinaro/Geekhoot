@@ -59,13 +59,8 @@ export default function Orders() {
   const handleDownloadInvoice = async (order: any, e?: React.MouseEvent) => {
     e?.stopPropagation();
     try {
-      let url = order.invoiceUrl;
-      if (!url) {
-        toast.info('Preparing your invoice...');
-        const { data } = await api.post('/orders/invoice', { orderCodes: [order.orderCode] });
-        url = data.invoiceUrl;
-      }
-      window.open(url, '_blank');
+      const { data } = await api.post('/orders/invoice', { orderCodes: [order.orderCode] });
+      window.open(data.invoiceUrl, '_blank');
     } catch (err: any) {
       toast.error(err.response?.data?.message || 'Failed to download invoice');
     }

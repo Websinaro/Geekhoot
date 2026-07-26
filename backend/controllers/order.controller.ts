@@ -1,4 +1,4 @@
-import { Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import * as orderService from "../services/order.service";
 import { AuthRequest } from "../middleware/auth.middleware";
 
@@ -59,6 +59,22 @@ export const generateInvoice = async (req: AuthRequest, res: Response, next: Nex
     const { orderCodes } = req.body;
     const invoiceUrl = await orderService.generateInvoiceForOrders(orderCodes, req.user.id, req.user.role);
     res.json({ invoiceUrl });
+  } catch (error: any) {
+    next(error);
+  }
+};
+
+// Public — no auth. This is the link shared over WhatsApp/SMS, opened straight
+// from a phone's browser with no session, so it can't sit behind `protect`.
+// Security is by the unguessable token rather than a login check.
+export const downloadInvoiceFile = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { token } = req.params;
+    const { buffer, filename } = await orderService.getInvoicePdfByToken(token);
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.setHeader('Content-Length', buffer.length.toString());
+    res.send(buffer);
   } catch (error: any) {
     next(error);
   }

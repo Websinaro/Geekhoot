@@ -20,6 +20,7 @@ import adminRoutes from "./routes/admin.routes";
 import notificationRoutes from "./routes/notification.routes";
 import wishlistRoutes from "./routes/wishlist.routes";
 import sitemapRoutes from "./routes/sitemap.routes";
+import invoiceRoutes from "./routes/invoice.routes";
 
 import prisma from "./prisma/db";
 
@@ -81,6 +82,7 @@ async function startServer() {
   app.use("/api/admin", adminRoutes);
   app.use("/api/notifications", notificationRoutes);
   app.use("/api/wishlist", wishlistRoutes);
+  app.use("/api/invoices", invoiceRoutes);
 
   // SEO: sitemap + robots (must be before SPA catch-all)
   app.use("/", sitemapRoutes);

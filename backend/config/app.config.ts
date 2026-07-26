@@ -7,4 +7,5 @@ export const config = {
   jwtSecret: process.env.JWT_SECRET || 'default_secret',
   corsOrigin: process.env.CORS_ORIGIN || '*',
   databaseUrl: process.env.DATABASE_URL,
+  baseUrl: process.env.BASE_URL || 'https://mygeekhoot.onrender.com',
 };

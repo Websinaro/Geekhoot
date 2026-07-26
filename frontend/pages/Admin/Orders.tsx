@@ -86,13 +86,8 @@ export default function AdminOrders() {
 
   const handleDownloadInvoice = async (order: any) => {
     try {
-      let url = order.invoiceUrl;
-      if (!url) {
-        toast.info('Preparing invoice...');
-        const { data } = await api.post('/orders/invoice', { orderCodes: [order.orderCode] });
-        url = data.invoiceUrl;
-      }
-      window.open(url, '_blank');
+      const { data } = await api.post('/orders/invoice', { orderCodes: [order.orderCode] });
+      window.open(data.invoiceUrl, '_blank');
     } catch (error: any) {
       toast.error(error.response?.data?.message || 'Failed to download invoice');
     }
