@@ -13,7 +13,8 @@ import {
   Info,
   ArrowRight,
   ClipboardCheck,
-  Search
+  Search,
+  Download
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
@@ -54,6 +55,21 @@ export default function Orders() {
   });
 
   if (isLoading) return <OrderListSkeleton />;
+
+  const handleDownloadInvoice = async (order: any, e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    try {
+      let url = order.invoiceUrl;
+      if (!url) {
+        toast.info('Preparing your invoice...');
+        const { data } = await api.post('/orders/invoice', { orderCodes: [order.orderCode] });
+        url = data.invoiceUrl;
+      }
+      window.open(url, '_blank');
+    } catch (err: any) {
+      toast.error(err.response?.data?.message || 'Failed to download invoice');
+    }
+  };
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 bg-[#f1f3f6] dark:bg-zinc-950 min-h-screen text-gray-900 dark:text-white">
@@ -128,7 +144,14 @@ export default function Orders() {
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-center border-t md:border-t-0 md:border-l border-gray-50 dark:border-zinc-800 pt-4 md:pt-0 md:pl-6">
+                      <div className="flex items-center justify-center gap-2 border-t md:border-t-0 md:border-l border-gray-50 dark:border-zinc-800 pt-4 md:pt-0 md:pl-6">
+                         <Button
+                           variant="outline"
+                           onClick={(e) => handleDownloadInvoice(order, e)}
+                           className="border-gray-200 dark:border-zinc-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-800 font-bold gap-1.5 cursor-pointer transition-all"
+                         >
+                           <Download className="w-4 h-4" /> Invoice
+                         </Button>
                          <Button 
                            variant="ghost" 
                            onClick={(e) => {
@@ -167,9 +190,19 @@ export default function Orders() {
                     <h2 className="text-lg font-bold text-gray-900 dark:text-white">Order Details</h2>
                     <p className="text-xs text-gray-500 dark:text-zinc-400 font-medium">ID: {selectedOrder.orderCode || selectedOrder.id.slice(-8).toUpperCase()}</p>
                  </div>
-                 <Badge className={`${STATUS_CONFIG[selectedOrder.status]?.color || 'bg-gray-100 dark:bg-zinc-700'} border-none font-bold text-xs px-3 py-1 rounded-sm`}>
-                    {selectedOrder.status}
-                 </Badge>
+                 <div className="flex items-center gap-2">
+                   <Button
+                     size="sm"
+                     variant="outline"
+                     onClick={(e) => handleDownloadInvoice(selectedOrder, e)}
+                     className="border-gray-200 dark:border-zinc-700 text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-zinc-700 font-bold gap-1.5 cursor-pointer transition-all"
+                   >
+                     <Download className="w-3.5 h-3.5" /> Invoice
+                   </Button>
+                   <Badge className={`${STATUS_CONFIG[selectedOrder.status]?.color || 'bg-gray-100 dark:bg-zinc-700'} border-none font-bold text-xs px-3 py-1 rounded-sm`}>
+                      {selectedOrder.status}
+                   </Badge>
+                 </div>
               </div>
 
               <div className="p-6 space-y-8">

@@ -180,7 +180,19 @@ export default function Cart() {
         return;
       }
       
-      sendWhatsAppMessage(adminNumber, successfulOrders, locationUrl);
+      // Build one consolidated PDF invoice for the whole order and get a shareable link —
+      // this is what lets the WhatsApp message stay short instead of listing every detail.
+      let invoiceUrl: string | undefined;
+      if (successfulOrders.length > 0) {
+        try {
+          const invoiceRes = await api.post('/orders/invoice', { orderCodes: successfulOrders });
+          invoiceUrl = invoiceRes.data?.invoiceUrl;
+        } catch (invoiceErr) {
+          console.error('Invoice generation failed:', invoiceErr);
+        }
+      }
+
+      sendWhatsAppMessage(adminNumber, successfulOrders, locationUrl, invoiceUrl);
       clearCart();
     } catch (error: any) {
       console.error('Checkout failed:', error);
@@ -191,33 +203,20 @@ export default function Cart() {
     }
   };
 
-  const sendWhatsAppMessage = (adminNumber: string, orderCodes: string[], locationUrl?: string) => {
-    let productDetails = cart.map(item => `- ${item.product.name}${item.size ? ` [Size: ${item.size}]` : ''} (Qty: ${item.quantity})`).join('\n');
+  const sendWhatsAppMessage = (adminNumber: string, orderCodes: string[], locationUrl?: string, invoiceUrl?: string) => {
     const codesString = orderCodes.length > 0 ? `*Order IDs:* ${orderCodes.map(c => `#${c}`).join(', ')}` : '';
 
     const message = `Hello Geekhoot Admin,
 
-*New Multi-Product Order Request*
+*New Order Request*
 *Customer:* ${user.name}
 *Phone:* ${user.phone}
-
-*Delivery Address:*
-- House/Flat No: ${user.houseNo || 'N/A'}
-- Street / Near: ${user.streetNear || 'N/A'}
-- Road / Area: ${user.road || 'N/A'}
-- District: ${user.district || 'N/A'}
-- State: ${user.state || 'N/A'}
-- Pincode: ${user.pincode || 'N/A'}
-- Full Address: ${user.address || 'N/A'}
-${locationUrl ? `*Precise Location:* ${locationUrl}` : '*Location:* Using profile address'}
-
-*Products:*
-${productDetails}
-
 *Total Amount:* ₹${totalPrice.toLocaleString()}
 ${codesString}
+${invoiceUrl ? `\n📄 *Invoice (full details & items):* ${invoiceUrl}` : ''}
+${locationUrl ? `📍 *Delivery Location:* ${locationUrl}` : ''}
 
-Please confirm the order. Admin, you can search for these IDs in your dashboard.`;
+Please confirm the order.`;
 
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${adminNumber}?text=${encodedMessage}`, '_blank');

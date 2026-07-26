@@ -53,3 +53,13 @@ export const getAllOrders = async (req: AuthRequest, res: Response, next: NextFu
     next(error);
   }
 };
+
+export const generateInvoice = async (req: AuthRequest, res: Response, next: NextFunction) => {
+  try {
+    const { orderCodes } = req.body;
+    const invoiceUrl = await orderService.generateInvoiceForOrders(orderCodes, req.user.id, req.user.role);
+    res.json({ invoiceUrl });
+  } catch (error: any) {
+    next(error);
+  }
+};

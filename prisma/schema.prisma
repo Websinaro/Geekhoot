@@ -128,6 +128,7 @@ model Order {
   courier     String?
   notes       String?
   locationUrl String?
+  invoiceUrl  String?
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 

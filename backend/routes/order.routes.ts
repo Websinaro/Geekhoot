@@ -7,6 +7,7 @@ const router = express.Router();
 router.use(protect);
 
 router.get("/my", orderController.getMyOrders);
+router.post("/invoice", orderController.generateInvoice);
 router.get("/:id", orderController.getOrderById);
 
 // Admin Routes

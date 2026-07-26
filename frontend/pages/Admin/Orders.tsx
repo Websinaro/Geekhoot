@@ -12,7 +12,8 @@ import {
   MapPin,
   Filter,
   Phone,
-  X
+  X,
+  Download
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import api from '@/src/services/api';
@@ -80,6 +81,20 @@ export default function AdminOrders() {
       fetchOrders();
     } catch (error) {
       toast.error('Update failed');
+    }
+  };
+
+  const handleDownloadInvoice = async (order: any) => {
+    try {
+      let url = order.invoiceUrl;
+      if (!url) {
+        toast.info('Preparing invoice...');
+        const { data } = await api.post('/orders/invoice', { orderCodes: [order.orderCode] });
+        url = data.invoiceUrl;
+      }
+      window.open(url, '_blank');
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || 'Failed to download invoice');
     }
   };
 
@@ -183,17 +198,28 @@ export default function AdminOrders() {
                         </Badge>
                       </td>
                       <td className="p-4 px-6">
-                        <Button 
-                          variant="outline"
-                          size="sm"
-                          className="font-bold text-xs h-8 px-4 rounded-sm border-gray-200 dark:border-zinc-700 text-gray-700 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800"
-                          onClick={() => {
-                            setSelectedOrder(order);
-                            setIsDialogOpen(true);
-                          }}
-                        >
-                          Update
-                        </Button>
+                        <div className="flex items-center gap-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            aria-label="Download invoice"
+                            className="font-bold text-xs h-8 w-8 p-0 rounded-sm border-gray-200 dark:border-zinc-700 text-gray-700 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800"
+                            onClick={() => handleDownloadInvoice(order)}
+                          >
+                            <Download className="w-3.5 h-3.5" />
+                          </Button>
+                          <Button 
+                            variant="outline"
+                            size="sm"
+                            className="font-bold text-xs h-8 px-4 rounded-sm border-gray-200 dark:border-zinc-700 text-gray-700 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800"
+                            onClick={() => {
+                              setSelectedOrder(order);
+                              setIsDialogOpen(true);
+                            }}
+                          >
+                            Update
+                          </Button>
+                        </div>
                       </td>
                     </tr>
                   );

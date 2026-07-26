@@ -192,8 +192,16 @@ function ProductDetailContent({ id }: { id: string }) {
         orderCode: uniqueId,
         locationUrl: locationUrl
       });
-      
-      sendWhatsAppMessage(uniqueId, adminNumber, locationUrl);
+
+      let invoiceUrl: string | undefined;
+      try {
+        const invoiceRes = await api.post('/orders/invoice', { orderCodes: [uniqueId] });
+        invoiceUrl = invoiceRes.data?.invoiceUrl;
+      } catch (invoiceErr) {
+        console.error('Invoice generation failed:', invoiceErr);
+      }
+
+      sendWhatsAppMessage(uniqueId, adminNumber, locationUrl, invoiceUrl);
     } catch (error: any) {
       console.error('Order failed:', error);
       toast.error(error.response?.data?.message || 'Order failed, redirecting to WhatsApp...');
@@ -203,7 +211,7 @@ function ProductDetailContent({ id }: { id: string }) {
     }
   };
 
-  const sendWhatsAppMessage = (uniqueId: string, adminNumber: string, locationUrl?: string) => {
+  const sendWhatsAppMessage = (uniqueId: string, adminNumber: string, locationUrl?: string, invoiceUrl?: string) => {
     const message = `Hello Geekhoot,
 I want to order:
 *Product:* ${product.name}
@@ -211,19 +219,9 @@ ${selectedSize ? `*Size:* ${selectedSize}\n` : ''}*Qty:* ${quantity}
 *Total:* ₹${(product.price * quantity).toLocaleString()}
 *Order ID:* #${uniqueId}
 
-*Customer Details:*
-- Name: ${user.name}
-- Phone: ${user.phone}
-
-*Delivery Address:*
-- House/Flat No: ${user.houseNo || 'N/A'}
-- Street / Near: ${user.streetNear || 'N/A'}
-- Road / Area: ${user.road || 'N/A'}
-- District: ${user.district || 'N/A'}
-- State: ${user.state || 'N/A'}
-- Pincode: ${user.pincode || 'N/A'}
-- Full Address: ${user.address || 'N/A'}
-${locationUrl ? `*Location:* ${locationUrl}` : ''}`;
+*Customer:* ${user.name} (${user.phone})
+${invoiceUrl ? `\n📄 *Invoice (full details):* ${invoiceUrl}` : ''}
+${locationUrl ? `📍 *Delivery Location:* ${locationUrl}` : ''}`;
 
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${adminNumber}?text=${encodedMessage}`, '_blank');
