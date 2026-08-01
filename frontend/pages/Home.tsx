@@ -1,6 +1,6 @@
 import React, { useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Truck, ShieldCheck, Zap, ShieldCheck as BadgeCheck, Headphones, Lock, Gift, Shirt, Coffee, Image as ImageIcon, Smartphone, MoreHorizontal } from 'lucide-react';
+import { ArrowRight, ShieldCheck as BadgeCheck, Headphones, Lock, Gift, Shirt, Coffee, Image as ImageIcon, Smartphone, MoreHorizontal } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useQuery } from '@tanstack/react-query';
@@ -174,32 +174,7 @@ export default function Home() {
 
         {/* Below-fold sections deferred — don't block initial paint */}
         <React.Suspense fallback={null}>
-          {/* Brand Promises */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-           <div className="flex items-center gap-4 p-6 bg-red-50/50 dark:bg-red-950/20 rounded-lg border border-red-100/65 dark:border-red-900/30 transition-colors">
-             <Truck className="w-8 h-8 text-red-600" />
-             <div>
-               <h3 className="font-bold text-gray-900 dark:text-white">Fast Shipping</h3>
-               <p className="text-sm text-gray-500 dark:text-gray-400">Express delivery within 48-72 hours</p>
-             </div>
-           </div>
-           <div className="flex items-center gap-4 p-6 bg-green-50/50 dark:bg-green-950/20 rounded-lg border border-green-100/65 dark:border-green-900/30 transition-colors">
-             <ShieldCheck className="w-8 h-8 text-green-600" />
-             <div>
-               <h3 className="font-bold text-gray-900 dark:text-white">Quality Assured</h3>
-               <p className="text-sm text-gray-500 dark:text-gray-400">Every product goes through multi-level QC</p>
-             </div>
-           </div>
-           <div className="flex items-center gap-4 p-6 bg-red-50/50 dark:bg-red-950/20 rounded-lg border border-red-100/65 dark:border-red-900/30 transition-colors">
-             <Zap className="w-8 h-8 text-[#e0122a]" />
-             <div>
-               <h3 className="font-bold text-gray-900 dark:text-white">Easy Support</h3>
-               <p className="text-sm text-gray-500 dark:text-gray-400">Direct WhatsApp support for orders</p>
-             </div>
-           </div>
-        </div>
-
-        {/* Trending Section Overlay */}
+          {/* Trending Section Overlay */}
         <section className="bg-[#0b0b0d] rounded-xl overflow-hidden relative p-12 md:p-24 text-center">
            <div className="absolute inset-0 bg-gradient-to-br from-[#e0122a]/25 via-transparent to-transparent"></div>
            <div className="relative z-10 max-w-2xl mx-auto">

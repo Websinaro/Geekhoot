@@ -203,6 +203,10 @@ export default function AdminProducts() {
                   <Input name="originalPrice" type="number" step="any" defaultValue={editingProduct?.originalPrice} placeholder="Optional for discount %" className="rounded-md h-10 border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800" />
                 </div>
                 <div className="space-y-2">
+                  <Label className="text-xs font-bold text-gray-700 dark:text-zinc-300">Delivery Fee (₹)</Label>
+                  <Input name="deliveryFee" type="number" step="any" min="0" defaultValue={editingProduct?.deliveryFee ?? 0} placeholder="Charged via India Post — shown to customer at checkout" className="rounded-md h-10 border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800" />
+                </div>
+                <div className="space-y-2">
                   <Label className="text-xs font-bold text-gray-700 dark:text-zinc-300">Stock Quantity</Label>
                   <Input
                     name="stock"
@@ -327,6 +331,9 @@ export default function AdminProducts() {
                     {product.originalPrice && (
                       <div className="text-[10px] text-gray-400 dark:text-zinc-500 line-through">₹{product.originalPrice.toLocaleString()}</div>
                     )}
+                    <div className="text-[10px] font-medium text-gray-500 dark:text-zinc-400">
+                      Delivery: {product.deliveryFee ? `₹${product.deliveryFee.toLocaleString()}` : 'Free'}
+                    </div>
                   </td>
                   <td className="p-4 px-6">
                      <span className={`text-sm font-bold ${product.stock < 5 ? 'text-red-600 dark:text-red-400' : 'text-gray-900 dark:text-white'}`}>{product.stock}</span>

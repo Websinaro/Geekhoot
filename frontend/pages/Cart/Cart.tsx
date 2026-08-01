@@ -43,6 +43,8 @@ export default function Cart() {
 
   const totalPrice = getTotalPrice();
   const totalItems = getTotalItems();
+  const totalDeliveryFee = cart.reduce((sum, item) => sum + (item.product.deliveryFee || 0), 0);
+  const grandTotal = totalPrice + totalDeliveryFee;
 
   React.useEffect(() => {
     const validateCartItems = async () => {
@@ -159,7 +161,7 @@ export default function Cart() {
             productId: item.productId,
             quantity: item.quantity,
             size: item.size || undefined,
-            totalAmount: item.product.price * item.quantity,
+            totalAmount: item.product.price * item.quantity + (item.product.deliveryFee || 0),
             orderCode: uniqueId,
             locationUrl: locationUrl
           });
@@ -211,7 +213,9 @@ export default function Cart() {
 *New Order Request*
 *Customer:* ${user.name}
 *Phone:* ${user.phone}
-*Total Amount:* ₹${totalPrice.toLocaleString()}
+*Items Total:* ₹${totalPrice.toLocaleString()}
+*Delivery Fee:* ${totalDeliveryFee ? `₹${totalDeliveryFee.toLocaleString()}` : 'Free'}
+*Total Amount:* ₹${grandTotal.toLocaleString()}
 ${codesString}
 ${invoiceUrl ? `\n📄 *Invoice (full details & items):* ${invoiceUrl}` : ''}
 ${locationUrl ? `📍 *Delivery Location:* ${locationUrl}` : ''}
@@ -373,12 +377,17 @@ Please confirm the order.`;
                 </div>
                 <div className="flex justify-between items-center text-gray-600 dark:text-zinc-400">
                   <span>Delivery Charges</span>
-                  <span className="text-green-600 dark:text-green-400 font-bold uppercase text-[10px]">Free</span>
+                  {totalDeliveryFee > 0 ? (
+                    <span className="font-medium text-gray-900 dark:text-white">₹{totalDeliveryFee.toLocaleString()}</span>
+                  ) : (
+                    <span className="text-green-600 dark:text-green-400 font-bold uppercase text-[10px]">Free</span>
+                  )}
                 </div>
+                <p className="text-[11px] text-gray-400 dark:text-zinc-500 -mt-2">Shipped via India Post — delivery time varies by location</p>
                 <Separator className="bg-gray-50 dark:bg-zinc-800" />
                 <div className="flex justify-between items-center text-lg font-bold text-gray-900 dark:text-white pt-2">
                   <span>Total Amount</span>
-                  <span>₹{totalPrice.toLocaleString()}</span>
+                  <span>₹{grandTotal.toLocaleString()}</span>
                 </div>
                 <div className="pt-2">
                   <p className="text-green-600 dark:text-green-400 font-bold text-xs">You will save ₹{(totalPrice * 0.1).toLocaleString()} on this order</p>

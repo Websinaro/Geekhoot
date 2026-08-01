@@ -188,7 +188,7 @@ function ProductDetailContent({ id }: { id: string }) {
         productId: product.id,
         quantity: quantity,
         size: selectedSize || undefined,
-        totalAmount: product.price * quantity,
+        totalAmount: product.price * quantity + (product.deliveryFee || 0),
         orderCode: uniqueId,
         locationUrl: locationUrl
       });
@@ -212,11 +212,15 @@ function ProductDetailContent({ id }: { id: string }) {
   };
 
   const sendWhatsAppMessage = (uniqueId: string, adminNumber: string, locationUrl?: string, invoiceUrl?: string) => {
+    const deliveryFee = product.deliveryFee || 0;
+    const orderTotal = product.price * quantity + deliveryFee;
     const message = `Hello Geekhoot,
 I want to order:
 *Product:* ${product.name}
 ${selectedSize ? `*Size:* ${selectedSize}\n` : ''}*Qty:* ${quantity}
-*Total:* ₹${(product.price * quantity).toLocaleString()}
+*Item Total:* ₹${(product.price * quantity).toLocaleString()}
+*Delivery Fee:* ${deliveryFee ? `₹${deliveryFee.toLocaleString()}` : 'Free'}
+*Total:* ₹${orderTotal.toLocaleString()}
 *Order ID:* #${uniqueId}
 
 *Customer:* ${user.name} (${user.phone})
@@ -443,7 +447,7 @@ ${locationUrl ? `📍 *Delivery Location:* ${locationUrl}` : ''}`;
                   )}
                 </div>
 
-                <div className="flex items-baseline gap-3 mb-4">
+                <div className="flex items-baseline gap-3 mb-1">
                   <span className="text-3xl font-bold text-gray-900 dark:text-white">₹{product.price.toLocaleString()}</span>
                   {product.originalPrice && product.originalPrice > product.price && (
                     <>
@@ -454,6 +458,9 @@ ${locationUrl ? `📍 *Delivery Location:* ${locationUrl}` : ''}`;
                     </>
                   )}
                 </div>
+                <p className="text-xs text-gray-500 dark:text-zinc-400 mb-4">
+                  {product.deliveryFee ? `+ ₹${product.deliveryFee.toLocaleString()} delivery fee` : 'Free delivery'}
+                </p>
 
                 {!hasSizes && product.stock <= 5 && product.stock > 0 && (
                   <p className="text-red-500 dark:text-red-400 text-sm font-bold mb-4 italic">Only {product.stock} left in stock - order soon!</p>
@@ -543,15 +550,17 @@ ${locationUrl ? `📍 *Delivery Location:* ${locationUrl}` : ''}`;
                   <div className="flex items-start gap-3 p-4 bg-gray-50 dark:bg-zinc-800 rounded-lg">
                     <Truck className="w-5 h-5 text-gray-400 dark:text-zinc-500 mt-1" />
                     <div>
-                      <p className="text-sm font-bold dark:text-white">Free Delivery</p>
-                      <p className="text-xs text-gray-500 dark:text-zinc-400">Usually ships in 24-48 hours</p>
+                      <p className="text-sm font-bold dark:text-white">
+                        Delivery Fee: {product.deliveryFee ? `₹${product.deliveryFee.toLocaleString()}` : 'Free'}
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-zinc-400">Shipped via India Post — delivery time varies by location</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3 p-4 bg-gray-50 dark:bg-zinc-800 rounded-lg">
                     <ShieldCheck className="w-5 h-5 text-gray-400 dark:text-zinc-500 mt-1" />
                     <div>
-                      <p className="text-sm font-bold dark:text-white">7 Days Replacement</p>
-                      <p className="text-xs text-gray-500 dark:text-zinc-400">Quality checking before dispatch</p>
+                      <p className="text-sm font-bold dark:text-white">Quality Checked</p>
+                      <p className="text-xs text-gray-500 dark:text-zinc-400">Every product inspected before dispatch</p>
                     </div>
                   </div>
                 </div>

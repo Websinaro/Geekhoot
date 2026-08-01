@@ -19,6 +19,7 @@ export interface Product {
   description: string;
   price: number;
   originalPrice?: number;
+  deliveryFee?: number;
   images: string[];
   stock: number;
   rating: number;

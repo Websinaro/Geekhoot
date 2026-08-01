@@ -100,6 +100,7 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
     }
     if (data.stock) data.stock = parseInt(data.stock);
     if (data.rating) data.rating = parseFloat(data.rating);
+    if (data.deliveryFee !== undefined) data.deliveryFee = parseFloat(data.deliveryFee) || 0;
     if (data.sizeStock !== undefined) {
       data.sizeStock = parseSizeStock(data.sizeStock);
       // Keep the overall stock count in sync with the sum of per-size stock
@@ -137,6 +138,7 @@ export const updateProduct = async (req: Request, res: Response, next: NextFunct
     if (data.stock !== undefined) data.stock = parseInt(data.stock);
     if (data.lowStockThreshold !== undefined) data.lowStockThreshold = parseInt(data.lowStockThreshold);
     if (data.rating) data.rating = parseFloat(data.rating);
+    if (data.deliveryFee !== undefined) data.deliveryFee = parseFloat(data.deliveryFee) || 0;
     if (data.sizeStock !== undefined) {
       data.sizeStock = parseSizeStock(data.sizeStock);
       // Keep the overall stock count in sync with the sum of per-size stock
