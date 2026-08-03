@@ -1,6 +1,6 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, ShieldCheck as BadgeCheck, Headphones, Lock, Gift, Shirt, Coffee, Image as ImageIcon, Smartphone, MoreHorizontal } from 'lucide-react';
+import { ArrowRight, Search, ShieldCheck as BadgeCheck, Headphones, Lock, Gift, Shirt, Coffee, Image as ImageIcon, Smartphone, MoreHorizontal } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useQuery } from '@tanstack/react-query';
@@ -30,6 +30,14 @@ const TRUST_STRIP = [
 
 export default function Home() {
   const navigate = useNavigate();
+  const [heroQuery, setHeroQuery] = useState('');
+
+  const handleHeroSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (heroQuery.trim()) {
+      navigate(`/products?search=${encodeURIComponent(heroQuery.trim())}`);
+    }
+  };
 
   // Hero fades out as the user scrolls it out of view at the top of the viewport
   const heroRef = useRef<HTMLDivElement>(null);
@@ -100,6 +108,30 @@ export default function Home() {
             Shop Now
             <ArrowRight style={{ width: 'clamp(10px,1.5vw,18px)', height: 'clamp(10px,1.5vw,18px)' }} aria-hidden="true" />
           </button>
+
+          {/* Floating search — same glassy overlay treatment as Shop Now, sits just
+              below it in the same open part of the artwork */}
+          <form
+            onSubmit={handleHeroSearch}
+            role="search"
+            className="absolute left-[4.5%] top-[82%] flex items-center bg-white/20 backdrop-blur-md border border-white/40 rounded-full shadow-lg shadow-black/15"
+            style={{
+              width: 'min(58%, 380px)',
+              padding: 'clamp(4px,1vw,8px) clamp(8px,2vw,16px)',
+              gap: 'clamp(4px,1vw,8px)',
+            }}
+          >
+            <Search style={{ width: 'clamp(10px,1.6vw,16px)', height: 'clamp(10px,1.6vw,16px)' }} className="text-white shrink-0" aria-hidden="true" />
+            <input
+              type="search"
+              value={heroQuery}
+              onChange={(e) => setHeroQuery(e.target.value)}
+              placeholder="Search products..."
+              aria-label="Search products"
+              className="bg-transparent outline-none text-white placeholder-white/80 flex-1 min-w-0"
+              style={{ fontSize: 'clamp(8px,1.4vw,13px)' }}
+            />
+          </form>
         </motion.div>
 
         {/* Visually hidden heading — keeps the page's semantic structure/SEO intact

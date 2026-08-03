@@ -118,10 +118,10 @@ export async function generateInvoicePdfBuffer(params: {
     orders.map((o) => fetchImageBuffer(o.product.images?.[0]))
   );
 
-  // A4 is 595.28 x 841.89pt — one label at exactly 1/3 of that height, so if
-  // you ever do want to print several, three of these tile onto one A4 sheet.
-  const width = 595.28;
-  const height = 841.89 / 3;
+  // A standard small shipping-label size (4in x 6in) — narrow enough to print
+  // small and stick straight onto the outgoing package, like a normal courier label.
+  const width = 4 * 72;
+  const height = 6 * 72;
 
   const doc = new PDFDocument({ size: [width, height], margin: 0, bufferPages: true });
   const chunks: Buffer[] = [];
@@ -145,48 +145,47 @@ export async function generateInvoicePdfBuffer(params: {
   const grandTotal = orders.reduce((sum, o) => sum + o.totalAmount, 0);
   const invoiceDate = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
 
-  const pad = 10;
+  const pad = 12;
   const contentLeft = pad;
   const contentWidth = width - pad * 2;
 
   drawWatermark(doc, logoBuffer, watermarkFont, height, width, 0, 0);
 
-  let y = 8;
+  let y = 10;
 
   // ---- Header row ----
   if (logoBuffer) {
-    try { doc.image(logoBuffer, contentLeft, y, { width: 20, height: 20 }); } catch { /* skip */ }
+    try { doc.image(logoBuffer, contentLeft, y, { width: 22, height: 22 }); } catch { /* skip */ }
   }
-  doc.font('Helvetica-Bold').fontSize(12).fillColor(BRAND_BLACK)
-    .text('GeekHoot', contentLeft + 25, y + 4);
+  doc.font('Helvetica-Bold').fontSize(14).fillColor(BRAND_BLACK)
+    .text('GeekHoot', contentLeft + 28, y + 4);
 
-  doc.font('Helvetica-Bold').fontSize(11).fillColor(BRAND_RED)
+  doc.font('Helvetica-Bold').fontSize(13).fillColor(BRAND_RED)
     .text('INVOICE', contentLeft, y, { width: contentWidth, align: 'right' });
-  doc.font('Helvetica').fontSize(6.5).fillColor(MUTED)
-    .text(`#${orderCodes}  |  ${invoiceDate}`, contentLeft, y + 13, { width: contentWidth, align: 'right' });
+  doc.font('Helvetica').fontSize(7.5).fillColor(MUTED)
+    .text(`#${orderCodes}  |  ${invoiceDate}`, contentLeft, y + 15, { width: contentWidth, align: 'right' });
 
-  y += 24;
-  doc.moveTo(contentLeft, y).lineTo(contentLeft + contentWidth, y).lineWidth(1.2).strokeColor(BRAND_RED).stroke();
-  y += 7;
+  y += 28;
+  doc.moveTo(contentLeft, y).lineTo(contentLeft + contentWidth, y).lineWidth(1.4).strokeColor(BRAND_RED).stroke();
+  y += 10;
 
-  // ---- FROM / TO ----
-  const colGap = 10;
-  const colWidth = (contentWidth - colGap) / 2;
-  const fromX = contentLeft;
-  const toX = contentLeft + colWidth + colGap;
-  const addrTop = y;
-
-  doc.font('Helvetica-Bold').fontSize(6.5).fillColor(MUTED).text('FROM', fromX, addrTop);
-  doc.font('Helvetica-Bold').fontSize(7.5).fillColor(BRAND_BLACK).text(FROM_ADDRESS.name, fromX, addrTop + 9, { width: colWidth });
-  let fromY = addrTop + 18;
-  doc.font('Helvetica').fontSize(7).fillColor(BRAND_BLACK);
+  // ---- FROM (stacked, full width — narrow label has no room for side-by-side columns) ----
+  doc.font('Helvetica-Bold').fontSize(7).fillColor(MUTED).text('FROM', contentLeft, y);
+  y += 11;
+  doc.font('Helvetica-Bold').fontSize(9).fillColor(BRAND_BLACK).text(FROM_ADDRESS.name, contentLeft, y, { width: contentWidth });
+  y += 12;
+  doc.font('Helvetica').fontSize(8).fillColor(BRAND_BLACK);
   FROM_ADDRESS.lines.forEach((line) => {
-    doc.text(line, fromX, fromY, { width: colWidth });
-    fromY += 8.5;
+    doc.text(line, contentLeft, y, { width: contentWidth });
+    y += 10.5;
   });
-  doc.fillColor(MUTED).text(`Ph: ${FROM_ADDRESS.phone}`, fromX, fromY, { width: colWidth });
-  fromY += 8.5;
+  doc.fillColor(MUTED).text(`Ph: ${FROM_ADDRESS.phone}`, contentLeft, y, { width: contentWidth });
+  y += 16;
 
+  doc.moveTo(contentLeft, y).lineTo(contentLeft + contentWidth, y).lineWidth(0.5).strokeColor(LINE_GRAY).stroke();
+  y += 10;
+
+  // ---- TO (stacked, full width) ----
   const addressLines = [
     customer.houseNo,
     customer.streetNear,
@@ -196,47 +195,49 @@ export async function generateInvoicePdfBuffer(params: {
   ].filter(Boolean) as string[];
   if (addressLines.length === 0 && customer.address) addressLines.push(customer.address);
 
-  doc.font('Helvetica-Bold').fontSize(6.5).fillColor(BRAND_RED).text('TO', toX, addrTop);
-  doc.font('Helvetica-Bold').fontSize(7.5).fillColor(BRAND_BLACK).text(customer.name, toX, addrTop + 9, { width: colWidth });
-  let toY = addrTop + 18;
-  doc.font('Helvetica').fontSize(7).fillColor(BRAND_BLACK);
-  addressLines.slice(0, 4).forEach((line) => {
-    doc.text(String(line), toX, toY, { width: colWidth, ellipsis: true });
-    toY += 8.5;
+  doc.font('Helvetica-Bold').fontSize(7).fillColor(BRAND_RED).text('TO', contentLeft, y);
+  y += 11;
+  doc.font('Helvetica-Bold').fontSize(9).fillColor(BRAND_BLACK).text(customer.name, contentLeft, y, { width: contentWidth });
+  y += 12;
+  doc.font('Helvetica').fontSize(8).fillColor(BRAND_BLACK);
+  addressLines.forEach((line) => {
+    doc.text(String(line), contentLeft, y, { width: contentWidth, ellipsis: true });
+    y += 10.5;
   });
-  doc.fillColor(MUTED).text(`Ph: ${customer.phone}`, toX, toY, { width: colWidth });
-  toY += 8.5;
+  doc.fillColor(MUTED).text(`Ph: ${customer.phone}`, contentLeft, y, { width: contentWidth });
+  y += 10.5;
 
   if (locationUrl) {
-    doc.fillColor(BRAND_RED).font('Helvetica-Bold').fontSize(6.5).text('View delivery location ->', toX, toY, { width: colWidth });
-    doc.link(toX, toY, colWidth, 8, locationUrl);
+    doc.fillColor(BRAND_RED).font('Helvetica-Bold').fontSize(7.5).text('View delivery location ->', contentLeft, y, { width: contentWidth });
+    doc.link(contentLeft, y, contentWidth, 10, locationUrl);
+    y += 10.5;
   }
 
-  y = Math.max(fromY, toY + 9) + 4;
-  doc.moveTo(contentLeft, y).lineTo(contentLeft + contentWidth, y).lineWidth(0.5).strokeColor(LINE_GRAY).stroke();
   y += 6;
+  doc.moveTo(contentLeft, y).lineTo(contentLeft + contentWidth, y).lineWidth(0.5).strokeColor(LINE_GRAY).stroke();
+  y += 8;
 
   // ---- Product table ----
-  const colImage = 26;
-  const colQty = 24;
+  const colImage = 28;
+  const colQty = 26;
   const colPrice = 55;
   const colSubtotal = 62;
   const colProduct = contentWidth - colImage - colQty - colPrice - colSubtotal;
 
-  doc.rect(contentLeft, y, contentWidth, 13).fill(BRAND_BLACK);
-  doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(6);
+  doc.rect(contentLeft, y, contentWidth, 15).fill(BRAND_BLACK);
+  doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(6.5);
   let hx = contentLeft;
-  doc.text('IMG', hx + 3, y + 4, { width: colImage - 3 }); hx += colImage;
-  doc.text('PRODUCT', hx + 4, y + 4, { width: colProduct - 4 }); hx += colProduct;
-  doc.text('QTY', hx, y + 4, { width: colQty, align: 'center' }); hx += colQty;
-  doc.text('PRICE', hx, y + 4, { width: colPrice, align: 'right' }); hx += colPrice;
-  doc.text('SUBTOTAL', hx, y + 4, { width: colSubtotal - 4, align: 'right' });
-  y += 13;
+  doc.text('IMG', hx + 3, y + 5, { width: colImage - 3 }); hx += colImage;
+  doc.text('PRODUCT', hx + 4, y + 5, { width: colProduct - 4 }); hx += colProduct;
+  doc.text('QTY', hx, y + 5, { width: colQty, align: 'center' }); hx += colQty;
+  doc.text('PRICE', hx, y + 5, { width: colPrice, align: 'right' }); hx += colPrice;
+  doc.text('SUBTOTAL', hx, y + 5, { width: colSubtotal - 4, align: 'right' });
+  y += 15;
 
   // Space left for the table before the total bar
-  const bottomLimit = height - pad - 16;
-  const availableForRows = Math.max(bottomLimit - y, 16);
-  const rowHeight = Math.max(16, Math.min(26, availableForRows / Math.max(orders.length, 1)));
+  const bottomLimit = height - pad - 20;
+  const availableForRows = Math.max(bottomLimit - y, 20);
+  const rowHeight = Math.max(20, Math.min(34, availableForRows / Math.max(orders.length, 1)));
 
   orders.forEach((order, i) => {
     if (y + rowHeight > bottomLimit) return; // guard against a very long cart overflowing this compact label
@@ -245,7 +246,7 @@ export async function generateInvoicePdfBuffer(params: {
     }
 
     let x = contentLeft;
-    const imgSize = Math.min(rowHeight - 4, 22);
+    const imgSize = Math.min(rowHeight - 6, 26);
     const imgBuf = productImageBuffers[i];
     if (imgBuf) {
       try { doc.image(imgBuf, x + 2, y + (rowHeight - imgSize) / 2, { width: imgSize, height: imgSize, fit: [imgSize, imgSize] }); } catch { /* skip */ }
@@ -254,17 +255,17 @@ export async function generateInvoicePdfBuffer(params: {
     }
     x += colImage;
 
-    const nameY = rowHeight > 20 ? y + 3 : y + (rowHeight - 7) / 2;
-    doc.font('Helvetica-Bold').fontSize(6.5).fillColor(BRAND_BLACK)
-      .text(order.product.name, x + 3, nameY, { width: colProduct - 6, ellipsis: true });
-    if (order.size && rowHeight > 20) {
-      doc.font('Helvetica').fontSize(5.5).fillColor(MUTED)
-        .text(`Size: ${order.size}`, x + 3, nameY + 8, { width: colProduct - 6 });
+    const nameY = rowHeight > 24 ? y + 4 : y + (rowHeight - 7) / 2;
+    doc.font('Helvetica-Bold').fontSize(7).fillColor(BRAND_BLACK)
+      .text(order.product.name, x + 3, nameY, { width: colProduct - 6, ellipsis: rowHeight <= 24 });
+    if (order.size && rowHeight > 24) {
+      doc.font('Helvetica').fontSize(6).fillColor(MUTED)
+        .text(`Size: ${order.size}`, x + 3, nameY + 9, { width: colProduct - 6 });
     }
     x += colProduct;
 
     const midY = y + rowHeight / 2 - 3.5;
-    doc.font('Helvetica').fontSize(6.5).fillColor(BRAND_BLACK)
+    doc.font('Helvetica').fontSize(7).fillColor(BRAND_BLACK)
       .text(String(order.quantity), x, midY, { width: colQty, align: 'center' });
     x += colQty;
 
@@ -278,11 +279,11 @@ export async function generateInvoicePdfBuffer(params: {
   });
 
   // ---- Grand total ----
-  const totalBarY = height - pad - 15;
-  doc.rect(contentLeft, totalBarY, contentWidth, 15).fill(BRAND_RED);
-  doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(8)
-    .text('GRAND TOTAL', contentLeft + 8, totalBarY + 4, { width: contentWidth - 16 - 90 });
-  doc.text(formatCurrency(grandTotal), contentLeft, totalBarY + 4, { width: contentWidth - 8, align: 'right' });
+  const totalBarY = height - pad - 18;
+  doc.rect(contentLeft, totalBarY, contentWidth, 18).fill(BRAND_RED);
+  doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(9)
+    .text('GRAND TOTAL', contentLeft + 8, totalBarY + 5, { width: contentWidth - 16 - 90 });
+  doc.text(formatCurrency(grandTotal), contentLeft, totalBarY + 5, { width: contentWidth - 8, align: 'right' });
 
   doc.end();
   return done;
