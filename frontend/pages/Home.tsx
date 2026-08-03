@@ -94,6 +94,35 @@ export default function Home() {
             ))}
           </div>
 
+          {/* Mobile search — moved to the hero's open top band (the same spot the
+              desktop category row uses, which is hidden on mobile so this doesn't
+              collide with anything). Solid, theme-aware background so it's clearly
+              visible against the artwork in both light and dark mode — the previous
+              glassy/translucent version blended into the banner's white background. */}
+          <form
+            onSubmit={handleHeroSearch}
+            role="search"
+            className="absolute z-10 sm:hidden flex items-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-full shadow-md"
+            style={{
+              top: '6%',
+              left: '36%',
+              right: '15%',
+              padding: 'clamp(4px,1.8vw,8px) clamp(8px,2.6vw,14px)',
+              gap: 'clamp(3px,1.2vw,6px)',
+            }}
+          >
+            <Search style={{ width: 'clamp(10px,2.6vw,16px)', height: 'clamp(10px,2.6vw,16px)' }} className="text-gray-400 dark:text-zinc-500 shrink-0" aria-hidden="true" />
+            <input
+              type="search"
+              value={heroQuery}
+              onChange={(e) => setHeroQuery(e.target.value)}
+              placeholder="Search products..."
+              aria-label="Search products"
+              className="bg-transparent outline-none text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-zinc-500 flex-1 min-w-0"
+              style={{ fontSize: 'clamp(8px,2.4vw,12px)' }}
+            />
+          </form>
+
           {/* Shop Now — overlaid on the artwork, scales fluidly with it at every breakpoint */}
           <button
             onClick={() => navigate('/products')}
@@ -108,30 +137,6 @@ export default function Home() {
             Shop Now
             <ArrowRight style={{ width: 'clamp(10px,1.5vw,18px)', height: 'clamp(10px,1.5vw,18px)' }} aria-hidden="true" />
           </button>
-
-          {/* Floating search — same glassy overlay treatment as Shop Now, sits just
-              below it in the same open part of the artwork */}
-          <form
-            onSubmit={handleHeroSearch}
-            role="search"
-            className="absolute left-[4.5%] top-[82%] flex items-center bg-white/20 backdrop-blur-md border border-white/40 rounded-full shadow-lg shadow-black/15"
-            style={{
-              width: 'min(58%, 380px)',
-              padding: 'clamp(4px,1vw,8px) clamp(8px,2vw,16px)',
-              gap: 'clamp(4px,1vw,8px)',
-            }}
-          >
-            <Search style={{ width: 'clamp(10px,1.6vw,16px)', height: 'clamp(10px,1.6vw,16px)' }} className="text-white shrink-0" aria-hidden="true" />
-            <input
-              type="search"
-              value={heroQuery}
-              onChange={(e) => setHeroQuery(e.target.value)}
-              placeholder="Search products..."
-              aria-label="Search products"
-              className="bg-transparent outline-none text-white placeholder-white/80 flex-1 min-w-0"
-              style={{ fontSize: 'clamp(8px,1.4vw,13px)' }}
-            />
-          </form>
         </motion.div>
 
         {/* Visually hidden heading — keeps the page's semantic structure/SEO intact
