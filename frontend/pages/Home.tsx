@@ -108,19 +108,20 @@ export default function Home() {
 
         {/* Category strip — mobile only; desktop/tablet gets the on-image overlay above,
             since the artwork is too compact there for a legible overlaid row */}
-        <div className="sm:hidden border-t border-gray-100 dark:border-zinc-900 overflow-x-auto scrollbar-hide">
-          <div className="flex items-center justify-between px-4 gap-6 min-w-max py-4">
+        <div className="sm:hidden bg-gray-50 dark:bg-zinc-900/60 border-t border-gray-100 dark:border-zinc-900 px-4 py-5">
+          <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400 dark:text-zinc-500 mb-3">Shop by Category</p>
+          <div className="flex items-stretch gap-3 overflow-x-auto scrollbar-hide -mx-4 px-4">
             {TOP_CATEGORIES.map(({ label, filter, icon: Icon }) => (
-              <div
+              <button
                 key={label}
                 onClick={() => navigate(filter ? `/products?category=${encodeURIComponent(filter)}` : '/products')}
-                className="flex flex-col items-center gap-2 cursor-pointer group"
+                className="flex flex-col items-center gap-2 shrink-0 w-20 py-3 rounded-xl bg-white dark:bg-zinc-800 border border-gray-100 dark:border-zinc-700 shadow-sm active:scale-95 transition-transform cursor-pointer"
               >
-                <div className="w-12 h-12 rounded-full bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center transition-all group-hover:scale-110 group-hover:border-[#e0122a]/40 group-hover:bg-[#fdeaec] dark:group-hover:bg-red-950/20">
-                  <Icon className="w-5 h-5 text-gray-800 dark:text-gray-200 group-hover:text-[#e0122a]" aria-hidden="true" />
+                <div className="w-9 h-9 rounded-full bg-[#fdeaec] dark:bg-red-950/30 flex items-center justify-center">
+                  <Icon className="w-4.5 h-4.5 text-[#e0122a]" aria-hidden="true" />
                 </div>
-                <span className="text-[11px] font-semibold text-gray-600 dark:text-gray-400 group-hover:text-[#e0122a] text-center leading-tight whitespace-nowrap">{label}</span>
-              </div>
+                <span className="text-[10px] font-bold text-gray-700 dark:text-gray-300 text-center leading-tight whitespace-nowrap">{label}</span>
+              </button>
             ))}
           </div>
         </div>
@@ -128,35 +129,40 @@ export default function Home() {
 
       {/* Trust strip */}
       <section className="bg-[#0b0b0d] dark:bg-black">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex flex-wrap items-center justify-center sm:justify-between gap-x-8 gap-y-3">
+        <div className="max-w-7xl mx-auto px-5 sm:px-4 md:px-8 py-5 sm:py-4 grid grid-cols-2 sm:flex sm:flex-wrap items-center sm:justify-between gap-x-4 gap-y-4 sm:gap-x-8 sm:gap-y-3">
           {TRUST_STRIP.map(({ icon: Icon, label }) => (
             <div key={label} className="flex items-center gap-2.5 text-white">
-              <Icon className="w-4 h-4 text-[#e0122a] shrink-0" aria-hidden="true" />
-              <span className="text-xs font-bold tracking-wide whitespace-nowrap">{label}</span>
+              <div className="w-7 h-7 sm:w-auto sm:h-auto rounded-full bg-white/5 sm:bg-transparent flex items-center justify-center shrink-0">
+                <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#e0122a]" aria-hidden="true" />
+              </div>
+              <span className="text-[11px] sm:text-xs font-bold tracking-wide leading-tight">{label}</span>
             </div>
           ))}
         </div>
       </section>
 
       {/* Main Content Area */}
-      <div className="max-w-7xl mx-auto px-4 py-8 w-full">
+      <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 w-full">
         {/* Featured Products List */}
-        <section className="bg-white dark:bg-zinc-900 p-6 rounded-lg border border-gray-100 dark:border-zinc-800 shadow-sm mb-12 transition-colors">
-          <div className="flex justify-between items-center mb-8">
-            <div className="flex items-center gap-3">
-              <span className="w-1.5 h-7 bg-[#e0122a] rounded-full" aria-hidden="true" />
-              <h2 style={{ fontFamily: 'var(--font-heading)' }} className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">Featured Product Arrivals</h2>
+        <section className="bg-white dark:bg-zinc-900 p-4 sm:p-6 rounded-lg border border-gray-100 dark:border-zinc-800 shadow-sm mb-8 sm:mb-12 transition-colors">
+          <div className="flex justify-between items-center mb-5 sm:mb-8">
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <span className="w-1.5 h-6 sm:h-7 bg-[#e0122a] rounded-full" aria-hidden="true" />
+              <div>
+                <h2 style={{ fontFamily: 'var(--font-heading)' }} className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white leading-tight">Featured Arrivals</h2>
+                <p className="text-[11px] sm:text-xs text-gray-400 dark:text-zinc-500 font-medium hidden sm:block">Fresh drops, picked for you</p>
+              </div>
             </div>
             <Button 
               variant="outline" 
               onClick={() => navigate('/products')} 
-              className="rounded-full border-red-600 text-red-600 hover:bg-red-50 dark:border-zinc-700 dark:text-red-400 dark:hover:bg-zinc-800 font-bold"
+              className="hidden sm:inline-flex rounded-full border-red-600 text-red-600 hover:bg-red-50 dark:border-zinc-700 dark:text-red-400 dark:hover:bg-zinc-800 font-bold"
             >
               View All
             </Button>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
             {isLoading ? (
               Array.from({ length: 4 }).map((_, i) => (
                 <div key={i} className="aspect-[3/4] bg-gray-50 dark:bg-zinc-800 rounded animate-pulse"></div>
@@ -170,19 +176,27 @@ export default function Home() {
               ))
             )}
           </div>
+
+          <Button 
+            variant="outline" 
+            onClick={() => navigate('/products')} 
+            className="sm:hidden w-full mt-5 rounded-full border-red-600 text-red-600 hover:bg-red-50 dark:border-zinc-700 dark:text-red-400 dark:hover:bg-zinc-800 font-bold"
+          >
+            View All Products
+          </Button>
         </section>
 
         {/* Below-fold sections deferred — don't block initial paint */}
         <React.Suspense fallback={null}>
           {/* Trending Section Overlay */}
-        <section className="bg-[#0b0b0d] rounded-xl overflow-hidden relative p-12 md:p-24 text-center">
+        <section className="bg-[#0b0b0d] rounded-xl overflow-hidden relative p-8 sm:p-12 md:p-24 text-center">
            <div className="absolute inset-0 bg-gradient-to-br from-[#e0122a]/25 via-transparent to-transparent"></div>
            <div className="relative z-10 max-w-2xl mx-auto">
-             <h2 style={{ fontFamily: 'var(--font-heading)' }} className="text-3xl md:text-5xl font-bold text-white mb-6 uppercase tracking-tight">Unleash Your Creativity</h2>
-             <p className="text-gray-400 mb-10 text-lg">Join thousands of customers who trust Geekhoot for their custom printing needs. High quality, zero compromises.</p>
+             <h2 style={{ fontFamily: 'var(--font-heading)' }} className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-4 sm:mb-6 uppercase tracking-tight">Unleash Your Creativity</h2>
+             <p className="text-gray-400 mb-7 sm:mb-10 text-sm sm:text-lg">Join thousands of customers who trust Geekhoot for their custom printing needs. High quality, zero compromises.</p>
              <Button 
                 onClick={() => navigate('/products')} 
-                className="bg-[#e0122a] hover:bg-white text-white hover:text-[#0b0b0d] font-bold px-10 h-14 rounded-full text-lg border-none"
+                className="w-full sm:w-auto bg-[#e0122a] hover:bg-white text-white hover:text-[#0b0b0d] font-bold px-10 h-12 sm:h-14 rounded-full text-base sm:text-lg border-none"
               >
                 Explore Full Collection
              </Button>
@@ -191,5 +205,6 @@ export default function Home() {
         </React.Suspense>
       </div>
     </div>
+
   );
 }
