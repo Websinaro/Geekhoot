@@ -45,7 +45,6 @@ model User {
   role      Role     @default(USER)
   isVerified Boolean   @default(false)
   verificationCode String?
-  refreshToken String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   
@@ -54,6 +53,23 @@ model User {
   reviews   Review[]
   notifications Notification[]
   wishlistItems WishlistItem[]
+  sessions  RefreshSession[]
+}
+
+// One row per logged-in device/browser. A user can hold up to MAX_SESSIONS_PER_USER
+// (see auth.service.ts) rows at once — logging in on a 4th device evicts the
+// oldest session instead of invalidating a random one.
+model RefreshSession {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String   @unique
+  userAgent String?
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model Product {

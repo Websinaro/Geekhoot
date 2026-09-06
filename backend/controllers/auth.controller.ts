@@ -3,7 +3,6 @@ import * as authService from "../services/auth.service";
 import prisma from "../prisma/db";
 import { sendVerificationEmail } from "../services/email.service";
 import { z } from "zod";
-import jwt from "jsonwebtoken";
 
 const signupSchema = z.object({
   name: z.string().min(2),
@@ -40,7 +39,7 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
     
     const token = authService.generateAccessToken(user.id);
     const refreshToken = authService.generateRefreshToken(user.id);
-    await authService.storeRefreshToken(user.id, refreshToken);
+    await authService.storeRefreshToken(user.id, refreshToken, req.headers['user-agent']);
     
     setAuthCookies(res, token, refreshToken);
     return res.status(201).json({
@@ -61,7 +60,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
     
     const token = authService.generateAccessToken(user.id);
     const refreshToken = authService.generateRefreshToken(user.id);
-    await authService.storeRefreshToken(user.id, refreshToken);
+    await authService.storeRefreshToken(user.id, refreshToken, req.headers['user-agent']);
     
     setAuthCookies(res, token, refreshToken);
 
@@ -110,7 +109,7 @@ export const verifyCode = async (req: Request, res: Response, next: NextFunction
     // Automatically log in on verification!
     const token = authService.generateAccessToken(updatedUser.id);
     const refreshToken = authService.generateRefreshToken(updatedUser.id);
-    await authService.storeRefreshToken(updatedUser.id, refreshToken);
+    await authService.storeRefreshToken(updatedUser.id, refreshToken, req.headers['user-agent']);
     
     setAuthCookies(res, token, refreshToken);
 
@@ -166,10 +165,8 @@ export const logout = async (req: Request, res: Response) => {
   try {
     const refreshToken = req.cookies.refreshToken;
     if (refreshToken) {
-      const decoded: any = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET || ((process.env.JWT_SECRET || 'default_secret') + '_refresh'));
-      if (decoded && decoded.id) {
-        await authService.revokeRefreshToken(decoded.id);
-      }
+      // Only revoke THIS device's session — other logged-in devices stay signed in.
+      await authService.revokeRefreshToken(refreshToken);
     }
   } catch (err) {
     // Ignore verification/decoding errors on logout
@@ -201,7 +198,9 @@ export const refresh = async (req: Request, res: Response, next: NextFunction) =
     const newAccessToken = authService.generateAccessToken(user.id);
     const newRefreshToken = authService.generateRefreshToken(user.id);
 
-    await authService.storeRefreshToken(user.id, newRefreshToken);
+    // Rotate THIS device's session in place — doesn't touch or count against
+    // the other devices' sessions.
+    await authService.rotateRefreshToken(refreshToken, newRefreshToken, req.headers['user-agent']);
     setAuthCookies(res, newAccessToken, newRefreshToken);
 
     const { password: _, refreshToken: __, ...userWithoutPassword } = user;

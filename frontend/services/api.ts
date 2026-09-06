@@ -78,8 +78,14 @@ api.interceptors.response.use(
       return api(config);
     }
 
+    // Only attempt a silent refresh for 401s from *protected* endpoints.
+    // Never trigger it for auth endpoints themselves (login/signup/refresh/etc.),
+    // otherwise a real "invalid credentials" 401 gets masked by whatever
+    // /auth/refresh returns (e.g. "Refresh token is missing").
+    const isAuthEndpoint = /\/auth\/(login|signup|refresh|verify-code|resend-code|logout)/.test(config?.url || '');
+
     // Access Token expired/invalid status 401 handling
-    if (response?.status === 401 && config && !config._retry && !config.url?.includes('/auth/refresh')) {
+    if (response?.status === 401 && config && !config._retry && !isAuthEndpoint) {
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
           failedQueue.push({ resolve, reject });

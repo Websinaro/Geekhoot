@@ -20,11 +20,38 @@ export const generateToken = (id: string): string => {
   return generateAccessToken(id);
 };
 
-export const storeRefreshToken = async (userId: string, token: string) => {
-  const hashedToken = crypto.createHash('sha256').update(token).digest('hex');
-  await prisma.user.update({
-    where: { id: userId },
-    data: { refreshToken: hashedToken }
+// Max number of devices/browsers that can be logged into the same account at once.
+// Logging in on one more than this evicts the least-recently-issued session.
+const MAX_SESSIONS_PER_USER = 2;
+const REFRESH_TOKEN_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days, matches generateRefreshToken
+
+const hashToken = (token: string) =>
+  crypto.createHash('sha256').update(token).digest('hex');
+
+// Creates a new session row for a fresh login/signup. If the user already has
+// MAX_SESSIONS_PER_USER sessions, the oldest one is evicted first so this
+// never silently kicks out a *different*, more-recent device.
+export const storeRefreshToken = async (userId: string, token: string, userAgentHeader?: string | string[]) => {
+  const userAgent = Array.isArray(userAgentHeader) ? userAgentHeader[0] : userAgentHeader;
+  const existing = await prisma.refreshSession.findMany({
+    where: { userId },
+    orderBy: { createdAt: 'asc' },
+  });
+
+  if (existing.length >= MAX_SESSIONS_PER_USER) {
+    const toEvict = existing.slice(0, existing.length - MAX_SESSIONS_PER_USER + 1);
+    await prisma.refreshSession.deleteMany({
+      where: { id: { in: toEvict.map((s) => s.id) } },
+    });
+  }
+
+  await prisma.refreshSession.create({
+    data: {
+      userId,
+      tokenHash: hashToken(token),
+      userAgent,
+      expiresAt: new Date(Date.now() + REFRESH_TOKEN_TTL_MS),
+    },
   });
 };
 
@@ -39,13 +66,17 @@ export const verifyRefreshToken = async (token: string) => {
       throw new AppError('User not found', 401);
     }
 
-    if (!user.refreshToken) {
+    const session = await prisma.refreshSession.findUnique({
+      where: { tokenHash: hashToken(token) },
+    });
+
+    if (!session || session.userId !== user.id) {
       throw new AppError('Session expired. Please log in again.', 401);
     }
 
-    const hashedToken = crypto.createHash('sha256').update(token).digest('hex');
-    if (user.refreshToken !== hashedToken) {
-      throw new AppError('Refresh token compromise/reuse detected', 401);
+    if (session.expiresAt < new Date()) {
+      await prisma.refreshSession.delete({ where: { id: session.id } }).catch(() => {});
+      throw new AppError('Session expired. Please log in again.', 401);
     }
 
     return user;
@@ -55,15 +86,41 @@ export const verifyRefreshToken = async (token: string) => {
   }
 };
 
-export const revokeRefreshToken = async (userId: string) => {
-  try {
-    await prisma.user.update({
-      where: { id: userId },
-      data: { refreshToken: null }
-    });
-  } catch (error) {
-    // Ignore if user doesn't exist anymore
+// Rotates the token for THIS device's session in place (same row), so refreshing
+// on device A never touches device B/C's sessions or counts against the 3-device cap.
+export const rotateRefreshToken = async (oldToken: string, newToken: string, userAgentHeader?: string | string[]) => {
+  const userAgent = Array.isArray(userAgentHeader) ? userAgentHeader[0] : userAgentHeader;
+  const oldHash = hashToken(oldToken);
+  const session = await prisma.refreshSession.findUnique({ where: { tokenHash: oldHash } });
+
+  if (!session) {
+    // Defensive fallback — shouldn't happen since verifyRefreshToken already checked.
+    return storeRefreshToken(jwt.decode(newToken) ? (jwt.decode(newToken) as any).id : '', newToken, userAgent);
   }
+
+  await prisma.refreshSession.update({
+    where: { id: session.id },
+    data: {
+      tokenHash: hashToken(newToken),
+      userAgent: userAgent ?? session.userAgent,
+      expiresAt: new Date(Date.now() + REFRESH_TOKEN_TTL_MS),
+    },
+  });
+};
+
+// Logs out only the current device — deletes the one session matching this token,
+// leaving the user's other logged-in devices untouched.
+export const revokeRefreshToken = async (token: string) => {
+  try {
+    await prisma.refreshSession.delete({ where: { tokenHash: hashToken(token) } });
+  } catch (error) {
+    // Ignore if the session doesn't exist anymore
+  }
+};
+
+// Logs out every device for a user (e.g. "log out of all sessions" / password change).
+export const revokeAllRefreshTokens = async (userId: string) => {
+  await prisma.refreshSession.deleteMany({ where: { userId } });
 };
 
 export const signupUser = async (data: any) => {
